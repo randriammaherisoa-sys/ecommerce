@@ -1,1 +1,1211 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>comete.ai | 4 simulateurs IA — Nouvelle Architecture</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    * { font-family: 'Montserrat', sans-serif; }
+    body { background: #f4f7fc; }
+    .digital-noise::before { content: ""; position: fixed; top:0; left:0; width:100%; height:100%; background-image: url('https://www.transparenttextures.com/patterns/carbon-fibre.png'); opacity: 0.012; pointer-events: none; z-index: 50; }
+    .text-gradient { background: linear-gradient(135deg, #1a56db, #3b82f6, #8b5cf6); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .nav-pill { position: fixed; top: 16px; left: 50%; transform: translateX(-50%); width: 92%; max-width: 1300px; background: rgba(255,255,255,0.85); backdrop-filter: blur(16px); border-radius: 999px; padding: 8px 24px; z-index: 300; transition: all 0.4s; border: 1px solid rgba(255,255,255,0.6); box-shadow: 0 8px 32px rgba(0,0,0,0.06); }
+    .nav-pill.scrolled { padding: 5px 20px; width: 80%; max-width: 1000px; background: rgba(255,255,255,0.96); }
+    #progress-bar { position: fixed; top:0; left:0; width:0%; height: 3px; background: linear-gradient(90deg, #1a56db, #8b5cf6, #3b82f6); z-index: 400; transition: width 0.2s; }
+    .sim-tab { transition: all 0.3s; cursor: pointer; border-radius: 999px; padding: 12px 28px; font-weight: 600; border: 1px solid #e2e8f0; background: white; color: #1e293b; box-shadow: 0 2px 8px rgba(0,0,0,0.02); display: inline-flex; align-items: center; gap: 8px; }
+    .sim-tab:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.04); border-color: #94a3b8; }
+    .sim-tab.active { background: linear-gradient(135deg, #1a56db, #3b82f6); color: white !important; border-color: transparent; transform: translateY(-4px); box-shadow: 0 12px 32px -8px rgba(26,86,219,0.4); }
+    .sim-tab i { width: 20px; height: 20px; }
+    .glass-card { background: rgba(255,255,255,0.80); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.5); box-shadow: 0 20px 60px -12px rgba(0,0,0,0.08); border-radius: 32px; overflow: hidden; transition: all 0.4s; height: 100%; display: flex; flex-direction: column; }
+    .glass-card:hover { box-shadow: 0 30px 80px -12px rgba(0,0,0,0.12); transform: translateY(-4px); }
+    .sim-header { display: flex; align-items: center; gap: 14px; padding: 18px 24px; border-bottom: 1px solid rgba(0,0,0,0.04); flex-shrink: 0; }
+    .sim-header i { color: #1a56db; width: 28px; height: 28px; }
+    .whatsapp-container { background-color: #0b141a; background-image: radial-gradient(circle at 25% 40%, rgba(255,255,255,0.02) 2%, transparent 2.5%), radial-gradient(circle at 75% 80%, rgba(255,255,255,0.015) 1.5%, transparent 2%); background-size: 32px 32px, 48px 48px; border-radius: 24px; padding: 18px; height: 380px; overflow-y: auto; display: flex; flex-direction: column; scroll-behavior: smooth; flex-shrink: 0; }
+    .whatsapp-bubble-user { background: linear-gradient(135deg, #005c4b, #007a63); color: white; border-radius: 18px 18px 4px 18px; padding: 12px 16px; max-width: 85%; align-self: flex-end; margin-bottom: 10px; font-size: 14px; animation: fadeSlideUp 0.3s ease; }
+    .whatsapp-bubble-bot { background: #1f2c33; color: #e1e9f0; border-radius: 18px 18px 18px 4px; padding: 12px 16px; max-width: 85%; align-self: flex-start; margin-bottom: 10px; font-size: 14px; animation: fadeSlideUp 0.3s ease; }
+    .whatsapp-bubble-user img { max-width: 200px; border-radius: 12px; margin-top: 6px; display: block; }
+    @keyframes fadeSlideUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    .suggestion-chip { background: white; color: #1e293b; border: 1px solid #cbd5e1; border-radius: 40px; padding: 10px 22px; font-size: 13px; font-weight: 600; cursor: pointer; display: inline-block; margin: 6px; transition: all 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.02); }
+    .suggestion-chip:hover { background: #f1f5f9; border-color: #3b82f6; transform: scale(1.02); box-shadow: 0 4px 12px rgba(0,0,0,0.04); }
+    .suggestion-chip:active { transform: scale(0.96); }
+    .kpi-card { background: white; border-radius: 20px; padding: 16px 20px; border: 1px solid #e2e8f0; box-shadow: 0 4px 12px rgba(0,0,0,0.02); transition: all 0.2s; }
+    .kpi-card:hover { border-color: #94a3b8; }
+    .kpi-value { font-size: 28px; font-weight: 800; color: #0b1e3a; line-height: 1.2; transition: all 0.3s ease; }
+    .kpi-label { font-size: 12px; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.03em; }
+    .kpi-trend { font-size: 13px; font-weight: 700; margin-left: 4px; }
+    .kpi-trend-up { color: #10b981; }
+    .kpi-trend-down { color: #ef4444; }
+    .image-placeholder { background: rgba(0,0,0,0.03); border-radius: 28px; display: flex; align-items: center; justify-content: center; flex-direction: column; min-height: 300px; backdrop-filter: blur(4px); border: 1px dashed #cbd5e1; flex: 1; }
+    .scan-badge { background: rgba(59,130,246,0.12); backdrop-filter: blur(8px); border-radius: 40px; padding: 8px 18px; font-size: 12px; font-weight: 600; color: #1a56db; display: inline-block; margin-bottom: 12px; border: 1px solid rgba(59,130,246,0.15); }
+    .fade-in { animation: fadeIn 0.8s ease forwards; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .flex-1 { flex: 1; }
+    .overflow-y-auto { overflow-y: auto; }
+    @media (max-width: 768px) { .sim-tab { padding: 8px 16px; font-size: 12px; gap: 4px; } .sim-tab i { width: 16px; height: 16px; } .grid { grid-template-columns: 1fr !important; } }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 to-slate-100 digital-noise">
 
+<div id="progress-bar"></div>
+
+<nav id="nav-pill" class="nav-pill flex items-center justify-between">
+  <a href="https://comete.ai/">
+    <img src="https://cdn.convrrt.com/apps/sendinblue/6761372/ab4f2f8e-3e94-4b4e-8ff8-e21271d4b3f4.png" alt="comete.ai" class="h-8 md:h-10" />
+  </a>
+  <button onclick="window.open('https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ3JTz751iHQ5Rb5gntRTGFWkr2nO8ocaXYcBoHv6MOaaitFMWgY4O0kzJ5K-xBe6a_tF64_FSyQ','_blank')" class="px-6 py-2.5 rounded-full bg-gradient-to-r from-[#1a56db] to-[#3b82f6] text-white font-bold uppercase tracking-widest text-[10px] md:text-xs shadow-lg hover:shadow-xl transition-all hover:scale-105">🚀 Démo gratuite</button>
+</nav>
+
+<div class="pt-28 pb-16 text-center bg-gradient-to-br from-[#0b1e3a] via-[#142b4a] to-[#0b1e3a] relative overflow-hidden">
+  <div class="relative z-10 fade-in">
+    <div class="inline-flex items-center gap-3 bg-white/10 backdrop-blur-md rounded-full px-6 py-1.5 mb-6">
+      <span class="w-2.5 h-2.5 rounded-full bg-blue-400 animate-pulse"></span>
+      <span class="text-[10px] text-blue-200 uppercase tracking-widest font-semibold">Laboratoire d'innovation</span>
+    </div>
+    <h1 class="text-5xl md:text-7xl font-black text-white leading-tight">
+      4 simulateurs <span class="text-gradient">IA</span><br>
+      <span class="text-2xl md:text-4xl font-light text-blue-200/80">Nouvelle Architecture</span>
+    </h1>
+    <p class="text-blue-200/70 mt-5 max-w-2xl mx-auto text-base md:text-lg font-light">Chaque interaction est historisée et visible en temps réel dans le tableau de bord.</p>
+  </div>
+</div>
+
+<div class="max-w-6xl mx-auto px-4 -mt-6 mb-10">
+  <div id="tabs-wrapper" class="flex flex-wrap justify-center gap-3"></div>
+</div>
+
+<div id="sim-root" class="max-w-6xl mx-auto px-4 pb-20"></div>
+
+<footer class="border-t border-slate-200/40 py-10 text-center text-slate-400 text-[9px] font-semibold uppercase tracking-widest bg-white/30 backdrop-blur-sm">© 2026 comete.ai — L'IA qui transforme l'expérience client</footer>
+
+<script>
+// ============================================================
+// 0. BASE DE DONNÉES SIMULÉE
+// ============================================================
+var DB = {
+  clients: {
+    match: { 'client_match_1': { id: 'client_match_1', firstName: 'Jean', lastName: 'Dupont', history: [], purchases: [], totalSpent: 0 } },
+    secondlife: { 'client_sl_1': { id: 'client_sl_1', firstName: 'Marie', lastName: 'Martin', history: [], purchases: [], totalSpent: 0 } },
+    croute: { 'client_cr_1': { id: 'client_cr_1', firstName: 'Pierre', lastName: 'Durand', history: [], purchases: [], totalSpent: 0 } },
+    safereturn: { 'client_sr_1': { id: 'client_sr_1', firstName: 'Sophie', lastName: 'Lefèvre', history: [], purchases: [], totalSpent: 0 } }
+  },
+  getClient: function(simId, clientId) {
+    if (!this.clients[simId]) this.clients[simId] = {};
+    if (!this.clients[simId][clientId]) {
+      this.clients[simId][clientId] = { id: clientId, firstName: 'Client', lastName: 'Anonyme', history: [], purchases: [], totalSpent: 0 };
+    }
+    return this.clients[simId][clientId];
+  },
+  save: function() { /* console.log('DB sauvegardée', this.clients); */ }
+};
+
+// ============================================================
+// 1. ONGLETS
+// ============================================================
+var tabsData = [
+  { id: 'match', label: 'Match & Buy', icon: 'shopping-bag' },
+  { id: 'secondlife', label: 'Seconde Main', icon: 'camera' },
+  { id: 'croute', label: 'C-Route Dispatch', icon: 'truck' },
+  { id: 'safereturn', label: 'SafeReturn', icon: 'shield-check' }
+];
+
+var tabsWrapper = document.getElementById('tabs-wrapper');
+var tabElements = [];
+
+for (var t = 0; t < tabsData.length; t++) {
+  var tab = tabsData[t];
+  var btn = document.createElement('button');
+  btn.setAttribute('data-sim', tab.id);
+  btn.className = 'sim-tab';
+  btn.innerHTML = '<i data-lucide="' + tab.icon + '" style="width:20px;height:20px;"></i> ' + tab.label;
+  tabsWrapper.appendChild(btn);
+  tabElements.push(btn);
+}
+
+// ============================================================
+// 2. FONCTIONS UTILITAIRES GLOBALES
+// ============================================================
+function addMessage(containerId, from, text, imageUrl) {
+  var container = document.getElementById(containerId);
+  if (!container) return;
+  var time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  var bubble = document.createElement('div');
+  bubble.className = from === 'user' ? 'whatsapp-bubble-user' : 'whatsapp-bubble-bot';
+  var html = text;
+  if (imageUrl) {
+    html += '<br><img src="' + imageUrl + '" alt="Photo envoyée" style="max-width:200px; border-radius:12px; margin-top:6px;">';
+  }
+  bubble.innerHTML = html + '<div class="text-right text-[9px] opacity-50 mt-1">' + time + (from === 'user' ? ' ✔️✔️' : '') + '</div>';
+  container.appendChild(bubble);
+  container.scrollTop = container.scrollHeight;
+}
+
+function clearSuggestions(containerId) {
+  var div = document.getElementById(containerId);
+  if (div) div.innerHTML = '';
+}
+
+function addResetButton(containerId, resetFn) {
+  var div = document.getElementById(containerId);
+  if (div) {
+    var btn = document.createElement('div');
+    btn.className = 'suggestion-chip';
+    btn.innerText = '🔄 Nouvelle simulation';
+    btn.style.background = '#1a56db';
+    btn.style.color = 'white';
+    btn.style.borderColor = '#1a56db';
+    btn.onclick = resetFn;
+    div.appendChild(btn);
+  }
+}
+
+// ============================================================
+// 3. SIMULATEUR 1 : MATCH & BUY (stable)
+// ============================================================
+function renderMatch() {
+  var clientId = 'client_match_1';
+  var client = DB.getClient('match', clientId);
+  var firstName = client.firstName;
+
+  var step = 1;
+  var selectedUsage = null;
+  var cart = [];
+  var totalVisits = 0;
+  var conversions = 0;
+  var products = [
+    { name: "MacBook Pro M3 Max", price: 3899, category: "creatif" },
+    { name: "Lenovo IdeaPad 5", price: 799, category: "etudiant" },
+    { name: "Dell XPS 15", price: 2199, category: "pro" },
+    { name: "ASUS ROG Strix G16", price: 2199, category: "gamer" }
+  ];
+  var crossSellOffers = {
+    'creatif': { product: 'Souris MX Master 3S', price: 99, pitch: 'Précision inégalée pour vos créations' },
+    'etudiant': { product: 'Housse de transport', price: 45, pitch: 'Protégez votre investissement' },
+    'pro': { product: 'Hub USB-C 7-en-1', price: 79, pitch: 'Connectez tous vos périphériques' },
+    'gamer': { product: 'Casque gaming surround', price: 129, pitch: 'Son immersif pour vos parties' }
+  };
+  var isProcessing = false;
+
+  function updateDashboard() {
+    var total = 0;
+    for (var i = 0; i < cart.length; i++) total += cart[i].price;
+    var avgBasket = cart.length > 0 ? (total / cart.length).toFixed(0) + '€' : '0€';
+    var rate = totalVisits > 0 ? Math.round((conversions / totalVisits) * 100) : 0;
+    var el = function(id) { return document.getElementById(id); };
+    var elm;
+    if ((elm = el('m-dash-visits'))) elm.textContent = totalVisits;
+    if ((elm = el('m-dash-conversions'))) elm.textContent = conversions;
+    if ((elm = el('m-dash-cartItems'))) elm.textContent = cart.length;
+    if ((elm = el('m-dash-avgBasket'))) elm.textContent = avgBasket;
+    if ((elm = el('m-dash-totalSpent'))) elm.textContent = client.totalSpent + '€';
+    if ((elm = el('m-dash-conversionBar'))) elm.style.width = rate + '%';
+    if ((elm = el('m-dash-rate'))) elm.textContent = rate + '%';
+    if ((elm = el('m-dash-trend'))) {
+      elm.textContent = rate > 50 ? '▲ +5%' : '▼ -2%';
+      elm.className = 'kpi-trend ' + (rate > 50 ? 'kpi-trend-up' : 'kpi-trend-down');
+    }
+    var historyList = el('m-dash-history');
+    if (historyList) {
+      var html = '';
+      for (var h = 0; h < client.history.length; h++) {
+        html += '<div class="text-xs text-slate-600 border-b border-slate-100 py-1">' + client.history[h].action + ' - ' + (client.history[h].details || '') + '</div>';
+      }
+      historyList.innerHTML = html || '<div class="text-xs text-slate-400">Aucune interaction</div>';
+    }
+    if ((elm = el('m-cart-count'))) elm.textContent = cart.length;
+    if ((elm = el('m-total'))) elm.textContent = total + '€';
+  }
+
+  function addUser(text) {
+    addMessage('m-chat', 'user', text);
+    client.history.push({ action: 'Message client', details: text, timestamp: new Date().toISOString() });
+    DB.save();
+    updateDashboard();
+  }
+
+  function addBot(text) {
+    addMessage('m-chat', 'bot', text.replace(/{user}/g, firstName));
+    updateDashboard();
+  }
+
+  function replaceSuggestions(btns) {
+    var container = document.getElementById('m-suggestions');
+    if (!container) return;
+    container.innerHTML = '';
+    for (var i = 0; i < btns.length; i++) {
+      var b = btns[i];
+      var chip = document.createElement('div');
+      chip.className = 'suggestion-chip';
+      chip.innerText = b.label;
+      chip.dataset.value = b.value;
+      chip.addEventListener('click', function() {
+        if (isProcessing) return;
+        var val = this.dataset.value;
+        if (val !== 'reset') addUser(this.innerText);
+        handleChoice(val);
+      });
+      container.appendChild(chip);
+    }
+  }
+
+  function handleChoice(val) {
+    if (step === 1) {
+      selectedUsage = val;
+      step = 2;
+      totalVisits++;
+      var product = null;
+      for (var i = 0; i < products.length; i++) {
+        if (products[i].category === selectedUsage) { product = products[i]; break; }
+      }
+      if (product) {
+        addBot('Bonjour ' + firstName + ', merci de nous contacter. Je vous recommande le ' + product.name + ' à ' + product.price + '€. Souhaitez-vous l\'ajouter à votre panier ?');
+        replaceSuggestions([
+          { label: "✅ Ajouter au panier", value: "add" },
+          { label: "🔄 Recommencer", value: "reset" }
+        ]);
+      }
+    } else if (step === 2) {
+      if (val === "add") {
+        var product = null;
+        for (var i = 0; i < products.length; i++) {
+          if (products[i].category === selectedUsage) { product = products[i]; break; }
+        }
+        if (product) {
+          cart.push(product);
+          client.history.push({ action: 'Ajout panier', details: product.name, timestamp: new Date().toISOString() });
+          DB.save();
+          addBot('Le ' + product.name + ' a été ajouté. Voulez-vous finaliser la commande ?');
+          step = 3;
+          replaceSuggestions([
+            { label: "✅ Finaliser", value: "checkout" },
+            { label: "🔄 Recommencer", value: "reset" }
+          ]);
+        }
+      } else if (val === "reset") {
+        reset();
+      }
+    } else if (step === 3) {
+      if (val === "checkout") {
+        conversions++;
+        for (var i = 0; i < cart.length; i++) {
+          client.purchases.push(cart[i]);
+          client.totalSpent += cart[i].price;
+        }
+        client.history.push({ action: 'Commande finalisée', details: cart.length + ' article(s)', timestamp: new Date().toISOString() });
+        DB.save();
+        addBot('🎉 Commande validée avec succès ' + firstName + ' ! Merci de votre confiance.');
+        clearSuggestions('m-suggestions');
+        var offer = crossSellOffers[selectedUsage];
+        if (offer) {
+          var recosDiv = document.getElementById('m-suggestions');
+          var msg = document.createElement('div');
+          msg.className = 'text-sm text-slate-600 mt-2 mb-1';
+          msg.innerHTML = '💡 <strong>' + firstName + '</strong>, je vous propose d\'ajouter <strong>' + offer.product + '</strong> (' + offer.price + '€) à votre commande.<br><span class="text-xs">' + offer.pitch + '</span>';
+          recosDiv.appendChild(msg);
+          var acceptBtn = document.createElement('div');
+          acceptBtn.className = 'suggestion-chip';
+          acceptBtn.innerText = '✅ Accepter l\'offre (+' + offer.price + '€)';
+          acceptBtn.style.borderColor = '#10b981';
+          acceptBtn.addEventListener('click', function() {
+            if (isProcessing) return;
+            addUser('Accepter l\'offre ' + offer.product);
+            cart.push({ name: offer.product, price: offer.price });
+            client.purchases.push({ name: offer.product, price: offer.price });
+            client.totalSpent += offer.price;
+            client.history.push({ action: 'Cross-sell accepté', details: offer.product, timestamp: new Date().toISOString() });
+            DB.save();
+            addBot('👍 Parfait ' + firstName + ' ! ' + offer.product + ' a été ajouté à votre commande. Au plaisir de vous accompagner.');
+            clearSuggestions('m-suggestions');
+            addResetButton('m-suggestions', reset);
+            updateDashboard();
+          });
+          recosDiv.appendChild(acceptBtn);
+          var refuseBtn = document.createElement('div');
+          refuseBtn.className = 'suggestion-chip';
+          refuseBtn.innerText = '❌ Refuser l\'offre';
+          refuseBtn.style.borderColor = '#ef4444';
+          refuseBtn.addEventListener('click', function() {
+            addUser('Refuser l\'offre');
+            addBot('Pas de problème ' + firstName + ', je comprends tout à fait. Restons en contact.');
+            clearSuggestions('m-suggestions');
+            addResetButton('m-suggestions', reset);
+            updateDashboard();
+          });
+          recosDiv.appendChild(refuseBtn);
+        } else {
+          addBot('Merci ' + firstName + ' pour votre commande. Nous restons à votre disposition.');
+          addResetButton('m-suggestions', reset);
+        }
+      } else if (val === "reset") {
+        reset();
+      }
+    }
+    updateDashboard();
+  }
+
+  function reset() {
+    client.history = [];
+    client.purchases = [];
+    client.totalSpent = 0;
+    DB.save();
+    step = 1;
+    selectedUsage = null;
+    cart = [];
+    totalVisits = 0;
+    conversions = 0;
+    var chatDiv = document.getElementById('m-chat');
+    if (chatDiv) chatDiv.innerHTML = '';
+    addUser('Bonjour ' + firstName + ', je recherche un ordinateur professionnel.');
+    addBot('Bonjour ' + firstName + ' et merci pour votre visite. Pour vous orienter vers le modèle idéal, quel est votre usage principal ?');
+    replaceSuggestions([
+      { label: "🎨 Créatif", value: "creatif" },
+      { label: "📚 Étudiant", value: "etudiant" },
+      { label: "💼 Professionnel", value: "pro" },
+      { label: "🎮 Gamer", value: "gamer" }
+    ]);
+    updateDashboard();
+  }
+
+  var html = `
+  <div class="grid md:grid-cols-2 gap-6 fade-in">
+    <div class="glass-card">
+      <div class="sim-header">
+        <i data-lucide="shopping-bag"></i>
+        <h2 class="text-xl font-bold text-slate-800">Match & Buy — Client</h2>
+        <div class="flex-1"></div>
+        <div class="bg-slate-100 px-4 py-1.5 rounded-full text-sm font-semibold text-slate-700">🛒 <span id="m-cart-count">0</span> • <span id="m-total" class="text-blue-600">0€</span></div>
+      </div>
+      <div class="p-4 flex-1 flex flex-col">
+        <div class="whatsapp-container" id="m-chat" style="height: 380px;"></div>
+        <div id="m-suggestions" class="flex flex-wrap gap-2 mt-4 justify-center"></div>
+      </div>
+    </div>
+    <div class="glass-card">
+      <div class="sim-header">
+        <i data-lucide="bar-chart-2"></i>
+        <h2 class="text-xl font-bold text-slate-800">Dashboard Commerçant</h2>
+      </div>
+      <div class="p-4 flex-1 overflow-y-auto">
+        <div class="grid grid-cols-2 gap-4">
+          <div class="kpi-card"><div class="kpi-label">Visites</div><div class="kpi-value" id="m-dash-visits">0</div></div>
+          <div class="kpi-card"><div class="kpi-label">Commandes</div><div class="kpi-value" id="m-dash-conversions">0</div></div>
+          <div class="kpi-card"><div class="kpi-label">Articles panier</div><div class="kpi-value" id="m-dash-cartItems">0</div></div>
+          <div class="kpi-card"><div class="kpi-label">Panier moyen</div><div class="kpi-value" id="m-dash-avgBasket">0€</div></div>
+          <div class="kpi-card col-span-2"><div class="kpi-label">Dépensé total</div><div class="kpi-value" id="m-dash-totalSpent">0€</div></div>
+        </div>
+        <div class="mt-4 bg-slate-50 rounded-2xl p-4">
+          <p class="text-sm text-slate-600 font-medium">📈 Taux de conversion : <span id="m-dash-rate" class="font-bold text-blue-600">0%</span> <span id="m-dash-trend" class="kpi-trend kpi-trend-up">▲ +0%</span></p>
+          <div class="w-full bg-slate-200 rounded-full h-2.5 mt-1">
+            <div class="bg-blue-600 h-2.5 rounded-full transition-all duration-500" style="width:0%" id="m-dash-conversionBar"></div>
+          </div>
+        </div>
+        <div class="mt-4 bg-slate-50 rounded-2xl p-4">
+          <p class="text-sm text-slate-600 font-medium">📋 Historique des interactions</p>
+          <div id="m-dash-history" class="mt-1 text-xs text-slate-600 max-h-32 overflow-y-auto"></div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+  document.getElementById('sim-root').innerHTML = html;
+  setTimeout(function() { lucide.createIcons(); reset(); }, 100);
+}
+
+// ============================================================
+// 4. SIMULATEUR 2 : SECONDE MAIN (CORRIGÉ AVEC VÉRIFICATIONS)
+// ============================================================
+function renderSecondLife() {
+  var clientId = 'client_sl_1';
+  var client = DB.getClient('secondlife', clientId);
+  var firstName = client.firstName;
+
+  var state = {
+    step: 0,
+    photoSent: false,
+    scanCompleted: false,
+    totalEstimations: 0,
+    acceptedOffers: 0,
+    lastEstimation: 0,
+    lastConfidence: 0,
+    isProcessing: false,
+    timerId: null
+  };
+
+  function updateDashboard() {
+    var acceptRate = state.totalEstimations > 0 ? Math.round((state.acceptedOffers / state.totalEstimations) * 100) : 0;
+    var gain = state.acceptedOffers * 425;
+    var el = function(id) { return document.getElementById(id); };
+    var elm;
+
+    if ((elm = el('sl-dash-estimations'))) elm.textContent = state.totalEstimations;
+    if ((elm = el('sl-dash-accepted'))) elm.textContent = state.acceptedOffers;
+    if ((elm = el('sl-dash-acceptRate'))) elm.textContent = acceptRate + '%';
+    if ((elm = el('sl-dash-acceptBar'))) elm.style.width = acceptRate + '%';
+    if ((elm = el('sl-dash-gain'))) elm.textContent = gain + '€';
+    if ((elm = el('sl-dash-trend'))) {
+      elm.textContent = acceptRate > 50 ? '▲ +8%' : '▼ -3%';
+      elm.className = 'kpi-trend ' + (acceptRate > 50 ? 'kpi-trend-up' : 'kpi-trend-down');
+    }
+    var stock = gain * 1.8;
+    if ((elm = el('sl-dash-stockBar'))) elm.style.width = Math.min((stock / 1000) * 100, 100) + '%';
+    if ((elm = el('sl-dash-potential'))) elm.textContent = stock + '€';
+
+    var historyDiv = el('sl-dash-history');
+    if (historyDiv) {
+      var html = '';
+      for (var i = 0; i < client.history.length; i++) {
+        if (client.history[i].type === 'estimation') {
+          html += '<div class="text-xs text-slate-600 border-b border-slate-100 py-1">' + client.history[i].device + ' - ' + client.history[i].price + '€ (confiance ' + client.history[i].confidence + '%)</div>';
+        }
+      }
+      historyDiv.innerHTML = html || '<div class="text-xs text-slate-400">Aucune estimation</div>';
+    }
+
+    if ((elm = el('sl-dash-estimation'))) elm.textContent = state.lastEstimation > 0 ? state.lastEstimation + '€' : '---';
+    if ((elm = el('sl-dash-confidence'))) elm.textContent = state.lastConfidence > 0 ? state.lastConfidence + '%' : '--%';
+
+    var statusEl = el('sl-dash-scanStatus');
+    if (statusEl) {
+      if (state.scanCompleted) {
+        statusEl.textContent = '✅ Scan terminé';
+        statusEl.style.color = '#10b981';
+      } else if (state.photoSent) {
+        statusEl.textContent = '🔍 Analyse en cours...';
+        statusEl.style.color = '#f59e0b';
+      } else {
+        statusEl.textContent = '⏳ En attente';
+        statusEl.style.color = '#64748b';
+      }
+    }
+  }
+
+  function addBot(text) {
+    addMessage('sl-chat', 'bot', text.replace(/{user}/g, firstName));
+  }
+  function addUser(text, imageUrl) {
+    addMessage('sl-chat', 'user', text, imageUrl);
+    client.history.push({ type: 'user_message', text: text, timestamp: new Date().toISOString() });
+    DB.save();
+  }
+
+  function updateLeftPanel() {
+    var leftPanel = document.getElementById('sl-left-panel');
+    if (!leftPanel) return;
+    if (!state.photoSent) {
+      leftPanel.innerHTML = `
+        <div class="image-placeholder w-full flex flex-col items-center justify-center text-center p-8">
+          <i data-lucide="camera" class="w-16 h-16 text-blue-400 mb-4"></i>
+          <p class="text-slate-700 text-lg font-semibold">En attente de la photo</p>
+          <p class="text-slate-400 text-sm mt-2">Envoyez une photo de votre iPhone 13 Pro pour une estimation instantanée</p>
+        </div>
+      `;
+    } else {
+      var overlay = !state.scanCompleted ? '<div class="absolute inset-0 bg-black/30 z-10 flex items-center justify-center"><span class="text-white text-sm font-semibold">📸 Photo reçue, analyse en cours...</span></div>' : '';
+      var badge = state.scanCompleted ? '<div class="absolute top-4 left-4 z-20"><span class="scan-badge">✅ Scan terminé - Confiance ' + state.lastConfidence + '%</span></div>' : '';
+      leftPanel.innerHTML = `
+        <div class="relative w-full min-h-[300px] overflow-hidden rounded-3xl">
+          <img src="https://cdn.convrrt.com/apps/sendinblue/6761372/5b4c26c6-34de-4125-879b-4b13a02b2154.png" class="w-full h-full object-cover absolute inset-0" alt="iPhone 13 Pro">
+          ${overlay}
+          ${badge}
+        </div>
+      `;
+    }
+    lucide.createIcons();
+  }
+
+  function showAcceptButtons() {
+    var div = document.getElementById('sl-suggestions');
+    if (!div) return;
+    div.innerHTML = '';
+
+    var accept = document.createElement('div');
+    accept.className = 'suggestion-chip';
+    accept.innerText = '✅ Accepter l\'offre';
+    accept.addEventListener('click', function() {
+      if (state.isProcessing) return;
+      state.isProcessing = true;
+      addUser("Accepter l'offre");
+      state.acceptedOffers++;
+      client.purchases.push({ name: 'iPhone 13 Pro (reconditionné)', price: 425 });
+      client.totalSpent += 425;
+      client.history.push({ type: 'offre_acceptee', details: 'iPhone 13 Pro', timestamp: new Date().toISOString() });
+      DB.save();
+      addBot('🎉 Offre acceptée ' + firstName + ' ! L\'étiquette d\'expédition vous sera envoyée par email sous 2h. Merci pour votre confiance.');
+      clearSuggestions('sl-suggestions');
+      addResetButton('sl-suggestions', reset);
+      updateDashboard();
+      state.step = 0;
+      state.isProcessing = false;
+    });
+    div.appendChild(accept);
+
+    var refuse = document.createElement('div');
+    refuse.className = 'suggestion-chip';
+    refuse.innerText = '❌ Refuser l\'offre';
+    refuse.style.borderColor = '#ef4444';
+    refuse.addEventListener('click', function() {
+      if (state.isProcessing) return;
+      state.isProcessing = true;
+      addUser("Refuser l'offre");
+      addBot('Pas de souci ' + firstName + ', vous pouvez toujours y revenir. Merci de nous avoir contactés.');
+      clearSuggestions('sl-suggestions');
+      addResetButton('sl-suggestions', reset);
+      state.step = 0;
+      state.isProcessing = false;
+    });
+    div.appendChild(refuse);
+  }
+
+  function completeScan() {
+    if (state.timerId) {
+      clearTimeout(state.timerId);
+      state.timerId = null;
+    }
+    state.scanCompleted = true;
+    state.totalEstimations++;
+    state.lastEstimation = 425;
+    state.lastConfidence = Math.floor(Math.random() * 9 + 90);
+    client.history.push({
+      type: 'estimation',
+      device: 'iPhone 13 Pro',
+      price: 425,
+      confidence: state.lastConfidence,
+      timestamp: new Date().toISOString()
+    });
+    DB.save();
+    state.step = 2;
+    updateLeftPanel();
+    updateDashboard();
+    addBot('🔍 Analyse terminée ' + firstName + ' : état général correct (micro-rayures superficielles, batterie 81%). Estimation : 425€. Taux de confiance IA : ' + state.lastConfidence + '%. Acceptez-vous l\'offre ?');
+    showAcceptButtons();
+    state.isProcessing = false;
+  }
+
+  function sendPhoto() {
+    if (state.step !== 0 || state.isProcessing) return;
+    state.isProcessing = true;
+    var imageUrl = 'https://cdn.convrrt.com/apps/sendinblue/6761372/5b4c26c6-34de-4125-879b-4b13a02b2154.png';
+    addUser("📸 Photo envoyée", imageUrl);
+    state.photoSent = true;
+    state.scanCompleted = false;
+    state.step = 1;
+    updateLeftPanel();
+    updateDashboard();
+    addBot('Merci ' + firstName + ' ! L\'analyse de votre iPhone 13 Pro est en cours...');
+    if (state.timerId) clearTimeout(state.timerId);
+    state.timerId = setTimeout(function() {
+      completeScan();
+    }, 3000);
+  }
+
+  function reset() {
+    if (state.timerId) {
+      clearTimeout(state.timerId);
+      state.timerId = null;
+    }
+    client.history = [];
+    client.purchases = [];
+    client.totalSpent = 0;
+    DB.save();
+
+    state.step = 0;
+    state.photoSent = false;
+    state.scanCompleted = false;
+    state.totalEstimations = 0;
+    state.acceptedOffers = 0;
+    state.lastEstimation = 0;
+    state.lastConfidence = 0;
+    state.isProcessing = false;
+
+    var chatDiv = document.getElementById('sl-chat');
+    if (chatDiv) chatDiv.innerHTML = '';
+    addBot('Bonjour ' + firstName + ' ! Pour une estimation précise, envoyez-moi une photo de votre iPhone 13 Pro.');
+    updateLeftPanel();
+
+    var div = document.getElementById('sl-suggestions');
+    if (div) {
+      div.innerHTML = '';
+      var sendBtn = document.createElement('div');
+      sendBtn.className = 'suggestion-chip';
+      sendBtn.innerText = '📸 Envoyer la photo';
+      sendBtn.addEventListener('click', sendPhoto);
+      div.appendChild(sendBtn);
+    }
+
+    updateDashboard();
+  }
+
+  var html = `
+  <div class="grid md:grid-cols-2 gap-6 fade-in">
+    <div class="glass-card">
+      <div class="sim-header">
+        <i data-lucide="camera"></i>
+        <h2 class="text-xl font-bold text-slate-800">Seconde Main — Client</h2>
+      </div>
+      <div class="p-4 flex-1 flex flex-col">
+        <div id="sl-left-panel" class="flex-1" style="min-height: 300px;"></div>
+        <div class="whatsapp-container mt-4" id="sl-chat" style="height: 300px;"></div>
+        <div id="sl-suggestions" class="flex flex-wrap gap-2 mt-3 justify-center"></div>
+      </div>
+    </div>
+    <div class="glass-card">
+      <div class="sim-header">
+        <i data-lucide="bar-chart-2"></i>
+        <h2 class="text-xl font-bold text-slate-800">Dashboard Commerçant</h2>
+      </div>
+      <div class="p-4 flex-1 overflow-y-auto">
+        <div class="grid grid-cols-2 gap-4">
+          <div class="kpi-card"><div class="kpi-label">Estimations</div><div class="kpi-value" id="sl-dash-estimations">0</div></div>
+          <div class="kpi-card"><div class="kpi-label">Offres acceptées</div><div class="kpi-value" id="sl-dash-accepted">0</div></div>
+          <div class="kpi-card"><div class="kpi-label">Taux d'acceptation</div><div class="kpi-value" id="sl-dash-acceptRate">0% <span id="sl-dash-trend" class="kpi-trend kpi-trend-up">▲ +0%</span></div></div>
+          <div class="kpi-card"><div class="kpi-label">Gain estimé</div><div class="kpi-value" id="sl-dash-gain">0€</div></div>
+        </div>
+        <div class="mt-4 bg-slate-50 rounded-2xl p-4">
+          <p class="text-sm text-slate-600 font-medium">📊 Valorisation du stock</p>
+          <div class="w-full bg-slate-200 rounded-full h-2.5 mt-1">
+            <div class="bg-blue-600 h-2.5 rounded-full transition-all duration-500" style="width:0%" id="sl-dash-stockBar"></div>
+          </div>
+          <p class="text-xs text-slate-400 mt-1">Potentiel de revente : <span id="sl-dash-potential">0€</span></p>
+        </div>
+        <div class="mt-4 bg-slate-50 rounded-2xl p-4">
+          <p class="text-sm text-slate-600 font-medium">🔍 Résultat du scan</p>
+          <p class="text-xs font-semibold" id="sl-dash-scanStatus" style="color:#64748b;">⏳ En attente</p>
+          <p class="text-xs text-slate-600 mt-1">Estimation : <span id="sl-dash-estimation">---</span></p>
+          <p class="text-xs text-slate-600">Confiance IA : <span id="sl-dash-confidence">--%</span></p>
+        </div>
+        <div class="mt-4 bg-slate-50 rounded-2xl p-4">
+          <p class="text-sm text-slate-600 font-medium">📋 Historique des estimations</p>
+          <div id="sl-dash-history" class="mt-1 text-xs text-slate-600 max-h-32 overflow-y-auto"></div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+  document.getElementById('sim-root').innerHTML = html;
+  setTimeout(function() { lucide.createIcons(); reset(); }, 100);
+}
+
+// ============================================================
+// 5. SIMULATEUR 3 : C-ROUTE DISPATCH (AVEC VÉRIFICATIONS)
+// ============================================================
+function renderCRoute() {
+  var clientId = 'client_cr_1';
+  var client = DB.getClient('croute', clientId);
+  var firstName = client.firstName;
+
+  var step = 1;
+  var isProcessing = false;
+  var totalCO2 = 4.8;
+  var totalKm = 24;
+  var incidents = 1;
+  var satisfaction = 85;
+  var deliveries = 12;
+  var optimizations = 0;
+
+  function updateDashboard() {
+    var el = function(id) { return document.getElementById(id); };
+    var elm;
+    if ((elm = el('cr-dash-co2'))) elm.textContent = totalCO2.toFixed(1) + ' kg';
+    if ((elm = el('cr-dash-km'))) elm.textContent = totalKm + ' km';
+    if ((elm = el('cr-dash-incidents'))) elm.textContent = incidents;
+    if ((elm = el('cr-dash-satisfaction'))) elm.textContent = satisfaction + '%';
+    if ((elm = el('cr-dash-satisfactionBar'))) elm.style.width = satisfaction + '%';
+    if ((elm = el('cr-dash-deliveries'))) elm.textContent = deliveries;
+    if ((elm = el('cr-dash-optimizations'))) elm.textContent = optimizations;
+    if ((elm = el('cr-dash-trend'))) {
+      elm.textContent = satisfaction > 90 ? '▲ +5%' : '▼ -2%';
+      elm.className = 'kpi-trend ' + (satisfaction > 90 ? 'kpi-trend-up' : 'kpi-trend-down');
+    }
+    if ((elm = el('cr-distance'))) elm.innerHTML = totalKm + ' km';
+    if ((elm = el('cr-co2'))) elm.innerHTML = totalCO2.toFixed(1) + ' kg CO₂';
+
+    var historyDiv = el('cr-dash-history');
+    if (historyDiv) {
+      var html = '';
+      for (var i = 0; i < client.history.length; i++) {
+        if (client.history[i].type === 'optimization') {
+          html += '<div class="text-xs text-slate-600 border-b border-slate-100 py-1">Tournée optimisée : ' + client.history[i].km + ' km, ' + client.history[i].co2 + ' kg CO₂</div>';
+        }
+      }
+      historyDiv.innerHTML = html || '<div class="text-xs text-slate-400">Aucune optimisation</div>';
+    }
+  }
+
+  function addBot(text) {
+    addMessage('cr-chat', 'bot', text.replace(/{user}/g, firstName));
+  }
+  function addUser(text) {
+    addMessage('cr-chat', 'user', text);
+    client.history.push({ type: 'user_message', text: text, timestamp: new Date().toISOString() });
+    DB.save();
+  }
+
+  function reroute() {
+    if (step !== 1 || isProcessing) return;
+    isProcessing = true;
+    addUser("🔄 Optimiser la tournée");
+    addBot('🔍 Recherche d’un itinéraire plus efficace ' + firstName + '...');
+    setTimeout(function() {
+      addBot('🟢 Nouvelle tournée : 18 km (0,4 kg CO₂). Livraison estimée dans 22 min. Validez-vous ?');
+      step = 2;
+      var div = document.getElementById('cr-suggestions');
+      if (!div) return;
+      div.innerHTML = '';
+      var confirm = document.createElement('div');
+      confirm.className = 'suggestion-chip';
+      confirm.innerText = '✅ Valider la tournée';
+      confirm.addEventListener('click', function() {
+        addUser("Valider la tournée");
+        totalCO2 = 0.4;
+        totalKm = 18;
+        incidents = 0;
+        satisfaction = 98;
+        deliveries = 12;
+        optimizations++;
+        client.history.push({
+          type: 'optimization',
+          km: 18,
+          co2: 0.4,
+          timestamp: new Date().toISOString()
+        });
+        DB.save();
+        updateDashboard();
+        var path = document.getElementById('new-route-path');
+        if (path) path.setAttribute('stroke', '#3b82f6');
+        addBot('✅ Tournée validée ' + firstName + ' ! Client notifié. Économie : 4,4 kg CO₂ évités. Merci de votre confiance.');
+        clearSuggestions('cr-suggestions');
+        var recosDiv = document.getElementById('cr-suggestions');
+        if (recosDiv) {
+          var label = document.createElement('div');
+          label.className = 'text-sm font-semibold text-slate-600 mt-2 mb-1';
+          label.innerText = '💡 Souhaitez-vous optimiser une autre tournée ?';
+          recosDiv.appendChild(label);
+          var chip = document.createElement('div');
+          chip.className = 'suggestion-chip';
+          chip.innerText = '🔄 Nouvelle optimisation';
+          chip.addEventListener('click', reset);
+          recosDiv.appendChild(chip);
+          addResetButton('cr-suggestions', reset);
+        }
+        isProcessing = false;
+      });
+      div.appendChild(confirm);
+      var resetChip = document.createElement('div');
+      resetChip.className = 'suggestion-chip';
+      resetChip.innerText = '🔄 Recommencer';
+      resetChip.addEventListener('click', reset);
+      div.appendChild(resetChip);
+      isProcessing = false;
+    }, 2000);
+  }
+
+  function reset() {
+    client.history = [];
+    client.purchases = [];
+    client.totalSpent = 0;
+    DB.save();
+    step = 1;
+    totalCO2 = 4.8;
+    totalKm = 24;
+    incidents = 1;
+    satisfaction = 85;
+    deliveries = 12;
+    optimizations = 0;
+    isProcessing = false;
+    updateDashboard();
+    var path = document.getElementById('new-route-path');
+    if (path) path.setAttribute('stroke', 'none');
+    var chatDiv = document.getElementById('cr-chat');
+    if (chatDiv) chatDiv.innerHTML = '';
+    addBot('Bonjour ' + firstName + ', un incident est signalé : technicien J. Martin en panne. Lancer l\'optimisation ?');
+    var div = document.getElementById('cr-suggestions');
+    if (div) {
+      div.innerHTML = '';
+      var opt = document.createElement('div');
+      opt.className = 'suggestion-chip';
+      opt.innerText = '🔄 Optimiser la tournée';
+      opt.addEventListener('click', reroute);
+      div.appendChild(opt);
+    }
+  }
+
+  var html = `
+  <div class="grid md:grid-cols-2 gap-6 fade-in">
+    <div class="glass-card">
+      <div class="sim-header">
+        <i data-lucide="map-pin"></i>
+        <h2 class="text-xl font-bold text-slate-800">C-Route — Client</h2>
+      </div>
+      <div class="p-4 flex-1 flex flex-col">
+        <svg viewBox="0 0 700 400" class="w-full rounded-2xl bg-slate-50 flex-shrink-0">
+          <rect width="700" height="400" fill="#f8fafc" rx="16"/>
+          <path d="M 0,200 Q 200,180 350,210 T 700,190" stroke="#cbd5e1" stroke-width="8" fill="none" opacity="0.5"/>
+          <text x="320" y="180" font-size="9" fill="#475569">La Seine</text>
+          <circle cx="120" cy="240" r="8" fill="#10b981" stroke="white"/><text x="100" y="230" font-size="8">Dépôt</text>
+          <circle cx="280" cy="140" r="8" fill="#f59e0b" stroke="white"/><text x="260" y="130" font-size="8">Client A</text>
+          <circle cx="480" cy="170" r="10" fill="#ef4444" stroke="white" class="animate-pulse"/><text x="460" y="160" font-size="8" fill="#ef4444">⚠️ Incident</text>
+          <circle cx="580" cy="310" r="8" fill="#3b82f6" stroke="white"/><text x="560" y="300" font-size="8">Client B</text>
+          <circle cx="450" cy="330" r="8" fill="#8b5cf6" stroke="white"/><text x="430" y="320" font-size="8">Client C</text>
+          <path d="M 120,240 L 280,140 L 480,170 L 580,310 L 450,330" stroke="#94a3b8" stroke-width="3" fill="none" stroke-dasharray="5,5"/>
+          <path id="new-route-path" d="M 120,240 L 280,140 L 320,220 L 450,330 L 580,310" stroke="none" stroke-width="3" fill="none"/>
+          <text x="20" y="380" font-size="9">● Dépôt  ● Client  ⚠️ Incident</text>
+        </svg>
+        <div class="mt-4 flex justify-between text-sm font-semibold bg-slate-100 p-3 rounded-xl">
+          <span>📏 Distance : <span id="cr-distance">24</span> km</span>
+          <span>🌱 CO₂ : <span id="cr-co2">4.8</span> kg CO₂</span>
+        </div>
+        <div class="whatsapp-container mt-4" id="cr-chat" style="height: 200px;"></div>
+        <div id="cr-suggestions" class="flex flex-wrap gap-2 mt-3 justify-center"></div>
+      </div>
+    </div>
+    <div class="glass-card">
+      <div class="sim-header">
+        <i data-lucide="bar-chart-2"></i>
+        <h2 class="text-xl font-bold text-slate-800">Dashboard Logistique</h2>
+      </div>
+      <div class="p-4 flex-1 overflow-y-auto">
+        <div class="grid grid-cols-2 gap-4">
+          <div class="kpi-card"><div class="kpi-label">CO₂ total</div><div class="kpi-value" id="cr-dash-co2">4.8 kg</div></div>
+          <div class="kpi-card"><div class="kpi-label">Km parcourus</div><div class="kpi-value" id="cr-dash-km">24 km</div></div>
+          <div class="kpi-card"><div class="kpi-label">Incidents</div><div class="kpi-value" id="cr-dash-incidents">1</div></div>
+          <div class="kpi-card"><div class="kpi-label">Satisfaction</div><div class="kpi-value" id="cr-dash-satisfaction">85% <span id="cr-dash-trend" class="kpi-trend kpi-trend-up">▲ +0%</span></div></div>
+          <div class="kpi-card"><div class="kpi-label">Livraisons</div><div class="kpi-value" id="cr-dash-deliveries">12</div></div>
+          <div class="kpi-card"><div class="kpi-label">Optimisations</div><div class="kpi-value" id="cr-dash-optimizations">0</div></div>
+        </div>
+        <div class="mt-4 bg-slate-50 rounded-2xl p-4">
+          <p class="text-sm text-slate-600 font-medium">😊 Taux de satisfaction client</p>
+          <div class="w-full bg-slate-200 rounded-full h-2.5 mt-1">
+            <div class="bg-emerald-500 h-2.5 rounded-full transition-all duration-500" style="width:85%" id="cr-dash-satisfactionBar"></div>
+          </div>
+        </div>
+        <div class="mt-4 bg-slate-50 rounded-2xl p-4">
+          <p class="text-sm text-slate-600 font-medium">📋 Historique des optimisations</p>
+          <div id="cr-dash-history" class="mt-1 text-xs text-slate-600 max-h-32 overflow-y-auto"></div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+  document.getElementById('sim-root').innerHTML = html;
+  setTimeout(function() { lucide.createIcons(); reset(); }, 100);
+}
+
+// ============================================================
+// 6. SIMULATEUR 4 : SAFERETURN (AVEC VÉRIFICATIONS)
+// ============================================================
+function renderSafeReturn() {
+  var clientId = 'client_sr_1';
+  var client = DB.getClient('safereturn', clientId);
+  var firstName = client.firstName;
+
+  var state = {
+    step: 0,
+    photoSent: false,
+    scanCompleted: false,
+    totalFraudDetected: 0,
+    totalClaims: 0,
+    savings: 0,
+    confidenceLevel: 96,
+    isProcessing: false,
+    timerId: null
+  };
+
+  function updateDashboard() {
+    var el = function(id) { return document.getElementById(id); };
+    var elm;
+    if ((elm = el('sr-dash-frauds'))) elm.textContent = state.totalFraudDetected;
+    if ((elm = el('sr-dash-claims'))) elm.textContent = state.totalClaims;
+    if ((elm = el('sr-dash-savings'))) elm.textContent = state.savings + '€';
+    var rate = state.totalClaims > 0 ? Math.round((state.totalFraudDetected / state.totalClaims) * 100) : 0;
+    if ((elm = el('sr-dash-fraudRate'))) elm.textContent = rate + '%';
+    if ((elm = el('sr-dash-fraudBar'))) elm.style.width = rate + '%';
+    if ((elm = el('sr-dash-confidenceLevel'))) elm.textContent = state.confidenceLevel + '%';
+    if ((elm = el('sr-dash-confidenceBar'))) elm.style.width = state.confidenceLevel + '%';
+    if ((elm = el('sr-dash-trend'))) {
+      elm.textContent = rate > 50 ? '▲ +12%' : '▼ -5%';
+      elm.className = 'kpi-trend ' + (rate > 50 ? 'kpi-trend-up' : 'kpi-trend-down');
+    }
+
+    var historyDiv = el('sr-dash-history');
+    if (historyDiv) {
+      var html = '';
+      for (var i = 0; i < client.history.length; i++) {
+        if (client.history[i].type === 'fraud_check') {
+          html += '<div class="text-xs text-slate-600 border-b border-slate-100 py-1">' + client.history[i].status + ' - Confiance ' + client.history[i].confidence + '%</div>';
+        }
+      }
+      historyDiv.innerHTML = html || '<div class="text-xs text-slate-400">Aucune vérification</div>';
+    }
+
+    var statusEl = el('sr-dash-scanStatus');
+    if (statusEl) {
+      if (state.scanCompleted) {
+        statusEl.textContent = '✅ Scan terminé';
+        statusEl.style.color = '#10b981';
+      } else if (state.photoSent) {
+        statusEl.textContent = '🔍 Analyse en cours...';
+        statusEl.style.color = '#f59e0b';
+      } else {
+        statusEl.textContent = '⏳ En attente';
+        statusEl.style.color = '#64748b';
+      }
+    }
+  }
+
+  function addBot(text) {
+    addMessage('sr-chat', 'bot', text.replace(/{user}/g, firstName));
+  }
+  function addUser(text, imageUrl) {
+    addMessage('sr-chat', 'user', text, imageUrl);
+    client.history.push({ type: 'user_message', text: text, timestamp: new Date().toISOString() });
+    DB.save();
+  }
+
+  function updateLeftPanel() {
+    var leftPanel = document.getElementById('sr-left-panel');
+    if (!leftPanel) return;
+    if (!state.photoSent) {
+      leftPanel.innerHTML = `
+        <div class="image-placeholder w-full flex flex-col items-center justify-center text-center p-8">
+          <i data-lucide="package" class="w-16 h-16 text-red-400 mb-4"></i>
+          <p class="text-slate-700 text-lg font-semibold">En attente de la photo</p>
+          <p class="text-slate-400 text-sm mt-2">Envoyez une photo du colis endommagé pour analyse anti-fraude</p>
+        </div>
+      `;
+    } else {
+      var overlay = !state.scanCompleted ? '<div class="absolute inset-0 bg-black/30 z-10 flex items-center justify-center"><span class="text-white text-sm font-semibold">📸 Photo reçue, analyse en cours...</span></div>' : '';
+      var badge = state.scanCompleted ? '<div class="absolute top-4 left-4 z-20"><span class="scan-badge" style="background:rgba(239,68,68,0.12); color:#dc2626; border-color:#fca5a5;">⚠️ Fraude détectée - ' + state.confidenceLevel + '%</span></div>' : '';
+      leftPanel.innerHTML = `
+        <div class="relative w-full min-h-[300px] overflow-hidden rounded-3xl">
+          <img src="https://cdn.convrrt.com/apps/sendinblue/6761372/7212f405-ebd9-4255-8af6-08936a033c66.png" class="w-full h-full object-cover absolute inset-0" alt="Colis endommagé">
+          ${overlay}
+          ${badge}
+        </div>
+      `;
+    }
+    lucide.createIcons();
+  }
+
+  function showContestButtons() {
+    var div = document.getElementById('sr-suggestions');
+    if (!div) return;
+    div.innerHTML = '';
+
+    var appeal = document.createElement('div');
+    appeal.className = 'suggestion-chip';
+    appeal.innerText = '📋 Contester la décision';
+    appeal.addEventListener('click', function() {
+      if (state.isProcessing) return;
+      state.isProcessing = true;
+      addUser("Contester la décision");
+      addBot('📞 Réclamation déposée ' + firstName + '. Un expert analysera votre dossier sous 48h. Merci de votre confiance.');
+      clearSuggestions('sr-suggestions');
+      addResetButton('sr-suggestions', reset);
+      state.step = 0;
+      state.isProcessing = false;
+    });
+    div.appendChild(appeal);
+
+    var accept = document.createElement('div');
+    accept.className = 'suggestion-chip';
+    accept.innerText = '✅ Accepter la décision';
+    accept.style.borderColor = '#10b981';
+    accept.addEventListener('click', function() {
+      if (state.isProcessing) return;
+      state.isProcessing = true;
+      addUser("Accepter la décision");
+      addBot('Merci ' + firstName + ' pour votre compréhension. Nous restons à votre disposition.');
+      clearSuggestions('sr-suggestions');
+      addResetButton('sr-suggestions', reset);
+      state.step = 0;
+      state.isProcessing = false;
+    });
+    div.appendChild(accept);
+  }
+
+  function completeScan() {
+    if (state.timerId) {
+      clearTimeout(state.timerId);
+      state.timerId = null;
+    }
+    state.scanCompleted = true;
+    state.confidenceLevel = Math.floor(Math.random() * 9 + 90);
+    state.totalClaims++;
+    state.totalFraudDetected++;
+    state.savings += 150;
+    client.history.push({
+      type: 'fraud_check',
+      status: 'Fraude confirmée',
+      confidence: state.confidenceLevel,
+      timestamp: new Date().toISOString()
+    });
+    DB.save();
+    state.step = 2;
+    updateLeftPanel();
+    updateDashboard();
+    addBot('🔬 Vérification des métadonnées EXIF et analyse des pixels ' + firstName + '...');
+    addBot('🚨 Fraude confirmée ' + firstName + ' : métadonnées EXIF altérées (date 2023-01-12), clonage Photoshop détecté. Score de confiance : ' + state.confidenceLevel + '%. Remboursement refusé.');
+    addBot('📷 Détails : Adobe Photoshop 2024, duplication de zones de pixels. Souhaitez-vous contester cette décision ' + firstName + ' ?');
+    showContestButtons();
+    state.isProcessing = false;
+  }
+
+  function sendPhoto() {
+    if (state.step !== 0 || state.isProcessing) return;
+    state.isProcessing = true;
+    var imageUrl = 'https://cdn.convrrt.com/apps/sendinblue/6761372/7212f405-ebd9-4255-8af6-08936a033c66.png';
+    addUser("📸 Photo du colis envoyée", imageUrl);
+    state.photoSent = true;
+    state.scanCompleted = false;
+    state.step = 1;
+    updateLeftPanel();
+    updateDashboard();
+    if (state.timerId) clearTimeout(state.timerId);
+    state.timerId = setTimeout(function() {
+      completeScan();
+    }, 3000);
+  }
+
+  function reset() {
+    if (state.timerId) {
+      clearTimeout(state.timerId);
+      state.timerId = null;
+    }
+    client.history = [];
+    client.purchases = [];
+    client.totalSpent = 0;
+    DB.save();
+
+    state.step = 0;
+    state.photoSent = false;
+    state.scanCompleted = false;
+    state.totalFraudDetected = 0;
+    state.totalClaims = 0;
+    state.savings = 0;
+    state.confidenceLevel = 96;
+    state.isProcessing = false;
+
+    var chatDiv = document.getElementById('sr-chat');
+    if (chatDiv) chatDiv.innerHTML = '';
+    addBot('Bonjour ' + firstName + ', un litige a été ouvert pour un colis endommagé. Pour traiter votre demande, envoyez-nous une photo du colis.');
+    updateLeftPanel();
+
+    var div = document.getElementById('sr-suggestions');
+    if (div) {
+      div.innerHTML = '';
+      var sendBtn = document.createElement('div');
+      sendBtn.className = 'suggestion-chip';
+      sendBtn.innerText = '📸 Envoyer la photo';
+      sendBtn.addEventListener('click', sendPhoto);
+      div.appendChild(sendBtn);
+    }
+
+    updateDashboard();
+  }
+
+  var html = `
+  <div class="grid md:grid-cols-2 gap-6 fade-in">
+    <div class="glass-card">
+      <div class="sim-header">
+        <i data-lucide="shield-check"></i>
+        <h2 class="text-xl font-bold text-slate-800">SafeReturn — Client</h2>
+      </div>
+      <div class="p-4 flex-1 flex flex-col">
+        <div id="sr-left-panel" class="flex-1" style="min-height: 300px;"></div>
+        <div class="whatsapp-container mt-4" id="sr-chat" style="height: 300px;"></div>
+        <div id="sr-suggestions" class="flex flex-wrap gap-2 mt-3 justify-center"></div>
+      </div>
+    </div>
+    <div class="glass-card">
+      <div class="sim-header">
+        <i data-lucide="bar-chart-2"></i>
+        <h2 class="text-xl font-bold text-slate-800">Dashboard Anti-Fraude</h2>
+      </div>
+      <div class="p-4 flex-1 overflow-y-auto">
+        <div class="grid grid-cols-2 gap-4">
+          <div class="kpi-card"><div class="kpi-label">Fraudes détectées</div><div class="kpi-value" id="sr-dash-frauds">0</div></div>
+          <div class="kpi-card"><div class="kpi-label">Réclamations</div><div class="kpi-value" id="sr-dash-claims">0</div></div>
+          <div class="kpi-card"><div class="kpi-label">Économies réalisées</div><div class="kpi-value" id="sr-dash-savings">0€</div></div>
+          <div class="kpi-card"><div class="kpi-label">Taux de fraude</div><div class="kpi-value" id="sr-dash-fraudRate">0% <span id="sr-dash-trend" class="kpi-trend kpi-trend-up">▲ +0%</span></div></div>
+        </div>
+        <div class="mt-4 bg-slate-50 rounded-2xl p-4">
+          <p class="text-sm text-slate-600 font-medium">🔒 Score de confiance IA</p>
+          <div class="w-full bg-slate-200 rounded-full h-2.5 mt-1">
+            <div class="bg-emerald-500 h-2.5 rounded-full transition-all duration-500" style="width:96%" id="sr-dash-confidenceBar"></div>
+          </div>
+          <p class="text-xs text-slate-400 mt-1">Niveau actuel : <span id="sr-dash-confidenceLevel">96%</span></p>
+        </div>
+        <div class="mt-4 bg-slate-50 rounded-2xl p-4">
+          <p class="text-sm text-slate-600 font-medium">🔍 Résultat du scan</p>
+          <p class="text-xs font-semibold" id="sr-dash-scanStatus" style="color:#64748b;">⏳ En attente</p>
+        </div>
+        <div class="mt-4 bg-slate-50 rounded-2xl p-4">
+          <p class="text-sm text-slate-600 font-medium">📋 Historique des vérifications</p>
+          <div id="sr-dash-history" class="mt-1 text-xs text-slate-600 max-h-32 overflow-y-auto"></div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+  document.getElementById('sim-root').innerHTML = html;
+  setTimeout(function() { lucide.createIcons(); reset(); }, 100);
+}
+
+// ============================================================
+// 7. ROUTEUR
+// ============================================================
+var simMap = {
+  match: renderMatch,
+  secondlife: renderSecondLife,
+  croute: renderCRoute,
+  safereturn: renderSafeReturn
+};
+var current = "match";
+
+function switchSim(id) {
+  current = id;
+  if (simMap[current]) simMap[current]();
+
+  for (var i = 0; i < tabElements.length; i++) {
+    var btn = tabElements[i];
+    var isActive = btn.getAttribute('data-sim') === current;
+    if (isActive) {
+      btn.style.background = 'linear-gradient(135deg, #1a56db, #3b82f6)';
+      btn.style.color = 'white';
+      btn.style.borderColor = 'transparent';
+      btn.style.transform = 'translateY(-4px)';
+      btn.style.boxShadow = '0 12px 32px -8px rgba(26,86,219,0.4)';
+    } else {
+      btn.style.background = 'white';
+      btn.style.color = '#1e293b';
+      btn.style.borderColor = '#e2e8f0';
+      btn.style.transform = 'translateY(0)';
+      btn.style.boxShadow = '0 2px 8px rgba(0,0,0,0.02)';
+    }
+  }
+}
+
+for (var i = 0; i < tabElements.length; i++) {
+  (function(btn) {
+    btn.addEventListener('click', function() {
+      switchSim(this.getAttribute('data-sim'));
+    });
+  })(tabElements[i]);
+}
+
+switchSim('match');
+
+window.addEventListener("scroll", function() {
+  var scroll = document.documentElement.scrollTop;
+  var height = document.documentElement.scrollHeight - window.innerHeight;
+  var progress = document.getElementById("progress-bar");
+  if (progress) progress.style.width = (scroll / height) * 100 + "%";
+  var nav = document.getElementById("nav-pill");
+  if (nav) {
+    if (scroll > 60) nav.classList.add("scrolled");
+    else nav.classList.remove("scrolled");
+  }
+});
+
+lucide.createIcons();
+</script>
+</body>
+</html>
