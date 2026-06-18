@@ -1,1211 +1,1617 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>comete.ai | 4 simulateurs IA — Nouvelle Architecture</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <style>
-    * { font-family: 'Montserrat', sans-serif; }
-    body { background: #f4f7fc; }
-    .digital-noise::before { content: ""; position: fixed; top:0; left:0; width:100%; height:100%; background-image: url('https://www.transparenttextures.com/patterns/carbon-fibre.png'); opacity: 0.012; pointer-events: none; z-index: 50; }
-    .text-gradient { background: linear-gradient(135deg, #1a56db, #3b82f6, #8b5cf6); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-    .nav-pill { position: fixed; top: 16px; left: 50%; transform: translateX(-50%); width: 92%; max-width: 1300px; background: rgba(255,255,255,0.85); backdrop-filter: blur(16px); border-radius: 999px; padding: 8px 24px; z-index: 300; transition: all 0.4s; border: 1px solid rgba(255,255,255,0.6); box-shadow: 0 8px 32px rgba(0,0,0,0.06); }
-    .nav-pill.scrolled { padding: 5px 20px; width: 80%; max-width: 1000px; background: rgba(255,255,255,0.96); }
-    #progress-bar { position: fixed; top:0; left:0; width:0%; height: 3px; background: linear-gradient(90deg, #1a56db, #8b5cf6, #3b82f6); z-index: 400; transition: width 0.2s; }
-    .sim-tab { transition: all 0.3s; cursor: pointer; border-radius: 999px; padding: 12px 28px; font-weight: 600; border: 1px solid #e2e8f0; background: white; color: #1e293b; box-shadow: 0 2px 8px rgba(0,0,0,0.02); display: inline-flex; align-items: center; gap: 8px; }
-    .sim-tab:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.04); border-color: #94a3b8; }
-    .sim-tab.active { background: linear-gradient(135deg, #1a56db, #3b82f6); color: white !important; border-color: transparent; transform: translateY(-4px); box-shadow: 0 12px 32px -8px rgba(26,86,219,0.4); }
-    .sim-tab i { width: 20px; height: 20px; }
-    .glass-card { background: rgba(255,255,255,0.80); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.5); box-shadow: 0 20px 60px -12px rgba(0,0,0,0.08); border-radius: 32px; overflow: hidden; transition: all 0.4s; height: 100%; display: flex; flex-direction: column; }
-    .glass-card:hover { box-shadow: 0 30px 80px -12px rgba(0,0,0,0.12); transform: translateY(-4px); }
-    .sim-header { display: flex; align-items: center; gap: 14px; padding: 18px 24px; border-bottom: 1px solid rgba(0,0,0,0.04); flex-shrink: 0; }
-    .sim-header i { color: #1a56db; width: 28px; height: 28px; }
-    .whatsapp-container { background-color: #0b141a; background-image: radial-gradient(circle at 25% 40%, rgba(255,255,255,0.02) 2%, transparent 2.5%), radial-gradient(circle at 75% 80%, rgba(255,255,255,0.015) 1.5%, transparent 2%); background-size: 32px 32px, 48px 48px; border-radius: 24px; padding: 18px; height: 380px; overflow-y: auto; display: flex; flex-direction: column; scroll-behavior: smooth; flex-shrink: 0; }
-    .whatsapp-bubble-user { background: linear-gradient(135deg, #005c4b, #007a63); color: white; border-radius: 18px 18px 4px 18px; padding: 12px 16px; max-width: 85%; align-self: flex-end; margin-bottom: 10px; font-size: 14px; animation: fadeSlideUp 0.3s ease; }
-    .whatsapp-bubble-bot { background: #1f2c33; color: #e1e9f0; border-radius: 18px 18px 18px 4px; padding: 12px 16px; max-width: 85%; align-self: flex-start; margin-bottom: 10px; font-size: 14px; animation: fadeSlideUp 0.3s ease; }
-    .whatsapp-bubble-user img { max-width: 200px; border-radius: 12px; margin-top: 6px; display: block; }
-    @keyframes fadeSlideUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
-    .suggestion-chip { background: white; color: #1e293b; border: 1px solid #cbd5e1; border-radius: 40px; padding: 10px 22px; font-size: 13px; font-weight: 600; cursor: pointer; display: inline-block; margin: 6px; transition: all 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.02); }
-    .suggestion-chip:hover { background: #f1f5f9; border-color: #3b82f6; transform: scale(1.02); box-shadow: 0 4px 12px rgba(0,0,0,0.04); }
-    .suggestion-chip:active { transform: scale(0.96); }
-    .kpi-card { background: white; border-radius: 20px; padding: 16px 20px; border: 1px solid #e2e8f0; box-shadow: 0 4px 12px rgba(0,0,0,0.02); transition: all 0.2s; }
-    .kpi-card:hover { border-color: #94a3b8; }
-    .kpi-value { font-size: 28px; font-weight: 800; color: #0b1e3a; line-height: 1.2; transition: all 0.3s ease; }
-    .kpi-label { font-size: 12px; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.03em; }
-    .kpi-trend { font-size: 13px; font-weight: 700; margin-left: 4px; }
-    .kpi-trend-up { color: #10b981; }
-    .kpi-trend-down { color: #ef4444; }
-    .image-placeholder { background: rgba(0,0,0,0.03); border-radius: 28px; display: flex; align-items: center; justify-content: center; flex-direction: column; min-height: 300px; backdrop-filter: blur(4px); border: 1px dashed #cbd5e1; flex: 1; }
-    .scan-badge { background: rgba(59,130,246,0.12); backdrop-filter: blur(8px); border-radius: 40px; padding: 8px 18px; font-size: 12px; font-weight: 600; color: #1a56db; display: inline-block; margin-bottom: 12px; border: 1px solid rgba(59,130,246,0.15); }
-    .fade-in { animation: fadeIn 0.8s ease forwards; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-    .flex-1 { flex: 1; }
-    .overflow-y-auto { overflow-y: auto; }
-    @media (max-width: 768px) { .sim-tab { padding: 8px 16px; font-size: 12px; gap: 4px; } .sim-tab i { width: 16px; height: 16px; } .grid { grid-template-columns: 1fr !important; } }
-  </style>
-</head>
-<body class="bg-gradient-to-br from-slate-50 to-slate-100 digital-noise">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<!-- SEO Meta Tags -->
+<title>comete.ai - L'IA au cœur du E-commerce et de la Grande Distribution</title>
+<meta name="description" content="De la découverte produit à la fidélisation, comete.ai orchestre une expérience omnicanale fluide, durable et ultra-personnalisée pour le retail et le e-commerce.">
+<meta name="author" content="comete.ai">
+<meta name="robots" content="index, follow">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="comete.ai - L'IA au cœur du E-commerce et de la Grande Distribution">
+<meta property="og:description" content="Transformez votre parcours client omnicanal grâce à l'IA opérationnelle de comete.ai.">
+<meta property="og:image" content="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&q=80&w=1200&h=630">
+<!-- Favicon -->
+<link rel="icon" href="https://cdn.convrrt.com/apps/sendinblue/6761372/6aa995aa-40f4-4933-83ae-401c3ae0ae02.png" type="image/png">
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<!-- Scripts -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+tailwind.config = {
+theme: {
+extend: {
+fontFamily: { sans: ['Montserrat', 'sans-serif'] },
+colors: {
+themeAccent: "#2470ef",
+themeDeepBlue: "#002d62",
+themeBlack: "#000d25",
+themeLightBlue: "#5170ff",
+themeYellow: "#ffde59"
+},
+animation: {
+'float': 'float 6s ease-in-out infinite',
+'pulse-slow': 'pulse 5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+'bg-zoom': 'bg-zoom 30s ease-in-out infinite alternate',
+'slide-in-right': 'slideInRight 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+'fade-in': 'fadeIn 1.5s ease-out forwards',
+'slow-spin': 'spin 15s linear infinite',
+'slow-spin-reverse': 'spin 20s linear infinite reverse',
+'shimmer': 'shimmer 3s infinite',
+'scan-line': 'scanLine 2s linear infinite',
+'glow-pulse': 'glowPulse 3s ease-in-out infinite',
+'float-slow': 'floatSlow 8s ease-in-out infinite',
+'gradient-x': 'gradientX 6s ease infinite',
+'bounce-in': 'bounceIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+'typing': 'typing 1.5s steps(20) infinite',
+'dash': 'dash 1.5s linear infinite'
+},
+keyframes: {
+float: { '0%, 100%': { transform: 'translateY(0) scale(1)' }, '50%': { transform: 'translateY(-25px) scale(1.02)' } },
+'bg-zoom': { '0%': { transform: 'scale(1)' }, '100%': { transform: 'scale(1.18)' } },
+slideInRight: { '0%': { opacity: '0', transform: 'translateX(60px)' }, '100%': { opacity: '1', transform: 'translateX(0)' } },
+fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+shimmer: { '0%': { transform: 'translateX(-100%) skewX(-20deg)' }, '100%': { transform: 'translateX(200%) skewX(-20deg)' } },
+scanLine: { '0%': { top: '0%' }, '100%': { top: '100%' } },
+glowPulse: { '0%, 100%': { boxShadow: '0 0 20px rgba(36, 112, 239, 0.3)' }, '50%': { boxShadow: '0 0 60px rgba(36, 112, 239, 0.8)' } },
+floatSlow: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-15px)' } },
+gradientX: { '0%, 100%': { backgroundPosition: '0% 50%' }, '50%': { backgroundPosition: '100% 50%' } },
+bounceIn: { '0%': { opacity: '0', transform: 'scale(0.3)' }, '50%': { transform: 'scale(1.05)' }, '70%': { transform: 'scale(0.95)' }, '100%': { opacity: '1', transform: 'scale(1)' } },
+typing: { '0%': { width: '0' }, '50%': { width: '100%' }, '100%': { width: '0' } },
+dash: { 'to': { 'stroke-dashoffset': '-20' } }
+}
+}
+}
+}
+</script>
+<style>
+html { scroll-behavior: smooth; }
+* { font-family: 'Montserrat', sans-serif; }
+.digital-noise::before {
+content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+background-image: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+opacity: 0.015; pointer-events: none; z-index: 50;
+}
+.text-gradient-animated {
+background-size: 200% auto;
+background-image: linear-gradient(to right, #2470ef, #5170ff, #8ab1ff, #2470ef);
+-webkit-background-clip: text; -webkit-text-fill-color: transparent;
+animation: gradient-shift 4s linear infinite;
+}
+@keyframes gradient-shift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+.module-card { transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); border: 1px solid rgba(0,0,0,0.05); height: 100%; display: flex; flex-direction: column; background: white; position: relative; overflow: hidden; }
+.module-card::before {
+content: ""; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+background: linear-gradient(90deg, transparent, rgba(36, 112, 239, 0.05), transparent);
+transition: left 0.8s ease;
+}
+.module-card:hover::before { left: 100%; }
+.module-card:hover { transform: translateY(-12px); box-shadow: 0 40px 80px -15px rgba(36, 112, 239, 0.25); border-color: rgba(36, 112, 239, 0.3); }
+.reveal-up { opacity: 0; transform: translateY(35px); transition: all 0.9s cubic-bezier(0.5, 0, 0, 1); }
+.reveal-up.active { opacity: 1; transform: translateY(0); }
+.nav-pill {
+position: fixed; top: 12px; left: 50%; transform: translateX(-50%);
+width: 94%; max-width: 1300px;
+background: rgba(255, 255, 255, 0.9);
+backdrop-filter: blur(12px); border-radius: 999px;
+padding: 8px 16px; display: flex; justify-content: space-between; align-items: center;
+z-index: 300; box-shadow: 0 10px 40px rgba(0,0,0,0.08); border: 1px solid rgba(255, 255, 255, 1);
+transition: all 0.4s ease;
+}
+.nav-pill.scrolled { padding: 4px 12px; width: 80%; max-width: 1000px; background: rgba(255, 255, 255, 0.98); }
+.sidebar-container {
+background-color: rgba(241, 245, 249, 0.92);
+backdrop-filter: blur(18px);
+border: 1px solid rgba(255, 255, 255, 0.6);
+padding: 6px; border-radius: 999px;
+display: flex; flex-direction: column; gap: 0.75rem;
+transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+@media (max-width: 768px) { .sidebar-container.idle { opacity: 0.15; transform: translate(40px, -50%); } }
+.sidebar-link {
+transition: all 0.4s ease; width: 38px; height: 38px;
+display: flex; align-items: center; justify-content: center;
+border-radius: 50%; color: #64748b;
+}
+@media (min-width: 768px) { .sidebar-link { width: 44px; height: 44px; } .sidebar-container { padding: 12px; gap: 1.5rem; } }
+.sidebar-link.active { background-color: #2470ef; color: #ffffff !important; box-shadow: 0 6px 20px rgba(36, 112, 239, 0.4); transform: scale(1.15); }
+/* Unified Icon Colors */
+.icon-unified { color: #2470ef !important; }
+.icon-unified-accent { color: #06b6d4 !important; }
+.icon-unified-success { color: #10b981 !important; }
+.icon-unified-warning { color: #f59e0b !important; }
+.icon-unified-danger { color: #ef4444 !important; }
 
+.vs-image-container {
+position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+width: 140px; height: 140px; z-index: 20; background: white; border-radius: 50%;
+box-shadow: 0 15px 45px rgba(36, 112, 239, 0.2), 0 0 0 12px rgba(255,255,255,1);
+padding: 20px;
+animation: vs-pulse 3s ease-in-out infinite alternate;
+}
+@keyframes vs-pulse {
+0% { box-shadow: 0 15px 45px rgba(36, 112, 239, 0.2), 0 0 0 12px rgba(255,255,255,1); transform: translate(-50%, -50%) scale(1); }
+100% { box-shadow: 0 20px 60px rgba(36, 112, 239, 0.5), 0 0 0 12px rgba(255,255,255,1), 0 0 40px rgba(36, 112, 239, 0.3); transform: translate(-50%, -50%) scale(1.05); }
+}
+@media (max-width: 1024px) {
+.vs-image-container { position: relative; top: auto; left: auto; transform: none; margin: -40px auto -40px auto; width: 100px; height: 100px; padding: 15px; box-shadow: 0 10px 25px rgba(36, 112, 239, 0.3), 0 0 0 8px rgba(255,255,255,1); animation: none; }
+}
+#progress-bar { position: fixed; top: 0; left: 0; width: 0%; height: 3px; background: linear-gradient(90deg, #2470ef, #5170ff, #2470ef); background-size: 200% 100%; animation: gradient-x 3s linear infinite; z-index: 400; transition: width 0.1s ease; }
+.scan-line { position: relative; overflow: hidden; }
+.scan-line::after {
+content: ""; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+animation: shimmer 5s infinite;
+}
+.step-number-pill {
+padding: 8px 22px; color: white; border-radius: 999px;
+display: inline-flex; align-items: center; justify-content: center;
+font-weight: 900; font-size: 2rem; margin-right: 18px; flex-shrink: 0;
+box-shadow: 0 8px 20px rgba(0,0,0,0.15); text-transform: uppercase; letter-spacing: 0.05em;
+}
+.kpi-step-badge {
+padding: 8px 24px; border-radius: 999px; color: white; font-weight: 900; font-size: 12px;
+text-transform: uppercase; letter-spacing: 0.12em; box-shadow: 0 10px 30px rgba(0,0,0,0.2); display: inline-block;
+}
+.kpi-blue   { background: linear-gradient(135deg, #2470ef, #5170ff); }
+.kpi-green  { background: linear-gradient(135deg, #10b981, #059669); }
+.kpi-cyan   { background: linear-gradient(135deg, #06b6d4, #0891b2); }
+.kpi-yellow { background: linear-gradient(135deg, #ffde59, #facc15); color: #002d62; }
+.kpi-purple { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+.tech-ring { position: absolute; border: 1px solid rgba(36, 112, 239, 0.1); border-radius: 50%; pointer-events: none; }
+.whatsapp-chat-bg {
+background-color: #0b141a !important;
+background-image: linear-gradient(rgba(11, 20, 26, 0.92), rgba(11, 20, 26, 0.92)), url('https://cdn.convrrt.com/apps/sendinblue/6761372/ecdddcc7-8c32-4b1c-a2f6-d53234b08244.png') !important;
+background-repeat: repeat !important; background-size: 280px !important; background-position: center top !important;
+}
+.custom-scroll::-webkit-scrollbar { width: 4px; height: 4px; }
+.custom-scroll::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 999px; }
+.custom-scroll::-webkit-scrollbar-thumb { background: rgba(36, 112, 239, 0.4); border-radius: 999px; }
+.lab-tab-btn { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+.lab-tab-btn.active { background: rgba(36, 112, 239, 0.15) !important; border-color: rgba(36, 112, 239, 0.5) !important; box-shadow: 0 10px 40px rgba(36, 112, 239, 0.2); }
+.lab-tab-btn.active .lab-tab-icon { background: #2470ef !important; color: white !important; box-shadow: 0 8px 25px rgba(36, 112, 239, 0.5); }
+.lab-tab-btn:hover:not(.active) { background: rgba(255,255,255,0.8); border-color: rgba(36, 112, 239, 0.2); }
+
+/* Premium Glassmorphism for Lab */
+.lab-glass {
+background: rgba(255, 255, 255, 0.03);
+backdrop-filter: blur(20px);
+border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Animated gradient border */
+.gradient-border {
+position: relative;
+background: #000d25;
+border-radius: 24px;
+}
+.gradient-border::before {
+content: "";
+position: absolute;
+inset: -2px;
+border-radius: 26px;
+padding: 2px;
+background: linear-gradient(135deg, #2470ef, #5170ff, #06b6d4, #2470ef);
+background-size: 300% 300%;
+animation: gradient-x 4s ease infinite;
+-webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+-webkit-mask-composite: xor;
+mask-composite: exclude;
+pointer-events: none;
+}
+
+/* Scan effect for vision AI */
+.vision-scan-line {
+position: absolute;
+left: 0;
+width: 100%;
+height: 4px;
+background: linear-gradient(90deg, transparent, #2470ef, #00ffaa, #2470ef, transparent);
+box-shadow: 0 0 20px #00ffaa, 0 0 40px #00ffaa;
+animation: scanLine 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+z-index: 10;
+}
+@keyframes scanLine {
+0% { top: 0%; }
+100% { top: 100%; }
+}
+
+/* Bounding box animation */
+.bounding-box {
+position: absolute;
+border: 2px solid;
+border-radius: 8px;
+animation: boxPulse 2s ease-in-out infinite;
+}
+@keyframes boxPulse {
+0%, 100% { opacity: 1; box-shadow: 0 0 10px currentColor; }
+50% { opacity: 0.7; box-shadow: 0 0 25px currentColor; }
+}
+
+/* Typing indicator */
+.typing-dots span {
+display: inline-block;
+width: 6px;
+height: 6px;
+border-radius: 50%;
+background: currentColor;
+margin: 0 2px;
+animation: typingBounce 1.4s infinite ease-in-out;
+}
+.typing-dots span:nth-child(1) { animation-delay: -0.32s; }
+.typing-dots span:nth-child(2) { animation-delay: -0.16s; }
+@keyframes typingBounce {
+0%, 80%, 100% { transform: scale(0); }
+40% { transform: scale(1); }
+}
+
+/* Hero particles */
+.hero-particle {
+position: absolute;
+width: 4px;
+height: 4px;
+background: rgba(36, 112, 239, 0.6);
+border-radius: 50%;
+box-shadow: 0 0 10px rgba(36, 112, 239, 0.8);
+animation: particleFloat 15s linear infinite;
+}
+@keyframes particleFloat {
+0% { transform: translateY(100vh) translateX(0) scale(0); opacity: 0; }
+10% { opacity: 1; transform: translateY(90vh) translateX(10px) scale(1); }
+90% { opacity: 1; }
+100% { transform: translateY(-10vh) translateX(-20px) scale(0); opacity: 0; }
+}
+
+/* KPI counter animation */
+.kpi-value {
+background: linear-gradient(135deg, #2470ef, #5170ff);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+}
+
+/* Premium card hover glow */
+.premium-glow {
+position: relative;
+transition: all 0.5s ease;
+}
+.premium-glow::after {
+content: "";
+position: absolute;
+inset: 0;
+border-radius: inherit;
+padding: 2px;
+background: linear-gradient(135deg, rgba(36, 112, 239, 0), rgba(36, 112, 239, 0));
+-webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+-webkit-mask-composite: xor;
+mask-composite: exclude;
+transition: all 0.5s ease;
+}
+.premium-glow:hover::after {
+background: linear-gradient(135deg, #2470ef, #5170ff, #06b6d4);
+}
+
+/* Live indicator */
+.live-dot {
+position: relative;
+}
+.live-dot::before {
+content: "";
+position: absolute;
+inset: -4px;
+border-radius: 50%;
+background: currentColor;
+opacity: 0.4;
+animation: livePulse 2s ease-out infinite;
+}
+@keyframes livePulse {
+0% { transform: scale(1); opacity: 0.4; }
+100% { transform: scale(2); opacity: 0; }
+}
+
+
+.mouse-glow-bg {
+    position: absolute; width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(36, 112, 239, 0.12) 0%, rgba(36, 112, 239, 0) 70%);
+    border-radius: 50%; pointer-events: none; transform: translate(-50%, -50%);
+    transition: opacity 0.5s ease; opacity: 0; z-index: 1;
+}
+
+.kitchen-tile { transition: all 0.2s ease; cursor: pointer; }
+.kitchen-tile:hover { filter: drop-shadow(0 0 6px #2470ef); }
+</style>
+</head>
+<body class="min-h-screen bg-white font-sans text-slate-900 overflow-x-hidden relative digital-noise text-left">
+<!-- PROGRESS BAR -->
 <div id="progress-bar"></div>
 
-<nav id="nav-pill" class="nav-pill flex items-center justify-between">
-  <a href="https://comete.ai/">
-    <img src="https://cdn.convrrt.com/apps/sendinblue/6761372/ab4f2f8e-3e94-4b4e-8ff8-e21271d4b3f4.png" alt="comete.ai" class="h-8 md:h-10" />
-  </a>
-  <button onclick="window.open('https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ3JTz751iHQ5Rb5gntRTGFWkr2nO8ocaXYcBoHv6MOaaitFMWgY4O0kzJ5K-xBe6a_tF64_FSyQ','_blank')" class="px-6 py-2.5 rounded-full bg-gradient-to-r from-[#1a56db] to-[#3b82f6] text-white font-bold uppercase tracking-widest text-[10px] md:text-xs shadow-lg hover:shadow-xl transition-all hover:scale-105">🚀 Démo gratuite</button>
+<!-- NAVIGATION HEADER -->
+<nav id="nav-pill" class="nav-pill">
+<a href="https://comete.ai/" class="shrink-0">
+<img src="https://cdn.convrrt.com/apps/sendinblue/6761372/ab4f2f8e-3e94-4b4e-8ff8-e21271d4b3f4.png" alt="comete.ai" class="h-5 md:h-8" />
+</a>
+<button onclick="window.location.href='https://comete.ai/etudes-de-cas/'" class="px-3 py-2 md:px-6 md:py-3 rounded-full bg-[#2470ef] text-white font-bold uppercase tracking-widest text-[8px] md:text-[11px] shadow-lg border border-white/10 transition-all hover:scale-[1.05] flex items-center gap-2 whitespace-nowrap font-sans">
+<span>Voir les autres études de cas</span>
+<i data-lucide="arrow-right" class="w-3 h-3 md:w-4 md:h-4" style="color:white !important;"></i>
+</button>
 </nav>
 
-<div class="pt-28 pb-16 text-center bg-gradient-to-br from-[#0b1e3a] via-[#142b4a] to-[#0b1e3a] relative overflow-hidden">
-  <div class="relative z-10 fade-in">
-    <div class="inline-flex items-center gap-3 bg-white/10 backdrop-blur-md rounded-full px-6 py-1.5 mb-6">
-      <span class="w-2.5 h-2.5 rounded-full bg-blue-400 animate-pulse"></span>
-      <span class="text-[10px] text-blue-200 uppercase tracking-widest font-semibold">Laboratoire d'innovation</span>
+<!-- CONTENU PRINCIPAL -->
+<div id="main-content" class="text-left w-full max-w-full overflow-hidden">
+<!-- SIDEBAR -->
+<div id="sidebar" class="fixed right-2 md:right-6 top-1/2 -translate-y-1/2 z-[110] flex sidebar-container shadow-2xl">
+<a href="#hero" class="sidebar-link active animate-fade-in" data-section="hero"><i data-lucide="home" class="w-4 h-4 md:w-5 md:h-5"></i></a>
+<a href="#comparatif" class="sidebar-link" data-section="comparatif"><i data-lucide="scale" class="w-4 h-4 md:w-5 md:h-5"></i></a>
+<a href="#modules" class="sidebar-link" data-section="modules"><i data-lucide="layers" class="w-4 h-4 md:w-5 md:h-5"></i></a>
+<a href="#impact" class="sidebar-link" data-section="impact"><i data-lucide="trending-up" class="w-4 h-4 md:w-5 md:h-5"></i></a>
+<a href="#laboratoire" class="sidebar-link" data-section="laboratoire"><i data-lucide="activity" class="w-4 h-4 md:w-5 md:h-5"></i></a>
+<a href="#vision" class="sidebar-link" data-section="vision"><i data-lucide="award" class="w-4 h-4 md:w-5 md:h-5"></i></a>
+</div>
+
+<!-- HERO SECTION -->
+<section id="hero" class="min-h-screen relative flex items-center overflow-hidden bg-[#000d25] text-left pt-36 pb-20 md:pt-48 md:pb-32">
+<div id="hero-mouse-glow" class="mouse-glow-bg"></div>
+<!-- Particles -->
+<div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+<div class="hero-particle" style="left: 10%; animation-delay: 0s;"></div>
+<div class="hero-particle" style="left: 20%; animation-delay: 2s;"></div>
+<div class="hero-particle" style="left: 35%; animation-delay: 4s;"></div>
+<div class="hero-particle" style="left: 50%; animation-delay: 1s;"></div>
+<div class="hero-particle" style="left: 65%; animation-delay: 3s;"></div>
+<div class="hero-particle" style="left: 80%; animation-delay: 5s;"></div>
+<div class="hero-particle" style="left: 90%; animation-delay: 2.5s;"></div>
+</div>
+<div class="absolute inset-0 z-0">
+<img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&q=80&w=2400" class="w-full h-full object-cover opacity-25 animate-bg-zoom scale-105" alt="E-commerce Futuriste" />
+<div class="absolute inset-0 bg-gradient-to-r from-[#000d25] via-[#000d25]/85 to-transparent"></div>
+<div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#000d25]"></div>
+<div class="tech-ring w-[600px] h-[600px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-slow-spin"></div>
+<div class="tech-ring w-[800px] h-[800px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-slow-spin-reverse opacity-50"></div>
+<div class="tech-ring w-[1000px] h-[1000px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-slow-spin opacity-30"></div>
+</div>
+<div class="relative z-10 max-w-7xl mx-auto px-4 md:px-6 w-full">
+<div class="max-w-4xl space-y-8 md:space-y-12">
+<div class="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-xl animate-fade-in shadow-2xl">
+<span class="w-2 h-2 rounded-full bg-cyan-300 animate-pulse live-dot font-sans"></span>
+<span class="text-[9px] md:text-[10px] uppercase tracking-[0.3em] text-blue-100 font-black font-sans">E-COMMERCE & GRANDE DISTRIBUTION : L'ÈRE DE L'EXPÉRIENCE AUGMENTÉE</span>
+</div>
+<h1 class="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-normal text-white leading-[1.1] tracking-tighter">
+L'IA redéfinit le <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#2470ef] via-[#5170ff] to-[#8ab1ff] font-sans font-bold">parcours d'achat</span> et la relation client.
+</h1>
+<p class="text-base md:text-xl lg:text-2xl text-blue-100/70 font-light leading-relaxed border-l-4 border-[#2470ef]/60 pl-4 md:pl-6 max-w-3xl animate-fade-in" style="animation-delay: 0.6s;">
+De la découverte produit à la fidélisation, <b class="text-white">comete.ai orchestre</b> une expérience omnicanale fluide, durable et ultra-personnalisée. Transformez chaque interaction en opportunité de valeur.
+</p>
+<div class="animate-fade-in flex flex-wrap gap-4" style="animation-delay: 0.9s;">
+<button onclick="document.getElementById('laboratoire').scrollIntoView({behavior:'smooth'})" class="group bg-gradient-to-r from-[#2470ef] to-[#5170ff] text-white px-6 py-4 md:px-8 md:py-5 rounded-2xl font-bold uppercase tracking-widest text-[10px] md:text-sm flex items-center gap-3 shadow-2xl transition-all hover:scale-[1.05] hover:shadow-[0_20px_60px_rgba(36,112,239,0.6)] font-sans">
+DÉCOUVRIR LE LAB IA <i data-lucide="arrow-down" class="w-4 h-4 md:w-5 md:h-5 group-hover:translate-y-1 transition-transform" style="color:white !important;"></i>
+</button>
+<button onclick="document.getElementById('impact').scrollIntoView({behavior:'smooth'})" class="group bg-white/5 backdrop-blur-xl border border-white/20 text-white px-6 py-4 md:px-8 md:py-5 rounded-2xl font-bold uppercase tracking-widest text-[10px] md:text-sm flex items-center gap-3 transition-all hover:bg-white/10 hover:border-white/40 font-sans">
+VOIR LES RÉSULTATS <i data-lucide="trending-up" class="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" style="color:white !important;"></i>
+</button>
+</div>
+</div>
+</div>
+</section>
+
+<!-- SECTION COMPARATIVE -->
+<section id="comparatif" class="py-24 md:py-36 bg-white overflow-hidden text-left relative">
+<div class="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
+<h2 class="text-3xl md:text-5xl lg:text-7xl font-normal text-[#002d62] leading-tight tracking-tighter mb-12 md:mb-20 lg:mb-16">
+La performance <br><span class="text-[#2470ef]">sans compromis</span> sur l'expérience client.
+</h2>
+<div class="flex flex-col lg:grid lg:grid-cols-2 gap-0 relative">
+<!-- E-commerce traditionnel -->
+<div class="bg-gradient-to-br from-slate-50 to-white p-6 md:p-14 lg:pr-24 rounded-3xl lg:rounded-l-[48px] lg:rounded-r-none border border-slate-200 mb-10 lg:mb-0 reveal-up">
+<h3 class="text-xl md:text-2xl font-black text-slate-700 mb-10 flex items-center gap-4">
+<span class="w-10 h-10 rounded-xl bg-red-100 flex items-center justify-center"><i data-lucide="alert-circle" class="icon-unified-danger w-5 h-5"></i></span>
+Pistes d'amélioration
+</h3>
+<ul class="space-y-6">
+<li class="flex gap-4 text-slate-500 text-sm md:text-base group">
+<span class="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center shrink-0 group-hover:bg-red-100 transition-colors"><i data-lucide="x-circle" class="icon-unified-danger w-4 h-4"></i></span>
+<span>Parcours d'achat <b>statique</b> et comparatifs techniques indigestes.</span>
+</li>
+<li class="flex gap-4 text-slate-500 text-sm md:text-base group">
+<span class="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center shrink-0 group-hover:bg-red-100 transition-colors"><i data-lucide="x-circle" class="icon-unified-danger w-4 h-4"></i></span>
+<span>Taux d'abandon de panier élevé par <b>manque d'accompagnement</b> contextuel.</span>
+</li>
+<li class="flex gap-4 text-slate-500 text-sm md:text-base group">
+<span class="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center shrink-0 group-hover:bg-red-100 transition-colors"><i data-lucide="x-circle" class="icon-unified-danger w-4 h-4"></i></span>
+<span>SAV réactif et coûteux, généré par une <b>mauvaise utilisation</b> des produits.</span>
+</li>
+<li class="flex gap-4 text-slate-500 text-sm md:text-base group">
+<span class="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center shrink-0 group-hover:bg-red-100 transition-colors"><i data-lucide="x-circle" class="icon-unified-danger w-4 h-4"></i></span>
+<span>Gestion des retours, de la fraude et de la <b>seconde main fragmentée</b>.</span>
+</li>
+<li class="flex gap-4 text-slate-500 text-sm md:text-base group">
+<span class="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center shrink-0 group-hover:bg-red-100 transition-colors"><i data-lucide="x-circle" class="icon-unified-danger w-4 h-4"></i></span>
+<span>Maintenance et consommables déclenchés <b>uniquement après la panne</b>.</span>
+</li>
+</ul>
+</div>
+<!-- Badge VS -->
+<div class="vs-image-container">
+<img src="https://cdn.convrrt.com/apps/sendinblue/6761372/060d39f9-27f2-4b6f-8faf-aaf96c025e56.png" alt="VS" class="w-full object-contain" />
+</div>
+<!-- Orchestration comete.ai -->
+<div class="bg-gradient-to-br from-[#002d62] via-[#001c3d] to-[#002d62] px-6 pb-6 pt-16 md:p-14 lg:pl-24 rounded-3xl lg:rounded-r-[48px] lg:rounded-l-none border border-[#2470ef]/20 shadow-2xl reveal-up relative overflow-hidden">
+<div class="absolute top-0 right-0 w-96 h-96 bg-[#2470ef]/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 font-sans"></div>
+<div class="absolute bottom-0 left-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 font-sans"></div>
+<div class="relative z-10">
+<h3 class="text-xl md:text-2xl font-black text-white mb-10 flex items-center gap-4">
+<span class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#2470ef] to-cyan-500 flex items-center justify-center shadow-lg shadow-[#2470ef]/30"><i data-lucide="sparkles" class="w-5 h-5" style="color:white !important;"></i></span>
+Orchestration comete.ai
+</h3>
+<ul class="space-y-6">
+<li class="flex gap-4 text-blue-50 text-sm md:text-base group">
+<span class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center shrink-0 group-hover:bg-white/20 transition-colors"><i data-lucide="check-circle-2" class="icon-unified-accent w-4 h-4" style="color:#22d3ee !important;"></i></span>
+<span><b>Assistant d'achat conversationnel</b> et comparateur intelligent guidé par l'IA.</span>
+</li>
+<li class="flex gap-4 text-blue-50 text-sm md:text-base group">
+<span class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center shrink-0 group-hover:bg-white/20 transition-colors"><i data-lucide="check-circle-2" class="icon-unified-accent w-4 h-4" style="color:#22d3ee !important;"></i></span>
+<span><b>Relance contextuelle</b> et personnalisée des paniers abandonnés en temps réel.</span>
+</li>
+<li class="flex gap-4 text-blue-50 text-sm md:text-base group">
+<span class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center shrink-0 group-hover:bg-white/20 transition-colors"><i data-lucide="check-circle-2" class="icon-unified-accent w-4 h-4" style="color:#22d3ee !important;"></i></span>
+<span><b>Aide à l'usage proactive</b> et visio-assistance pour un SAV résolu au premier contact.</span>
+</li>
+<li class="flex gap-4 text-blue-50 text-sm md:text-base group">
+<span class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center shrink-0 group-hover:bg-white/20 transition-colors"><i data-lucide="check-circle-2" class="icon-unified-accent w-4 h-4" style="color:#22d3ee !important;"></i></span>
+<span><b>Estimation instantanée par Vision IA</b> pour la reprise et l'économie circulaire.</span>
+</li>
+<li class="flex gap-4 text-blue-50 text-sm md:text-base group">
+<span class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center shrink-0 group-hover:bg-white/20 transition-colors"><i data-lucide="check-circle-2" class="icon-unified-accent w-4 h-4" style="color:#22d3ee !important;"></i></span>
+<span><b>Concierge IA prédictif</b> pour l'entretien, les consommables et l'upsell cyclique.</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- SECTION MODULES - INTEGRATION FIDELE DU STYLE DE L'IMAGE image_a0eaa1.jpg -->
+<section id="modules" class="py-24 md:py-36 bg-white text-left overflow-hidden">
+<div class="max-w-[1440px] mx-auto px-4 md:px-6">
+<div class="text-center max-w-3xl mx-auto mb-16 md:mb-20 reveal-up font-sans">
+<div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#2470ef]/10 border border-[#2470ef]/20 mb-6">
+<i data-lucide="layers" class="icon-unified w-4 h-4 font-sans"></i>
+<span class="text-[10px] uppercase tracking-widest text-[#2470ef] font-black font-sans">Nos Briques Opérationnelles</span>
+</div>
+<h2 class="text-3xl md:text-5xl lg:text-6xl font-normal text-[#002d62] tracking-tighter">
+L'orchestration retail & E-commerce <br><span class="text-gradient-animated">augmentée par l'IA.</span>
+</h2>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8 font-sans animate-fade-in" id="solutions-retail-grid">
+<!-- Les cartes d'offres de nos 6 briques opérationnelles seront injectées par le script JS avec le design premium et couleurs distinctives -->
+</div>
+</div>
+</section>
+
+<!-- IMPACT SECTION (Déplacée juste en dessous de la section Modules) -->
+<section id="impact" class="py-24 md:py-36 bg-[#001c3d] text-white relative overflow-hidden">
+<div class="absolute inset-0 pointer-events-none">
+<div class="absolute top-20 left-10 w-72 h-72 bg-[#2470ef]/10 rounded-full blur-3xl animate-float-slow"></div>
+<div class="absolute bottom-20 right-10 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl animate-float-slow" style="animation-delay: 2s;"></div>
+</div>
+<div class="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
+<div class="grid lg:grid-cols-2 gap-16 md:gap-24 items-center">
+<div class="space-y-8 reveal-up">
+<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 font-sans">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse font-sans"></span>
+<span class="text-[9px] uppercase tracking-widest text-emerald-400 font-bold font-sans">Résultats mesurables</span>
+</div>
+<h2 class="text-3xl md:text-5xl lg:text-7xl font-normal leading-tight tracking-tighter font-sans">
+Un commerce <span class="text-gradient-animated">augmenté</span>, des résultats mesurables.
+</h2>
+<p class="text-blue-100/70 text-lg md:text-2xl italic font-light pl-6 border-l-2 border-[#2470ef] font-sans">
+"L'IA ne remplace pas le commerce, elle lui donne les moyens d'être à la hauteur des attentes omnicanalles."
+</p>
+</div>
+<div class="grid grid-cols-2 gap-4 md:gap-6 font-sans">
+<div class="group bg-gradient-to-br from-white/5 to-white/[0.02] p-6 md:p-8 rounded-3xl border border-white/10 text-center transition-all hover:bg-white/10 hover:border-[#2470ef]/40 hover:scale-105 reveal-up">
+<span class="text-3xl md:text-6xl font-black kpi-value block mb-2">+35%</span>
+<span class="text-[8px] md:text-[9px] uppercase font-bold text-blue-100/50 tracking-widest">Taux de conversion</span>
+</div>
+<div class="group bg-gradient-to-br from-white/5 to-white/[0.02] p-6 md:p-8 rounded-3xl border border-white/10 text-center transition-all hover:bg-white/10 hover:border-[#2470ef]/40 hover:scale-105 reveal-up" style="transition-delay: 0.1s;">
+<span class="text-3xl md:text-6xl font-black kpi-value block mb-2">-40%</span>
+<span class="text-[8px] md:text-[9px] uppercase font-bold text-blue-100/50 tracking-widest">Abandons de panier</span>
+</div>
+<div class="group bg-gradient-to-br from-white/5 to-white/[0.02] p-6 md:p-8 rounded-3xl border border-white/10 text-center transition-all hover:bg-white/10 hover:border-[#2470ef]/40 hover:scale-105 reveal-up" style="transition-delay: 0.2s;">
+<span class="text-3xl md:text-6xl font-black kpi-value block mb-2">-60%</span>
+<span class="text-[8px] md:text-[9px] uppercase font-bold text-blue-100/50 tracking-widest">Retours (mauvais usage)</span>
+</div>
+<div class="group bg-gradient-to-br from-white/5 to-white/[0.02] p-6 md:p-8 rounded-3xl border border-white/10 text-center transition-all hover:bg-white/10 hover:border-[#2470ef]/40 hover:scale-105 reveal-up" style="transition-delay: 0.3s;">
+<span class="text-3xl md:text-6xl font-black kpi-value block mb-2">+25%</span>
+<span class="text-[8px] md:text-[9px] uppercase font-bold text-blue-100/50 tracking-widest">Revenus récurrents</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- LABORATOIRE INTERACTIF - TOUS LES SIMULATEURS INDÉPENDANTS -->
+<section id="laboratoire" class="py-24 md:py-36 bg-gradient-to-b from-slate-50 via-white to-slate-50 text-left overflow-hidden relative">
+<div class="absolute inset-0 pointer-events-none">
+<div class="absolute top-40 left-20 w-96 h-96 bg-[#2470ef]/5 rounded-full blur-3xl"></div>
+<div class="absolute bottom-40 right-20 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl"></div>
+</div>
+<div class="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
+<div class="text-center max-w-3xl mx-auto mb-12 md:mb-16 reveal-up">
+<div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#2470ef]/10 border border-[#2470ef]/20 mb-6">
+<i data-lucide="flask-conical" class="icon-unified w-4 h-4 font-sans"></i>
+<span class="text-[10px] uppercase tracking-widest text-[#2470ef] font-black font-sans">Laboratoire Interactif</span>
+</div>
+<h2 class="text-3xl md:text-5xl lg:text-6xl font-normal text-[#002d62] tracking-tighter">
+Le Laboratoire <span class="text-gradient-animated">comete.ai</span>
+</h2>
+<p class="text-slate-500 text-[15px] font-light mt-4 text-center font-sans">
+Visualisez concrètement comment notre IA transforme chaque étape du parcours client. Cliquez sur les modules pour tester les simulations en temps réel.
+</p>
+</div>
+
+<!-- LE SELECTEUR DE SIMULATEURS UNIFIÉ (GRID-COLS-5) -->
+<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 pb-4 mb-8 max-w-6xl mx-auto px-2 font-sans">
+<button onclick="window.switchLabTab('assistant')" id="lab-tab-assistant" class="lab-tab-btn active text-left p-3 rounded-2xl border border-slate-200 bg-white transition-all duration-300 flex items-center gap-3 hover:border-[#2470ef]/30 font-sans">
+<span class="lab-tab-icon w-10 h-10 rounded-xl bg-slate-100 text-slate-500 flex items-center justify-center shrink-0 transition-all font-sans">
+<i data-lucide="message-square" class="w-5 h-5 font-sans"></i>
+</span>
+<div class="min-w-0 hidden sm:block">
+<h4 class="font-bold text-[#002d62] text-[11px] lg:text-xs truncate font-sans">Assistant d'Achat</h4>
+<span class="text-[9px] text-slate-400 block font-sans font-sans">Conversationnel</span>
+</div>
+</button>
+
+<button onclick="window.switchLabTab('scanplan')" id="lab-tab-scanplan" class="lab-tab-btn text-left p-3 rounded-2xl border border-slate-200 bg-white transition-all duration-300 flex items-center gap-3 hover:border-[#2470ef]/30 font-sans">
+<span class="lab-tab-icon w-10 h-10 rounded-xl bg-slate-100 text-slate-500 flex items-center justify-center shrink-0 transition-all">
+<i data-lucide="layout-grid" class="w-5 h-5"></i>
+</span>
+<div class="min-w-0 hidden sm:block font-sans">
+<h4 class="font-bold text-[#002d62] text-[11px] lg:text-xs truncate font-sans">Scan & Plan</h4>
+<span class="text-[9px] text-slate-400 block font-sans font-sans font-sans">Aménagement 3D</span>
+</div>
+</button>
+
+<button onclick="window.switchLabTab('vision')" id="lab-tab-vision" class="lab-tab-btn text-left p-3 rounded-2xl border border-slate-200 bg-white transition-all duration-300 flex items-center gap-3 hover:border-[#2470ef]/30 font-sans font-sans font-sans">
+<span class="lab-tab-icon w-10 h-10 rounded-xl bg-slate-100 text-slate-500 flex items-center justify-center shrink-0 transition-all">
+<i data-lucide="scan-eye" class="w-5 h-5 font-sans font-sans"></i>
+</span>
+<div class="min-w-0 hidden sm:block font-sans font-sans">
+<h4 class="font-bold text-[#002d62] text-[11px] lg:text-xs truncate font-sans">Vision : Reprise</h4>
+<span class="text-[9px] text-slate-400 block font-sans font-sans font-sans">Estimation Occasion</span>
+</div>
+</button>
+
+<button onclick="window.switchLabTab('logistique')" id="lab-tab-logistique" class="lab-tab-btn text-left p-3 rounded-2xl border border-slate-200 bg-white transition-all duration-300 flex items-center gap-3 hover:border-[#2470ef]/30 font-sans">
+<span class="lab-tab-icon w-10 h-10 rounded-xl bg-slate-100 text-slate-500 flex items-center justify-center shrink-0 transition-all">
+<i data-lucide="map" class="w-5 h-5 font-sans"></i>
+</span>
+<div class="min-w-0 hidden sm:block font-sans font-sans font-sans">
+<h4 class="font-bold text-[#002d62] text-[11px] lg:text-xs truncate font-sans font-sans">C-Route Dispatch</h4>
+<span class="text-[9px] text-slate-400 block font-sans font-sans">Dernier Kilomètre</span>
+</div>
+</button>
+
+<button onclick="window.switchLabTab('fraud')" id="lab-tab-fraud" class="lab-tab-btn text-left p-3 rounded-2xl border border-slate-200 bg-white transition-all duration-300 flex items-center gap-3 hover:border-[#2470ef]/30 font-sans font-sans">
+<span class="lab-tab-icon w-10 h-10 rounded-xl bg-slate-100 text-slate-500 flex items-center justify-center shrink-0 transition-all font-sans">
+<i data-lucide="shield-alert" class="w-5 h-5 font-sans"></i>
+</span>
+<div class="min-w-0 hidden sm:block font-sans font-sans">
+<h4 class="font-bold text-[#002d62] text-[11px] lg:text-xs truncate font-sans font-sans">Anti-Fraude</h4>
+<span class="text-[9px] text-slate-400 block font-sans font-sans">Contrôle Retours</span>
+</div>
+</button>
+</div>
+
+<!-- Display Area - Premium Cockpit (Structure exacte de image_ae12dc.png) -->
+<div class="lg:col-span-12 gradient-border p-1">
+<div class="bg-[#000d25] rounded-[22px] p-5 md:p-6 text-white flex flex-col justify-between border border-white/10 shadow-2xl relative min-h-[600px] text-left overflow-hidden">
+<!-- Ambient glow -->
+<div class="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-transparent to-[#2470ef]/5 pointer-events-none"></div>
+<div class="absolute top-0 right-0 w-96 h-96 bg-[#2470ef]/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+<!-- Header -->
+<div class="flex items-center justify-between border-b border-white/10 pb-3 mb-4 shrink-0 relative z-10 font-sans">
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-3 rounded-full bg-red-400 animate-pulse font-sans"></span>
+<span class="w-3 h-3 rounded-full bg-yellow-400"></span>
+<span class="w-3 h-3 rounded-full bg-green-400 animate-pulse font-sans"></span>
+</div>
+<span class="text-[10px] text-slate-400 font-mono ml-2">C-Suite // LABORATOIRE COMETE.AI</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="flex items-center gap-1.5 text-[9px] text-emerald-400 font-mono">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 live-dot font-sans"></span>
+LIVE
+</span>
+<span id="lab-stage-indicator" class="px-3 py-1 rounded-full bg-[#2470ef]/20 text-cyan-300 text-[10px] font-bold font-mono border border-[#2470ef]/30 font-sans">MODULE 01</span>
+</div>
+</div>
+<!-- Content -->
+<div class="space-y-4 flex-grow w-full overflow-hidden relative z-10 font-sans" id="lab-screen-display">
+<!-- Content populated by JS -->
+</div>
+
+<!-- Telemetry and Reset Row -->
+<div class="flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-slate-400 shrink-0 relative z-10 font-sans border-t border-white/10 pt-3 mt-4">
+    <div class="flex flex-wrap gap-4 text-xs font-mono text-slate-400 font-sans">
+        <div class="flex items-center gap-1.5 bg-white/5 py-1 px-3 rounded-lg border border-white/5 font-sans">
+            <span class="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse font-sans font-sans"></span>
+            <span>Performance : <b class="text-white" id="telemetry-conv">+24%</b></span>
+        </div>
+        <div class="flex items-center gap-1.5 bg-white/5 py-1 px-3 rounded-lg border border-white/5 font-sans">
+            <span class="w-1.5 h-1.5 rounded-full bg-red-400 font-sans" id="fraud-indicator"></span>
+            <span>Fraude : <b class="text-white font-sans font-sans font-sans" id="telemetry-fraud">0%</b></span>
+        </div>
     </div>
-    <h1 class="text-5xl md:text-7xl font-black text-white leading-tight">
-      4 simulateurs <span class="text-gradient">IA</span><br>
-      <span class="text-2xl md:text-4xl font-light text-blue-200/80">Nouvelle Architecture</span>
-    </h1>
-    <p class="text-blue-200/70 mt-5 max-w-2xl mx-auto text-base md:text-lg font-light">Chaque interaction est historisée et visible en temps réel dans le tableau de bord.</p>
-  </div>
+    <button id="btn-reset-all-journey" disabled class="px-5 py-2 rounded-full bg-slate-950 text-slate-600 font-bold uppercase tracking-wider text-[10px] border border-white/5 flex items-center gap-2 cursor-not-allowed transition-all duration-300 opacity-40 hover:bg-slate-900 font-sans" onclick="window.resetAllJourney()">
+        <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> Réinitialiser le Lab
+    </button>
 </div>
 
-<div class="max-w-6xl mx-auto px-4 -mt-6 mb-10">
-  <div id="tabs-wrapper" class="flex flex-wrap justify-center gap-3"></div>
+<!-- Footer -->
+<div class="flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-slate-400 shrink-0 relative z-10 font-sans mt-3 border-t border-white/5 pt-3">
+<p class="text-center sm:text-left font-light text-slate-400 text-[11px] font-sans font-sans" id="lab-explainer">L'assistant IA guide le client vers le produit parfait en temps réel.</p>
+<div class="flex items-center gap-2 text-[9px] font-mono font-sans">
+<span class="flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 font-sans"></span> IA Active</span>
+<span class="text-slate-600 font-sans">|</span>
+<span class="font-sans">Latence &lt; 200ms</span>
 </div>
+</div>
+</div>
+</div>
+</div>
+</section>
 
-<div id="sim-root" class="max-w-6xl mx-auto px-4 pb-20"></div>
+<!-- VISION SECTION (TECHNOLOGIE ET HUMAIN) -->
+<section id="vision" class="py-24 md:py-36 bg-gradient-to-b from-slate-50 to-white text-left overflow-hidden relative">
+<div class="max-w-7xl mx-auto px-4 md:px-6 grid lg:grid-cols-2 gap-12 md:gap-20 items-center relative z-10">
+<div class="space-y-10 reveal-up">
+<div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#2470ef]/10 border border-[#2470ef]/20 font-sans">
+<i data-lucide="zap" class="icon-unified w-4 h-4 font-sans"></i>
+<span class="text-[10px] uppercase tracking-widest text-[#2470ef] font-black">Passez à l'action</span>
+</div>
+<h2 class="text-3xl md:text-5xl lg:text-7xl font-normal text-[#002d62] leading-tight tracking-tighter font-sans">
+Combiner intelligemment <span class="text-gradient-animated">Technologie et Humain.</span>
+</h2>
+<p class="text-slate-500 text-lg md:text-2xl font-light max-w-xl font-sans">
+Libérez vos équipes des tâches répétitives et concentrez votre énergie sur la relation client, le conseil expert et la création de valeur durable.
+</p>
+<div class="grid sm:grid-cols-2 gap-8 font-sans">
+<div class="space-y-1 group">
+<p class="font-bold text-slate-800 flex items-center gap-2 text-sm md:text-base"><span class="w-8 h-8 rounded-lg bg-[#2470ef]/10 flex items-center justify-center group-hover:bg-[#2470ef]/20 transition-colors"><i data-lucide="zap" class="icon-unified w-4 h-4"></i></span> Disponibilité totale</p>
+<p class="text-[11px] md:text-xs text-slate-400 pl-10 font-sans">Réponse pertinent à toute heure sur tous les canaux.</p>
+</div>
+<div class="space-y-1 group">
+<p class="font-bold text-slate-800 flex items-center gap-2 text-sm md:text-base"><span class="w-8 h-8 rounded-lg bg-[#2470ef]/10 flex items-center justify-center group-hover:bg-[#2470ef]/20 transition-colors"><i data-lucide="users" class="icon-unified w-4 h-4 animate-pulse"></i></span> Conseillers valorisés</p>
+<p class="text-[11px] md:text-xs text-slate-400 pl-10 font-sans">Vos équipes gagnent en fluidité et en disponibilité pour des échanges à plus forte valeur.</p>
+</div>
+<div class="space-y-1 group">
+<p class="font-bold text-slate-800 flex items-center gap-2 text-sm md:text-base"><span class="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center group-hover:bg-emerald-100 transition-colors"><i data-lucide="leaf" class="icon-unified-success w-4 h-4"></i></span> Durabilité</p>
+<p class="text-[11px] md:text-xs text-slate-400 pl-10 font-sans">Allongement de la durée de vie des produits et économie circulaire.</p>
+</div>
+<div class="space-y-1 group">
+<p class="font-bold text-slate-800 flex items-center gap-2 text-sm md:text-base"><span class="w-8 h-8 rounded-lg bg-[#2470ef]/10 flex items-center justify-center group-hover:bg-[#2470ef]/20 transition-colors"><i data-lucide="shield-check" class="icon-unified w-4 h-4"></i></span> Conformité garantie</p>
+<p class="text-[11px] md:text-xs text-slate-400 pl-10 font-sans">Interactions supervisées et protection contre la fraude.</p>
+</div>
+</div>
+</div>
+<div class="relative overflow-hidden rounded-[32px] md:rounded-[48px] border border-white/10 shadow-[0_25px_80px_rgba(0,0,0,0.45)] group reveal-up">
+<div class="absolute inset-0">
+<img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1600&auto=format&fit=crop" alt="Consultation stratégique" class="w-full h-full object-cover scale-105 group-hover:scale-110 transition-transform duration-[4000ms] ease-out" />
+<div class="absolute inset-0 bg-gradient-to-br from-[#001633]/95 via-[#002d62]/80 to-[#001633]/90"></div>
+<div class="absolute -top-24 -right-24 w-72 h-72 bg-blue-400/20 blur-3xl rounded-full"></div>
+<div class="absolute -bottom-24 -left-24 w-72 h-72 bg-cyan-300/10 blur-3xl rounded-full"></div>
+</div>
+<div class="relative z-10 px-8 py-12 md:px-16 md:py-20 text-center text-white font-sans">
+<div class="max-w-2xl mx-auto space-y-8 md:space-y-10">
+<div class="relative mx-auto w-20 h-20 md:w-24 md:h-24 flex items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-xl shadow-[0_10px_40px_rgba(255,255,255,0.08)] animate-glow-pulse">
+<div class="absolute inset-0 rounded-full bg-gradient-to-br from-yellow-300/20 to-orange-400/10"></div>
+<i data-lucide="zap" class="relative z-10 w-9 h-9 md:w-11 md:h-11 text-yellow-300 fill-yellow-300 drop-shadow-[0_0_18px_rgba(253,224,71,0.65)]"></i>
+</div>
+<div class="space-y-4">
+<h4 class="text-3xl md:text-5xl font-semibold tracking-[-0.03em] leading-tight">
+Passez à l'action
+</h4>
+<p class="text-blue-100/90 text-base md:text-xl leading-relaxed max-w-xl mx-auto font-light font-sans">
+Évaluer mon <b>Parcours Client Omnicanal</b> dès maintenant.
+</p>
+</div>
+<div class="pt-2 md:pt-4 font-sans">
+<button onclick="window.open('https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ3JTz751iHQ5Rb5gntRTGFWkr2nO8ocaXYcBoHv6MOaaitFMWgY4O0kzJ5K-xBe6a_tF64_FSyQ', '_blank')" class="inline-flex items-center justify-center gap-2.5 md:gap-4 rounded-xl md:rounded-3xl bg-gradient-to-r from-[#3b82f6] via-[#2470ef] to-[#1d4ed8] px-5 py-3.5 md:px-10 md:py-5 text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] text-white shadow-[0_12px_30px_rgba(37,99,235,0.35)] transition-all duration-500 hover:scale-[1.03] hover:shadow-[0_18px_50px_rgba(37,99,235,0.6)] hover:-translate-y-1">
+<span>ÉCHANGER AVEC UN EXPERT</span>
+<span class="flex items-center justify-center w-6 h-6 md:w-8 md:h-8 rounded-full bg-white/15 border border-white/20 backdrop-blur-md shrink-0">
+<i data-lucide="arrow-up-right" class="w-3 h-3 md:w-4 md:h-4" style="color:white !important;"></i>
+</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
 
-<footer class="border-t border-slate-200/40 py-10 text-center text-slate-400 text-[9px] font-semibold uppercase tracking-widest bg-white/30 backdrop-blur-sm">© 2026 comete.ai — L'IA qui transforme l'expérience client</footer>
+<!-- FOOTER -->
+<footer class="bg-white py-12 md:py-16 border-t border-slate-200">
+<div class="max-w-7xl mx-auto px-4 md:px-6 flex flex-col md:flex-row justify-between items-center gap-8 md:gap-10 text-center md:text-left">
+<div class="flex flex-col md:flex-row items-center gap-6 md:gap-8">
+<img src="https://cdn.convrrt.com/apps/sendinblue/6761372/ab4f2f8e-3e94-4b4e-8ff8-e21271d4b3f4.png" alt="comete.ai" class="h-5 md:h-6" />
+<p class="text-slate-400 font-black text-[7px] md:text-[9px] uppercase tracking-[0.4em] font-sans">La technologie et l'IA au service du E-commerce et du Retail</p>
+</div>
+<div class="text-slate-400 font-black text-[7px] md:text-[9px] uppercase tracking-[0.4em] font-sans">
+<span>© 2026 comete.ai</span>
+</div>
+</div>
+</footer>
+</div>
 
 <script>
-// ============================================================
-// 0. BASE DE DONNÉES SIMULÉE
-// ============================================================
-var DB = {
-  clients: {
-    match: { 'client_match_1': { id: 'client_match_1', firstName: 'Jean', lastName: 'Dupont', history: [], purchases: [], totalSpent: 0 } },
-    secondlife: { 'client_sl_1': { id: 'client_sl_1', firstName: 'Marie', lastName: 'Martin', history: [], purchases: [], totalSpent: 0 } },
-    croute: { 'client_cr_1': { id: 'client_cr_1', firstName: 'Pierre', lastName: 'Durand', history: [], purchases: [], totalSpent: 0 } },
-    safereturn: { 'client_sr_1': { id: 'client_sr_1', firstName: 'Sophie', lastName: 'Lefèvre', history: [], purchases: [], totalSpent: 0 } }
-  },
-  getClient: function(simId, clientId) {
-    if (!this.clients[simId]) this.clients[simId] = {};
-    if (!this.clients[simId][clientId]) {
-      this.clients[simId][clientId] = { id: clientId, firstName: 'Client', lastName: 'Anonyme', history: [], purchases: [], totalSpent: 0 };
-    }
-    return this.clients[simId][clientId];
-  },
-  save: function() { /* console.log('DB sauvegardée', this.clients); */ }
+// --- GLOBAL STATE ENGINE FOR LE LABORATOIRE ---
+window.simState = {
+activeTab: 'assistant',
+assistant: {
+    cart: []
+},
+vision: { status: 'idle', progress: 0 },
+reprise: { status: 'idle' },
+concierge: { status: 'idle' },
+fraud: { status: 'idle', selectedPhoto: 'colis-clean' },
+scanplan: { status: 'idle', placedElements: [], complianceError: false, estimatedPrice: 1200 },
+logistique: { status: 'nominal', distance: 92, co2: 18 }
 };
 
-// ============================================================
-// 1. ONGLETS
-// ============================================================
-var tabsData = [
-  { id: 'match', label: 'Match & Buy', icon: 'shopping-bag' },
-  { id: 'secondlife', label: 'Seconde Main', icon: 'camera' },
-  { id: 'croute', label: 'C-Route Dispatch', icon: 'truck' },
-  { id: 'safereturn', label: 'SafeReturn', icon: 'shield-check' }
+const retailSolutions = [
+    {
+        num: "01",
+        title: "Seconde Main & Reprise",
+        icon: "refresh-cw",
+        badge: "CIRCULAIRE",
+        challenge: "Proposer un parcours de reprise de produits d'occasion simple et digne de confiance pour encourager l'économie circulaire.",
+        solutions: [
+            "<b>Estimation en ligne par Vision IA</b> : analyse automatique de l'état esthétique à partir de photos.",
+            "<b>Visioconférence de certification</b> : validation en direct de l'état fonctionnel du produit.",
+            "<b>Rachat instantané</b> : conversion directe de la valeur estimée en carte cadeau."
+        ],
+        badgeBg: "kpi-blue",
+        numBg: "kpi-blue",
+        iconColor: "text-blue-500",
+        iconBg: "bg-blue-500/10",
+        borderClass: "border-t-blue-500",
+        hoverGlow: "hover:shadow-[0_20px_50px_rgba(59,130,246,0.35)] hover:border-blue-500/40",
+        image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&q=80&w=800"
+    },
+    {
+        num: "02",
+        title: "Coach & Aide à l'usage",
+        icon: "graduation-cap",
+        badge: "FIDÉLISATION",
+        challenge: "Accompagner l'acheteur dans sa prise en main pour maximiser sa satisfaction et limiter les retours évitables.",
+        solutions: [
+            "<b>Guides interactifs personnalisés</b> : tutoriels pas-à-pas adaptés aux besoins de l'usager.",
+            "<b>Alertes d'entretien intelligentes</b> : notifications basées sur le cycle de vie du produit.",
+            "<b>Sessions de formation en live</b> : webinaires thématiques pour s'approprier l'appareil."
+        ],
+        badgeBg: "kpi-green",
+        numBg: "kpi-green",
+        iconColor: "text-emerald-500",
+        iconBg: "bg-emerald-500/10",
+        borderClass: "border-t-emerald-500",
+        hoverGlow: "hover:shadow-[0_20px_50px_rgba(16,185,129,0.35)] hover:border-emerald-500/40",
+        image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=800"
+    },
+    {
+        num: "03",
+        title: "SafeReturn : Anti-Fraude",
+        icon: "shield-alert",
+        badge: "RISK MANAGEMENT",
+        challenge: "Protéger les marges d'exploitation face aux abus et fausses déclarations de colis endommagés.",
+        solutions: [
+            "<b>Analyse forensique d'images</b> : détection de photomontages ou duplication de photos.",
+            "<b>Arbitrage vidéo assisté</b> : vérification visuelle guidée pour valider les réclamations.",
+            "<b>Scoring de suspicion</b> : identification précoce des comportements abusifs répétés."
+        ],
+        badgeBg: "bg-gradient-to-r from-rose-500 to-pink-600",
+        numBg: "bg-gradient-to-r from-rose-500 to-pink-600",
+        iconColor: "text-rose-500",
+        iconBg: "bg-rose-500/10",
+        borderClass: "border-t-rose-500",
+        hoverGlow: "hover:shadow-[0_20px_50px_rgba(244,63,94,0.35)] hover:border-rose-500/40",
+        image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=800"
+    },
+    {
+        num: "04",
+        title: "Conciergerie IA Omnicanale",
+        icon: "message-square",
+        badge: "WhatsApp & RCS",
+        challenge: "Maintenir une relation client proactive post-achat pour anticiper les besoins et générer des ventes récurrentes.",
+        solutions: [
+            "<b>Suivi d'entretien proactif</b> : rappels réguliers pour préserver les performances de l'appareil.",
+            "<b>Réapprovisionnement prédictif</b> : suggestions de consommables au moment idéal.",
+            "<b>Relance de panier intelligente</b> : récupération des ventes interrompues sur tous les canaux."
+        ],
+        badgeBg: "kpi-purple",
+        numBg: "kpi-purple",
+        iconColor: "text-purple-500",
+        iconBg: "bg-purple-500/10",
+        borderClass: "border-t-purple-500",
+        hoverGlow: "hover:shadow-[0_20px_50px_rgba(168,85,247,0.35)] hover:border-purple-500/40",
+        image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800"
+    },
+    {
+        num: "05",
+        title: "Scan & Plan : Designer Virtuel",
+        icon: "layout",
+        badge: "CONCEPTION",
+        challenge: "Accompagner les projets d'aménagement d'intérieur complexes sans nécessiter de déplacements physiques coûteux.",
+        solutions: [
+            "<b>Analyse de pièce par Vision IA</b> : détection automatique des dimensions et obstacles.",
+            "<b>Propositions d'aménagement 3D</b> : sélection optimisée de mobilier et d'électroménager.",
+            "<b>Génération de devis automatique</b> : budgétisation immédiate pour prise de rendez-vous qualifié."
+        ],
+        badgeBg: "kpi-cyan",
+        numBg: "kpi-cyan",
+        iconColor: "text-cyan-500",
+        iconBg: "bg-cyan-500/10",
+        borderClass: "border-t-cyan-500",
+        hoverGlow: "hover:shadow-[0_20px_50px_rgba(6,182,212,0.35)] hover:border-cyan-500/40",
+        image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&q=80&w=800"
+    },
+    {
+        num: "06",
+        title: "Match & Buy : Conseil Intelligent",
+        icon: "git-compare",
+        badge: "CONVERSATIONNEL",
+        challenge: "Guider l'acheteur parmi des catalogues complexes en remplaçant les filtres techniques par un conseil chaleureux.",
+        solutions: [
+            "<b>Analyse de requêtes sémantiques</b> : compréhension des besoins exprimés en langage naturel.",
+            "<b>Comparaison comparative active</b> : mise en évidence argumentée des forces de chaque modèle.",
+            "<b>Assistant d'achat dynamique</b> : accompagnement personnalisé du conseil jusqu'au panier."
+        ],
+        badgeBg: "kpi-yellow",
+        numBg: "kpi-yellow",
+        iconColor: "text-amber-500",
+        iconBg: "bg-amber-500/10",
+        borderClass: "border-t-amber-500",
+        hoverGlow: "hover:shadow-[0_20px_50px_rgba(245,158,11,0.35)] hover:border-amber-500/40",
+        image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800"
+    }
 ];
 
-var tabsWrapper = document.getElementById('tabs-wrapper');
-var tabElements = [];
+document.addEventListener("DOMContentLoaded", () => {
+injectStaticContent();
+lucide.createIcons();
+const observer = new IntersectionObserver((entries) => {
+entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+}, { threshold: 0.05 });
+document.querySelectorAll('.reveal-up').forEach(el => observer.observe(el));
 
-for (var t = 0; t < tabsData.length; t++) {
-  var tab = tabsData[t];
-  var btn = document.createElement('button');
-  btn.setAttribute('data-sim', tab.id);
-  btn.className = 'sim-tab';
-  btn.innerHTML = '<i data-lucide="' + tab.icon + '" style="width:20px;height:20px;"></i> ' + tab.label;
-  tabsWrapper.appendChild(btn);
-  tabElements.push(btn);
-}
-
-// ============================================================
-// 2. FONCTIONS UTILITAIRES GLOBALES
-// ============================================================
-function addMessage(containerId, from, text, imageUrl) {
-  var container = document.getElementById(containerId);
-  if (!container) return;
-  var time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-  var bubble = document.createElement('div');
-  bubble.className = from === 'user' ? 'whatsapp-bubble-user' : 'whatsapp-bubble-bot';
-  var html = text;
-  if (imageUrl) {
-    html += '<br><img src="' + imageUrl + '" alt="Photo envoyée" style="max-width:200px; border-radius:12px; margin-top:6px;">';
-  }
-  bubble.innerHTML = html + '<div class="text-right text-[9px] opacity-50 mt-1">' + time + (from === 'user' ? ' ✔️✔️' : '') + '</div>';
-  container.appendChild(bubble);
-  container.scrollTop = container.scrollHeight;
-}
-
-function clearSuggestions(containerId) {
-  var div = document.getElementById(containerId);
-  if (div) div.innerHTML = '';
-}
-
-function addResetButton(containerId, resetFn) {
-  var div = document.getElementById(containerId);
-  if (div) {
-    var btn = document.createElement('div');
-    btn.className = 'suggestion-chip';
-    btn.innerText = '🔄 Nouvelle simulation';
-    btn.style.background = '#1a56db';
-    btn.style.color = 'white';
-    btn.style.borderColor = '#1a56db';
-    btn.onclick = resetFn;
-    div.appendChild(btn);
-  }
-}
-
-// ============================================================
-// 3. SIMULATEUR 1 : MATCH & BUY (stable)
-// ============================================================
-function renderMatch() {
-  var clientId = 'client_match_1';
-  var client = DB.getClient('match', clientId);
-  var firstName = client.firstName;
-
-  var step = 1;
-  var selectedUsage = null;
-  var cart = [];
-  var totalVisits = 0;
-  var conversions = 0;
-  var products = [
-    { name: "MacBook Pro M3 Max", price: 3899, category: "creatif" },
-    { name: "Lenovo IdeaPad 5", price: 799, category: "etudiant" },
-    { name: "Dell XPS 15", price: 2199, category: "pro" },
-    { name: "ASUS ROG Strix G16", price: 2199, category: "gamer" }
-  ];
-  var crossSellOffers = {
-    'creatif': { product: 'Souris MX Master 3S', price: 99, pitch: 'Précision inégalée pour vos créations' },
-    'etudiant': { product: 'Housse de transport', price: 45, pitch: 'Protégez votre investissement' },
-    'pro': { product: 'Hub USB-C 7-en-1', price: 79, pitch: 'Connectez tous vos périphériques' },
-    'gamer': { product: 'Casque gaming surround', price: 129, pitch: 'Son immersif pour vos parties' }
-  };
-  var isProcessing = false;
-
-  function updateDashboard() {
-    var total = 0;
-    for (var i = 0; i < cart.length; i++) total += cart[i].price;
-    var avgBasket = cart.length > 0 ? (total / cart.length).toFixed(0) + '€' : '0€';
-    var rate = totalVisits > 0 ? Math.round((conversions / totalVisits) * 100) : 0;
-    var el = function(id) { return document.getElementById(id); };
-    var elm;
-    if ((elm = el('m-dash-visits'))) elm.textContent = totalVisits;
-    if ((elm = el('m-dash-conversions'))) elm.textContent = conversions;
-    if ((elm = el('m-dash-cartItems'))) elm.textContent = cart.length;
-    if ((elm = el('m-dash-avgBasket'))) elm.textContent = avgBasket;
-    if ((elm = el('m-dash-totalSpent'))) elm.textContent = client.totalSpent + '€';
-    if ((elm = el('m-dash-conversionBar'))) elm.style.width = rate + '%';
-    if ((elm = el('m-dash-rate'))) elm.textContent = rate + '%';
-    if ((elm = el('m-dash-trend'))) {
-      elm.textContent = rate > 50 ? '▲ +5%' : '▼ -2%';
-      elm.className = 'kpi-trend ' + (rate > 50 ? 'kpi-trend-up' : 'kpi-trend-down');
-    }
-    var historyList = el('m-dash-history');
-    if (historyList) {
-      var html = '';
-      for (var h = 0; h < client.history.length; h++) {
-        html += '<div class="text-xs text-slate-600 border-b border-slate-100 py-1">' + client.history[h].action + ' - ' + (client.history[h].details || '') + '</div>';
-      }
-      historyList.innerHTML = html || '<div class="text-xs text-slate-400">Aucune interaction</div>';
-    }
-    if ((elm = el('m-cart-count'))) elm.textContent = cart.length;
-    if ((elm = el('m-total'))) elm.textContent = total + '€';
-  }
-
-  function addUser(text) {
-    addMessage('m-chat', 'user', text);
-    client.history.push({ action: 'Message client', details: text, timestamp: new Date().toISOString() });
-    DB.save();
-    updateDashboard();
-  }
-
-  function addBot(text) {
-    addMessage('m-chat', 'bot', text.replace(/{user}/g, firstName));
-    updateDashboard();
-  }
-
-  function replaceSuggestions(btns) {
-    var container = document.getElementById('m-suggestions');
-    if (!container) return;
-    container.innerHTML = '';
-    for (var i = 0; i < btns.length; i++) {
-      var b = btns[i];
-      var chip = document.createElement('div');
-      chip.className = 'suggestion-chip';
-      chip.innerText = b.label;
-      chip.dataset.value = b.value;
-      chip.addEventListener('click', function() {
-        if (isProcessing) return;
-        var val = this.dataset.value;
-        if (val !== 'reset') addUser(this.innerText);
-        handleChoice(val);
-      });
-      container.appendChild(chip);
-    }
-  }
-
-  function handleChoice(val) {
-    if (step === 1) {
-      selectedUsage = val;
-      step = 2;
-      totalVisits++;
-      var product = null;
-      for (var i = 0; i < products.length; i++) {
-        if (products[i].category === selectedUsage) { product = products[i]; break; }
-      }
-      if (product) {
-        addBot('Bonjour ' + firstName + ', merci de nous contacter. Je vous recommande le ' + product.name + ' à ' + product.price + '€. Souhaitez-vous l\'ajouter à votre panier ?');
-        replaceSuggestions([
-          { label: "✅ Ajouter au panier", value: "add" },
-          { label: "🔄 Recommencer", value: "reset" }
-        ]);
-      }
-    } else if (step === 2) {
-      if (val === "add") {
-        var product = null;
-        for (var i = 0; i < products.length; i++) {
-          if (products[i].category === selectedUsage) { product = products[i]; break; }
-        }
-        if (product) {
-          cart.push(product);
-          client.history.push({ action: 'Ajout panier', details: product.name, timestamp: new Date().toISOString() });
-          DB.save();
-          addBot('Le ' + product.name + ' a été ajouté. Voulez-vous finaliser la commande ?');
-          step = 3;
-          replaceSuggestions([
-            { label: "✅ Finaliser", value: "checkout" },
-            { label: "🔄 Recommencer", value: "reset" }
-          ]);
-        }
-      } else if (val === "reset") {
-        reset();
-      }
-    } else if (step === 3) {
-      if (val === "checkout") {
-        conversions++;
-        for (var i = 0; i < cart.length; i++) {
-          client.purchases.push(cart[i]);
-          client.totalSpent += cart[i].price;
-        }
-        client.history.push({ action: 'Commande finalisée', details: cart.length + ' article(s)', timestamp: new Date().toISOString() });
-        DB.save();
-        addBot('🎉 Commande validée avec succès ' + firstName + ' ! Merci de votre confiance.');
-        clearSuggestions('m-suggestions');
-        var offer = crossSellOffers[selectedUsage];
-        if (offer) {
-          var recosDiv = document.getElementById('m-suggestions');
-          var msg = document.createElement('div');
-          msg.className = 'text-sm text-slate-600 mt-2 mb-1';
-          msg.innerHTML = '💡 <strong>' + firstName + '</strong>, je vous propose d\'ajouter <strong>' + offer.product + '</strong> (' + offer.price + '€) à votre commande.<br><span class="text-xs">' + offer.pitch + '</span>';
-          recosDiv.appendChild(msg);
-          var acceptBtn = document.createElement('div');
-          acceptBtn.className = 'suggestion-chip';
-          acceptBtn.innerText = '✅ Accepter l\'offre (+' + offer.price + '€)';
-          acceptBtn.style.borderColor = '#10b981';
-          acceptBtn.addEventListener('click', function() {
-            if (isProcessing) return;
-            addUser('Accepter l\'offre ' + offer.product);
-            cart.push({ name: offer.product, price: offer.price });
-            client.purchases.push({ name: offer.product, price: offer.price });
-            client.totalSpent += offer.price;
-            client.history.push({ action: 'Cross-sell accepté', details: offer.product, timestamp: new Date().toISOString() });
-            DB.save();
-            addBot('👍 Parfait ' + firstName + ' ! ' + offer.product + ' a été ajouté à votre commande. Au plaisir de vous accompagner.');
-            clearSuggestions('m-suggestions');
-            addResetButton('m-suggestions', reset);
-            updateDashboard();
-          });
-          recosDiv.appendChild(acceptBtn);
-          var refuseBtn = document.createElement('div');
-          refuseBtn.className = 'suggestion-chip';
-          refuseBtn.innerText = '❌ Refuser l\'offre';
-          refuseBtn.style.borderColor = '#ef4444';
-          refuseBtn.addEventListener('click', function() {
-            addUser('Refuser l\'offre');
-            addBot('Pas de problème ' + firstName + ', je comprends tout à fait. Restons en contact.');
-            clearSuggestions('m-suggestions');
-            addResetButton('m-suggestions', reset);
-            updateDashboard();
-          });
-          recosDiv.appendChild(refuseBtn);
-        } else {
-          addBot('Merci ' + firstName + ' pour votre commande. Nous restons à votre disposition.');
-          addResetButton('m-suggestions', reset);
-        }
-      } else if (val === "reset") {
-        reset();
-      }
-    }
-    updateDashboard();
-  }
-
-  function reset() {
-    client.history = [];
-    client.purchases = [];
-    client.totalSpent = 0;
-    DB.save();
-    step = 1;
-    selectedUsage = null;
-    cart = [];
-    totalVisits = 0;
-    conversions = 0;
-    var chatDiv = document.getElementById('m-chat');
-    if (chatDiv) chatDiv.innerHTML = '';
-    addUser('Bonjour ' + firstName + ', je recherche un ordinateur professionnel.');
-    addBot('Bonjour ' + firstName + ' et merci pour votre visite. Pour vous orienter vers le modèle idéal, quel est votre usage principal ?');
-    replaceSuggestions([
-      { label: "🎨 Créatif", value: "creatif" },
-      { label: "📚 Étudiant", value: "etudiant" },
-      { label: "💼 Professionnel", value: "pro" },
-      { label: "🎮 Gamer", value: "gamer" }
-    ]);
-    updateDashboard();
-  }
-
-  var html = `
-  <div class="grid md:grid-cols-2 gap-6 fade-in">
-    <div class="glass-card">
-      <div class="sim-header">
-        <i data-lucide="shopping-bag"></i>
-        <h2 class="text-xl font-bold text-slate-800">Match & Buy — Client</h2>
-        <div class="flex-1"></div>
-        <div class="bg-slate-100 px-4 py-1.5 rounded-full text-sm font-semibold text-slate-700">🛒 <span id="m-cart-count">0</span> • <span id="m-total" class="text-blue-600">0€</span></div>
-      </div>
-      <div class="p-4 flex-1 flex flex-col">
-        <div class="whatsapp-container" id="m-chat" style="height: 380px;"></div>
-        <div id="m-suggestions" class="flex flex-wrap gap-2 mt-4 justify-center"></div>
-      </div>
-    </div>
-    <div class="glass-card">
-      <div class="sim-header">
-        <i data-lucide="bar-chart-2"></i>
-        <h2 class="text-xl font-bold text-slate-800">Dashboard Commerçant</h2>
-      </div>
-      <div class="p-4 flex-1 overflow-y-auto">
-        <div class="grid grid-cols-2 gap-4">
-          <div class="kpi-card"><div class="kpi-label">Visites</div><div class="kpi-value" id="m-dash-visits">0</div></div>
-          <div class="kpi-card"><div class="kpi-label">Commandes</div><div class="kpi-value" id="m-dash-conversions">0</div></div>
-          <div class="kpi-card"><div class="kpi-label">Articles panier</div><div class="kpi-value" id="m-dash-cartItems">0</div></div>
-          <div class="kpi-card"><div class="kpi-label">Panier moyen</div><div class="kpi-value" id="m-dash-avgBasket">0€</div></div>
-          <div class="kpi-card col-span-2"><div class="kpi-label">Dépensé total</div><div class="kpi-value" id="m-dash-totalSpent">0€</div></div>
-        </div>
-        <div class="mt-4 bg-slate-50 rounded-2xl p-4">
-          <p class="text-sm text-slate-600 font-medium">📈 Taux de conversion : <span id="m-dash-rate" class="font-bold text-blue-600">0%</span> <span id="m-dash-trend" class="kpi-trend kpi-trend-up">▲ +0%</span></p>
-          <div class="w-full bg-slate-200 rounded-full h-2.5 mt-1">
-            <div class="bg-blue-600 h-2.5 rounded-full transition-all duration-500" style="width:0%" id="m-dash-conversionBar"></div>
-          </div>
-        </div>
-        <div class="mt-4 bg-slate-50 rounded-2xl p-4">
-          <p class="text-sm text-slate-600 font-medium">📋 Historique des interactions</p>
-          <div id="m-dash-history" class="mt-1 text-xs text-slate-600 max-h-32 overflow-y-auto"></div>
-        </div>
-      </div>
-    </div>
-  </div>`;
-  document.getElementById('sim-root').innerHTML = html;
-  setTimeout(function() { lucide.createIcons(); reset(); }, 100);
-}
-
-// ============================================================
-// 4. SIMULATEUR 2 : SECONDE MAIN (CORRIGÉ AVEC VÉRIFICATIONS)
-// ============================================================
-function renderSecondLife() {
-  var clientId = 'client_sl_1';
-  var client = DB.getClient('secondlife', clientId);
-  var firstName = client.firstName;
-
-  var state = {
-    step: 0,
-    photoSent: false,
-    scanCompleted: false,
-    totalEstimations: 0,
-    acceptedOffers: 0,
-    lastEstimation: 0,
-    lastConfidence: 0,
-    isProcessing: false,
-    timerId: null
-  };
-
-  function updateDashboard() {
-    var acceptRate = state.totalEstimations > 0 ? Math.round((state.acceptedOffers / state.totalEstimations) * 100) : 0;
-    var gain = state.acceptedOffers * 425;
-    var el = function(id) { return document.getElementById(id); };
-    var elm;
-
-    if ((elm = el('sl-dash-estimations'))) elm.textContent = state.totalEstimations;
-    if ((elm = el('sl-dash-accepted'))) elm.textContent = state.acceptedOffers;
-    if ((elm = el('sl-dash-acceptRate'))) elm.textContent = acceptRate + '%';
-    if ((elm = el('sl-dash-acceptBar'))) elm.style.width = acceptRate + '%';
-    if ((elm = el('sl-dash-gain'))) elm.textContent = gain + '€';
-    if ((elm = el('sl-dash-trend'))) {
-      elm.textContent = acceptRate > 50 ? '▲ +8%' : '▼ -3%';
-      elm.className = 'kpi-trend ' + (acceptRate > 50 ? 'kpi-trend-up' : 'kpi-trend-down');
-    }
-    var stock = gain * 1.8;
-    if ((elm = el('sl-dash-stockBar'))) elm.style.width = Math.min((stock / 1000) * 100, 100) + '%';
-    if ((elm = el('sl-dash-potential'))) elm.textContent = stock + '€';
-
-    var historyDiv = el('sl-dash-history');
-    if (historyDiv) {
-      var html = '';
-      for (var i = 0; i < client.history.length; i++) {
-        if (client.history[i].type === 'estimation') {
-          html += '<div class="text-xs text-slate-600 border-b border-slate-100 py-1">' + client.history[i].device + ' - ' + client.history[i].price + '€ (confiance ' + client.history[i].confidence + '%)</div>';
-        }
-      }
-      historyDiv.innerHTML = html || '<div class="text-xs text-slate-400">Aucune estimation</div>';
-    }
-
-    if ((elm = el('sl-dash-estimation'))) elm.textContent = state.lastEstimation > 0 ? state.lastEstimation + '€' : '---';
-    if ((elm = el('sl-dash-confidence'))) elm.textContent = state.lastConfidence > 0 ? state.lastConfidence + '%' : '--%';
-
-    var statusEl = el('sl-dash-scanStatus');
-    if (statusEl) {
-      if (state.scanCompleted) {
-        statusEl.textContent = '✅ Scan terminé';
-        statusEl.style.color = '#10b981';
-      } else if (state.photoSent) {
-        statusEl.textContent = '🔍 Analyse en cours...';
-        statusEl.style.color = '#f59e0b';
-      } else {
-        statusEl.textContent = '⏳ En attente';
-        statusEl.style.color = '#64748b';
-      }
-    }
-  }
-
-  function addBot(text) {
-    addMessage('sl-chat', 'bot', text.replace(/{user}/g, firstName));
-  }
-  function addUser(text, imageUrl) {
-    addMessage('sl-chat', 'user', text, imageUrl);
-    client.history.push({ type: 'user_message', text: text, timestamp: new Date().toISOString() });
-    DB.save();
-  }
-
-  function updateLeftPanel() {
-    var leftPanel = document.getElementById('sl-left-panel');
-    if (!leftPanel) return;
-    if (!state.photoSent) {
-      leftPanel.innerHTML = `
-        <div class="image-placeholder w-full flex flex-col items-center justify-center text-center p-8">
-          <i data-lucide="camera" class="w-16 h-16 text-blue-400 mb-4"></i>
-          <p class="text-slate-700 text-lg font-semibold">En attente de la photo</p>
-          <p class="text-slate-400 text-sm mt-2">Envoyez une photo de votre iPhone 13 Pro pour une estimation instantanée</p>
-        </div>
-      `;
-    } else {
-      var overlay = !state.scanCompleted ? '<div class="absolute inset-0 bg-black/30 z-10 flex items-center justify-center"><span class="text-white text-sm font-semibold">📸 Photo reçue, analyse en cours...</span></div>' : '';
-      var badge = state.scanCompleted ? '<div class="absolute top-4 left-4 z-20"><span class="scan-badge">✅ Scan terminé - Confiance ' + state.lastConfidence + '%</span></div>' : '';
-      leftPanel.innerHTML = `
-        <div class="relative w-full min-h-[300px] overflow-hidden rounded-3xl">
-          <img src="https://cdn.convrrt.com/apps/sendinblue/6761372/5b4c26c6-34de-4125-879b-4b13a02b2154.png" class="w-full h-full object-cover absolute inset-0" alt="iPhone 13 Pro">
-          ${overlay}
-          ${badge}
-        </div>
-      `;
-    }
-    lucide.createIcons();
-  }
-
-  function showAcceptButtons() {
-    var div = document.getElementById('sl-suggestions');
-    if (!div) return;
-    div.innerHTML = '';
-
-    var accept = document.createElement('div');
-    accept.className = 'suggestion-chip';
-    accept.innerText = '✅ Accepter l\'offre';
-    accept.addEventListener('click', function() {
-      if (state.isProcessing) return;
-      state.isProcessing = true;
-      addUser("Accepter l'offre");
-      state.acceptedOffers++;
-      client.purchases.push({ name: 'iPhone 13 Pro (reconditionné)', price: 425 });
-      client.totalSpent += 425;
-      client.history.push({ type: 'offre_acceptee', details: 'iPhone 13 Pro', timestamp: new Date().toISOString() });
-      DB.save();
-      addBot('🎉 Offre acceptée ' + firstName + ' ! L\'étiquette d\'expédition vous sera envoyée par email sous 2h. Merci pour votre confiance.');
-      clearSuggestions('sl-suggestions');
-      addResetButton('sl-suggestions', reset);
-      updateDashboard();
-      state.step = 0;
-      state.isProcessing = false;
+// Configuration Mouse Glow
+const heroSection = document.getElementById('hero');
+const mouseGlow = document.getElementById('hero-mouse-glow');
+if (heroSection && mouseGlow) {
+    heroSection.addEventListener('mousemove', (e) => {
+        const rect = heroSection.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        mouseGlow.style.left = `${x}px`;
+        mouseGlow.style.top = `${y}px`;
+        mouseGlow.style.opacity = '1';
     });
-    div.appendChild(accept);
-
-    var refuse = document.createElement('div');
-    refuse.className = 'suggestion-chip';
-    refuse.innerText = '❌ Refuser l\'offre';
-    refuse.style.borderColor = '#ef4444';
-    refuse.addEventListener('click', function() {
-      if (state.isProcessing) return;
-      state.isProcessing = true;
-      addUser("Refuser l'offre");
-      addBot('Pas de souci ' + firstName + ', vous pouvez toujours y revenir. Merci de nous avoir contactés.');
-      clearSuggestions('sl-suggestions');
-      addResetButton('sl-suggestions', reset);
-      state.step = 0;
-      state.isProcessing = false;
+    heroSection.addEventListener('mouseleave', () => {
+        mouseGlow.style.opacity = '0';
     });
-    div.appendChild(refuse);
-  }
-
-  function completeScan() {
-    if (state.timerId) {
-      clearTimeout(state.timerId);
-      state.timerId = null;
-    }
-    state.scanCompleted = true;
-    state.totalEstimations++;
-    state.lastEstimation = 425;
-    state.lastConfidence = Math.floor(Math.random() * 9 + 90);
-    client.history.push({
-      type: 'estimation',
-      device: 'iPhone 13 Pro',
-      price: 425,
-      confidence: state.lastConfidence,
-      timestamp: new Date().toISOString()
-    });
-    DB.save();
-    state.step = 2;
-    updateLeftPanel();
-    updateDashboard();
-    addBot('🔍 Analyse terminée ' + firstName + ' : état général correct (micro-rayures superficielles, batterie 81%). Estimation : 425€. Taux de confiance IA : ' + state.lastConfidence + '%. Acceptez-vous l\'offre ?');
-    showAcceptButtons();
-    state.isProcessing = false;
-  }
-
-  function sendPhoto() {
-    if (state.step !== 0 || state.isProcessing) return;
-    state.isProcessing = true;
-    var imageUrl = 'https://cdn.convrrt.com/apps/sendinblue/6761372/5b4c26c6-34de-4125-879b-4b13a02b2154.png';
-    addUser("📸 Photo envoyée", imageUrl);
-    state.photoSent = true;
-    state.scanCompleted = false;
-    state.step = 1;
-    updateLeftPanel();
-    updateDashboard();
-    addBot('Merci ' + firstName + ' ! L\'analyse de votre iPhone 13 Pro est en cours...');
-    if (state.timerId) clearTimeout(state.timerId);
-    state.timerId = setTimeout(function() {
-      completeScan();
-    }, 3000);
-  }
-
-  function reset() {
-    if (state.timerId) {
-      clearTimeout(state.timerId);
-      state.timerId = null;
-    }
-    client.history = [];
-    client.purchases = [];
-    client.totalSpent = 0;
-    DB.save();
-
-    state.step = 0;
-    state.photoSent = false;
-    state.scanCompleted = false;
-    state.totalEstimations = 0;
-    state.acceptedOffers = 0;
-    state.lastEstimation = 0;
-    state.lastConfidence = 0;
-    state.isProcessing = false;
-
-    var chatDiv = document.getElementById('sl-chat');
-    if (chatDiv) chatDiv.innerHTML = '';
-    addBot('Bonjour ' + firstName + ' ! Pour une estimation précise, envoyez-moi une photo de votre iPhone 13 Pro.');
-    updateLeftPanel();
-
-    var div = document.getElementById('sl-suggestions');
-    if (div) {
-      div.innerHTML = '';
-      var sendBtn = document.createElement('div');
-      sendBtn.className = 'suggestion-chip';
-      sendBtn.innerText = '📸 Envoyer la photo';
-      sendBtn.addEventListener('click', sendPhoto);
-      div.appendChild(sendBtn);
-    }
-
-    updateDashboard();
-  }
-
-  var html = `
-  <div class="grid md:grid-cols-2 gap-6 fade-in">
-    <div class="glass-card">
-      <div class="sim-header">
-        <i data-lucide="camera"></i>
-        <h2 class="text-xl font-bold text-slate-800">Seconde Main — Client</h2>
-      </div>
-      <div class="p-4 flex-1 flex flex-col">
-        <div id="sl-left-panel" class="flex-1" style="min-height: 300px;"></div>
-        <div class="whatsapp-container mt-4" id="sl-chat" style="height: 300px;"></div>
-        <div id="sl-suggestions" class="flex flex-wrap gap-2 mt-3 justify-center"></div>
-      </div>
-    </div>
-    <div class="glass-card">
-      <div class="sim-header">
-        <i data-lucide="bar-chart-2"></i>
-        <h2 class="text-xl font-bold text-slate-800">Dashboard Commerçant</h2>
-      </div>
-      <div class="p-4 flex-1 overflow-y-auto">
-        <div class="grid grid-cols-2 gap-4">
-          <div class="kpi-card"><div class="kpi-label">Estimations</div><div class="kpi-value" id="sl-dash-estimations">0</div></div>
-          <div class="kpi-card"><div class="kpi-label">Offres acceptées</div><div class="kpi-value" id="sl-dash-accepted">0</div></div>
-          <div class="kpi-card"><div class="kpi-label">Taux d'acceptation</div><div class="kpi-value" id="sl-dash-acceptRate">0% <span id="sl-dash-trend" class="kpi-trend kpi-trend-up">▲ +0%</span></div></div>
-          <div class="kpi-card"><div class="kpi-label">Gain estimé</div><div class="kpi-value" id="sl-dash-gain">0€</div></div>
-        </div>
-        <div class="mt-4 bg-slate-50 rounded-2xl p-4">
-          <p class="text-sm text-slate-600 font-medium">📊 Valorisation du stock</p>
-          <div class="w-full bg-slate-200 rounded-full h-2.5 mt-1">
-            <div class="bg-blue-600 h-2.5 rounded-full transition-all duration-500" style="width:0%" id="sl-dash-stockBar"></div>
-          </div>
-          <p class="text-xs text-slate-400 mt-1">Potentiel de revente : <span id="sl-dash-potential">0€</span></p>
-        </div>
-        <div class="mt-4 bg-slate-50 rounded-2xl p-4">
-          <p class="text-sm text-slate-600 font-medium">🔍 Résultat du scan</p>
-          <p class="text-xs font-semibold" id="sl-dash-scanStatus" style="color:#64748b;">⏳ En attente</p>
-          <p class="text-xs text-slate-600 mt-1">Estimation : <span id="sl-dash-estimation">---</span></p>
-          <p class="text-xs text-slate-600">Confiance IA : <span id="sl-dash-confidence">--%</span></p>
-        </div>
-        <div class="mt-4 bg-slate-50 rounded-2xl p-4">
-          <p class="text-sm text-slate-600 font-medium">📋 Historique des estimations</p>
-          <div id="sl-dash-history" class="mt-1 text-xs text-slate-600 max-h-32 overflow-y-auto"></div>
-        </div>
-      </div>
-    </div>
-  </div>`;
-  document.getElementById('sim-root').innerHTML = html;
-  setTimeout(function() { lucide.createIcons(); reset(); }, 100);
 }
 
-// ============================================================
-// 5. SIMULATEUR 3 : C-ROUTE DISPATCH (AVEC VÉRIFICATIONS)
-// ============================================================
-function renderCRoute() {
-  var clientId = 'client_cr_1';
-  var client = DB.getClient('croute', clientId);
-  var firstName = client.firstName;
+const sidebar = document.getElementById('sidebar');
+const navPill = document.getElementById('nav-pill');
+const progressBar = document.getElementById('progress-bar');
+let scrollTimeout;
 
-  var step = 1;
-  var isProcessing = false;
-  var totalCO2 = 4.8;
-  var totalKm = 24;
-  var incidents = 1;
-  var satisfaction = 85;
-  var deliveries = 12;
-  var optimizations = 0;
+window.addEventListener('scroll', () => {
+const scrollY = window.scrollY;
+const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+progressBar.style.width = (scrollY / height) * 100 + '%';
+if (scrollY > 50) navPill.classList.add('scrolled'); else navPill.classList.remove('scrolled');
 
-  function updateDashboard() {
-    var el = function(id) { return document.getElementById(id); };
-    var elm;
-    if ((elm = el('cr-dash-co2'))) elm.textContent = totalCO2.toFixed(1) + ' kg';
-    if ((elm = el('cr-dash-km'))) elm.textContent = totalKm + ' km';
-    if ((elm = el('cr-dash-incidents'))) elm.textContent = incidents;
-    if ((elm = el('cr-dash-satisfaction'))) elm.textContent = satisfaction + '%';
-    if ((elm = el('cr-dash-satisfactionBar'))) elm.style.width = satisfaction + '%';
-    if ((elm = el('cr-dash-deliveries'))) elm.textContent = deliveries;
-    if ((elm = el('cr-dash-optimizations'))) elm.textContent = optimizations;
-    if ((elm = el('cr-dash-trend'))) {
-      elm.textContent = satisfaction > 90 ? '▲ +5%' : '▼ -2%';
-      elm.className = 'kpi-trend ' + (satisfaction > 90 ? 'kpi-trend-up' : 'kpi-trend-down');
-    }
-    if ((elm = el('cr-distance'))) elm.innerHTML = totalKm + ' km';
-    if ((elm = el('cr-co2'))) elm.innerHTML = totalCO2.toFixed(1) + ' kg CO₂';
-
-    var historyDiv = el('cr-dash-history');
-    if (historyDiv) {
-      var html = '';
-      for (var i = 0; i < client.history.length; i++) {
-        if (client.history[i].type === 'optimization') {
-          html += '<div class="text-xs text-slate-600 border-b border-slate-100 py-1">Tournée optimisée : ' + client.history[i].km + ' km, ' + client.history[i].co2 + ' kg CO₂</div>';
-        }
-      }
-      historyDiv.innerHTML = html || '<div class="text-xs text-slate-400">Aucune optimisation</div>';
-    }
-  }
-
-  function addBot(text) {
-    addMessage('cr-chat', 'bot', text.replace(/{user}/g, firstName));
-  }
-  function addUser(text) {
-    addMessage('cr-chat', 'user', text);
-    client.history.push({ type: 'user_message', text: text, timestamp: new Date().toISOString() });
-    DB.save();
-  }
-
-  function reroute() {
-    if (step !== 1 || isProcessing) return;
-    isProcessing = true;
-    addUser("🔄 Optimiser la tournée");
-    addBot('🔍 Recherche d’un itinéraire plus efficace ' + firstName + '...');
-    setTimeout(function() {
-      addBot('🟢 Nouvelle tournée : 18 km (0,4 kg CO₂). Livraison estimée dans 22 min. Validez-vous ?');
-      step = 2;
-      var div = document.getElementById('cr-suggestions');
-      if (!div) return;
-      div.innerHTML = '';
-      var confirm = document.createElement('div');
-      confirm.className = 'suggestion-chip';
-      confirm.innerText = '✅ Valider la tournée';
-      confirm.addEventListener('click', function() {
-        addUser("Valider la tournée");
-        totalCO2 = 0.4;
-        totalKm = 18;
-        incidents = 0;
-        satisfaction = 98;
-        deliveries = 12;
-        optimizations++;
-        client.history.push({
-          type: 'optimization',
-          km: 18,
-          co2: 0.4,
-          timestamp: new Date().toISOString()
-        });
-        DB.save();
-        updateDashboard();
-        var path = document.getElementById('new-route-path');
-        if (path) path.setAttribute('stroke', '#3b82f6');
-        addBot('✅ Tournée validée ' + firstName + ' ! Client notifié. Économie : 4,4 kg CO₂ évités. Merci de votre confiance.');
-        clearSuggestions('cr-suggestions');
-        var recosDiv = document.getElementById('cr-suggestions');
-        if (recosDiv) {
-          var label = document.createElement('div');
-          label.className = 'text-sm font-semibold text-slate-600 mt-2 mb-1';
-          label.innerText = '💡 Souhaitez-vous optimiser une autre tournée ?';
-          recosDiv.appendChild(label);
-          var chip = document.createElement('div');
-          chip.className = 'suggestion-chip';
-          chip.innerText = '🔄 Nouvelle optimisation';
-          chip.addEventListener('click', reset);
-          recosDiv.appendChild(chip);
-          addResetButton('cr-suggestions', reset);
-        }
-        isProcessing = false;
-      });
-      div.appendChild(confirm);
-      var resetChip = document.createElement('div');
-      resetChip.className = 'suggestion-chip';
-      resetChip.innerText = '🔄 Recommencer';
-      resetChip.addEventListener('click', reset);
-      div.appendChild(resetChip);
-      isProcessing = false;
-    }, 2000);
-  }
-
-  function reset() {
-    client.history = [];
-    client.purchases = [];
-    client.totalSpent = 0;
-    DB.save();
-    step = 1;
-    totalCO2 = 4.8;
-    totalKm = 24;
-    incidents = 1;
-    satisfaction = 85;
-    deliveries = 12;
-    optimizations = 0;
-    isProcessing = false;
-    updateDashboard();
-    var path = document.getElementById('new-route-path');
-    if (path) path.setAttribute('stroke', 'none');
-    var chatDiv = document.getElementById('cr-chat');
-    if (chatDiv) chatDiv.innerHTML = '';
-    addBot('Bonjour ' + firstName + ', un incident est signalé : technicien J. Martin en panne. Lancer l\'optimisation ?');
-    var div = document.getElementById('cr-suggestions');
-    if (div) {
-      div.innerHTML = '';
-      var opt = document.createElement('div');
-      opt.className = 'suggestion-chip';
-      opt.innerText = '🔄 Optimiser la tournée';
-      opt.addEventListener('click', reroute);
-      div.appendChild(opt);
-    }
-  }
-
-  var html = `
-  <div class="grid md:grid-cols-2 gap-6 fade-in">
-    <div class="glass-card">
-      <div class="sim-header">
-        <i data-lucide="map-pin"></i>
-        <h2 class="text-xl font-bold text-slate-800">C-Route — Client</h2>
-      </div>
-      <div class="p-4 flex-1 flex flex-col">
-        <svg viewBox="0 0 700 400" class="w-full rounded-2xl bg-slate-50 flex-shrink-0">
-          <rect width="700" height="400" fill="#f8fafc" rx="16"/>
-          <path d="M 0,200 Q 200,180 350,210 T 700,190" stroke="#cbd5e1" stroke-width="8" fill="none" opacity="0.5"/>
-          <text x="320" y="180" font-size="9" fill="#475569">La Seine</text>
-          <circle cx="120" cy="240" r="8" fill="#10b981" stroke="white"/><text x="100" y="230" font-size="8">Dépôt</text>
-          <circle cx="280" cy="140" r="8" fill="#f59e0b" stroke="white"/><text x="260" y="130" font-size="8">Client A</text>
-          <circle cx="480" cy="170" r="10" fill="#ef4444" stroke="white" class="animate-pulse"/><text x="460" y="160" font-size="8" fill="#ef4444">⚠️ Incident</text>
-          <circle cx="580" cy="310" r="8" fill="#3b82f6" stroke="white"/><text x="560" y="300" font-size="8">Client B</text>
-          <circle cx="450" cy="330" r="8" fill="#8b5cf6" stroke="white"/><text x="430" y="320" font-size="8">Client C</text>
-          <path d="M 120,240 L 280,140 L 480,170 L 580,310 L 450,330" stroke="#94a3b8" stroke-width="3" fill="none" stroke-dasharray="5,5"/>
-          <path id="new-route-path" d="M 120,240 L 280,140 L 320,220 L 450,330 L 580,310" stroke="none" stroke-width="3" fill="none"/>
-          <text x="20" y="380" font-size="9">● Dépôt  ● Client  ⚠️ Incident</text>
-        </svg>
-        <div class="mt-4 flex justify-between text-sm font-semibold bg-slate-100 p-3 rounded-xl">
-          <span>📏 Distance : <span id="cr-distance">24</span> km</span>
-          <span>🌱 CO₂ : <span id="cr-co2">4.8</span> kg CO₂</span>
-        </div>
-        <div class="whatsapp-container mt-4" id="cr-chat" style="height: 200px;"></div>
-        <div id="cr-suggestions" class="flex flex-wrap gap-2 mt-3 justify-center"></div>
-      </div>
-    </div>
-    <div class="glass-card">
-      <div class="sim-header">
-        <i data-lucide="bar-chart-2"></i>
-        <h2 class="text-xl font-bold text-slate-800">Dashboard Logistique</h2>
-      </div>
-      <div class="p-4 flex-1 overflow-y-auto">
-        <div class="grid grid-cols-2 gap-4">
-          <div class="kpi-card"><div class="kpi-label">CO₂ total</div><div class="kpi-value" id="cr-dash-co2">4.8 kg</div></div>
-          <div class="kpi-card"><div class="kpi-label">Km parcourus</div><div class="kpi-value" id="cr-dash-km">24 km</div></div>
-          <div class="kpi-card"><div class="kpi-label">Incidents</div><div class="kpi-value" id="cr-dash-incidents">1</div></div>
-          <div class="kpi-card"><div class="kpi-label">Satisfaction</div><div class="kpi-value" id="cr-dash-satisfaction">85% <span id="cr-dash-trend" class="kpi-trend kpi-trend-up">▲ +0%</span></div></div>
-          <div class="kpi-card"><div class="kpi-label">Livraisons</div><div class="kpi-value" id="cr-dash-deliveries">12</div></div>
-          <div class="kpi-card"><div class="kpi-label">Optimisations</div><div class="kpi-value" id="cr-dash-optimizations">0</div></div>
-        </div>
-        <div class="mt-4 bg-slate-50 rounded-2xl p-4">
-          <p class="text-sm text-slate-600 font-medium">😊 Taux de satisfaction client</p>
-          <div class="w-full bg-slate-200 rounded-full h-2.5 mt-1">
-            <div class="bg-emerald-500 h-2.5 rounded-full transition-all duration-500" style="width:85%" id="cr-dash-satisfactionBar"></div>
-          </div>
-        </div>
-        <div class="mt-4 bg-slate-50 rounded-2xl p-4">
-          <p class="text-sm text-slate-600 font-medium">📋 Historique des optimisations</p>
-          <div id="cr-dash-history" class="mt-1 text-xs text-slate-600 max-h-32 overflow-y-auto"></div>
-        </div>
-      </div>
-    </div>
-  </div>`;
-  document.getElementById('sim-root').innerHTML = html;
-  setTimeout(function() { lucide.createIcons(); reset(); }, 100);
-}
-
-// ============================================================
-// 6. SIMULATEUR 4 : SAFERETURN (AVEC VÉRIFICATIONS)
-// ============================================================
-function renderSafeReturn() {
-  var clientId = 'client_sr_1';
-  var client = DB.getClient('safereturn', clientId);
-  var firstName = client.firstName;
-
-  var state = {
-    step: 0,
-    photoSent: false,
-    scanCompleted: false,
-    totalFraudDetected: 0,
-    totalClaims: 0,
-    savings: 0,
-    confidenceLevel: 96,
-    isProcessing: false,
-    timerId: null
-  };
-
-  function updateDashboard() {
-    var el = function(id) { return document.getElementById(id); };
-    var elm;
-    if ((elm = el('sr-dash-frauds'))) elm.textContent = state.totalFraudDetected;
-    if ((elm = el('sr-dash-claims'))) elm.textContent = state.totalClaims;
-    if ((elm = el('sr-dash-savings'))) elm.textContent = state.savings + '€';
-    var rate = state.totalClaims > 0 ? Math.round((state.totalFraudDetected / state.totalClaims) * 100) : 0;
-    if ((elm = el('sr-dash-fraudRate'))) elm.textContent = rate + '%';
-    if ((elm = el('sr-dash-fraudBar'))) elm.style.width = rate + '%';
-    if ((elm = el('sr-dash-confidenceLevel'))) elm.textContent = state.confidenceLevel + '%';
-    if ((elm = el('sr-dash-confidenceBar'))) elm.style.width = state.confidenceLevel + '%';
-    if ((elm = el('sr-dash-trend'))) {
-      elm.textContent = rate > 50 ? '▲ +12%' : '▼ -5%';
-      elm.className = 'kpi-trend ' + (rate > 50 ? 'kpi-trend-up' : 'kpi-trend-down');
-    }
-
-    var historyDiv = el('sr-dash-history');
-    if (historyDiv) {
-      var html = '';
-      for (var i = 0; i < client.history.length; i++) {
-        if (client.history[i].type === 'fraud_check') {
-          html += '<div class="text-xs text-slate-600 border-b border-slate-100 py-1">' + client.history[i].status + ' - Confiance ' + client.history[i].confidence + '%</div>';
-        }
-      }
-      historyDiv.innerHTML = html || '<div class="text-xs text-slate-400">Aucune vérification</div>';
-    }
-
-    var statusEl = el('sr-dash-scanStatus');
-    if (statusEl) {
-      if (state.scanCompleted) {
-        statusEl.textContent = '✅ Scan terminé';
-        statusEl.style.color = '#10b981';
-      } else if (state.photoSent) {
-        statusEl.textContent = '🔍 Analyse en cours...';
-        statusEl.style.color = '#f59e0b';
-      } else {
-        statusEl.textContent = '⏳ En attente';
-        statusEl.style.color = '#64748b';
-      }
-    }
-  }
-
-  function addBot(text) {
-    addMessage('sr-chat', 'bot', text.replace(/{user}/g, firstName));
-  }
-  function addUser(text, imageUrl) {
-    addMessage('sr-chat', 'user', text, imageUrl);
-    client.history.push({ type: 'user_message', text: text, timestamp: new Date().toISOString() });
-    DB.save();
-  }
-
-  function updateLeftPanel() {
-    var leftPanel = document.getElementById('sr-left-panel');
-    if (!leftPanel) return;
-    if (!state.photoSent) {
-      leftPanel.innerHTML = `
-        <div class="image-placeholder w-full flex flex-col items-center justify-center text-center p-8">
-          <i data-lucide="package" class="w-16 h-16 text-red-400 mb-4"></i>
-          <p class="text-slate-700 text-lg font-semibold">En attente de la photo</p>
-          <p class="text-slate-400 text-sm mt-2">Envoyez une photo du colis endommagé pour analyse anti-fraude</p>
-        </div>
-      `;
-    } else {
-      var overlay = !state.scanCompleted ? '<div class="absolute inset-0 bg-black/30 z-10 flex items-center justify-center"><span class="text-white text-sm font-semibold">📸 Photo reçue, analyse en cours...</span></div>' : '';
-      var badge = state.scanCompleted ? '<div class="absolute top-4 left-4 z-20"><span class="scan-badge" style="background:rgba(239,68,68,0.12); color:#dc2626; border-color:#fca5a5;">⚠️ Fraude détectée - ' + state.confidenceLevel + '%</span></div>' : '';
-      leftPanel.innerHTML = `
-        <div class="relative w-full min-h-[300px] overflow-hidden rounded-3xl">
-          <img src="https://cdn.convrrt.com/apps/sendinblue/6761372/7212f405-ebd9-4255-8af6-08936a033c66.png" class="w-full h-full object-cover absolute inset-0" alt="Colis endommagé">
-          ${overlay}
-          ${badge}
-        </div>
-      `;
-    }
-    lucide.createIcons();
-  }
-
-  function showContestButtons() {
-    var div = document.getElementById('sr-suggestions');
-    if (!div) return;
-    div.innerHTML = '';
-
-    var appeal = document.createElement('div');
-    appeal.className = 'suggestion-chip';
-    appeal.innerText = '📋 Contester la décision';
-    appeal.addEventListener('click', function() {
-      if (state.isProcessing) return;
-      state.isProcessing = true;
-      addUser("Contester la décision");
-      addBot('📞 Réclamation déposée ' + firstName + '. Un expert analysera votre dossier sous 48h. Merci de votre confiance.');
-      clearSuggestions('sr-suggestions');
-      addResetButton('sr-suggestions', reset);
-      state.step = 0;
-      state.isProcessing = false;
-    });
-    div.appendChild(appeal);
-
-    var accept = document.createElement('div');
-    accept.className = 'suggestion-chip';
-    accept.innerText = '✅ Accepter la décision';
-    accept.style.borderColor = '#10b981';
-    accept.addEventListener('click', function() {
-      if (state.isProcessing) return;
-      state.isProcessing = true;
-      addUser("Accepter la décision");
-      addBot('Merci ' + firstName + ' pour votre compréhension. Nous restons à votre disposition.');
-      clearSuggestions('sr-suggestions');
-      addResetButton('sr-suggestions', reset);
-      state.step = 0;
-      state.isProcessing = false;
-    });
-    div.appendChild(accept);
-  }
-
-  function completeScan() {
-    if (state.timerId) {
-      clearTimeout(state.timerId);
-      state.timerId = null;
-    }
-    state.scanCompleted = true;
-    state.confidenceLevel = Math.floor(Math.random() * 9 + 90);
-    state.totalClaims++;
-    state.totalFraudDetected++;
-    state.savings += 150;
-    client.history.push({
-      type: 'fraud_check',
-      status: 'Fraude confirmée',
-      confidence: state.confidenceLevel,
-      timestamp: new Date().toISOString()
-    });
-    DB.save();
-    state.step = 2;
-    updateLeftPanel();
-    updateDashboard();
-    addBot('🔬 Vérification des métadonnées EXIF et analyse des pixels ' + firstName + '...');
-    addBot('🚨 Fraude confirmée ' + firstName + ' : métadonnées EXIF altérées (date 2023-01-12), clonage Photoshop détecté. Score de confiance : ' + state.confidenceLevel + '%. Remboursement refusé.');
-    addBot('📷 Détails : Adobe Photoshop 2024, duplication de zones de pixels. Souhaitez-vous contester cette décision ' + firstName + ' ?');
-    showContestButtons();
-    state.isProcessing = false;
-  }
-
-  function sendPhoto() {
-    if (state.step !== 0 || state.isProcessing) return;
-    state.isProcessing = true;
-    var imageUrl = 'https://cdn.convrrt.com/apps/sendinblue/6761372/7212f405-ebd9-4255-8af6-08936a033c66.png';
-    addUser("📸 Photo du colis envoyée", imageUrl);
-    state.photoSent = true;
-    state.scanCompleted = false;
-    state.step = 1;
-    updateLeftPanel();
-    updateDashboard();
-    if (state.timerId) clearTimeout(state.timerId);
-    state.timerId = setTimeout(function() {
-      completeScan();
-    }, 3000);
-  }
-
-  function reset() {
-    if (state.timerId) {
-      clearTimeout(state.timerId);
-      state.timerId = null;
-    }
-    client.history = [];
-    client.purchases = [];
-    client.totalSpent = 0;
-    DB.save();
-
-    state.step = 0;
-    state.photoSent = false;
-    state.scanCompleted = false;
-    state.totalFraudDetected = 0;
-    state.totalClaims = 0;
-    state.savings = 0;
-    state.confidenceLevel = 96;
-    state.isProcessing = false;
-
-    var chatDiv = document.getElementById('sr-chat');
-    if (chatDiv) chatDiv.innerHTML = '';
-    addBot('Bonjour ' + firstName + ', un litige a été ouvert pour un colis endommagé. Pour traiter votre demande, envoyez-nous une photo du colis.');
-    updateLeftPanel();
-
-    var div = document.getElementById('sr-suggestions');
-    if (div) {
-      div.innerHTML = '';
-      var sendBtn = document.createElement('div');
-      sendBtn.className = 'suggestion-chip';
-      sendBtn.innerText = '📸 Envoyer la photo';
-      sendBtn.addEventListener('click', sendPhoto);
-      div.appendChild(sendBtn);
-    }
-
-    updateDashboard();
-  }
-
-  var html = `
-  <div class="grid md:grid-cols-2 gap-6 fade-in">
-    <div class="glass-card">
-      <div class="sim-header">
-        <i data-lucide="shield-check"></i>
-        <h2 class="text-xl font-bold text-slate-800">SafeReturn — Client</h2>
-      </div>
-      <div class="p-4 flex-1 flex flex-col">
-        <div id="sr-left-panel" class="flex-1" style="min-height: 300px;"></div>
-        <div class="whatsapp-container mt-4" id="sr-chat" style="height: 300px;"></div>
-        <div id="sr-suggestions" class="flex flex-wrap gap-2 mt-3 justify-center"></div>
-      </div>
-    </div>
-    <div class="glass-card">
-      <div class="sim-header">
-        <i data-lucide="bar-chart-2"></i>
-        <h2 class="text-xl font-bold text-slate-800">Dashboard Anti-Fraude</h2>
-      </div>
-      <div class="p-4 flex-1 overflow-y-auto">
-        <div class="grid grid-cols-2 gap-4">
-          <div class="kpi-card"><div class="kpi-label">Fraudes détectées</div><div class="kpi-value" id="sr-dash-frauds">0</div></div>
-          <div class="kpi-card"><div class="kpi-label">Réclamations</div><div class="kpi-value" id="sr-dash-claims">0</div></div>
-          <div class="kpi-card"><div class="kpi-label">Économies réalisées</div><div class="kpi-value" id="sr-dash-savings">0€</div></div>
-          <div class="kpi-card"><div class="kpi-label">Taux de fraude</div><div class="kpi-value" id="sr-dash-fraudRate">0% <span id="sr-dash-trend" class="kpi-trend kpi-trend-up">▲ +0%</span></div></div>
-        </div>
-        <div class="mt-4 bg-slate-50 rounded-2xl p-4">
-          <p class="text-sm text-slate-600 font-medium">🔒 Score de confiance IA</p>
-          <div class="w-full bg-slate-200 rounded-full h-2.5 mt-1">
-            <div class="bg-emerald-500 h-2.5 rounded-full transition-all duration-500" style="width:96%" id="sr-dash-confidenceBar"></div>
-          </div>
-          <p class="text-xs text-slate-400 mt-1">Niveau actuel : <span id="sr-dash-confidenceLevel">96%</span></p>
-        </div>
-        <div class="mt-4 bg-slate-50 rounded-2xl p-4">
-          <p class="text-sm text-slate-600 font-medium">🔍 Résultat du scan</p>
-          <p class="text-xs font-semibold" id="sr-dash-scanStatus" style="color:#64748b;">⏳ En attente</p>
-        </div>
-        <div class="mt-4 bg-slate-50 rounded-2xl p-4">
-          <p class="text-sm text-slate-600 font-medium">📋 Historique des vérifications</p>
-          <div id="sr-dash-history" class="mt-1 text-xs text-slate-600 max-h-32 overflow-y-auto"></div>
-        </div>
-      </div>
-    </div>
-  </div>`;
-  document.getElementById('sim-root').innerHTML = html;
-  setTimeout(function() { lucide.createIcons(); reset(); }, 100);
-}
-
-// ============================================================
-// 7. ROUTEUR
-// ============================================================
-var simMap = {
-  match: renderMatch,
-  secondlife: renderSecondLife,
-  croute: renderCRoute,
-  safereturn: renderSafeReturn
-};
-var current = "match";
-
-function switchSim(id) {
-  current = id;
-  if (simMap[current]) simMap[current]();
-
-  for (var i = 0; i < tabElements.length; i++) {
-    var btn = tabElements[i];
-    var isActive = btn.getAttribute('data-sim') === current;
-    if (isActive) {
-      btn.style.background = 'linear-gradient(135deg, #1a56db, #3b82f6)';
-      btn.style.color = 'white';
-      btn.style.borderColor = 'transparent';
-      btn.style.transform = 'translateY(-4px)';
-      btn.style.boxShadow = '0 12px 32px -8px rgba(26,86,219,0.4)';
-    } else {
-      btn.style.background = 'white';
-      btn.style.color = '#1e293b';
-      btn.style.borderColor = '#e2e8f0';
-      btn.style.transform = 'translateY(0)';
-      btn.style.boxShadow = '0 2px 8px rgba(0,0,0,0.02)';
-    }
-  }
-}
-
-for (var i = 0; i < tabElements.length; i++) {
-  (function(btn) {
-    btn.addEventListener('click', function() {
-      switchSim(this.getAttribute('data-sim'));
-    });
-  })(tabElements[i]);
-}
-
-switchSim('match');
-
-window.addEventListener("scroll", function() {
-  var scroll = document.documentElement.scrollTop;
-  var height = document.documentElement.scrollHeight - window.innerHeight;
-  var progress = document.getElementById("progress-bar");
-  if (progress) progress.style.width = (scroll / height) * 100 + "%";
-  var nav = document.getElementById("nav-pill");
-  if (nav) {
-    if (scroll > 60) nav.classList.add("scrolled");
-    else nav.classList.remove("scrolled");
-  }
+const sections = ['hero', 'comparatif', 'modules', 'impact', 'laboratoire', 'vision'];
+let current = 'hero';
+sections.forEach(id => {
+const el = document.getElementById(id);
+if (el && scrollY >= (el.offsetTop - 350)) current = id;
+});
+document.querySelectorAll('.sidebar-link').forEach(link => {
+link.classList.toggle('active', link.getAttribute('data-section') === current);
 });
 
+if (window.innerWidth < 768) {
+sidebar.classList.remove('idle');
+clearTimeout(scrollTimeout);
+scrollTimeout = setTimeout(() => sidebar.classList.add('idle'), 2000);
+}
+});
+
+// Initialize Lab
+window.switchLabTab('assistant');
+});
+
+const injectStaticContent = () => {
+    document.getElementById('solutions-retail-grid').innerHTML = retailSolutions.map(s => `
+        <div class="module-card rounded-[40px] overflow-hidden shadow-xl reveal-up transition-all duration-500 border-t-4 ${s.borderClass} ${s.hoverGlow} text-left font-sans bg-white flex flex-col h-full">
+            <div class="h-44 relative overflow-hidden bg-slate-950">
+                <img src="${s.image}" class="w-full h-full object-cover opacity-35 transition-transform duration-[6s] hover:scale-105" />
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/95 via-slate-900/40 to-transparent"></div>
+                <span class="absolute top-6 left-6 px-4 py-1.5 rounded-full text-[9px] font-black uppercase tracking-widest text-white ${s.badgeBg}">${s.badge}</span>
+                <div class="absolute bottom-6 right-6 w-12 h-12 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center">
+                    <i data-lucide="${s.icon}" class="w-6 h-6 ${s.iconColor}"></i>
+                </div>
+            </div>
+            <div class="p-6 md:p-8 flex-grow flex flex-col justify-between bg-white text-left font-sans">
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3 mb-5">
+                        <span class="w-10 h-10 rounded-xl flex items-center justify-center font-extrabold text-sm text-white ${s.numBg}">${s.num}</span>
+                        <h3 class="text-base md:text-lg font-black text-[#002d62] leading-tight">${s.title}</h3>
+                    </div>
+                    
+                    <div>
+                        <p class="font-black uppercase text-[#2470ef] text-[9px] tracking-widest mb-1">LE DÉFI</p>
+                        <p class="text-slate-500 text-xs font-light leading-relaxed mb-4">${s.challenge}</p>
+                    </div>
+                    
+                    <div>
+                        <p class="font-black uppercase text-[#2470ef] text-[9px] tracking-widest mb-1.5">NOS SOLUTIONS</p>
+                        <div class="space-y-2 text-slate-700 text-xs font-medium">
+                            ${s.solutions.map(sol => `
+                                <div class="flex items-start gap-1.5">
+                                    <span class="text-[#2470ef] mt-0.5">•</span>
+                                    <p class="leading-relaxed font-sans">${sol}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `).join('');
+};
+
+// --- LAB INTERACTIVE SWITCHER ---
+window.switchLabTab = function(tabKey) {
+window.simState.activeTab = tabKey;
+['assistant', 'vision', 'concierge', 'fraud', 'scanplan', 'logistique'].forEach(k => {
+const btn = document.getElementById(`lab-tab-${k}`);
+if(btn) {
+if(k === tabKey) btn.classList.add('active'); else btn.classList.remove('active');
+}
+});
+
+const display = document.getElementById('lab-screen-display');
+const indicator = document.getElementById('lab-stage-indicator');
+const explainer = document.getElementById('lab-explainer');
+
+if(tabKey === 'assistant') {
+indicator.textContent = "MODULE 01";
+explainer.textContent = "L'assistant IA guide le client vers le produit parfait, propose des comparaisons claires et gère le panier d'achat.";
+let currentCartTotal = window.simState.assistant.cart.reduce((sum, item) => sum + item.price, 0);
+
+display.innerHTML = `
+<div class="grid md:grid-cols-12 gap-4 h-full items-stretch animate-fade-in font-sans">
+<div class="md:col-span-7 bg-slate-900/80 rounded-2xl p-4 flex flex-col border border-white/5 backdrop-blur-xl justify-between h-[450px]">
+<div>
+<div class="flex items-center gap-2 border-b border-white/10 pb-2 mb-3">
+<div class="w-8 h-8 rounded-full bg-gradient-to-br from-[#2470ef] to-cyan-500 flex items-center justify-center">
+<i data-lucide="shopping-bag" class="w-4 h-4" style="color:white !important;"></i>
+</div>
+<span class="text-white text-xs font-bold">Assistant d'Achat comete.ai</span>
+</div>
+
+<!-- Product grid image_ae12dc.png style -->
+<div class="grid grid-cols-2 gap-3 mb-3">
+<div class="bg-[#0f1934] rounded-2xl p-3 border border-white/5 flex flex-col justify-between hover:border-themeAccent/40 transition-all duration-300">
+<h4 class="font-bold text-white text-[11px] truncate font-sans">ASUS ROG Strix G16</h4>
+<p class="text-[8px] text-slate-400 font-mono mt-0.5 font-sans">RTX 4080, i9-13980HX, 32Go</p>
+<div class="flex items-center justify-between mt-2 font-sans">
+<span class="text-themeYellow font-black text-xs font-sans">2 199 €</span>
+<button onclick="window.addAssistantCart('ASUS ROG Strix G16', 2199)" class="px-2.5 py-1 bg-[#2470ef] text-white text-[9px] uppercase font-extrabold rounded-full transition-all hover:bg-blue-600 font-sans">Ajouter</button>
+</div>
+</div>
+<div class="bg-[#0f1934] rounded-2xl p-3 border border-white/5 flex flex-col justify-between hover:border-themeAccent/40 transition-all duration-300">
+<h4 class="font-bold text-white text-[11px] truncate font-sans">Dell XPS 13 Plus</h4>
+<p class="text-[8px] text-slate-400 font-mono mt-0.5 font-sans">i7, OLED 3.5K, 16Go</p>
+<div class="flex items-center justify-between mt-2 font-sans">
+<span class="text-themeYellow font-black text-xs font-sans">1 599 €</span>
+<button onclick="window.addAssistantCart('Dell XPS 13 Plus', 1599)" class="px-2.5 py-1 bg-[#2470ef] text-white text-[9px] uppercase font-extrabold rounded-full transition-all hover:bg-blue-600 font-sans">Ajouter</button>
+</div>
+</div>
+</div>
+
+<!-- Chat box inside -->
+<div class="bg-black/40 rounded-xl p-2.5 border border-white/5 font-sans">
+<span class="text-[8px] text-slate-400 uppercase font-black tracking-wider block mb-1 font-sans">💬 Concierge IA</span>
+<div class="h-20 overflow-y-auto custom-scroll pr-1 flex flex-col gap-1.5 font-sans" id="assistant-chat-history">
+<div class="self-start max-w-[85%] bg-[#202c33] text-white rounded-2xl rounded-bl-md px-2.5 py-1.5 text-[10px] font-sans">
+<p>Bonjour ! Je cherche un PC puissant pour faire tourner mes montages vidéo.</p>
+</div>
+<div class="self-end max-w-[85%] bg-[#005c4b] text-white rounded-2xl rounded-br-md px-2.5 py-1.5 text-[10px] ml-auto font-sans">
+<p>Pour le montage vidéo lourd, je vous conseille le <b>ASUS ROG Strix G16</b>. Son processeur i9 et ses 32Go de RAM offriront un rendu ultra-fluide.</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Bottom Shopping Bar -->
+<div class="bg-slate-950/80 px-3 py-2 rounded-xl border border-white/5 flex justify-between items-center text-[10px] mt-2 font-sans">
+<span>🛍️ Panier : <b class="text-white">${window.simState.assistant.cart.length}</b> article(s) — Total : <b class="text-emerald-400">${currentCartTotal} €</b></span>
+<button onclick="window.triggerCheckoutDemo()" class="px-3 py-1 bg-[#10b981] hover:bg-emerald-600 rounded-full text-white text-[9px] font-bold uppercase font-sans">Acheter</button>
+</div>
+</div>
+
+<!-- Right Panel Orchestration comete.ai -->
+<div class="md:col-span-5 bg-slate-900/80 rounded-2xl p-4 flex flex-col border border-white/5 backdrop-blur-xl justify-between h-[450px] font-sans">
+<div>
+<span class="text-[10px] uppercase tracking-wider text-emerald-400 font-bold block mb-3 flex items-center gap-2 font-sans"><i data-lucide="activity" class="w-3 h-3 font-sans" style="color:#10b981 !important;"></i> Orchestration comete.ai</span>
+<div class="space-y-3 font-sans">
+<div class="p-3 bg-white/5 rounded-xl border border-white/5 font-mono text-[9px] space-y-1 font-sans">
+<div class="flex justify-between font-sans"><span>🔍 ANALYSE SÉMANTIQUE :</span><span class="text-emerald-400 font-bold animate-pulse font-sans">active</span></div>
+<div class="flex justify-between font-sans"><span>📊 SCORING D'INTENTION :</span><span class="text-yellow-400 font-bold font-sans">${window.simState.assistant.cart.length > 0 ? '97% (Achat imminent)' : '87%'}</span></div>
+</div>
+
+<button onclick="window.triggerSimulatedAbandon()" class="w-full py-3 bg-[#b45309] hover:bg-[#9a4007] text-white font-extrabold text-[10px] uppercase rounded-xl tracking-wider transition-all duration-300 font-sans">
+Simuler un abandon de panier (Relance IA)
+</button>
+</div>
+</div>
+
+<div class="bg-[#0a1631] border border-white/5 p-4 rounded-xl space-y-2 font-sans">
+<div class="flex items-center gap-1.5 text-[10px] font-sans">
+<i data-lucide="trending-up" class="w-4 h-4 text-blue-400 font-sans"></i>
+<span class="font-sans">Taux de conversion prédictif : <b class="text-yellow-400 font-sans">+43%</b></span>
+</div>
+<div class="w-full h-1 bg-slate-800 rounded-full overflow-hidden font-sans">
+<div class="h-full bg-gradient-to-r from-blue-500 to-cyan-400 font-sans" style="width: 68%"></div>
+</div>
+</div>
+</div>
+</div>
+`;
+} else if(tabKey === 'scanplan') {
+indicator.textContent = "MODULE 02";
+explainer.textContent = "Le module Scan & Plan permet l'aménagement d'intérieur interactif en SVG, calcule le devis et détecte les anomalies de sécurité.";
+const hasFour = window.simState.scanplan.placedElements.includes('four');
+const hasFrigo = window.simState.scanplan.placedElements.includes('frigo');
+const hasEvier = window.simState.scanplan.placedElements.includes('evier');
+const hasPlaque = window.simState.scanplan.placedElements.includes('plaque');
+
+display.innerHTML = `
+<div class="grid md:grid-cols-12 gap-4 h-full items-stretch animate-fade-in font-sans">
+<div class="md:col-span-7 bg-slate-900/80 rounded-2xl p-4 flex flex-col border border-white/5 backdrop-blur-xl justify-between h-[450px]">
+<div>
+<div class="flex items-center gap-2 border-b border-white/10 pb-2 mb-3 font-sans">
+<div class="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
+<i data-lucide="layout-grid" class="w-4 h-4" style="color:white !important;"></i>
+</div>
+<span class="text-white text-xs font-bold font-sans">Scan & Plan : Designer Virtuel</span>
+</div>
+
+<!-- SVG blueprint interactive workspace -->
+<div class="bg-slate-950/80 rounded-xl p-3 border border-white/5 relative overflow-hidden flex items-center justify-center h-48 mb-3 font-sans">
+<svg class="w-full h-full max-w-[280px]" viewBox="0 0 200 120">
+<rect x="5" y="5" width="190" height="110" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="2" />
+<text x="10" y="16" fill="rgba(255,255,255,0.2)" font-size="6" font-weight="bold">ESPACE DESIGN</text>
+<circle cx="45" cy="100" r="4" fill="rgba(36,112,239,0.2)" stroke="#2470ef" stroke-width="1" />
+<text x="45" y="90" fill="#2470ef" font-size="4.5" text-anchor="middle" font-weight="600">Arrivée d'eau</text>
+<rect x="145" y="95" width="6" height="6" fill="rgba(250,204,21,0.2)" stroke="#facc15" stroke-width="1" />
+<text x="148" y="90" fill="#facc15" font-size="4.5" text-anchor="middle" font-weight="600">Prise force</text>
+
+${hasEvier ? `
+<g class="animate-fade-in">
+<rect x="30" y="60" width="30" height="30" fill="rgba(36,112,239,0.15)" stroke="#2470ef" stroke-width="1.5" />
+<text x="45" y="77" fill="#ffffff" font-size="6" font-weight="bold" text-anchor="middle">Évier</text>
+</g>
+` : ''}
+${hasPlaque ? `
+<g class="animate-fade-in">
+<rect x="70" y="60" width="30" height="30" fill="rgba(139,92,246,0.15)" stroke="#8b5cf6" stroke-width="1.5" />
+<text x="85" y="77" fill="#ffffff" font-size="6" font-weight="bold" text-anchor="middle">Plaques</text>
+</g>
+` : ''}
+${hasFour ? `
+<g class="animate-fade-in">
+<rect x="110" y="60" width="30" height="30" fill="rgba(244,63,94,0.15)" stroke="#f43f5e" stroke-width="1.5" />
+<text x="125" y="77" fill="#ffffff" font-size="6" font-weight="bold" text-anchor="middle">Four</text>
+</g>
+` : ''}
+${hasFrigo ? `
+<g class="animate-fade-in">
+<rect x="145" y="45" width="40" height="45" fill="rgba(16,185,129,0.15)" stroke="#10b981" stroke-width="1.5" />
+<text x="165" y="70" fill="#ffffff" font-size="6" font-weight="bold" text-anchor="middle">Réfrigérateur</text>
+</g>
+` : ''}
+</svg>
+</div>
+
+<!-- Buttons mapping -->
+<div class="grid grid-cols-4 gap-2 font-sans">
+<button onclick="window.togglePlanElement('evier', 450)" class="py-2.5 rounded-xl border ${hasEvier ? 'bg-[#2470ef]/20 border-[#2470ef]' : 'border-white/5 bg-[#0f1934]'} text-[8px] font-bold font-mono">Évier (450€)</button>
+<button onclick="window.togglePlanElement('plaque', 550)" class="py-2.5 rounded-xl border ${hasPlaque ? 'bg-purple-500/20 border-purple-500' : 'border-white/5 bg-[#0f1934]'} text-[8px] font-bold font-mono">Plaques (550€)</button>
+<button onclick="window.togglePlanElement('four', 850)" class="py-2.5 rounded-xl border ${hasFour ? 'bg-rose-500/20 border-rose-500' : 'border-white/5 bg-[#0f1934]'} text-[8px] font-bold font-mono">Four (850€)</button>
+<button onclick="window.togglePlanElement('frigo', 1200)" class="py-2.5 rounded-xl border ${hasFrigo ? 'bg-[#10b981]/20 border-[#10b981]' : 'border-white/5 bg-[#0f1934]'} text-[8px] font-bold font-mono">Frigo (1200€)</button>
+</div>
+</div>
+
+<div class="bg-slate-950/80 px-3 py-2 rounded-xl border border-white/5 flex justify-between items-center text-[10px] font-sans">
+<span>📐 Éléments : <b class="text-white">${window.simState.scanplan.placedElements.length} / 4 placés</b></span>
+<button onclick="window.triggerKitchenOrderDemo()" class="px-3 py-1.5 bg-[#10b981] hover:bg-emerald-600 rounded-full text-white text-[9px] font-bold uppercase font-sans">Générer devis</button>
+</div>
+</div>
+
+<div class="md:col-span-5 bg-slate-900/80 rounded-2xl p-4 flex flex-col border border-white/5 backdrop-blur-xl justify-between h-[450px] font-sans">
+<div>
+<span class="text-[10px] uppercase tracking-wider text-purple-400 font-bold block mb-3 flex items-center gap-2 font-sans"><i data-lucide="sparkles" class="w-3 h-3" style="color:#a855f7 !important;"></i> Orchestration comete.ai</span>
+<div class="space-y-3 font-sans">
+<div class="p-3 bg-white/5 rounded-xl border border-white/5 text-[9px] font-mono text-slate-300 font-sans">
+<div class="flex justify-between"><span>🚿 RACCORDEMENT PLOMBERIE :</span><span class="${hasEvier ? 'text-emerald-400' : 'text-slate-400'}">${hasEvier ? 'Raccordé' : 'Non détecté'}</span></div>
+<div class="flex justify-between mt-1"><span>⚡ ALIGNEMENT ÉLECTRIQUE :</span><span class="${hasFour ? 'text-emerald-400' : 'text-slate-400'}">${hasFour ? 'Raccordé' : 'Non détecté'}</span></div>
+</div>
+
+${window.simState.scanplan.complianceError ? `
+<div class="p-3 bg-rose-500/10 border border-rose-500/20 rounded-xl text-[9px] text-rose-400 animate-pulse font-mono">
+<div class="flex items-center gap-1.5 font-bold uppercase"><i data-lucide="alert-triangle" class="w-3.5 h-3.5"></i> Danger Raccordement</div>
+<p class="text-[8px] text-slate-300 font-sans mt-1">L'évier est placé de manière adjacente aux plaques de cuisson. Éloignement minimal de 60cm requis pour des raisons de conformité électrique.</p>
+</div>
+` : `
+<div class="p-3 bg-emerald-500/10 border border-emerald-500/20 rounded-xl text-[9px] text-emerald-400 font-mono">
+<div class="flex items-center gap-1.5 font-bold uppercase"><i data-lucide="check-circle" class="w-3.5 h-3.5"></i> Plan Conforme</div>
+</div>
+`}
+</div>
+</div>
+
+<div class="bg-[#0a1631] border border-white/5 p-4 rounded-xl flex items-center justify-between font-sans">
+<div>
+<span class="text-[8px] text-slate-400 uppercase font-mono block">DEVIS PROJET ESTIMÉ</span>
+<span class="text-[#2470ef] font-black text-lg font-mono">${window.simState.scanplan.estimatedPrice} €</span>
+</div>
+<span class="text-[10px] bg-emerald-500/20 text-emerald-400 font-bold px-3 py-1.5 rounded-full font-sans">Devis instantané</span>
+</div>
+</div>
+</div>
+`;
+} else if(tabKey === 'vision') {
+indicator.textContent = "MODULE 03";
+explainer.textContent = "La Vision IA de comete.ai examine l'intégrité de l'appareil (écran et châssis) pour produire une estimation certifiée.";
+const visionState = window.simState.reprise.status;
+
+display.innerHTML = `
+<div class="grid md:grid-cols-12 gap-4 h-full items-stretch animate-fade-in font-sans">
+<div class="md:col-span-7 bg-slate-900/80 rounded-2xl p-4 flex flex-col border border-white/5 backdrop-blur-xl justify-between h-[450px]">
+<div>
+<div class="flex items-center gap-2 border-b border-white/10 pb-2 mb-3">
+<div class="w-8 h-8 rounded-full bg-gradient-to-br from-[#2470ef] to-cyan-500 flex items-center justify-center">
+<i data-lucide="camera" class="w-4 h-4" style="color:white !important;"></i>
+</div>
+<span class="text-white text-xs font-bold">Analyseur de reprise optique</span>
+</div>
+
+<div class="flex-grow flex flex-col items-center justify-center relative bg-slate-950/80 rounded-xl border border-white/5 h-48 overflow-hidden mb-3">
+<img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover opacity-80" alt="Smartphone" />
+${visionState === 'scanning' ? `<div class="vision-scan-line"></div>` : ''}
+${visionState === 'complete' ? `
+<div class="absolute inset-0">
+<div class="bounding-box border-emerald-400 text-emerald-400" style="top:10%; left:15%; width:70%; height:80%;"></div>
+<div class="absolute top-[12%] left-[17%] px-2 py-0.5 bg-emerald-400 text-[8px] font-bold text-black rounded shadow-lg">ÉCRAN: 95% SANS ACCROC</div>
+</div>
+` : ''}
+</div>
+</div>
+
+<div class="pt-3">
+<button onclick="window.runRepriseScan()" id="reprise-scan-btn" ${visionState === 'scanning' ? 'disabled' : ''} class="w-full bg-gradient-to-r from-[#2470ef] to-[#5170ff] hover:shadow-[0_10px_40px_rgba(36,112,239,0.6)] text-white py-3 rounded-xl text-[10px] font-bold uppercase tracking-wider shadow-md flex items-center justify-center gap-2 transition-all">
+<i data-lucide="scan-eye" class="w-4 h-4" style="color:white !important;"></i> Lancer l'analyse d'état (Laser Vert)
+</button>
+</div>
+</div>
+
+<div class="md:col-span-5 bg-slate-900/80 rounded-2xl p-4 flex flex-col border border-white/5 backdrop-blur-xl justify-between h-[450px]">
+<div>
+<span class="text-[10px] uppercase tracking-wider text-emerald-400 font-bold block mb-3 flex items-center gap-2"><i data-lucide="cpu" class="w-3 h-3" style="color:#10b981 !important;"></i> Rapport de cotation IA</span>
+<div class="space-y-3">
+<div class="p-3 bg-white/5 rounded-xl border border-white/5 font-mono text-[9px] text-slate-300">
+<div class="flex justify-between"><span>🔍 MODÈLE DETECTÉ :</span><span class="text-white font-bold">${visionState === 'complete' ? 'iPhone 13 Pro 128Go' : 'En attente...'}</span></div>
+<div class="flex justify-between mt-1"><span>📱 ÉCRAN INTEGRITÉ :</span><span class="text-white">${visionState === 'complete' ? '95% (Sain)' : '--'}</span></div>
+<div class="flex justify-between mt-1"><span>🛡️ STATUT BLACKLIST :</span><span class="${visionState === 'complete' ? 'text-emerald-400 font-bold' : 'text-slate-400'}">${visionState === 'complete' ? 'PROPRE (GSMA Checked)' : '--'}</span></div>
+</div>
+</div>
+</div>
+
+<div class="bg-[#0a1631] border border-white/5 p-4 rounded-xl flex items-center justify-between font-sans">
+<div>
+<span class="text-[8px] text-slate-400 uppercase font-mono block">PROPOSITION DE RACHAT IA</span>
+<span class="text-emerald-400 font-black text-xl font-mono">${visionState === 'complete' ? '415 €' : '--'}</span>
+</div>
+<span class="text-[10px] bg-emerald-500/20 text-emerald-400 font-bold px-3 py-1.5 rounded-full font-sans">Seconde main</span>
+</div>
+</div>
+</div>
+`;
+} else if(tabKey === 'logistique') {
+indicator.textContent = "MODULE 04";
+explainer.textContent = "Optimisation dynamique du dernier kilomètre. Simulez un incident pour observer le re-routage IA instantané.";
+const logistiqueState = window.simState.logistique.status;
+let currentDist = window.simState.logistique.distance;
+let currentCO2 = window.simState.logistique.co2;
+
+display.innerHTML = `
+<div class="grid md:grid-cols-12 gap-4 h-full items-stretch animate-fade-in font-sans">
+<div class="md:col-span-7 bg-slate-900/80 rounded-2xl p-4 flex flex-col border border-white/5 backdrop-blur-xl justify-between h-[450px]">
+<div>
+<div class="flex items-center gap-2 border-b border-white/10 pb-2 mb-3">
+<div class="w-8 h-8 rounded-full bg-gradient-to-br from-[#2470ef] to-cyan-500 flex items-center justify-center">
+<i data-lucide="map" class="w-4 h-4" style="color:white !important;"></i>
+</div>
+<span class="text-white text-xs font-bold">C-Route Dispatch (Suivi GPS)</span>
+</div>
+
+<!-- GPS SVG Map Layout (Paris-Versailles) -->
+<div class="bg-slate-950/80 rounded-xl p-3 border border-white/5 relative overflow-hidden flex items-center justify-center h-48 mb-3 font-sans">
+<svg class="w-full h-full max-w-[280px]" viewBox="0 0 200 120">
+<rect x="5" y="5" width="190" height="110" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1" />
+<path d="M 200,90 C 170,85 160,75 160,60 C 160,45 170,35 150,25 C 130,15 120,25 110,35 C 100,45 80,45 70,30 C 60,15 50,25 40,40" fill="none" stroke="#2470ef" stroke-width="3.5" opacity="0.15" stroke-linecap="round" />
+
+<path d="M 40,80 C 60,82 100,75 120,60 C 140,45 150,35 180,30" fill="none" stroke="#eab308" stroke-width="2.5" stroke-linecap="round" />
+<path d="M 40,80 C 60,82 100,75 120,60 C 140,45 150,35 180,30" fill="none" stroke="#ffffff" stroke-width="1" stroke-linecap="round" stroke-dasharray="3, 9" class="animate-dash" />
+
+${logistiqueState === 'incident' || logistiqueState === 'rerouted' ? `
+<circle cx="120" cy="60" r="8" fill="rgba(244,63,94,0.3)" />
+<circle cx="120" cy="60" r="2.5" fill="#f43f5e" class="animate-ping" />
+` : ''}
+
+${logistiqueState === 'rerouted' ? `
+<path d="M 40,80 C 70,105 120,95 150,70 C 165,55 170,45 180,30" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" />
+<path d="M 40,80 C 70,105 120,95 150,70 C 165,55 170,45 180,30" fill="none" stroke="#ffedd5" stroke-width="1" stroke-linecap="round" stroke-dasharray="3, 9" class="animate-dash" />
+` : ''}
+
+<circle cx="40" cy="80" r="4.5" fill="#2470ef" stroke="#ffffff" stroke-width="1" />
+<text x="40" y="92" fill="#818cf8" font-size="4.5" font-family="sans-serif" font-weight="bold" text-anchor="middle">Versailles</text>
+
+<circle cx="180" cy="30" r="4.5" fill="#ef4444" stroke="#ffffff" stroke-width="1" />
+<text x="180" y="42" fill="#ffffff" font-size="4.5" font-family="sans-serif" font-weight="bold" text-anchor="middle">Paris</text>
+</svg>
+</div>
+</div>
+
+<div class="flex gap-2">
+<button onclick="window.triggerLogistiqueIncident()" class="flex-1 py-3 px-4 bg-rose-600 hover:bg-rose-500 rounded-2xl font-bold uppercase tracking-wider text-[9px] flex items-center justify-center gap-2">
+Simuler incident 🚨
+</button>
+<button onclick="window.resolveRerouteDispatch()" ${logistiqueState !== 'incident' ? 'disabled' : ''} class="flex-1 py-3 px-4 bg-emerald-600 hover:bg-emerald-500 rounded-2xl font-bold uppercase tracking-wider text-[9px] flex items-center justify-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed">
+Rerouting IA 🔄
+</button>
+</div>
+</div>
+
+<div class="md:col-span-5 bg-slate-900/80 rounded-2xl p-4 flex flex-col border border-white/5 backdrop-blur-xl justify-between h-[450px]">
+<div>
+<span class="text-[10px] uppercase tracking-wider text-emerald-400 font-bold block mb-3 flex items-center gap-2"><i data-lucide="cpu" class="w-3 h-3" style="color:#10b981 !important;"></i> Optimiseur Logistique</span>
+<div class="space-y-3">
+<div class="grid grid-cols-2 gap-3 font-mono text-[9px]">
+<div class="bg-white/5 p-3 rounded-xl border border-white/5">
+<span class="text-slate-400 uppercase block mb-1">Distance totale</span>
+<span class="text-white font-extrabold text-sm block">${currentDist} km</span>
+</div>
+<div class="bg-white/5 p-3 rounded-xl border border-white/5">
+<span class="text-slate-400 uppercase block mb-1">Empreinte CO2</span>
+<span class="text-white font-extrabold text-sm block">${currentCO2} kg</span>
+</div>
+</div>
+
+${logistiqueState === 'incident' ? `
+<div class="p-3 bg-rose-500/10 border border-rose-500/20 rounded-2xl text-[9px] text-rose-400 animate-pulse font-mono">
+<div class="flex items-center gap-1.5 font-bold uppercase"><i data-lucide="alert-triangle" class="w-3.5 h-3.5"></i> Camion de livraison bloqué</div>
+<p class="text-[8px] text-slate-300 font-sans mt-1">L'IA de dispatch propose un trajet alternatif (Plan B) pour respecter le SLA et livrer à temps.</p>
+</div>
+` : logistiqueState === 'rerouted' ? `
+<div class="p-3 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl text-[9px] text-emerald-400 font-mono">
+<div class="flex items-center gap-1.5 font-bold uppercase"><i data-lucide="check-circle" class="w-3.5 h-3.5"></i> Rerouting IA Terminé</div>
+<p class="text-[8px] text-slate-300 font-sans mt-1">Liaison optimisée via l'axe sud. Trajet descendu à ${currentDist} km. Notification client émise.</p>
+</div>
+` : `
+<div class="p-3 bg-white/5 rounded-2xl text-[9px] text-slate-400 font-mono">
+<p>Planification nominale en cours. Aucun retard de livraison.</p>
+</div>
+`}
+</div>
+</div>
+
+<div class="p-3 bg-[#2470ef]/10 rounded-xl border border-[#2470ef]/20 font-sans text-xs">
+<b class="text-cyan-400 block mb-1 text-[9px]">Notification RCS client :</b> 
+<p class="text-emerald-400 leading-relaxed text-[9px] font-mono animate-pulse">
+${logistiqueState === 'rerouted' ? "&gt; \"Bonjour Thomas, la livraison de votre équipement est confirmée pour ce jeudi à 14h.\"" : "&gt; Canal de communication logistique actif."}
+</p>
+</div>
+</div>
+</div>
+`;
+} else if(tabKey === 'fraud') {
+indicator.textContent = "MODULE 05";
+explainer.textContent = "L'IA SafeReturn de comete.ai examine pixellairement l'intégrité des documents et colis réclamés pour débusquer les fraudes.";
+const fraudState = window.simState.fraud.status;
+const photo = window.simState.fraud.selectedPhoto;
+
+display.innerHTML = `
+<div class="grid md:grid-cols-12 gap-4 h-full items-stretch animate-fade-in font-sans">
+<div class="md:col-span-7 bg-slate-900/80 rounded-2xl p-4 flex flex-col border border-white/5 backdrop-blur-xl justify-between h-[450px]">
+<div>
+<div class="flex items-center gap-2 border-b border-white/10 pb-2 mb-3">
+<div class="w-8 h-8 rounded-full bg-gradient-to-br from-red-500 to-orange-500 flex items-center justify-center">
+<i data-lucide="shield-alert" class="w-4 h-4" style="color:white !important;"></i>
+</div>
+<span class="text-white text-xs font-bold">Sélection Preuve de Réclamation</span>
+</div>
+
+<div class="grid grid-cols-2 gap-2 mb-3">
+<button onclick="window.setFraudPhoto('colis-clean')" class="p-2.5 border rounded-xl text-left hover:border-blue-500 transition-all text-xs font-bold flex items-center gap-2 ${photo === 'colis-clean' ? 'border-blue-500 bg-blue-500/10' : 'border-white/10 bg-slate-950/40'}">
+<span>📦</span> Colis endommagé (Réel)
+</button>
+<button onclick="window.setFraudPhoto('photoshop-scam')" class="p-2.5 border rounded-xl text-left hover:border-red-500 transition-all text-xs font-bold flex items-center gap-2 ${photo === 'photoshop-scam' ? 'border-red-500 bg-red-500/10' : 'border-white/10 bg-slate-950/40'}">
+<span>🖼️</span> Choc altéré (Montage)
+</button>
+</div>
+
+<div class="flex-grow flex flex-col items-center justify-center relative bg-slate-950/80 rounded-xl border border-white/5 h-44 overflow-hidden mb-3">
+<img src="${photo === 'photoshop-scam' ? 'https://images.unsplash.com/photo-1560472355-536de3962603?auto=format&fit=crop&q=80&w=800' : 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=800'}" class="absolute inset-0 w-full h-full object-cover opacity-65" />
+${fraudState === 'inspecting' ? `<div class="vision-scan-line"></div>` : ''}
+${fraudState === 'flagged' ? `
+<div class="absolute inset-0">
+<div class="bounding-box border-red-500 text-red-500" style="top:25%; left:30%; width:40%; height:45%;"></div>
+<div class="absolute top-[27%] left-[32%] px-1.5 py-0.5 bg-red-500 text-[8px] font-bold text-white rounded">CLONAGE DETECTÉ : 94% FAUX</div>
+</div>
+` : ''}
+</div>
+</div>
+
+<div class="pt-3">
+<button onclick="window.runSafeReturnCheck()" id="fraud-scan-btn" ${fraudState === 'inspecting' ? 'disabled' : ''} class="w-full bg-[#ef4444] hover:bg-red-600 hover:shadow-[0_10px_40px_rgba(239,68,68,0.6)] text-white py-3 rounded-xl text-[10px] font-bold uppercase tracking-wider shadow-md flex items-center justify-center gap-2 transition-all font-sans">
+<i data-lucide="shield-alert" class="w-4 h-4" style="color:white !important;"></i> Lancer le contrôle SafeReturn
+</button>
+</div>
+</div>
+
+<div class="md:col-span-5 bg-slate-900/80 rounded-2xl p-4 flex flex-col border border-white/5 backdrop-blur-xl justify-between h-[450px]">
+<div>
+<span class="text-[10px] uppercase tracking-wider text-red-400 font-bold block mb-3 flex items-center gap-2"><i data-lucide="cpu" class="w-3 h-3" style="color:#ef4444 !important;"></i> SafeReturn Moteur d'Audit</span>
+<div class="space-y-3 font-sans">
+<div class="p-3 bg-white/5 rounded-xl border border-white/5 font-mono text-[9px] text-slate-300 font-sans">
+<div class="flex justify-between"><span>🔍 COHÉRENCE PIXELS :</span><span class="${fraudState === 'flagged' ? 'text-red-400 font-bold' : fraudState === 'clean' ? 'text-emerald-400 font-bold' : 'text-slate-400'}">${fraudState === 'flagged' ? 'ANOMALIE CLONAGE' : fraudState === 'clean' ? 'VALIDE' : 'En attente...'}</span></div>
+<div class="flex justify-between mt-1"><span>📂 HISTORIQUE CLIENT :</span><span class="${fraudState === 'flagged' ? 'text-red-400 font-bold' : 'text-slate-400'}">${fraudState === 'flagged' ? '3 réclamations (6 mois)' : 'Sain (0 litige)'}</span></div>
+</div>
+
+${fraudState === 'flagged' ? `
+<div class="p-3 bg-rose-500/10 border border-rose-500/20 rounded-xl text-[9px] text-red-400 animate-pulse font-mono font-sans">
+<div class="flex items-center gap-1.5 font-bold uppercase"><i data-lucide="alert-octagon" class="w-3.5 h-3.5 animate-pulse"></i> Tentative de fraude détectée</div>
+<p class="text-[8px] text-slate-300 font-sans mt-1">Anomalie pixellaire de modification d'image détectée. Dossier envoyé à un expert.</p>
+</div>
+` : fraudState === 'clean' ? `
+<div class="p-3 bg-emerald-500/10 border border-emerald-500/20 rounded-xl text-[9px] text-emerald-400 font-mono">
+<div class="flex items-center gap-1.5 font-bold uppercase"><i data-lucide="check-circle" class="w-3.5 h-3.5"></i> Document d'échange validé</div>
+</div>
+` : ''}
+</div>
+</div>
+
+<div class="bg-gradient-to-r from-red-500/10 to-[#2470ef]/10 border border-white/10 p-4 rounded-3xl flex items-center justify-between font-sans">
+<div>
+<span class="text-[8px] text-slate-400 uppercase font-mono block">SCORE DE FRAUDE ESTIMÉ</span>
+<span class="${isFlagged() ? 'text-red-400' : 'text-emerald-400'} font-black text-xl font-mono">${fraudState === 'flagged' ? '94%' : fraudState === 'clean' ? '8%' : '--%'}</span>
+</div>
+<span class="text-[10px] bg-red-500/20 text-red-400 font-bold px-3 py-1.5 rounded-full font-sans">${fraudState === 'flagged' ? 'Rejet automatique' : 'Aucun risque'}</span>
+</div>
+</div>
+</div>
+`;
+}
+
 lucide.createIcons();
+};
+
+// --- SIMULATOR ACTIONS MAPPED FROM THE STATE ENGINE ---
+window.addAssistantCart = (productName, price) => {
+    window.simState.assistant.cart.push({ name: productName, price: price });
+    
+    const chatContainer = document.getElementById('assistant-chat-history');
+    if (chatContainer) {
+        const userBubble = document.createElement('div');
+        userBubble.className = "self-end max-w-[85%] bg-[#005c4b] text-white rounded-2xl rounded-br-md px-2.5 py-1.5 text-[10px] ml-auto animate-bounce-in font-sans";
+        userBubble.innerHTML = `<p>J'ai ajouté <b>${productName}</b> au panier.</p>`;
+        chatContainer.appendChild(userBubble);
+
+        setTimeout(() => {
+            const botBubble = document.createElement('div');
+            botBubble.className = "self-start max-w-[85%] bg-[#202c33] text-white rounded-2xl rounded-bl-md px-2.5 py-1.5 text-[10px] animate-bounce-in font-sans";
+            botBubble.innerHTML = `<p>Panier mis à jour. Souhaitez-vous d'autres conseils ou finaliser votre achat de ${price}€ ?</p>`;
+            chatContainer.appendChild(botBubble);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }, 600);
+    }
+    
+    window.switchLabTab('assistant');
+    window.updateTelemetry();
+};
+
+window.triggerSimulatedAbandon = () => {
+    if (window.simState.assistant.cart.length === 0) {
+        alert("Veuillez d'abord ajouter un ordinateur au panier de l'assistant.");
+        return;
+    }
+    const chatContainer = document.getElementById('assistant-chat-history');
+    if (chatContainer) {
+        const botBubble = document.createElement('div');
+        botBubble.className = "self-start max-w-[85%] bg-[#202c33] text-white rounded-2xl rounded-bl-md px-2.5 py-1.5 text-[10px] animate-bounce-in border border-amber-500/30 font-sans";
+        botBubble.innerHTML = `<p>📲 <b>[IA comete.ai]</b> Relance WhatsApp envoyée : "Profitez de -10% sur vos articles (valables 2 heures) pour finaliser votre commande !"</p>`;
+        chatContainer.appendChild(botBubble);
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+};
+
+window.triggerCheckoutDemo = () => {
+    if (window.simState.assistant.cart.length === 0) {
+        alert("Votre panier virtuel est vide.");
+        return;
+    }
+    alert("Commande finalisée avec succès !");
+    window.simState.assistant.cart = [];
+    window.switchLabTab('assistant');
+    window.updateTelemetry();
+};
+
+// Étape 2 Actions - Plan Cuisine
+window.togglePlanElement = (elementName, price) => {
+    const index = window.simState.scanplan.placedElements.indexOf(elementName);
+    if (index > -1) {
+        window.simState.scanplan.placedElements.splice(index, 1);
+        window.simState.scanplan.estimatedPrice -= price;
+    } else {
+        window.simState.scanplan.placedElements.push(elementName);
+        window.simState.scanplan.estimatedPrice += price;
+    }
+
+    const hasPlaque = window.simState.scanplan.placedElements.includes('plaque');
+    const hasWater = window.simState.scanplan.placedElements.includes('evier');
+    window.simState.scanplan.complianceError = hasPlaque && hasWater;
+
+    window.switchLabTab('scanplan');
+    window.updateTelemetry();
+};
+
+window.triggerKitchenOrderDemo = () => {
+    if (window.simState.scanplan.placedElements.length === 0) {
+        alert("Veuillez d'abord placer un élément sur le plan de la cuisine.");
+        return;
+    }
+    alert("Devis de " + window.simState.scanplan.estimatedPrice + " € généré. Un e-mail de projet a été envoyé.");
+};
+
+// Étape 3 Actions - Scan de rachat
+window.runRepriseScan = () => {
+    window.simState.reprise.status = 'scanning';
+    window.switchLabTab('vision');
+
+    setTimeout(() => {
+        window.simState.reprise.status = 'complete';
+        window.switchLabTab('vision');
+        window.updateTelemetry();
+    }, 3000);
+};
+
+// Étape 4 Actions - Incident & Rerouting logistique
+window.triggerLogistiqueIncident = () => {
+    window.simState.logistique.status = 'incident';
+    window.simState.logistique.distance = 98;
+    window.simState.logistique.co2 = 24;
+    window.switchLabTab('logistique');
+    window.updateTelemetry();
+};
+
+window.resolveRerouteDispatch = () => {
+    window.simState.logistique.status = 'rerouted';
+    window.simState.logistique.distance = 74;
+    window.simState.logistique.co2 = 13;
+    window.switchLabTab('logistique');
+    window.updateTelemetry();
+};
+
+// Étape 5 Actions - Détection Fraude
+window.setFraudPhoto = (photoType) => {
+    window.simState.fraud.selectedPhoto = photoType;
+    window.simState.fraud.status = 'idle';
+    window.switchLabTab('fraud');
+};
+
+window.runSafeReturnCheck = () => {
+    window.simState.fraud.status = 'inspecting';
+    window.switchLabTab('fraud');
+
+    setTimeout(() => {
+        const photo = window.simState.fraud.selectedPhoto;
+        window.simState.fraud.status = photo === 'photoshop-scam' ? 'flagged' : 'clean';
+        window.switchLabTab('fraud');
+        window.updateTelemetry();
+    }, 2500);
+};
+
+window.isFlagged = () => {
+    return window.simState.fraud.status === 'flagged';
+};
+
+// REINITIALISATION TOTALE DU LAB
+window.resetAllJourney = () => {
+    window.simState.assistant.cart = [];
+    window.simState.scanplan.placedElements = [];
+    window.simState.scanplan.complianceError = false;
+    window.simState.scanplan.estimatedPrice = 1200;
+    window.simState.reprise.status = 'idle';
+    window.simState.logistique.status = 'nominal';
+    window.simState.logistique.distance = 92;
+    window.simState.logistique.co2 = 18;
+    window.simState.fraud.status = 'idle';
+    window.simState.fraud.selectedPhoto = 'colis-clean';
+
+    window.switchLabTab('assistant');
+};
+
+// MISE A JOUR TELEMETRIE GLOBALE
+window.updateTelemetry = () => {
+    const hasCart = window.simState.assistant.cart.length > 0;
+    const hasKitchen = window.simState.scanplan.placedElements.length > 0;
+    const hasReprise = window.simState.reprise.status === 'complete';
+    const hasDispatch = window.simState.logistique.status === 'rerouted';
+    const hasFraud = window.simState.fraud.status !== 'idle' && window.simState.fraud.status !== 'inspecting';
+
+    let count = 0;
+    if (hasCart) count += 6;
+    if (hasKitchen) count += 8;
+    if (hasReprise) count += 10;
+    if (hasDispatch) count += 12;
+
+    const telemetryConv = document.getElementById('telemetry-conv');
+    if (telemetryConv) {
+        telemetryConv.textContent = `+${24 + count}%`;
+    }
+
+    const fraudIndicator = document.getElementById('fraud-indicator');
+    const telemetryFraud = document.getElementById('telemetry-fraud');
+    
+    if (hasFraud) {
+        const isFaux = window.simState.fraud.status === 'flagged';
+        if (telemetryFraud) {
+            telemetryFraud.textContent = isFaux ? '94% (ALERTE)' : '8% (SAIN)';
+        }
+        if (fraudIndicator) {
+            fraudIndicator.className = isFaux ? 'w-1.5 h-1.5 rounded-full bg-red-500 animate-ping' : 'w-1.5 h-1.5 rounded-full bg-emerald-500';
+        }
+    } else {
+        if (telemetryFraud) {
+            telemetryFraud.textContent = '0%';
+        }
+        if (fraudIndicator) {
+            fraudIndicator.className = 'w-1.5 h-1.5 rounded-full bg-slate-400';
+        }
+    }
+
+    const btnReset = document.getElementById('btn-reset-all-journey');
+    if (btnReset) {
+        const completedSomething = hasCart || hasKitchen || hasReprise || hasDispatch || hasFraud;
+        btnReset.disabled = !completedSomething;
+        btnReset.className = completedSomething
+            ? "px-6 py-3 rounded-full bg-gradient-to-r from-[#2470ef] to-[#5170ff] text-white font-bold uppercase tracking-wider text-[11px] shadow-lg cursor-pointer opacity-100 flex items-center gap-2 font-sans"
+            : "px-6 py-3 rounded-full bg-slate-950 text-slate-600 font-bold uppercase tracking-wider text-[11px] border border-white/5 flex items-center gap-2 cursor-not-allowed opacity-40 font-sans";
+    }
+};
 </script>
 </body>
 </html>
