@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>comete.ai – L'IA au cœur du E‑commerce et de la Grande Distribution</title>
-  <meta name="description" content="De la découverte produit à la fidélisation, comete.ai orchestre une expérience omnicanale fluide, durable et ultra‑personnalisée." />
+  <meta name="description" content="De la découverte produit à l'après-vente, comete.ai orchestre chaque étape du parcours client e-commerce. Conversion, fidélisation, réduction des retours et des litiges." />
   <link rel="icon" href="https://cdn.convrrt.com/apps/sendinblue/6761372/6aa995aa-40f4-4933-83ae-401c3ae0ae02.png" type="image/png" />
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -173,7 +173,7 @@
       100% { background-position: 200% 50%; }
     }
 
-    /* Modules cards */
+    /* Modules cards (5 cartes) */
     .module-card {
       transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
       border: 1px solid rgba(0,0,0,0.05);
@@ -215,6 +215,7 @@
     .kpi-cyan   { background: linear-gradient(135deg, #06b6d4, #0891b2); }
     .kpi-yellow { background: linear-gradient(135deg, #ffde59, #facc15); color: #002d62; }
     .kpi-purple { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+    .kpi-rose   { background: linear-gradient(135deg, #f43f5e, #e11d48); }
 
     /* Tech rings */
     .tech-ring {
@@ -558,6 +559,7 @@
       .glass-card { border-radius: 1.5rem; }
       .whatsapp-container { height: 400px !important; }
       .sim-header h2 { font-size: 1.1rem; }
+      .module-card .p-6 { padding: 1rem; }
     }
     @media (min-width: 769px) and (max-width: 1024px) {
       .grid { grid-template-columns: 1fr 1fr; }
@@ -601,7 +603,7 @@
     <a href="#vision" class="sidebar-link" data-section="vision"><i data-lucide="award" class="w-4 h-4 md:w-5 md:h-5"></i></a>
   </div>
 
-  <!-- HERO -->
+  <!-- 1. HERO SECTION -->
   <section id="hero" class="min-h-screen relative flex items-center overflow-hidden bg-[#000d25] text-left pt-36 pb-20 md:pt-48 md:pb-32">
     <div id="hero-mouse-glow" class="mouse-glow-bg"></div>
     <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
@@ -625,13 +627,13 @@
       <div class="max-w-4xl space-y-8 md:space-y-12">
         <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-xl animate-fade-in shadow-2xl">
           <span class="w-2 h-2 rounded-full bg-cyan-300 animate-pulse live-dot"></span>
-          <span class="text-[9px] md:text-[10px] uppercase tracking-[0.3em] text-blue-100 font-black">E-COMMERCE & GRANDE DISTRIBUTION : L'ÈRE DE L'EXPÉRIENCE AUGMENTÉE</span>
+          <span class="text-[9px] md:text-[10px] uppercase tracking-[0.3em] text-blue-100 font-black">E-COMMERCE : L'IA À CHAQUE ÉTAPE DU PARCOURS CLIENT</span>
         </div>
         <h1 class="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-normal text-white leading-[1.1] tracking-tighter">
-          L'IA redéfinit le <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#2470ef] via-[#5170ff] to-[#8ab1ff] font-bold">parcours d'achat</span> et la relation client.
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#2470ef] via-[#5170ff] to-[#8ab1ff] font-bold">L'IA transforme chaque interaction</span> en opportunité de vente et de fidélisation.
         </h1>
         <p class="text-base md:text-xl lg:text-2xl text-white/70 font-light leading-relaxed border-l-4 border-[#2470ef]/60 pl-4 md:pl-6 max-w-3xl animate-fade-in" style="animation-delay: 0.6s;">
-          De la découverte produit à la fidélisation, <b class="text-white">comete.ai orchestre</b> une expérience omnicanale fluide, durable et ultra-personnalisée. Transformez chaque interaction en opportunité de valeur.
+          De la sélection produit à l'après-vente, <b class="text-white">comete.ai orchestre</b> l'ensemble du parcours client e-commerce. Augmentez votre conversion, réduisez vos retours et vos coûts SAV, et créez une relation client durable — à chaque étape du cycle de vie produit.
         </p>
         <div class="animate-fade-in flex flex-wrap gap-4" style="animation-delay: 0.9s;">
           <button onclick="document.getElementById('laboratoire').scrollIntoView({behavior:'smooth'})" class="btn-unified px-6 py-4 md:px-8 md:py-5 text-[10px] md:text-sm flex items-center gap-3">
@@ -646,7 +648,7 @@
     </div>
   </section>
 
-  <!-- COMPARATIF -->
+  <!-- 2. COMPARATIF -->
   <section id="comparatif" class="py-24 md:py-36 bg-white overflow-hidden text-left relative">
     <div class="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
       <h2 class="text-3xl md:text-5xl lg:text-7xl font-normal text-[#002d62] leading-tight tracking-tighter mb-12 md:mb-20 lg:mb-16">
@@ -656,28 +658,28 @@
         <div class="bg-gradient-to-br from-slate-50 to-white p-6 md:p-14 lg:pr-24 rounded-3xl lg:rounded-l-[48px] lg:rounded-r-none border border-slate-200 mb-10 lg:mb-0 reveal-up">
           <h3 class="text-xl md:text-2xl font-black text-slate-700 mb-10 flex items-center gap-4">
             <span class="w-10 h-10 rounded-xl bg-red-100 flex items-center justify-center"><i data-lucide="alert-circle" class="icon-unified-danger w-5 h-5"></i></span>
-            Pistes d'amélioration
+            Sans comete.ai / Pistes d’amélioration
           </h3>
           <ul class="space-y-6">
             <li class="flex gap-4 text-slate-500 text-sm md:text-base group">
               <span class="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center shrink-0 group-hover:bg-red-100 transition-colors"><i data-lucide="x-circle" class="icon-unified-danger w-4 h-4"></i></span>
-              <span>Parcours d'achat <b>statique</b> et comparatifs techniques indigestes.</span>
+              <span>Recherche produit guidée par des <b>filtres standards</b> et des fiches techniques</span>
             </li>
             <li class="flex gap-4 text-slate-500 text-sm md:text-base group">
               <span class="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center shrink-0 group-hover:bg-red-100 transition-colors"><i data-lucide="x-circle" class="icon-unified-danger w-4 h-4"></i></span>
-              <span>Taux d'abandon de panier élevé par <b>manque d'accompagnement</b> contextuel.</span>
+              <span>Accompagnement post-achat à la demande, <b>sur initiative du client</b></span>
             </li>
             <li class="flex gap-4 text-slate-500 text-sm md:text-base group">
               <span class="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center shrink-0 group-hover:bg-red-100 transition-colors"><i data-lucide="x-circle" class="icon-unified-danger w-4 h-4"></i></span>
-              <span>SAV réactif et coûteux, généré par une <b>mauvaise utilisation</b> des produits.</span>
+              <span>Litiges et reprises traités <b>selon les process habituels</b></span>
             </li>
             <li class="flex gap-4 text-slate-500 text-sm md:text-base group">
               <span class="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center shrink-0 group-hover:bg-red-100 transition-colors"><i data-lucide="x-circle" class="icon-unified-danger w-4 h-4"></i></span>
-              <span>Gestion des retours, de la fraude et de la <b>seconde main fragmentée</b>.</span>
+              <span>Relation client centrée sur la transaction, avec peu de suivi cycle de vie</span>
             </li>
             <li class="flex gap-4 text-slate-500 text-sm md:text-base group">
               <span class="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center shrink-0 group-hover:bg-red-100 transition-colors"><i data-lucide="x-circle" class="icon-unified-danger w-4 h-4"></i></span>
-              <span>Maintenance et consommables déclenchés <b>uniquement après la panne</b>.</span>
+              <span>Détection des fraudes documentaires reposant sur l'analyse manuelle</span>
             </li>
           </ul>
         </div>
@@ -690,28 +692,28 @@
           <div class="relative z-10">
             <h3 class="text-xl md:text-2xl font-black text-white mb-10 flex items-center gap-4">
               <span class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#2470ef] to-cyan-500 flex items-center justify-center shadow-lg shadow-[#2470ef]/30"><i data-lucide="sparkles" class="w-5 h-5" style="color:white !important;"></i></span>
-              Orchestration comete.ai
+              Avec comete.ai / orchestration comete.ai
             </h3>
             <ul class="space-y-6">
               <li class="flex gap-4 text-blue-50 text-sm md:text-base group">
                 <span class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center shrink-0 group-hover:bg-white/20 transition-colors"><i data-lucide="check-circle-2" class="icon-unified-accent w-4 h-4" style="color:#22d3ee !important;"></i></span>
-                <span><b>Assistant d'achat conversationnel</b> et comparateur intelligent guidé par l'IA.</span>
+                <span><b>Conseiller IA conversationnel :</b> guide le client du besoin au bon produit, jusqu'à la commande</span>
               </li>
               <li class="flex gap-4 text-blue-50 text-sm md:text-base group">
                 <span class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center shrink-0 group-hover:bg-white/20 transition-colors"><i data-lucide="check-circle-2" class="icon-unified-accent w-4 h-4" style="color:#22d3ee !important;"></i></span>
-                <span><b>Relance contextuelle</b> et personnalisée des paniers abandonnés en temps réel.</span>
+                <span><b>Assistance proactive post-achat :</b> tutoriels, alertes d'entretien et anticipation des consommables via WhatsApp/RCS</span>
               </li>
               <li class="flex gap-4 text-blue-50 text-sm md:text-base group">
                 <span class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center shrink-0 group-hover:bg-white/20 transition-colors"><i data-lucide="check-circle-2" class="icon-unified-accent w-4 h-4" style="color:#22d3ee !important;"></i></span>
-                <span><b>Aide à l'usage proactive</b> et visio-assistance pour un SAV résolu au premier contact.</span>
+                <span><b>Vérification visuelle par IA :</b> analyse photos/vidéos pour l'estimation à la reprise et la certification des litiges</span>
               </li>
               <li class="flex gap-4 text-blue-50 text-sm md:text-base group">
                 <span class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center shrink-0 group-hover:bg-white/20 transition-colors"><i data-lucide="check-circle-2" class="icon-unified-accent w-4 h-4" style="color:#22d3ee !important;"></i></span>
-                <span><b>Estimation instantanée par Vision IA</b> pour la reprise et l'économie circulaire.</span>
+                <span><b>Concierge IA personnel :</b> gestion du cycle de vie des équipements, upsell contextuel et commandes en un clic</span>
               </li>
               <li class="flex gap-4 text-blue-50 text-sm md:text-base group">
                 <span class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center shrink-0 group-hover:bg-white/20 transition-colors"><i data-lucide="check-circle-2" class="icon-unified-accent w-4 h-4" style="color:#22d3ee !important;"></i></span>
-                <span><b>Concierge IA prédictif</b> pour l'entretien, les consommables et l'upsell cyclique.</span>
+                <span><b>Détection automatique</b> des images retouchées et vérification par appel vidéo</span>
               </li>
             </ul>
           </div>
@@ -720,25 +722,32 @@
     </div>
   </section>
 
-  <!-- MODULES -->
+  <!-- 3. MODULES (5 CARTES) - DISPOSITION : 3 + 2 CENTRÉES -->
   <section id="modules" class="py-24 md:py-36 bg-white text-left overflow-hidden">
     <div class="max-w-[1440px] mx-auto px-4 md:px-6">
       <div class="text-center max-w-3xl mx-auto mb-16 md:mb-20 reveal-up">
         <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#2470ef]/10 border border-[#2470ef]/20 mb-6">
           <i data-lucide="layers" class="icon-unified w-4 h-4"></i>
-          <span class="text-[10px] uppercase tracking-widest text-[#2470ef] font-black">Nos Briques Opérationnelles</span>
+          <span class="text-[10px] uppercase tracking-widest text-[#2470ef] font-black">LES 5 ÉTAPES DU PARCOURS OPTIMISÉES PAR L’IA</span>
         </div>
         <h2 class="text-3xl md:text-5xl lg:text-6xl font-normal text-[#002d62] tracking-tighter">
           L'orchestration retail & E-commerce <br><span class="text-gradient-animated">augmentée par l'IA.</span>
         </h2>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8 animate-fade-in" id="solutions-retail-grid">
+
+      <!-- Grille : 3 premières cartes -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 animate-fade-in" id="solutions-retail-grid-top">
+        <!-- Injecté par JS -->
+      </div>
+
+      <!-- Grille : 2 dernières cartes centrées -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto animate-fade-in" id="solutions-retail-grid-bottom">
         <!-- Injecté par JS -->
       </div>
     </div>
   </section>
 
-  <!-- IMPACT -->
+  <!-- 4. IMPACT -->
   <section id="impact" class="py-24 md:py-36 bg-[#001c3d] text-white relative overflow-hidden">
     <div class="absolute inset-0 pointer-events-none">
       <div class="absolute top-20 left-10 w-72 h-72 bg-[#2470ef]/10 rounded-full blur-3xl animate-float-slow"></div>
@@ -749,38 +758,38 @@
         <div class="space-y-8 reveal-up">
           <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10">
             <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span class="text-[9px] uppercase tracking-widest text-emerald-400 font-bold">Résultats mesurables</span>
+            <span class="text-[9px] uppercase tracking-widest text-emerald-400 font-bold">IMPACT</span>
           </div>
           <h2 class="text-3xl md:text-5xl lg:text-7xl font-normal leading-tight tracking-tighter">
-            Un commerce <span class="text-gradient-animated">augmenté</span>, des résultats mesurables.
+            <span class="text-gradient-animated">"Le client ne veut pas chercher. Il veut trouver, comprendre et acheter — sans effort."</span>
           </h2>
           <p class="text-white/80 text-lg md:text-2xl italic font-light pl-6 border-l-2 border-[#2470ef]">
-            "L'IA ne remplace pas le commerce, elle lui donne les moyens d'être à la hauteur des attentes omnicanalles."
+            — comete.ai
           </p>
         </div>
         <div class="grid grid-cols-2 gap-4 md:gap-6">
           <div class="group bg-gradient-to-br from-white/5 to-white/[0.02] p-6 md:p-8 rounded-3xl border border-white/10 text-center transition-all hover:bg-white/10 hover:border-[#2470ef]/40 hover:scale-105 reveal-up">
-            <span class="text-3xl md:text-6xl font-black text-white block mb-2">+35%</span>
-            <span class="text-[8px] md:text-[9px] uppercase font-bold text-white/60 tracking-widest">Taux de conversion</span>
+            <span class="text-3xl md:text-6xl font-black text-white block mb-2">-40%</span>
+            <span class="text-[8px] md:text-[9px] uppercase font-bold text-white/60 tracking-widest">Contacts SAV évitables</span>
           </div>
           <div class="group bg-gradient-to-br from-white/5 to-white/[0.02] p-6 md:p-8 rounded-3xl border border-white/10 text-center transition-all hover:bg-white/10 hover:border-[#2470ef]/40 hover:scale-105 reveal-up" style="transition-delay: 0.1s;">
-            <span class="text-3xl md:text-6xl font-black text-white block mb-2">-40%</span>
-            <span class="text-[8px] md:text-[9px] uppercase font-bold text-white/60 tracking-widest">Abandons de panier</span>
+            <span class="text-3xl md:text-6xl font-black text-white block mb-2">+35%</span>
+            <span class="text-[8px] md:text-[9px] uppercase font-bold text-white/60 tracking-widest">Taux de conversion sur produits complexes</span>
           </div>
           <div class="group bg-gradient-to-br from-white/5 to-white/[0.02] p-6 md:p-8 rounded-3xl border border-white/10 text-center transition-all hover:bg-white/10 hover:border-[#2470ef]/40 hover:scale-105 reveal-up" style="transition-delay: 0.2s;">
-            <span class="text-3xl md:text-6xl font-black text-white block mb-2">-60%</span>
-            <span class="text-[8px] md:text-[9px] uppercase font-bold text-white/60 tracking-widest">Retours (mauvais usage)</span>
+            <span class="text-3xl md:text-6xl font-black text-white block mb-2">100%</span>
+            <span class="text-[8px] md:text-[9px] uppercase font-bold text-white/60 tracking-widest">Litiges instruits avec preuve vérifiable</span>
           </div>
           <div class="group bg-gradient-to-br from-white/5 to-white/[0.02] p-6 md:p-8 rounded-3xl border border-white/10 text-center transition-all hover:bg-white/10 hover:border-[#2470ef]/40 hover:scale-105 reveal-up" style="transition-delay: 0.3s;">
-            <span class="text-3xl md:text-6xl font-black text-white block mb-2">+25%</span>
-            <span class="text-[8px] md:text-[9px] uppercase font-bold text-white/60 tracking-widest">Revenus récurrents</span>
+            <span class="text-3xl md:text-6xl font-black text-white block mb-2">×3</span>
+            <span class="text-[8px] md:text-[9px] uppercase font-bold text-white/60 tracking-widest">Valeur générée après l'achat</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- LABORATOIRE -->
+  <!-- 5. LABORATOIRE (simulateurs) -->
   <section id="laboratoire" class="py-24 md:py-36 bg-gradient-to-b from-slate-50 via-white to-slate-50 text-left overflow-hidden relative">
     <div class="absolute inset-0 pointer-events-none">
       <div class="absolute top-40 left-20 w-96 h-96 bg-[#2470ef]/5 rounded-full blur-3xl"></div>
@@ -803,7 +812,6 @@
         <div id="tabs-wrapper" class="flex flex-wrap justify-center gap-3"></div>
       </div>
       <div id="sim-root" class="max-w-6xl mx-auto px-4 pb-20"></div>
-      <!-- Footer du laboratoire (explicatif) -->
       <div class="flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-slate-400 shrink-0 relative z-10 font-sans mt-3 border-t border-white/5 pt-3">
         <p class="text-center sm:text-left font-light text-slate-400 text-[11px]" id="lab-explainer">L'assistant IA guide le client vers le produit parfait en temps réel.</p>
         <div class="flex items-center gap-2 text-[9px] font-mono">
@@ -815,7 +823,7 @@
     </div>
   </section>
 
-  <!-- VISION -->
+  <!-- 6. VISION / CTA -->
   <section id="vision" class="py-24 md:py-36 bg-gradient-to-b from-slate-50 to-white text-left overflow-hidden relative">
     <div class="max-w-7xl mx-auto px-4 md:px-6 grid lg:grid-cols-2 gap-12 md:gap-20 items-center relative z-10">
       <div class="space-y-10 reveal-up">
@@ -827,24 +835,24 @@
           Combiner intelligemment <span class="text-gradient-animated">Technologie et Humain.</span>
         </h2>
         <p class="text-slate-500 text-lg md:text-2xl font-light max-w-xl">
-          Libérez vos équipes des tâches répétitives et concentrez votre énergie sur la relation client, le conseil expert et la création de valeur durable.
+          Libérez vos équipes des tâches répétitives et concentrez votre énergie sur la relation client et la création de valeur.
         </p>
         <div class="grid sm:grid-cols-2 gap-8">
           <div class="space-y-1 group">
             <p class="font-bold text-slate-800 flex items-center gap-2 text-sm md:text-base"><span class="w-8 h-8 rounded-lg bg-[#2470ef]/10 flex items-center justify-center group-hover:bg-[#2470ef]/20 transition-colors"><i data-lucide="zap" class="icon-unified w-4 h-4"></i></span> Disponibilité totale</p>
-            <p class="text-[11px] md:text-xs text-slate-400 pl-10">Réponse pertinent à toute heure sur tous les canaux.</p>
+            <p class="text-[11px] md:text-xs text-slate-400 pl-10">Réponse pertinente à toute heure, sur tous les canaux.</p>
           </div>
           <div class="space-y-1 group">
-            <p class="font-bold text-slate-800 flex items-center gap-2 text-sm md:text-base"><span class="w-8 h-8 rounded-lg bg-[#2470ef]/10 flex items-center justify-center group-hover:bg-[#2470ef]/20 transition-colors"><i data-lucide="users" class="icon-unified w-4 h-4 animate-pulse"></i></span> Conseillers valorisés</p>
-            <p class="text-[11px] md:text-xs text-slate-400 pl-10">Vos équipes gagnent en fluidité et en disponibilité pour des échanges à plus forte valeur.</p>
+            <p class="font-bold text-slate-800 flex items-center gap-2 text-sm md:text-base"><span class="w-8 h-8 rounded-lg bg-[#2470ef]/10 flex items-center justify-center group-hover:bg-[#2470ef]/20 transition-colors"><i data-lucide="trending-up" class="icon-unified w-4 h-4"></i></span> Conversion augmentée</p>
+            <p class="text-[11px] md:text-xs text-slate-400 pl-10">L'IA guide le client du besoin jusqu'au bon produit, sans friction.</p>
           </div>
           <div class="space-y-1 group">
-            <p class="font-bold text-slate-800 flex items-center gap-2 text-sm md:text-base"><span class="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center group-hover:bg-emerald-100 transition-colors"><i data-lucide="leaf" class="icon-unified-success w-4 h-4"></i></span> Durabilité</p>
-            <p class="text-[11px] md:text-xs text-slate-400 pl-10">Allongement de la durée de vie des produits et économie circulaire.</p>
+            <p class="font-bold text-slate-800 flex items-center gap-2 text-sm md:text-base"><span class="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center group-hover:bg-emerald-100 transition-colors"><i data-lucide="shield-check" class="icon-unified-success w-4 h-4"></i></span> Confiance renforcée</p>
+            <p class="text-[11px] md:text-xs text-slate-400 pl-10">Litiges instruits, reprises certifiées, fausses déclarations détectées.</p>
           </div>
           <div class="space-y-1 group">
-            <p class="font-bold text-slate-800 flex items-center gap-2 text-sm md:text-base"><span class="w-8 h-8 rounded-lg bg-[#2470ef]/10 flex items-center justify-center group-hover:bg-[#2470ef]/20 transition-colors"><i data-lucide="shield-check" class="icon-unified w-4 h-4"></i></span> Conformité garantie</p>
-            <p class="text-[11px] md:text-xs text-slate-400 pl-10">Interactions supervisées et protection contre la fraude.</p>
+            <p class="font-bold text-slate-800 flex items-center gap-2 text-sm md:text-base"><span class="w-8 h-8 rounded-lg bg-[#2470ef]/10 flex items-center justify-center group-hover:bg-[#2470ef]/20 transition-colors"><i data-lucide="repeat" class="icon-unified w-4 h-4"></i></span> Engagement durable</p>
+            <p class="text-[11px] md:text-xs text-slate-400 pl-10">Une relation qui ne s'arrête pas à la livraison.</p>
           </div>
         </div>
       </div>
@@ -920,12 +928,12 @@ var DB = {
 };
 
 // ============================================================
-// 2. ONGLETS
+// 2. ONGLETS (renommés)
 // ============================================================
 var tabsData = [
   { id: 'match', label: 'Match & Buy', icon: 'shopping-bag' },
-  { id: 'secondlife', label: 'Seconde Main', icon: 'camera' },
-  { id: 'croute', label: 'C-Route Dispatch', icon: 'truck' },
+  { id: 'secondlife', label: 'Reprise', icon: 'camera' },
+  { id: 'croute', label: 'Suivi de commande', icon: 'truck' },
   { id: 'safereturn', label: 'SafeReturn', icon: 'shield-check' }
 ];
 var tabsWrapper = document.getElementById('tabs-wrapper');
@@ -998,7 +1006,7 @@ function safeCreateIcons() {
 var explainerMap = {
   match: "L'assistant IA guide le client vers le produit parfait, propose des comparaisons claires et gère le panier d'achat.",
   secondlife: "La Vision IA de comete.ai examine l'intégrité de l'appareil pour produire une estimation certifiée.",
-  croute: "Optimisation dynamique du dernier kilomètre. Simulez un incident pour observer le re‑routage IA instantané.",
+  croute: "Suivez en temps réel l'avancement de votre commande via des notifications RCS.",
   safereturn: "L'IA SafeReturn de comete.ai examine pixellairement l'intégrité des documents et colis réclamés pour débusquer les fraudes."
 };
 
@@ -1010,8 +1018,158 @@ function updateLabExplainer(simId) {
 }
 
 // ============================================================
-// 5. SIMULATEUR : MATCH & BUY
+// 5. INJECTION DES 5 CARTES (3 + 2 centrées)
 // ============================================================
+function injectModules() {
+  var retailSolutions = [
+    {
+      num: "01",
+      title: "Découverte & Conseil Produit",
+      icon: "compass",
+      badge: "CONSEIL",
+      challenge: "Il a été découvert que les produits aux spécifications complexes (électroménager, high-tech, bricolage, ameublement...) le client hésite, compare mal et abandonne. Le conseiller humain ne peut pas être disponible à chaque instant.",
+      solutions: [
+        "<b>Conseiller IA conversationnel :</b> pose les bonnes questions sur l'usage, propose les produits adaptés, compare les caractéristiques et explique les différences — jusqu'à l'ajout au panier. (Exemple : pour l'achat d'un PC, l'IA qualifie l'usage, suggère trois modèles, les compare et guide vers le bon choix.)",
+        "<b>Assistant de conception IA :</b> à partir d'une photo ou d'un plan envoyé par le client, l'IA propose un aménagement personnalisé en s'appuyant sur le catalogue (ex. cuisine, salon). Un appel de validation peut être déclenché, et un rendez-vous en point de vente qualifié est proposé si le client souhaite aller plus loin."
+      ],
+      benefices: "Client : accompagnement personnalisé, même sur des produits complexes.<br>E‑commerçant : réduction des paniers abandonnés, meilleure conversion, rendez-vous en magasin qualifiés.",
+      badgeBg: "kpi-blue",
+      numBg: "kpi-blue",
+      iconColor: "text-blue-500",
+      borderClass: "border-t-blue-500",
+      hoverGlow: "hover:shadow-[0_20px_50px_rgba(59,130,246,0.35)] hover:border-blue-500/40",
+      image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&q=80&w=800"
+    },
+    {
+      num: "02",
+      title: "Achat & Souscription",
+      icon: "shopping-bag",
+      badge: "CONVERSION",
+      challenge: "Le passage à l'acte reste un moment de friction : hésitation de dernière minute, options mal comprises, parcours de commande abandonné avant la finalisation.",
+      solutions: [
+        "<b>Bot conversationnel :</b> lève les dernières objections, rassure sur les garanties et conditions de retour, et accompagne à la validation de commande.",
+        "<b>Push contextuel en temps réel :</b> suggère les accessoires, extensions de garantie ou services complémentaires au bon moment du parcours."
+      ],
+      benefices: "Client : expérience d'achat fluide et rassurante.<br>E‑commerçant : hausse du panier moyen et du taux de finalisation.",
+      badgeBg: "kpi-green",
+      numBg: "kpi-green",
+      iconColor: "text-emerald-500",
+      borderClass: "border-t-emerald-500",
+      hoverGlow: "hover:shadow-[0_20px_50px_rgba(16,185,129,0.35)] hover:border-emerald-500/40",
+      image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=800"
+    },
+    {
+      num: "03",
+      title: "Prise en main & Usage",
+      icon: "graduation-cap",
+      badge: "CONVERSION",
+      challenge: "Une part significative des retours et des contacts SAV est liée non à un défaut produit, mais à une mauvaise utilisation. L'e-commerçant subit un coût opérationnel évitable.",
+      solutions: [
+        "<b>Dispositif de formation proactive post-achat :</b> déclenchement automatique après livraison de guides interactifs, tutoriels vidéo et assistances pas-à-pas adaptés au produit acheté et au profil du client.",
+        "<b>Sessions de formation en live :</b> pour les produits à prise en main complexe, possibilité d'une session d'accompagnement ciblée avec un conseiller, à distance."
+      ],
+      benefices: "Client : satisfaction dès les premières utilisations, autonomie renforcée.<br>E‑commerçant : réduction des retours évitables et des contacts SAV de premier niveau.",
+      badgeBg: "kpi-cyan",
+      numBg: "kpi-cyan",
+      iconColor: "text-cyan-500",
+      borderClass: "border-t-cyan-500",
+      hoverGlow: "hover:shadow-[0_20px_50px_rgba(6,182,212,0.35)] hover:border-cyan-500/40",
+      image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800"
+    },
+    {
+      num: "04",
+      title: "SAV, Litiges & Reprise",
+      icon: "shield-alert",
+      badge: "RISK MANAGEMENT",
+      challenge: "Les réclamations pour colis endommagé ou produit défectueux reposent trop souvent sur du déclaratif non vérifiable. Parallèlement, les parcours de reprise ou de revente restent longs et peu engageants pour le client.",
+      solutions: [
+        "<b>Vérification visuelle IA des litiges :</b> détection automatique des images retouchées, analyse des photos soumises par le client selon des critères définis, déclenchement d'un appel vidéo de contrôle pour certifier les déclarations avant traitement.",
+        "<b>Estimation instantanée à la reprise :</b> à partir de photos ou d'une vidéo envoyées par le client, combinées à des données déclaratives (date d'achat, usage, état), l'IA évalue l'état esthétique et fonctionnel du produit et propose une valeur de reprise immédiate. Un appel vidéo de vérification peut compléter le parcours."
+      ],
+      benefices: "Client : parcours de litige ou de reprise rapide et transparent.<br>E‑commerçant : réduction des pertes liées aux fraudes, accélération du reconditionnement et valorisation de l'économie circulaire.",
+      badgeBg: "kpi-rose",
+      numBg: "kpi-rose",
+      iconColor: "text-rose-500",
+      borderClass: "border-t-rose-500",
+      hoverGlow: "hover:shadow-[0_20px_50px_rgba(244,63,94,0.35)] hover:border-rose-500/40",
+      image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=800"
+    },
+    {
+      num: "05",
+      title: "Fidélisation & Cycle de vie produit",
+      icon: "repeat",
+      badge: "FIDÉLISATION",
+      challenge: "La relation client s'arrête trop souvent à la livraison. Pourtant, c'est après l'achat que se jouent la fidélité, la recommandation et la valeur à long terme.",
+      solutions: [
+        "<b>Concierge IA personnel (WhatsApp / RCS) :</b> connaît les équipements possédés par le client, pousse des conseils d'entretien et d'usage au bon moment du cycle de vie, anticipe les commandes de consommables et détecte les opportunités d'upsell pertinentes.",
+        "<b>Échanges proactifs ciblés :</b> alertes de maintenance, rappels de garantie, suggestions de renouvellement ou d'upgrade contextualisés selon l'usage réel."
+      ],
+      benefices: "Client : relation proactive et personnalisée, produits mieux entretenus, pannes évitées.<br>E‑commerçant : allongement de la durée de vie des produits, réduction des interventions SAV, création de valeur continue après l'achat, fidélité renforcée.",
+      badgeBg: "kpi-purple",
+      numBg: "kpi-purple",
+      iconColor: "text-purple-500",
+      borderClass: "border-t-purple-500",
+      hoverGlow: "hover:shadow-[0_20px_50px_rgba(168,85,247,0.35)] hover:border-purple-500/40",
+      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800"
+    }
+  ];
+
+  function buildCardHTML(s) {
+    var solutionsHtml = s.solutions.map(function(sol) {
+      return '<div class="flex items-start gap-1.5"><span class="text-[#2470ef] mt-0.5">•</span><p class="leading-relaxed font-sans">' + sol + '</p></div>';
+    }).join('');
+
+    return `
+    <div class="module-card rounded-[40px] overflow-hidden shadow-xl reveal-up transition-all duration-500 border-t-4 ${s.borderClass} ${s.hoverGlow} text-left font-sans bg-white flex flex-col h-full">
+      <div class="h-44 relative overflow-hidden bg-slate-950">
+        <img src="${s.image}" class="w-full h-full object-cover opacity-35 transition-transform duration-[6s] hover:scale-105" />
+        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/95 via-slate-900/40 to-transparent"></div>
+        <span class="absolute top-6 left-6 px-4 py-1.5 rounded-full text-[9px] font-black uppercase tracking-widest text-white ${s.badgeBg}">${s.badge}</span>
+        <div class="absolute bottom-6 right-6 w-12 h-12 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center">
+          <i data-lucide="${s.icon}" class="w-6 h-6 ${s.iconColor}"></i>
+        </div>
+      </div>
+      <div class="p-6 md:p-8 flex-grow flex flex-col justify-between bg-white text-left font-sans">
+        <div class="space-y-4">
+          <div class="flex items-center gap-3 mb-5">
+            <span class="w-10 h-10 rounded-xl flex items-center justify-center font-extrabold text-sm text-white ${s.numBg}">${s.num}</span>
+            <h3 class="text-base md:text-lg font-black text-[#002d62] leading-tight">${s.title}</h3>
+          </div>
+          <div>
+            <p class="font-black uppercase text-[#2470ef] text-[9px] tracking-widest mb-1">LE DÉFI</p>
+            <p class="text-slate-500 text-xs font-light leading-relaxed mb-4">${s.challenge}</p>
+          </div>
+          <div>
+            <p class="font-black uppercase text-[#2470ef] text-[9px] tracking-widest mb-1.5">NOS SOLUTIONS</p>
+            <div class="space-y-2 text-slate-700 text-xs font-medium">${solutionsHtml}</div>
+          </div>
+          <div>
+            <p class="font-black uppercase text-[#2470ef] text-[9px] tracking-widest mb-1.5">BÉNÉFICES</p>
+            <p class="text-slate-600 text-xs font-medium leading-relaxed">${s.benefices}</p>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  var topContainer = document.getElementById('solutions-retail-grid-top');
+  if (topContainer) {
+    topContainer.innerHTML = retailSolutions.slice(0, 3).map(function(s) { return buildCardHTML(s); }).join('');
+  }
+
+  var bottomContainer = document.getElementById('solutions-retail-grid-bottom');
+  if (bottomContainer) {
+    bottomContainer.innerHTML = retailSolutions.slice(3).map(function(s) { return buildCardHTML(s); }).join('');
+  }
+
+  safeCreateIcons();
+}
+
+// ============================================================
+// 6. SIMULATEURS MIS À JOUR
+// ============================================================
+
+// ---- 6.1 MATCH & BUY (proactif, 1 seule salutation) ----
 function renderMatch() {
   var clientId = 'client_match_1';
   var client = DB.getClient('match', clientId);
@@ -1030,26 +1188,10 @@ function renderMatch() {
     { name: "ASUS ROG Strix G16", price: 2199, category: "gamer" }
   ];
   var crossSellOffers = {
-    'creatif': {
-      product: 'Souris MX Master 3S',
-      price: 99,
-      pitch: '🚀 Optimisez votre workflow créatif : précision 8K, scroll ultra-fluide, autonomie 70 jours. Réduisez de 30% vos clics inutiles.'
-    },
-    'etudiant': {
-      product: 'Housse de transport renforcée',
-      price: 45,
-      pitch: '🎒 Protégez votre investissement avec une housse antichoc étanche, garantie 2 ans.'
-    },
-    'pro': {
-      product: 'Hub USB-C 7-en-1',
-      price: 79,
-      pitch: '💼 Connectez tout votre écosystème : HDMI 4K, Ethernet Gigabit, 3 ports USB 3.0. Augmentez votre débit de 500%.'
-    },
-    'gamer': {
-      product: 'Casque gaming surround 7.1',
-      price: 129,
-      pitch: '🎧 Son immersif 3D, microphone noise-cancelling, latence < 20 ms pour une réactivité sans faille.'
-    }
+    'creatif': { product: 'Souris MX Master 3S', price: 99, pitch: 'Optimisez votre workflow créatif : précision 8K, scroll ultra-fluide, autonomie 70 jours.' },
+    'etudiant': { product: 'Housse de transport renforcée', price: 45, pitch: 'Protégez votre investissement avec une housse antichoc étanche, garantie 2 ans.' },
+    'pro': { product: 'Hub USB-C 7-en-1', price: 79, pitch: 'Connectez tout votre écosystème : HDMI 4K, Ethernet Gigabit, 3 ports USB 3.0.' },
+    'gamer': { product: 'Casque gaming surround 7.1', price: 129, pitch: 'Son immersif 3D, microphone noise-cancelling, latence < 20 ms.' }
   };
 
   function updateDashboard() {
@@ -1067,11 +1209,11 @@ function renderMatch() {
     safeSetText('m-total', total + '€');
     var nextEl = document.getElementById('m-next-action');
     if (nextEl) {
-      if (step === 1) nextEl.textContent = "L'IA va demander l'usage principal";
-      else if (step === 2) nextEl.textContent = "L'IA va proposer un produit et attendre l'ajout au panier";
-      else if (step === 3) nextEl.textContent = "L'IA va proposer la finalisation de la commande";
-      else if (step === 4) nextEl.textContent = "L'IA va proposer un cross‑sell (si applicable)";
-      else nextEl.textContent = "Simulation terminée";
+      if (step === 1) nextEl.textContent = "🔍 L'IA analyse votre besoin pour vous recommander le produit idéal.";
+      else if (step === 2) nextEl.textContent = "💡 L'IA prépare une proposition de produit adapté à votre usage.";
+      else if (step === 3) nextEl.textContent = "🛒 L'IA va vous proposer la finalisation de votre commande.";
+      else if (step === 4) nextEl.textContent = "🎯 L'IA vous suggère un accessoire complémentaire pour optimiser votre équipement.";
+      else nextEl.textContent = "✅ Simulation terminée – Merci d'avoir testé comete.ai.";
     }
     safeCreateIcons();
   }
@@ -1106,7 +1248,7 @@ function renderMatch() {
       var product = products.find(function(p) { return p.category === selectedUsage; });
       if (product) {
         addImportantSummary('Choix : ' + selectedUsage);
-        addBot('Bonjour ' + firstName + ', merci de nous contacter. Je vous recommande le ' + product.name + ' à ' + product.price + '€. Souhaitez-vous l\'ajouter à votre panier ?');
+        addBot('Je vous recommande le ' + product.name + ' à ' + product.price + '€. Souhaitez-vous l\'ajouter à votre panier ?');
         replaceSuggestions([
           { label: "✅ Ajouter au panier", value: "add" },
           { label: "🔄 Recommencer", value: "reset" }
@@ -1137,7 +1279,7 @@ function renderMatch() {
         var offer = crossSellOffers[selectedUsage];
         if (offer) {
           step = 4;
-          addBot('💡 ' + firstName + ', je vous propose d\'ajouter <strong>' + offer.product + '</strong> (' + offer.price + '€) à votre commande.<br><span class="text-xs">' + offer.pitch + '</span>');
+          addBot('💡 ' + firstName + ', je vous propose d\'ajouter <strong>' + offer.product + '</strong> (' + offer.price + '€) à votre commande. ' + offer.pitch);
 
           var recosDiv = document.getElementById('m-suggestions');
           if (recosDiv) {
@@ -1195,8 +1337,9 @@ function renderMatch() {
     step = 1; selectedUsage = null; cart = []; totalVisits = 0; conversions = 0;
     var chatDiv = document.getElementById('m-chat');
     if (chatDiv) chatDiv.innerHTML = '';
-    addUser('Bonjour ' + firstName + ', je recherche un ordinateur professionnel.');
-    addBot('Bonjour ' + firstName + ' ! Pour vous orienter, quel est votre usage principal ?');
+    // Message d'ouverture proactif unique
+    addUser('Bonjour ' + firstName + ', je suis à la recherche d\'un ordinateur professionnel.');
+    addBot('Bonjour ' + firstName + ', je vois que vous êtes à la recherche d\'un ordinateur professionnel. Pour mieux vous orienter, quel est votre usage principal ?');
     replaceSuggestions([
       { label: "🎨 Créatif", value: "creatif" },
       { label: "📚 Étudiant", value: "etudiant" },
@@ -1228,7 +1371,7 @@ function renderMatch() {
       <div class="p-4 flex-1 overflow-y-auto">
         <div class="next-action-box">
           <div class="label">🤖 Prochaine action IA</div>
-          <div class="action" id="m-next-action">En attente du choix de l'utilisateur</div>
+          <div class="action" id="m-next-action">🔍 L'IA analyse votre besoin...</div>
         </div>
         <div class="grid grid-cols-2 gap-4">
           <div class="kpi-card"><div class="kpi-label">Visites</div><div class="kpi-value" id="m-dash-visits">0</div></div>
@@ -1254,14 +1397,24 @@ function renderMatch() {
   setTimeout(function() { safeCreateIcons(); reset(); }, 100);
 }
 
-// ============================================================
-// 6. SIMULATEUR : SECONDE MAIN
-// ============================================================
+// ---- 6.2 REPRISE (ex-Seconde Main) ----
 function renderSecondLife() {
   var clientId = 'client_sl_1';
   var client = DB.getClient('secondlife', clientId);
   var firstName = client.firstName;
-  var state = { step:0, photoSent:false, scanCompleted:false, totalEstimations:0, acceptedOffers:0, lastEstimation:0, lastConfidence:0, isProcessing:false, timerId:null };
+  var state = {
+    step: 0,
+    selectedCondition: null,
+    detailsGiven: false,
+    photoSent: false,
+    scanCompleted: false,
+    totalEstimations: 0,
+    acceptedOffers: 0,
+    lastEstimation: 0,
+    lastConfidence: 0,
+    isProcessing: false,
+    timerId: null
+  };
 
   function updateDashboard() {
     var acceptRate = state.totalEstimations > 0 ? Math.round((state.acceptedOffers / state.totalEstimations) * 100) : 0;
@@ -1280,17 +1433,20 @@ function renderSecondLife() {
     if (statusEl) {
       if (state.scanCompleted) { statusEl.textContent = '✅ Scan terminé'; statusEl.style.color = '#10b981'; }
       else if (state.photoSent) { statusEl.textContent = '🔍 Analyse en cours...'; statusEl.style.color = '#f59e0b'; }
-      else { statusEl.textContent = '⏳ En attente'; statusEl.style.color = '#64748b'; }
+      else { statusEl.textContent = '⏳ En attente des infos'; statusEl.style.color = '#64748b'; }
     }
     var nextEl = document.getElementById('sl-next-action');
     if (nextEl) {
-      if (state.scanCompleted) nextEl.textContent = "Proposer l'offre d'achat";
-      else if (state.photoSent) nextEl.textContent = "Analyse en cours...";
-      else nextEl.textContent = "En attente de l'envoi de la photo";
+      if (state.scanCompleted) nextEl.textContent = "💰 Proposition de rachat prête – acceptez ou refusez l'offre.";
+      else if (state.photoSent) nextEl.textContent = "🧠 L'IA analyse en profondeur l'état de l'appareil…";
+      else if (state.detailsGiven) nextEl.textContent = "📸 Envoyez une photo pour confirmer l'état déclaré.";
+      else if (state.selectedCondition) nextEl.textContent = "📝 Précisez la date d'achat, les accessoires inclus, etc.";
+      else nextEl.textContent = "🔍 Précisez l'état du produit (excellent / bon / moyen / mauvais).";
     }
     updateScanPanel();
     safeCreateIcons();
   }
+
   function addBot(text) { addMessage('sl-chat', 'bot', text.replace(/{user}/g, firstName)); }
   function addUser(text, img) { addMessage('sl-chat', 'user', text, img); DB.save(); }
   function addImportantSummary(summary) { client.history.push({ important: true, summary: summary }); DB.save(); }
@@ -1303,7 +1459,7 @@ function renderSecondLife() {
         <div class="image-placeholder w-full flex flex-col items-center justify-center text-center p-4">
           <i data-lucide="camera" class="w-12 h-12 text-blue-400 mb-2"></i>
           <p class="text-slate-600 text-sm font-semibold">En attente de la photo</p>
-          <p class="text-slate-400 text-xs">Envoyez une photo pour l'analyse</p>
+          <p class="text-slate-400 text-xs">Envoyez une photo pour finaliser l'estimation</p>
         </div>`;
     } else {
       var overlay = !state.scanCompleted ? '<div class="absolute inset-0 bg-black/30 z-10 flex items-center justify-center"><span class="text-white text-sm font-semibold">📸 Analyse en cours...</span></div>' : '';
@@ -1333,7 +1489,7 @@ function renderSecondLife() {
       client.purchases.push({ name: 'iPhone 13 Pro (reconditionné)', price: 425 });
       client.totalSpent += 425;
       addImportantSummary('Offre acceptée : iPhone 13 Pro');
-      addBot('🎉 Offre acceptée ' + firstName + ' ! L\'étiquette d\'expédition vous sera envoyée par email sous 2h.');
+      addBot('🎉 Offre de reprise acceptée ! Nous vous enverrons les modalités d\'envoi par email sous 2h.');
       clearSuggestions('sl-suggestions');
       addResetButton('sl-suggestions', reset);
       updateDashboard();
@@ -1375,36 +1531,82 @@ function renderSecondLife() {
   }
 
   function sendPhoto() {
-    if (state.step !== 0 || state.isProcessing) return;
+    if (state.step !== 1 || state.isProcessing) return;
     state.isProcessing = true;
     var imageUrl = 'https://cdn.convrrt.com/apps/sendinblue/6761372/5b4c26c6-34de-4125-879b-4b13a02b2154.png';
     addUser("📸 Photo envoyée", imageUrl);
     state.photoSent = true;
     state.scanCompleted = false;
-    state.step = 1;
+    state.step = 2;
     updateDashboard();
     addBot('Merci ' + firstName + ' ! L\'analyse de votre iPhone 13 Pro est en cours...');
     if (state.timerId) clearTimeout(state.timerId);
     state.timerId = setTimeout(function() { completeScan(); }, 3000);
   }
 
-  function reset() {
-    if (state.timerId) { clearTimeout(state.timerId); state.timerId = null; }
-    client.history = []; client.purchases = []; client.totalSpent = 0; DB.save();
-    state.step = 0; state.photoSent = false; state.scanCompleted = false;
-    state.totalEstimations = 0; state.acceptedOffers = 0; state.lastEstimation = 0; state.lastConfidence = 0;
-    state.isProcessing = false;
-    var chatDiv = document.getElementById('sl-chat');
-    if (chatDiv) chatDiv.innerHTML = '';
-    addBot('Bonjour ' + firstName + ' ! Pour une estimation précise, envoyez-moi une photo de votre iPhone 13 Pro.');
+  function handleConditionChoice(condition) {
+    if (state.step !== 0 || state.isProcessing) return;
+    state.selectedCondition = condition;
+    state.step = 1;
+    addUser("État : " + condition);
+    addBot('Merci ' + firstName + '. Pouvez-vous préciser la date d\'achat, les accessoires inclus (chargeur, câble, etc.) et d\'éventuels défauts ?');
+    // Suggestion de détails
     var div = document.getElementById('sl-suggestions');
     if (div) {
       div.innerHTML = '';
-      var sendBtn = document.createElement('div');
-      sendBtn.className = 'suggestion-chip';
-      sendBtn.innerText = '📸 Envoyer la photo';
-      sendBtn.onclick = sendPhoto;
-      div.appendChild(sendBtn);
+      var detailsBtn = document.createElement('div');
+      detailsBtn.className = 'suggestion-chip';
+      detailsBtn.innerText = '📝 Acheté il y a 2 ans, chargeur inclus, micro-rayures sur l\'écran';
+      detailsBtn.onclick = function() {
+        if (state.isProcessing) return;
+        state.detailsGiven = true;
+        addUser('Acheté il y a 2 ans, chargeur inclus, micro-rayures sur l\'écran.');
+        addBot('Parfait ' + firstName + '. Pour finaliser l\'estimation, envoyez-nous une photo du produit (vue avant/arrière).');
+        state.step = 1; // on reste à l'étape 1 mais on passe à l'envoi de photo
+        // On remplace les suggestions par le bouton d'envoi de photo
+        var div2 = document.getElementById('sl-suggestions');
+        if (div2) {
+          div2.innerHTML = '';
+          var sendBtn = document.createElement('div');
+          sendBtn.className = 'suggestion-chip';
+          sendBtn.innerText = '📸 Envoyer la photo';
+          sendBtn.onclick = sendPhoto;
+          div2.appendChild(sendBtn);
+        }
+        updateDashboard();
+      };
+      div.appendChild(detailsBtn);
+    }
+    updateDashboard();
+  }
+
+  function reset() {
+    if (state.timerId) { clearTimeout(state.timerId); state.timerId = null; }
+    client.history = []; client.purchases = []; client.totalSpent = 0; DB.save();
+    state.step = 0;
+    state.selectedCondition = null;
+    state.detailsGiven = false;
+    state.photoSent = false;
+    state.scanCompleted = false;
+    state.totalEstimations = 0;
+    state.acceptedOffers = 0;
+    state.lastEstimation = 0;
+    state.lastConfidence = 0;
+    state.isProcessing = false;
+    var chatDiv = document.getElementById('sl-chat');
+    if (chatDiv) chatDiv.innerHTML = '';
+    addBot('Bonjour ' + firstName + ', vous souhaitez revendre votre iPhone 13 Pro. Pour évaluer sa valeur, précisez son état : excellent, bon, moyen ou mauvais.');
+    var div = document.getElementById('sl-suggestions');
+    if (div) {
+      div.innerHTML = '';
+      var states = ['Excellent', 'Bon', 'Moyen', 'Mauvais'];
+      states.forEach(function(s) {
+        var chip = document.createElement('div');
+        chip.className = 'suggestion-chip';
+        chip.innerText = s;
+        chip.onclick = function() { handleConditionChoice(s); };
+        div.appendChild(chip);
+      });
     }
     updateDashboard();
   }
@@ -1414,7 +1616,7 @@ function renderSecondLife() {
     <div class="glass-card">
       <div class="sim-header">
         <i data-lucide="camera"></i>
-        <h2>Seconde Main — Client</h2>
+        <h2>Reprise — Client</h2>
       </div>
       <div class="p-4 flex-1 flex flex-col">
         <div class="whatsapp-container" id="sl-chat" style="height: 700px;"></div>
@@ -1429,13 +1631,13 @@ function renderSecondLife() {
       <div class="p-4 flex-1 overflow-y-auto">
         <div class="next-action-box">
           <div class="label">🤖 Prochaine action IA</div>
-          <div class="action" id="sl-next-action">En attente de l'envoi de la photo</div>
+          <div class="action" id="sl-next-action">🔍 Précisez l'état du produit (excellent / bon / moyen / mauvais).</div>
         </div>
         <div class="scan-panel mb-4" id="sl-scan-panel">
           <div class="image-placeholder w-full flex flex-col items-center justify-center text-center p-4">
             <i data-lucide="camera" class="w-12 h-12 text-blue-400 mb-2"></i>
             <p class="text-slate-600 text-sm font-semibold">En attente de la photo</p>
-            <p class="text-slate-400 text-xs">Envoyez une photo pour l'analyse</p>
+            <p class="text-slate-400 text-xs">Envoyez une photo pour finaliser l'estimation</p>
           </div>
         </div>
         <div class="grid grid-cols-2 gap-4">
@@ -1468,111 +1670,77 @@ function renderSecondLife() {
   setTimeout(function() { safeCreateIcons(); reset(); }, 100);
 }
 
-// ============================================================
-// 7. SIMULATEUR : C-ROUTE
-// ============================================================
+// ---- 6.3 SUIVI DE COMMANDE (ex-C-Route) ----
 function renderCRoute() {
   var clientId = 'client_cr_1';
   var client = DB.getClient('croute', clientId);
   var firstName = client.firstName;
-  var step = 1, isProcessing = false;
-  var totalCO2 = 24 * 0.181, totalKm = 24, incidents = 1, satisfaction = 85, deliveries = 12, optimizations = 0;
+
+  var step = 1;
+  var notifications = [
+    "📦 Votre commande #CR-2026-001 est en cours de préparation.",
+    "🚚 Votre colis a été expédié par notre transporteur.",
+    "🔄 Votre colis est en transit – livraison prévue demain après-midi.",
+    "⚠️ Retard de livraison dû à des conditions météo – nouveau délai : +1 jour.",
+    "✅ Votre colis a été livré avec succès."
+  ];
+  var currentNotificationIndex = 0;
+  var isProcessing = false;
+  var timerId = null;
 
   function updateDashboard() {
-    safeSetText('cr-dash-co2', totalCO2.toFixed(1) + ' kg');
-    safeSetText('cr-dash-km', totalKm + ' km');
-    safeSetText('cr-dash-incidents', incidents);
-    safeSetText('cr-dash-satisfaction', satisfaction + '%');
-    safeSetWidth('cr-dash-satisfactionBar', satisfaction + '%');
-    safeSetText('cr-dash-deliveries', deliveries);
-    safeSetText('cr-dash-optimizations', optimizations);
-    safeSetText('cr-distance', totalKm);
-    safeSetText('cr-co2', totalCO2.toFixed(1));
-    var nextEl = document.getElementById('cr-next-action');
-    if (nextEl) {
-      if (step === 1) nextEl.textContent = "Proposer l'optimisation de la tournée";
-      else if (step === 2) nextEl.textContent = "Attendre la validation du client";
-      else nextEl.textContent = "Simulation terminée";
-    }
+    safeSetText('cr-dash-status', notifications[currentNotificationIndex]);
     safeCreateIcons();
   }
+
   function addBot(text) { addMessage('cr-chat', 'bot', text.replace(/{user}/g, firstName)); }
-  function addUser(text) { addMessage('cr-chat', 'user', text); DB.save(); }
   function addImportantSummary(summary) { client.history.push({ important: true, summary: summary }); DB.save(); }
 
-  function restoreSuggestions() {
-    var div = document.getElementById('cr-suggestions');
-    if (!div) return;
-    div.innerHTML = '';
-    if (step === 1) {
-      var opt = document.createElement('div');
-      opt.className = 'suggestion-chip';
-      opt.innerText = '🔄 Optimiser la tournée';
-      opt.onclick = reroute;
-      div.appendChild(opt);
-    } else if (step === 2) {
-      var confirm = document.createElement('div');
-      confirm.className = 'suggestion-chip';
-      confirm.innerText = '✅ Valider la tournée';
-      confirm.onclick = function() {
-        addUser("Valider la tournée");
-        var newCO2 = 18 * 0.181;
-        totalCO2 = newCO2; totalKm = 18; incidents = 0; satisfaction = 98; deliveries = 12; optimizations++;
-        addImportantSummary('Optimisation : 18 km, ' + newCO2.toFixed(1) + ' kg CO₂');
-        updateDashboard();
-        var path = document.getElementById('new-route-path');
-        if (path) path.setAttribute('stroke', '#3b82f6');
-        addBot('✅ Tournée validée ' + firstName + ' ! Économie : ' + (4.344 - newCO2).toFixed(1) + ' kg CO₂ évités.');
-        clearSuggestions('cr-suggestions');
-        addResetButton('cr-suggestions', reset);
-        step = 3;
-        updateDashboard();
-      };
-      div.appendChild(confirm);
-      var resetChip = document.createElement('div');
-      resetChip.className = 'suggestion-chip';
-      resetChip.innerText = '🔄 Recommencer';
-      resetChip.onclick = reset;
-      div.appendChild(resetChip);
-    } else if (step === 3) {
-      addResetButton('cr-suggestions', reset);
-    }
-    safeCreateIcons();
-  }
-
-  function reroute() {
-    if (step !== 1 || isProcessing) return;
+  function nextStep() {
+    if (isProcessing || currentNotificationIndex >= notifications.length - 1) return;
     isProcessing = true;
-    addUser("🔄 Optimiser la tournée");
-    addBot('🔍 Recherche d’un itinéraire plus efficace ' + firstName + '...');
-    clearSuggestions('cr-suggestions');
-    setTimeout(function() {
-      var newCO2 = 18 * 0.181;
-      addBot('🟢 Nouvelle tournée : 18 km (' + newCO2.toFixed(1) + ' kg CO₂). Validez-vous ?');
-      step = 2;
-      restoreSuggestions();
-      isProcessing = false;
-    }, 2000);
+    currentNotificationIndex++;
+    var msg = notifications[currentNotificationIndex];
+    addBot(msg);
+    addImportantSummary(msg);
+    updateDashboard();
+    isProcessing = false;
+    if (currentNotificationIndex >= notifications.length - 1) {
+      // Fin de la simulation, on ajoute un bouton reset
+      var div = document.getElementById('cr-suggestions');
+      if (div) {
+        div.innerHTML = '';
+        addResetButton('cr-suggestions', reset);
+      }
+    }
   }
 
   function reset() {
+    if (timerId) { clearTimeout(timerId); timerId = null; }
     client.history = []; client.purchases = []; client.totalSpent = 0; DB.save();
-    step = 1; totalCO2 = 24 * 0.181; totalKm = 24; incidents = 1; satisfaction = 85; deliveries = 12; optimizations = 0; isProcessing = false;
-    updateDashboard();
-    var path = document.getElementById('new-route-path');
-    if (path) path.setAttribute('stroke', 'none');
+    currentNotificationIndex = 0;
+    isProcessing = false;
     var chatDiv = document.getElementById('cr-chat');
     if (chatDiv) chatDiv.innerHTML = '';
-    addBot('Bonjour ' + firstName + ', un incident est signalé : technicien J. Martin en panne. Lancer l\'optimisation ?');
-    restoreSuggestions();
+    addBot('Bonjour ' + firstName + ', votre commande #CR-2026-001 est en cours de préparation.');
+    var div = document.getElementById('cr-suggestions');
+    if (div) {
+      div.innerHTML = '';
+      var nextBtn = document.createElement('div');
+      nextBtn.className = 'suggestion-chip';
+      nextBtn.innerText = '📨 Recevoir la prochaine notification';
+      nextBtn.onclick = nextStep;
+      div.appendChild(nextBtn);
+    }
+    updateDashboard();
   }
 
   var html = `
   <div class="grid md:grid-cols-2 gap-6 fade-in">
     <div class="glass-card">
       <div class="sim-header">
-        <i data-lucide="map-pin"></i>
-        <h2>C-Route — Client</h2>
+        <i data-lucide="truck"></i>
+        <h2>Suivi de commande — Client</h2>
       </div>
       <div class="p-4 flex-1 flex flex-col">
         <div class="whatsapp-container" id="cr-chat" style="height: 700px;"></div>
@@ -1586,44 +1754,11 @@ function renderCRoute() {
       </div>
       <div class="p-4 flex-1 overflow-y-auto">
         <div class="next-action-box">
-          <div class="label">🤖 Prochaine action IA</div>
-          <div class="action" id="cr-next-action">Proposer l'optimisation de la tournée</div>
-        </div>
-        <div class="map-panel">
-          <svg viewBox="0 0 700 400" class="w-full rounded-2xl bg-slate-50">
-            <rect width="700" height="400" fill="#f8fafc" rx="16"/>
-            <path d="M 0,200 Q 200,180 350,210 T 700,190" stroke="#cbd5e1" stroke-width="8" fill="none" opacity="0.5"/>
-            <text x="320" y="180" font-size="9" fill="#475569">La Seine</text>
-            <circle cx="120" cy="240" r="8" fill="#10b981" stroke="white"/><text x="100" y="230" font-size="8">Dépôt</text>
-            <circle cx="280" cy="140" r="8" fill="#f59e0b" stroke="white"/><text x="260" y="130" font-size="8">Client A</text>
-            <circle cx="480" cy="170" r="10" fill="#ef4444" stroke="white" class="animate-pulse"/><text x="460" y="160" font-size="8" fill="#ef4444">⚠️ Incident</text>
-            <circle cx="580" cy="310" r="8" fill="#3b82f6" stroke="white"/><text x="560" y="300" font-size="8">Client B</text>
-            <circle cx="450" cy="330" r="8" fill="#8b5cf6" stroke="white"/><text x="430" y="320" font-size="8">Client C</text>
-            <path d="M 120,240 L 280,140 L 480,170 L 580,310 L 450,330" stroke="#94a3b8" stroke-width="3" fill="none" stroke-dasharray="5,5"/>
-            <path id="new-route-path" d="M 120,240 L 280,140 L 320,220 L 450,330 L 580,310" stroke="none" stroke-width="3" fill="none"/>
-            <text x="20" y="380" font-size="9">● Dépôt  ● Client  ⚠️ Incident</text>
-          </svg>
-          <div class="mt-3 flex justify-between text-sm font-semibold bg-white/60 p-2 rounded-xl">
-            <span>📏 Distance : <span id="cr-distance">24</span> km</span>
-            <span>🌱 CO₂ : <span id="cr-co2">4.3</span> kg CO₂</span>
-          </div>
-        </div>
-        <div class="grid grid-cols-2 gap-4">
-          <div class="kpi-card"><div class="kpi-label">CO₂ total</div><div class="kpi-value" id="cr-dash-co2">4.3 kg</div></div>
-          <div class="kpi-card"><div class="kpi-label">Km parcourus</div><div class="kpi-value" id="cr-dash-km">24 km</div></div>
-          <div class="kpi-card"><div class="kpi-label">Incidents</div><div class="kpi-value" id="cr-dash-incidents">1</div></div>
-          <div class="kpi-card"><div class="kpi-label">Satisfaction</div><div class="kpi-value" id="cr-dash-satisfaction">85% <span id="cr-dash-trend" class="kpi-trend kpi-trend-up">▲ +0%</span></div></div>
-          <div class="kpi-card"><div class="kpi-label">Livraisons</div><div class="kpi-value" id="cr-dash-deliveries">12</div></div>
-          <div class="kpi-card"><div class="kpi-label">Optimisations</div><div class="kpi-value" id="cr-dash-optimizations">0</div></div>
+          <div class="label">📬 Dernière notification RCS</div>
+          <div class="action" id="cr-dash-status">📦 Votre commande #CR-2026-001 est en cours de préparation.</div>
         </div>
         <div class="mt-4 bg-slate-50 rounded-2xl p-4">
-          <p class="text-sm text-slate-600 font-medium">😊 Taux de satisfaction client</p>
-          <div class="w-full bg-slate-200 rounded-full h-2.5 mt-1">
-            <div class="bg-emerald-500 h-2.5 rounded-full transition-all duration-500" style="width:85%" id="cr-dash-satisfactionBar"></div>
-          </div>
-        </div>
-        <div class="mt-4 bg-slate-50 rounded-2xl p-4">
-          <p class="text-sm text-slate-600 font-medium">📋 Synthèse des optimisations</p>
+          <p class="text-sm text-slate-600 font-medium">📋 Historique des notifications</p>
           <div id="cr-dash-history" class="mt-1 text-xs text-slate-600 max-h-32 overflow-y-auto"></div>
         </div>
       </div>
@@ -1633,14 +1768,24 @@ function renderCRoute() {
   setTimeout(function() { safeCreateIcons(); reset(); }, 100);
 }
 
-// ============================================================
-// 8. SIMULATEUR : SAFERETURN
-// ============================================================
+// ---- 6.4 SAFERETURN (intro avec conditions) ----
 function renderSafeReturn() {
   var clientId = 'client_sr_1';
   var client = DB.getClient('safereturn', clientId);
   var firstName = client.firstName;
-  var state = { step:0, photoSent:false, scanCompleted:false, totalFraudDetected:0, totalClaims:0, savings:0, confidenceLevel:96, isProcessing:false, timerId:null };
+
+  var state = {
+    step: 0,
+    conditionsConfirmed: false,
+    photoSent: false,
+    scanCompleted: false,
+    totalFraudDetected: 0,
+    totalClaims: 0,
+    savings: 0,
+    confidenceLevel: 96,
+    isProcessing: false,
+    timerId: null
+  };
 
   function updateDashboard() {
     var rate = state.totalClaims > 0 ? Math.round((state.totalFraudDetected / state.totalClaims) * 100) : 0;
@@ -1655,17 +1800,19 @@ function renderSafeReturn() {
     if (statusEl) {
       if (state.scanCompleted) { statusEl.textContent = '✅ Scan terminé'; statusEl.style.color = '#10b981'; }
       else if (state.photoSent) { statusEl.textContent = '🔍 Analyse en cours...'; statusEl.style.color = '#f59e0b'; }
-      else { statusEl.textContent = '⏳ En attente'; statusEl.style.color = '#64748b'; }
+      else { statusEl.textContent = '⏳ En attente de photo'; statusEl.style.color = '#64748b'; }
     }
     var nextEl = document.getElementById('sr-next-action');
     if (nextEl) {
-      if (state.scanCompleted) nextEl.textContent = "Proposer la contestation ou l'acceptation";
-      else if (state.photoSent) nextEl.textContent = "Analyse en cours...";
-      else nextEl.textContent = "En attente de l'envoi de la photo";
+      if (state.scanCompleted) nextEl.textContent = "⚖️ Décision IA prise – Proposer la contestation ou l'acceptation.";
+      else if (state.photoSent) nextEl.textContent = "🔬 L'IA examine les pixels et les métadonnées…";
+      else if (state.conditionsConfirmed) nextEl.textContent = "📸 Envoyez la photo du colis pour lancer l'analyse.";
+      else nextEl.textContent = "📋 Confirmez les conditions de reprise.";
     }
     updateScanPanel();
     safeCreateIcons();
   }
+
   function addBot(text) { addMessage('sr-chat', 'bot', text.replace(/{user}/g, firstName)); }
   function addUser(text, img) { addMessage('sr-chat', 'user', text, img); DB.save(); }
   function addImportantSummary(summary) { client.history.push({ important: true, summary: summary }); DB.save(); }
@@ -1678,7 +1825,7 @@ function renderSafeReturn() {
         <div class="image-placeholder w-full flex flex-col items-center justify-center text-center p-4">
           <i data-lucide="package" class="w-12 h-12 text-red-400 mb-2"></i>
           <p class="text-slate-600 text-sm font-semibold">En attente de la photo</p>
-          <p class="text-slate-400 text-xs">Envoyez une photo du colis</p>
+          <p class="text-slate-400 text-xs">Envoyez une photo du colis pour l'analyse</p>
         </div>`;
     } else {
       var overlay = !state.scanCompleted ? '<div class="absolute inset-0 bg-black/30 z-10 flex items-center justify-center"><span class="text-white text-sm font-semibold">📸 Analyse en cours...</span></div>' : '';
@@ -1747,27 +1894,24 @@ function renderSafeReturn() {
   }
 
   function sendPhoto() {
-    if (state.step !== 0 || state.isProcessing) return;
+    if (state.step !== 1 || state.isProcessing) return;
     state.isProcessing = true;
     var imageUrl = 'https://cdn.convrrt.com/apps/sendinblue/6761372/7212f405-ebd9-4255-8af6-08936a033c66.png';
     addUser("📸 Photo du colis envoyée", imageUrl);
     state.photoSent = true;
     state.scanCompleted = false;
-    state.step = 1;
+    state.step = 2;
     updateDashboard();
     if (state.timerId) clearTimeout(state.timerId);
     state.timerId = setTimeout(function() { completeScan(); }, 3000);
   }
 
-  function reset() {
-    if (state.timerId) { clearTimeout(state.timerId); state.timerId = null; }
-    client.history = []; client.purchases = []; client.totalSpent = 0; DB.save();
-    state.step = 0; state.photoSent = false; state.scanCompleted = false;
-    state.totalFraudDetected = 0; state.totalClaims = 0; state.savings = 0; state.confidenceLevel = 96;
-    state.isProcessing = false;
-    var chatDiv = document.getElementById('sr-chat');
-    if (chatDiv) chatDiv.innerHTML = '';
-    addBot('Bonjour ' + firstName + ', un litige a été ouvert pour un colis endommagé. Envoyez-nous une photo.');
+  function confirmConditions() {
+    if (state.isProcessing) return;
+    state.conditionsConfirmed = true;
+    state.step = 1;
+    addUser("Oui, je confirme les conditions.");
+    addBot('Parfait ' + firstName + '. Veuillez maintenant nous envoyer une photo du colis endommagé (vue d\'ensemble et détails).');
     var div = document.getElementById('sr-suggestions');
     if (div) {
       div.innerHTML = '';
@@ -1776,6 +1920,33 @@ function renderSafeReturn() {
       sendBtn.innerText = '📸 Envoyer la photo';
       sendBtn.onclick = sendPhoto;
       div.appendChild(sendBtn);
+    }
+    updateDashboard();
+  }
+
+  function reset() {
+    if (state.timerId) { clearTimeout(state.timerId); state.timerId = null; }
+    client.history = []; client.purchases = []; client.totalSpent = 0; DB.save();
+    state.step = 0;
+    state.conditionsConfirmed = false;
+    state.photoSent = false;
+    state.scanCompleted = false;
+    state.totalFraudDetected = 0;
+    state.totalClaims = 0;
+    state.savings = 0;
+    state.confidenceLevel = 96;
+    state.isProcessing = false;
+    var chatDiv = document.getElementById('sr-chat');
+    if (chatDiv) chatDiv.innerHTML = '';
+    addBot('Bonjour ' + firstName + ', votre litige concernant le colis endommagé a été enregistré. Pour instruire votre dossier, nous devons vérifier quelques conditions : le produit est-il dans son emballage d\'origine ? Possédez-vous la facture ? Le colis a-t-il été ouvert ?');
+    var div = document.getElementById('sr-suggestions');
+    if (div) {
+      div.innerHTML = '';
+      var confirmBtn = document.createElement('div');
+      confirmBtn.className = 'suggestion-chip';
+      confirmBtn.innerText = '✅ Oui, tout est conforme';
+      confirmBtn.onclick = confirmConditions;
+      div.appendChild(confirmBtn);
     }
     updateDashboard();
   }
@@ -1800,13 +1971,13 @@ function renderSafeReturn() {
       <div class="p-4 flex-1 overflow-y-auto">
         <div class="next-action-box">
           <div class="label">🤖 Prochaine action IA</div>
-          <div class="action" id="sr-next-action">En attente de l'envoi de la photo</div>
+          <div class="action" id="sr-next-action">📋 Confirmez les conditions de reprise.</div>
         </div>
         <div class="scan-panel mb-4" id="sr-scan-panel">
           <div class="image-placeholder w-full flex flex-col items-center justify-center text-center p-4">
             <i data-lucide="package" class="w-12 h-12 text-red-400 mb-2"></i>
             <p class="text-slate-600 text-sm font-semibold">En attente de la photo</p>
-            <p class="text-slate-400 text-xs">Envoyez une photo du colis</p>
+            <p class="text-slate-400 text-xs">Envoyez une photo du colis pour l'analyse</p>
           </div>
         </div>
         <div class="grid grid-cols-2 gap-4">
@@ -1838,7 +2009,7 @@ function renderSafeReturn() {
 }
 
 // ============================================================
-// 9. ROUTEUR
+// 7. ROUTEUR
 // ============================================================
 var simMap = {
   match: renderMatch,
@@ -1867,153 +2038,10 @@ tabElements.forEach(function(btn) {
 });
 
 // ============================================================
-// 10. INJECTION DES CARTES MODULES & INIT
+// 8. INIT
 // ============================================================
 document.addEventListener('DOMContentLoaded', function() {
-  var retailSolutions = [
-    {
-      num: "01",
-      title: "Seconde Main & Reprise",
-      icon: "refresh-cw",
-      badge: "CIRCULAIRE",
-      challenge: "Proposer un parcours de reprise de produits d'occasion simple et digne de confiance pour encourager l'économie circulaire.",
-      solutions: [
-        "<b>Estimation en ligne par Vision IA</b> : analyse automatique de l'état esthétique à partir de photos.",
-        "<b>Visioconférence de certification</b> : validation en direct de l'état fonctionnel du produit.",
-        "<b>Rachat instantané</b> : conversion directe de la valeur estimée en carte cadeau."
-      ],
-      badgeBg: "kpi-blue",
-      numBg: "kpi-blue",
-      iconColor: "text-blue-500",
-      borderClass: "border-t-blue-500",
-      hoverGlow: "hover:shadow-[0_20px_50px_rgba(59,130,246,0.35)] hover:border-blue-500/40",
-      image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&q=80&w=800"
-    },
-    {
-      num: "02",
-      title: "Coach & Aide à l'usage",
-      icon: "graduation-cap",
-      badge: "FIDÉLISATION",
-      challenge: "Accompagner l'acheteur dans sa prise en main pour maximiser sa satisfaction et limiter les retours évitables.",
-      solutions: [
-        "<b>Guides interactifs personnalisés</b> : tutoriels pas-à-pas adaptés aux besoins de l'usager.",
-        "<b>Alertes d'entretien intelligentes</b> : notifications basées sur le cycle de vie du produit.",
-        "<b>Sessions de formation en live</b> : webinaires thématiques pour s'approprier l'appareil."
-      ],
-      badgeBg: "kpi-green",
-      numBg: "kpi-green",
-      iconColor: "text-emerald-500",
-      borderClass: "border-t-emerald-500",
-      hoverGlow: "hover:shadow-[0_20px_50px_rgba(16,185,129,0.35)] hover:border-emerald-500/40",
-      image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=800"
-    },
-    {
-      num: "03",
-      title: "SafeReturn : Anti-Fraude",
-      icon: "shield-alert",
-      badge: "RISK MANAGEMENT",
-      challenge: "Protéger les marges d'exploitation face aux abus et fausses déclarations de colis endommagés.",
-      solutions: [
-        "<b>Analyse forensique d'images</b> : détection de photomontages ou duplication de photos.",
-        "<b>Arbitrage vidéo assisté</b> : vérification visuelle guidée pour valider les réclamations.",
-        "<b>Scoring de suspicion</b> : identification précoce des comportements abusifs répétés."
-      ],
-      badgeBg: "bg-gradient-to-r from-rose-500 to-pink-600",
-      numBg: "bg-gradient-to-r from-rose-500 to-pink-600",
-      iconColor: "text-rose-500",
-      borderClass: "border-t-rose-500",
-      hoverGlow: "hover:shadow-[0_20px_50px_rgba(244,63,94,0.35)] hover:border-rose-500/40",
-      image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=800"
-    },
-    {
-      num: "04",
-      title: "Conciergerie IA Omnicanale",
-      icon: "message-square",
-      badge: "WhatsApp & RCS",
-      challenge: "Maintenir une relation client proactive post-achat pour anticiper les besoins et générer des ventes récurrentes.",
-      solutions: [
-        "<b>Suivi d'entretien proactif</b> : rappels réguliers pour préserver les performances de l'appareil.",
-        "<b>Réapprovisionnement prédictif</b> : suggestions de consommables au moment idéal.",
-        "<b>Relance de panier intelligente</b> : récupération des ventes interrompues sur tous les canaux."
-      ],
-      badgeBg: "kpi-purple",
-      numBg: "kpi-purple",
-      iconColor: "text-purple-500",
-      borderClass: "border-t-purple-500",
-      hoverGlow: "hover:shadow-[0_20px_50px_rgba(168,85,247,0.35)] hover:border-purple-500/40",
-      image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800"
-    },
-    {
-      num: "05",
-      title: "Scan & Plan : Designer Virtuel",
-      icon: "layout",
-      badge: "CONCEPTION",
-      challenge: "Accompagner les projets d'aménagement d'intérieur complexes sans nécessiter de déplacements physiques coûteux.",
-      solutions: [
-        "<b>Analyse de pièce par Vision IA</b> : détection automatique des dimensions et obstacles.",
-        "<b>Propositions d'aménagement 3D</b> : sélection optimisée de mobilier et d'électroménager.",
-        "<b>Génération de devis automatique</b> : budgétisation immédiate pour prise de rendez-vous qualifié."
-      ],
-      badgeBg: "kpi-cyan",
-      numBg: "kpi-cyan",
-      iconColor: "text-cyan-500",
-      borderClass: "border-t-cyan-500",
-      hoverGlow: "hover:shadow-[0_20px_50px_rgba(6,182,212,0.35)] hover:border-cyan-500/40",
-      image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&q=80&w=800"
-    },
-    {
-      num: "06",
-      title: "Match & Buy : Conseil Intelligent",
-      icon: "git-compare",
-      badge: "CONVERSATIONNEL",
-      challenge: "Guider l'acheteur parmi des catalogues complexes en remplaçant les filtres techniques par un conseil chaleureux.",
-      solutions: [
-        "<b>Analyse de requêtes sémantiques</b> : compréhension des besoins exprimés en langage naturel.",
-        "<b>Comparaison comparative active</b> : mise en évidence argumentée des forces de chaque modèle.",
-        "<b>Assistant d'achat dynamique</b> : accompagnement personnalisé du conseil jusqu'au panier."
-      ],
-      badgeBg: "kpi-yellow",
-      numBg: "kpi-yellow",
-      iconColor: "text-amber-500",
-      borderClass: "border-t-amber-500",
-      hoverGlow: "hover:shadow-[0_20px_50px_rgba(245,158,11,0.35)] hover:border-amber-500/40",
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800"
-    }
-  ];
-
-  document.getElementById('solutions-retail-grid').innerHTML = retailSolutions.map(function(s) {
-    return `
-    <div class="module-card rounded-[40px] overflow-hidden shadow-xl reveal-up transition-all duration-500 border-t-4 ${s.borderClass} ${s.hoverGlow} text-left font-sans bg-white flex flex-col h-full">
-      <div class="h-44 relative overflow-hidden bg-slate-950">
-        <img src="${s.image}" class="w-full h-full object-cover opacity-35 transition-transform duration-[6s] hover:scale-105" />
-        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/95 via-slate-900/40 to-transparent"></div>
-        <span class="absolute top-6 left-6 px-4 py-1.5 rounded-full text-[9px] font-black uppercase tracking-widest text-white ${s.badgeBg}">${s.badge}</span>
-        <div class="absolute bottom-6 right-6 w-12 h-12 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center">
-          <i data-lucide="${s.icon}" class="w-6 h-6 ${s.iconColor}"></i>
-        </div>
-      </div>
-      <div class="p-6 md:p-8 flex-grow flex flex-col justify-between bg-white text-left font-sans">
-        <div class="space-y-4">
-          <div class="flex items-center gap-3 mb-5">
-            <span class="w-10 h-10 rounded-xl flex items-center justify-center font-extrabold text-sm text-white ${s.numBg}">${s.num}</span>
-            <h3 class="text-base md:text-lg font-black text-[#002d62] leading-tight">${s.title}</h3>
-          </div>
-          <div>
-            <p class="font-black uppercase text-[#2470ef] text-[9px] tracking-widest mb-1">LE DÉFI</p>
-            <p class="text-slate-500 text-xs font-light leading-relaxed mb-4">${s.challenge}</p>
-          </div>
-          <div>
-            <p class="font-black uppercase text-[#2470ef] text-[9px] tracking-widest mb-1.5">NOS SOLUTIONS</p>
-            <div class="space-y-2 text-slate-700 text-xs font-medium">
-              ${s.solutions.map(function(sol) {
-                return `<div class="flex items-start gap-1.5"><span class="text-[#2470ef] mt-0.5">•</span><p class="leading-relaxed font-sans">${sol}</p></div>`;
-              }).join('')}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>`;
-  }).join('');
+  injectModules();
 
   var observer = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
