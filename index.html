@@ -729,7 +729,7 @@ Passez à l'action
 </footer>
 </div>
 
-<!-- ====== SCRIPTS DE L'ÉDITION LIGHT (copié intégralement) ====== -->
+<!-- ====== SCRIPTS DE L'ÉDITION LIGHT (avec cross-sell dans le chat) ====== -->
 <script>
 // ============================================================
 // 0. BASE DE DONNÉES SIMULÉE
@@ -812,7 +812,7 @@ function addResetButton(containerId, resetFn) {
 }
 
 // ============================================================
-// 3. SIMULATEUR 1 : MATCH & BUY
+// 3. SIMULATEUR 1 : MATCH & BUY (avec cross-sell dans le chat)
 // ============================================================
 function renderMatch() {
   var clientId = 'client_match_1';
@@ -831,10 +831,26 @@ function renderMatch() {
     { name: "ASUS ROG Strix G16", price: 2199, category: "gamer" }
   ];
   var crossSellOffers = {
-    'creatif': { product: 'Souris MX Master 3S', price: 99, pitch: 'Précision inégalée pour vos créations' },
-    'etudiant': { product: 'Housse de transport', price: 45, pitch: 'Protégez votre investissement' },
-    'pro': { product: 'Hub USB-C 7-en-1', price: 79, pitch: 'Connectez tous vos périphériques' },
-    'gamer': { product: 'Casque gaming surround', price: 129, pitch: 'Son immersif pour vos parties' }
+    'creatif': {
+      product: 'Souris MX Master 3S',
+      price: 99,
+      pitch: '🚀 Optimisez votre workflow créatif : la MX Master 3S offre une précision 8K, un scroll ultra-fluide et une autonomie de 70 jours. Réduisez de 30% vos clics inutiles et gagnez en productivité.'
+    },
+    'etudiant': {
+      product: 'Housse de transport renforcée',
+      price: 45,
+      pitch: '🎒 Protégez votre investissement avec une housse antichoc étanche, compatible avec tous les ordinateurs 13-16 pouces. Garantie 2 ans contre les chocs et l\'humidité.'
+    },
+    'pro': {
+      product: 'Hub USB-C 7-en-1',
+      price: 79,
+      pitch: '💼 Connectez tout votre écosystème professionnel en un clic : HDMI 4K, Ethernet Gigabit, 3 ports USB 3.0 et lecture de cartes SD. Augmentez votre débit de données de 500% et simplifiez vos présentations.'
+    },
+    'gamer': {
+      product: 'Casque gaming surround 7.1',
+      price: 129,
+      pitch: '🎧 Plongez au cœur de l\'action avec un son immersif 3D, un microphone noise-cancelling et une construction légère en alliage. Profitez d\'une latence < 20 ms pour une réactivité sans faille.'
+    }
   };
   var isProcessing = false;
   var nextAction = "En attente du choix de l'utilisateur";
@@ -963,46 +979,58 @@ function renderMatch() {
         addImportantSummary('Commande finalisée : ' + cart.length + ' article(s)');
         addBot('🎉 Commande validée avec succès ' + firstName + ' ! Merci de votre confiance.');
         clearSuggestions('m-suggestions');
+
         var offer = crossSellOffers[selectedUsage];
         if (offer) {
           step = 4;
+          // 1. Envoyer le message de cross-sell dans le chat (côté client)
+          addBot('💡 ' + firstName + ', je vous propose d\'ajouter <strong>' + offer.product + '</strong> (' + offer.price + '€) à votre commande.<br><span class="text-xs">' + offer.pitch + '</span>');
+
+          // 2. Ajouter les boutons d'action dans la zone de suggestions
           var recosDiv = document.getElementById('m-suggestions');
-          var msg = document.createElement('div');
-          msg.className = 'text-sm text-slate-600 mt-2 mb-1';
-          msg.innerHTML = '💡 <strong>' + firstName + '</strong>, je vous propose d\'ajouter <strong>' + offer.product + '</strong> (' + offer.price + '€) à votre commande.<br><span class="text-xs">' + offer.pitch + '</span>';
-          recosDiv.appendChild(msg);
-          var acceptBtn = document.createElement('div');
-          acceptBtn.className = 'suggestion-chip';
-          acceptBtn.innerText = '✅ Accepter l\'offre (+' + offer.price + '€)';
-          acceptBtn.style.borderColor = '#10b981';
-          acceptBtn.addEventListener('click', function() {
-            if (isProcessing) return;
-            addUser('Accepter l\'offre ' + offer.product);
-            cart.push({ name: offer.product, price: offer.price });
-            client.purchases.push({ name: offer.product, price: offer.price });
-            client.totalSpent += offer.price;
-            addImportantSummary('Cross-sell accepté : ' + offer.product);
-            addBot('👍 Parfait ' + firstName + ' ! ' + offer.product + ' a été ajouté à votre commande. Au plaisir de vous accompagner.');
-            clearSuggestions('m-suggestions');
-            addResetButton('m-suggestions', reset);
-            updateDashboard();
-            step = 0;
-          });
-          recosDiv.appendChild(acceptBtn);
-          var refuseBtn = document.createElement('div');
-          refuseBtn.className = 'suggestion-chip';
-          refuseBtn.innerText = '❌ Refuser l\'offre';
-          refuseBtn.style.borderColor = '#ef4444';
-          refuseBtn.addEventListener('click', function() {
-            addUser('Refuser l\'offre');
-            addImportantSummary('Cross-sell refusé');
-            addBot('Pas de problème ' + firstName + ', je comprends tout à fait. Restons en contact.');
-            clearSuggestions('m-suggestions');
-            addResetButton('m-suggestions', reset);
-            updateDashboard();
-            step = 0;
-          });
-          recosDiv.appendChild(refuseBtn);
+          if (recosDiv) {
+            // Vider la zone (au cas où)
+            recosDiv.innerHTML = '';
+
+            var acceptBtn = document.createElement('div');
+            acceptBtn.className = 'suggestion-chip';
+            acceptBtn.innerText = '✅ Accepter l\'offre (+' + offer.price + '€)';
+            acceptBtn.style.borderColor = '#10b981';
+            acceptBtn.addEventListener('click', function() {
+              if (isProcessing) return;
+              isProcessing = true;
+              addUser('Accepter l\'offre ' + offer.product);
+              cart.push({ name: offer.product, price: offer.price });
+              client.purchases.push({ name: offer.product, price: offer.price });
+              client.totalSpent += offer.price;
+              addImportantSummary('Cross-sell accepté : ' + offer.product);
+              addBot('👍 Parfait ' + firstName + ' ! ' + offer.product + ' a été ajouté à votre commande. Profitez dès maintenant de cette offre exclusive. Au plaisir de vous accompagner.');
+              clearSuggestions('m-suggestions');
+              addResetButton('m-suggestions', reset);
+              updateDashboard();
+              step = 0;
+              isProcessing = false;
+            });
+            recosDiv.appendChild(acceptBtn);
+
+            var refuseBtn = document.createElement('div');
+            refuseBtn.className = 'suggestion-chip';
+            refuseBtn.innerText = '❌ Refuser l\'offre';
+            refuseBtn.style.borderColor = '#ef4444';
+            refuseBtn.addEventListener('click', function() {
+              if (isProcessing) return;
+              isProcessing = true;
+              addUser('Refuser l\'offre');
+              addImportantSummary('Cross-sell refusé');
+              addBot('Pas de problème ' + firstName + ', je comprends tout à fait. N\'hésitez pas à revenir vers nous si besoin. Restons en contact.');
+              clearSuggestions('m-suggestions');
+              addResetButton('m-suggestions', reset);
+              updateDashboard();
+              step = 0;
+              isProcessing = false;
+            });
+            recosDiv.appendChild(refuseBtn);
+          }
         } else {
           addBot('Merci ' + firstName + ' pour votre commande. Nous restons à votre disposition.');
           addResetButton('m-suggestions', reset);
@@ -1356,7 +1384,7 @@ function renderSecondLife() {
 }
 
 // ============================================================
-// 5. SIMULATEUR 3 : C-ROUTE (CO2 corrigé)
+// 5. SIMULATEUR 3 : C-ROUTE
 // ============================================================
 function renderCRoute() {
   var clientId = 'client_cr_1';
@@ -1456,7 +1484,7 @@ function renderCRoute() {
         var recosDiv = document.getElementById('cr-suggestions');
         if (recosDiv) {
           var label = document.createElement('div');
-          label.className = 'text-sm font-semibold text-slate-600 mt-2 mb-1';
+          label.className = 'text-sm font-semibold text-slate-300 mt-2 mb-1';
           label.innerText = '💡 Souhaitez-vous optimiser une autre tournée ?';
           recosDiv.appendChild(label);
           var chip = document.createElement('div');
@@ -1897,7 +1925,7 @@ window.addEventListener("scroll", function() {
 lucide.createIcons();
 </script>
 
-<!-- ====== SCRIPTS DU SITE PRINCIPAL (injection des cartes modules, etc.) ====== -->
+<!-- ====== SCRIPTS DU SITE PRINCIPAL (injection des cartes modules) ====== -->
 <script>
 const retailSolutions = [
   {
