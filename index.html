@@ -1,738 +1,897 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<!-- SEO Meta Tags -->
-<title>comete.ai - L'IA au cœur du E-commerce et de la Grande Distribution</title>
-<meta name="description" content="De la découverte produit à la fidélisation, comete.ai orchestre une expérience omnicanale fluide, durable et ultra-personnalisée pour le retail et le e-commerce.">
-<meta name="author" content="comete.ai">
-<meta name="robots" content="index, follow">
-<!-- Open Graph -->
-<meta property="og:type" content="website">
-<meta property="og:title" content="comete.ai - L'IA au cœur du E-commerce et de la Grande Distribution">
-<meta property="og:description" content="Transformez votre parcours client omnicanal grâce à l'IA opérationnelle de comete.ai.">
-<meta property="og:image" content="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&q=80&w=1200&h=630">
-<!-- Favicon -->
-<link rel="icon" href="https://cdn.convrrt.com/apps/sendinblue/6761372/6aa995aa-40f4-4933-83ae-401c3ae0ae02.png" type="image/png">
-<!-- Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-<!-- Scripts -->
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://unpkg.com/lucide@latest"></script>
-<script>
-tailwind.config = {
-theme: {
-extend: {
-fontFamily: { sans: ['Montserrat', 'sans-serif'] },
-colors: {
-themeAccent: "#2470ef",
-themeDeepBlue: "#002d62",
-themeBlack: "#000d25",
-themeLightBlue: "#5170ff",
-themeYellow: "#ffde59"
-},
-animation: {
-'float': 'float 6s ease-in-out infinite',
-'pulse-slow': 'pulse 5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-'bg-zoom': 'bg-zoom 30s ease-in-out infinite alternate',
-'slide-in-right': 'slideInRight 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards',
-'fade-in': 'fadeIn 1.5s ease-out forwards',
-'slow-spin': 'spin 15s linear infinite',
-'slow-spin-reverse': 'spin 20s linear infinite reverse',
-'shimmer': 'shimmer 3s infinite',
-'scan-line': 'scanLine 2s linear infinite',
-'glow-pulse': 'glowPulse 3s ease-in-out infinite',
-'float-slow': 'floatSlow 8s ease-in-out infinite',
-'gradient-x': 'gradientX 6s ease infinite',
-'bounce-in': 'bounceIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
-'typing': 'typing 1.5s steps(20) infinite',
-'dash': 'dash 1.5s linear infinite'
-},
-keyframes: {
-float: { '0%, 100%': { transform: 'translateY(0) scale(1)' }, '50%': { transform: 'translateY(-25px) scale(1.02)' } },
-'bg-zoom': { '0%': { transform: 'scale(1)' }, '100%': { transform: 'scale(1.18)' } },
-slideInRight: { '0%': { opacity: '0', transform: 'translateX(60px)' }, '100%': { opacity: '1', transform: 'translateX(0)' } },
-fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
-shimmer: { '0%': { transform: 'translateX(-100%) skewX(-20deg)' }, '100%': { transform: 'translateX(200%) skewX(-20deg)' } },
-scanLine: { '0%': { top: '0%' }, '100%': { top: '100%' } },
-glowPulse: { '0%, 100%': { boxShadow: '0 0 20px rgba(36, 112, 239, 0.3)' }, '50%': { boxShadow: '0 0 60px rgba(36, 112, 239, 0.8)' } },
-floatSlow: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-15px)' } },
-gradientX: { '0%, 100%': { backgroundPosition: '0% 50%' }, '50%': { backgroundPosition: '100% 50%' } },
-bounceIn: { '0%': { opacity: '0', transform: 'scale(0.3)' }, '50%': { transform: 'scale(1.05)' }, '70%': { transform: 'scale(0.95)' }, '100%': { opacity: '1', transform: 'scale(1)' } },
-typing: { '0%': { width: '0' }, '50%': { width: '100%' }, '100%': { width: '0' } },
-dash: { 'to': { 'stroke-dashoffset': '-20' } }
-}
-}
-}
-}
-</script>
-<style>
-html { scroll-behavior: smooth; }
-* { font-family: 'Montserrat', sans-serif; }
-.digital-noise::before {
-content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-background-image: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
-opacity: 0.015; pointer-events: none; z-index: 50;
-}
-.text-gradient-animated {
-background-size: 200% auto;
-background-image: linear-gradient(to right, #2470ef, #5170ff, #8ab1ff, #2470ef);
--webkit-background-clip: text; -webkit-text-fill-color: transparent;
-animation: gradient-shift 4s linear infinite;
-}
-@keyframes gradient-shift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-.module-card { transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); border: 1px solid rgba(0,0,0,0.05); height: 100%; display: flex; flex-direction: column; background: white; position: relative; overflow: hidden; }
-.module-card::before {
-content: ""; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
-background: linear-gradient(90deg, transparent, rgba(36, 112, 239, 0.05), transparent);
-transition: left 0.8s ease;
-}
-.module-card:hover::before { left: 100%; }
-.module-card:hover { transform: translateY(-12px); box-shadow: 0 40px 80px -15px rgba(36, 112, 239, 0.25); border-color: rgba(36, 112, 239, 0.3); }
-.reveal-up { opacity: 0; transform: translateY(35px); transition: all 0.9s cubic-bezier(0.5, 0, 0, 1); }
-.reveal-up.active { opacity: 1; transform: translateY(0); }
-.nav-pill {
-position: fixed; top: 12px; left: 50%; transform: translateX(-50%);
-width: 94%; max-width: 1300px;
-background: rgba(255, 255, 255, 0.9);
-backdrop-filter: blur(12px); border-radius: 999px;
-padding: 8px 16px; display: flex; justify-content: space-between; align-items: center;
-z-index: 300; box-shadow: 0 10px 40px rgba(0,0,0,0.08); border: 1px solid rgba(255, 255, 255, 1);
-transition: all 0.4s ease;
-}
-.nav-pill.scrolled { padding: 4px 12px; width: 80%; max-width: 1000px; background: rgba(255, 255, 255, 0.98); }
-.sidebar-container {
-background-color: rgba(241, 245, 249, 0.92);
-backdrop-filter: blur(18px);
-border: 1px solid rgba(255, 255, 255, 0.6);
-padding: 6px; border-radius: 999px;
-display: flex; flex-direction: column; gap: 0.75rem;
-transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-@media (max-width: 768px) { .sidebar-container.idle { opacity: 0.15; transform: translate(40px, -50%); } }
-.sidebar-link {
-transition: all 0.4s ease; width: 38px; height: 38px;
-display: flex; align-items: center; justify-content: center;
-border-radius: 50%; color: #64748b;
-}
-@media (min-width: 768px) { .sidebar-link { width: 44px; height: 44px; } .sidebar-container { padding: 12px; gap: 1.5rem; } }
-.sidebar-link.active { background-color: #2470ef; color: #ffffff !important; box-shadow: 0 6px 20px rgba(36, 112, 239, 0.4); transform: scale(1.15); }
-/* Unified Icon Colors */
-.icon-unified { color: #2470ef !important; }
-.icon-unified-accent { color: #06b6d4 !important; }
-.icon-unified-success { color: #10b981 !important; }
-.icon-unified-warning { color: #f59e0b !important; }
-.icon-unified-danger { color: #ef4444 !important; }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>comete.ai – L'IA au cœur du E‑commerce et de la Grande Distribution</title>
+  <meta name="description" content="De la découverte produit à la fidélisation, comete.ai orchestre une expérience omnicanale fluide, durable et ultra‑personnalisée." />
+  <link rel="icon" href="https://cdn.convrrt.com/apps/sendinblue/6761372/6aa995aa-40f4-4933-83ae-401c3ae0ae02.png" type="image/png" />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Montserrat', 'sans-serif'],
+            mono: ['Share Tech Mono', 'monospace']
+          },
+          colors: {
+            themeAccent: "#2470ef",
+            themeDeepBlue: "#002d62",
+            themeBlack: "#000d25",
+            themeLightBlue: "#5170ff",
+            themeYellow: "#ffde59"
+          },
+          animation: {
+            'float': 'float 6s ease-in-out infinite',
+            'pulse-slow': 'pulse 5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'bg-zoom': 'bg-zoom 30s ease-in-out infinite alternate',
+            'fade-in': 'fadeIn 0.4s ease-out forwards',
+            'slow-spin': 'spin 15s linear infinite',
+            'slow-spin-reverse': 'spin 20s linear infinite reverse',
+            'gradient-x': 'gradientX 6s ease infinite',
+            'dash': 'dash 1.5s linear infinite'
+          },
+          keyframes: {
+            float: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-12px)' } },
+            'bg-zoom': { '0%': { transform: 'scale(1)' }, '100%': { transform: 'scale(1.08)' } },
+            fadeIn: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+            dash: { 'to': { 'stroke-dashoffset': '-20' } },
+            gradientX: { '0%, 100%': { backgroundPosition: '0% 50%' }, '50%': { backgroundPosition: '100% 50%' } }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* === STYLES UNIFIÉS – CHARTE USECASE IRVE === */
+    * { font-family: 'Montserrat', sans-serif; }
+    .font-mono, .terminal-log, .terminal-log * { font-family: 'Share Tech Mono', monospace !important; }
+    body { background: #f8fafc; color: #1e293b; overflow-x: hidden; }
+    .digital-noise::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-image: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+      opacity: 0.012;
+      pointer-events: none;
+      z-index: 50;
+    }
 
-.vs-image-container {
-position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
-width: 140px; height: 140px; z-index: 20; background: white; border-radius: 50%;
-box-shadow: 0 15px 45px rgba(36, 112, 239, 0.2), 0 0 0 12px rgba(255,255,255,1);
-padding: 20px;
-animation: vs-pulse 3s ease-in-out infinite alternate;
-}
-@keyframes vs-pulse {
-0% { box-shadow: 0 15px 45px rgba(36, 112, 239, 0.2), 0 0 0 12px rgba(255,255,255,1); transform: translate(-50%, -50%) scale(1); }
-100% { box-shadow: 0 20px 60px rgba(36, 112, 239, 0.5), 0 0 0 12px rgba(255,255,255,1), 0 0 40px rgba(36, 112, 239, 0.3); transform: translate(-50%, -50%) scale(1.05); }
-}
-@media (max-width: 1024px) {
-.vs-image-container { position: relative; top: auto; left: auto; transform: none; margin: -40px auto -40px auto; width: 100px; height: 100px; padding: 15px; box-shadow: 0 10px 25px rgba(36, 112, 239, 0.3), 0 0 0 8px rgba(255,255,255,1); animation: none; }
-}
-#progress-bar { position: fixed; top: 0; left: 0; width: 0%; height: 3px; background: linear-gradient(90deg, #2470ef, #5170ff, #2470ef); background-size: 200% 100%; animation: gradient-x 3s linear infinite; z-index: 400; transition: width 0.1s ease; }
-.scan-line { position: relative; overflow: hidden; }
-.scan-line::after {
-content: ""; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
-background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-animation: shimmer 5s infinite;
-}
-.step-number-pill {
-padding: 8px 22px; color: white; border-radius: 999px;
-display: inline-flex; align-items: center; justify-content: center;
-font-weight: 900; font-size: 2rem; margin-right: 18px; flex-shrink: 0;
-box-shadow: 0 8px 20px rgba(0,0,0,0.15); text-transform: uppercase; letter-spacing: 0.05em;
-}
-.kpi-step-badge {
-padding: 8px 24px; border-radius: 999px; color: white; font-weight: 900; font-size: 12px;
-text-transform: uppercase; letter-spacing: 0.12em; box-shadow: 0 10px 30px rgba(0,0,0,0.2); display: inline-block;
-}
-.kpi-blue   { background: linear-gradient(135deg, #2470ef, #5170ff); }
-.kpi-green  { background: linear-gradient(135deg, #10b981, #059669); }
-.kpi-cyan   { background: linear-gradient(135deg, #06b6d4, #0891b2); }
-.kpi-yellow { background: linear-gradient(135deg, #ffde59, #facc15); color: #002d62; }
-.kpi-purple { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
-.tech-ring { position: absolute; border: 1px solid rgba(36, 112, 239, 0.1); border-radius: 50%; pointer-events: none; }
+    .text-gradient-animated {
+      background-size: 200% auto;
+      background-image: linear-gradient(to right, #2470ef, #5170ff, #38bdf8, #2470ef);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradient-shift 4s linear infinite;
+    }
+    @keyframes gradient-shift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
 
-/* ===== STYLES DE L'ÉDITION LIGHT POUR LES SIMULATEURS ===== */
-.text-gradient {
-  background: linear-gradient(135deg, #1a56db, #8b5cf6, #3b82f6);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.glass-card {
-  background: rgba(255,255,255,0.80);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255,255,255,0.6);
-  box-shadow: 0 20px 60px -12px rgba(0,0,0,0.08);
-  border-radius: 32px;
-  overflow: hidden;
-  transition: all 0.4s;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-.glass-card:hover {
-  box-shadow: 0 30px 80px -12px rgba(0,0,0,0.12);
-  transform: translateY(-4px);
-}
-.sim-header {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 18px 24px;
-  border-bottom: 1px solid rgba(0,0,0,0.04);
-  flex-shrink: 0;
-}
-.sim-header i { color: #1a56db; width: 28px; height: 28px; }
-.sim-header h2 { font-size: 1.3rem; font-weight: 800; color: #0b1e3a; }
-.whatsapp-container {
-  background: #0b141a;
-  border-radius: 24px;
-  padding: 18px;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  scroll-behavior: smooth;
-  box-shadow: inset 0 0 20px rgba(0,0,0,0.4);
-  height: 700px;
-}
-.whatsapp-container::-webkit-scrollbar { width: 4px; }
-.whatsapp-container::-webkit-scrollbar-track { background: transparent; }
-.whatsapp-container::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 10px; }
-.whatsapp-bubble-user {
-  background: linear-gradient(135deg, #005c4b, #007a63);
-  color: white;
-  border-radius: 18px 18px 4px 18px;
-  padding: 12px 16px;
-  max-width: 85%;
-  align-self: flex-end;
-  margin-bottom: 10px;
-  font-size: 14px;
-  animation: slideUp 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-}
-.whatsapp-bubble-bot {
-  background: #1f2c33;
-  color: #e1e9f0;
-  border-radius: 18px 18px 18px 4px;
-  padding: 12px 16px;
-  max-width: 85%;
-  align-self: flex-start;
-  margin-bottom: 10px;
-  font-size: 14px;
-  animation: slideUp 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-}
-.whatsapp-bubble-user img, .whatsapp-bubble-bot img {
-  max-width: 200px;
-  border-radius: 12px;
-  margin-top: 6px;
-  display: block;
-}
-@keyframes slideUp {
-  from { opacity:0; transform: translateY(12px); }
-  to { opacity:1; transform: translateY(0); }
-}
-.suggestion-chip {
-  background: white;
-  color: #1e293b;
-  border: 1px solid #cbd5e1;
-  border-radius: 40px;
-  padding: 10px 22px;
-  font-size: 13px;
-  font-weight: 700;
-  cursor: pointer;
-  display: inline-block;
-  margin: 6px;
-  transition: all 0.2s;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.02);
-}
-.suggestion-chip:hover {
-  background: #f1f5f9;
-  border-color: #3b82f6;
-  transform: scale(1.02) translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
-}
-.suggestion-chip:active { transform: scale(0.96); }
-.sim-tab {
-  transition: all 0.3s;
-  cursor: pointer;
-  border-radius: 999px;
-  padding: 12px 28px;
-  font-weight: 700;
-  border: 1px solid #e2e8f0;
-  background: white;
-  color: #1e293b;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.02);
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.95rem;
-}
-.sim-tab:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.04);
-  border-color: #94a3b8;
-}
-.sim-tab.active {
-  background: linear-gradient(135deg, #1a56db, #3b82f6);
-  color: white !important;
-  border-color: transparent;
-  transform: translateY(-4px);
-  box-shadow: 0 12px 32px -8px rgba(26,86,219,0.4);
-}
-.sim-tab i { width: 20px; height: 20px; }
-.kpi-card {
-  background: white;
-  border-radius: 20px;
-  padding: 16px 20px;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.02);
-  transition: all 0.2s;
-}
-.kpi-card:hover {
-  border-color: #94a3b8;
-  transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.04);
-}
-.kpi-value { font-size: 28px; font-weight: 800; color: #0b1e3a; line-height: 1.2; }
-.kpi-label { font-size: 12px; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.03em; }
-.kpi-trend { font-size: 13px; font-weight: 700; margin-left: 4px; }
-.kpi-trend-up { color: #10b981; }
-.kpi-trend-down { color: #ef4444; }
-.image-placeholder {
-  background: rgba(0,0,0,0.02);
-  border-radius: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  min-height: 200px;
-  backdrop-filter: blur(4px);
-  border: 1px dashed #cbd5e1;
-  flex: 1;
-}
-.scan-badge {
-  background: rgba(59,130,246,0.12);
-  backdrop-filter: blur(8px);
-  border-radius: 40px;
-  padding: 8px 18px;
-  font-size: 12px;
-  font-weight: 700;
-  color: #1a56db;
-  display: inline-block;
-  margin-bottom: 12px;
-  border: 1px solid rgba(59,130,246,0.15);
-}
-.fade-in { animation: fadeIn 0.8s ease forwards; }
-@keyframes fadeIn {
-  from { opacity:0; transform: translateY(20px); }
-  to { opacity:1; transform: translateY(0); }
-}
-.hero-light { background: linear-gradient(135deg, #eef2ff, #e0e7ff, #f5f3ff); }
-.scan-panel {
-  background: rgba(255,255,255,0.05);
-  border-radius: 20px;
-  padding: 12px;
-  border: 1px solid rgba(0,0,0,0.04);
-  min-height: 180px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.scan-panel .relative { border-radius: 16px; overflow: hidden; }
-.map-panel {
-  background: rgba(255,255,255,0.05);
-  border-radius: 20px;
-  padding: 12px;
-  border: 1px solid rgba(0,0,0,0.04);
-  margin-bottom: 16px;
-}
-.map-panel svg { width: 100%; height: auto; border-radius: 16px; }
-.next-action-box {
-  background: rgba(59,130,246,0.08);
-  border-radius: 16px;
-  padding: 12px 16px;
-  border-left: 4px solid #3b82f6;
-  margin-bottom: 12px;
-}
-.next-action-box .label {
-  font-size: 10px;
-  font-weight: 700;
-  color: #3b82f6;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-.next-action-box .action {
-  font-size: 13px;
-  font-weight: 600;
-  color: #0b1e3a;
-}
-/* Responsive pour les simulateurs */
-@media (max-width: 768px) {
-  .sim-tab { padding: 8px 16px; font-size: 12px; gap: 4px; }
-  .sim-tab i { width: 16px; height: 16px; }
-  .grid { grid-template-columns: 1fr !important; }
-  .kpi-value { font-size: 22px; }
-  .glass-card { border-radius: 1.5rem; }
-  .whatsapp-container { height: 400px !important; }
-  .sim-header h2 { font-size: 1.1rem; }
-}
-@media (min-width: 769px) and (max-width: 1024px) {
-  .grid { grid-template-columns: 1fr 1fr; }
-}
+    .reveal-up { opacity: 0; transform: translateY(25px); transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1); }
+    .reveal-up.active { opacity: 1; transform: translateY(0); }
 
-/* ===== FIN STYLES ÉDITION LIGHT ===== */
+    .btn-unified {
+      background-color: #2470ef;
+      color: #ffffff !important;
+      font-weight: 800 !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.15em !important;
+      border-radius: 9999px !important;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      box-shadow: 0 4px 15px rgba(36, 112, 239, 0.35) !important;
+      border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    }
+    .btn-unified:hover:not(:disabled) {
+      transform: scale(1.02) translateY(-1px) !important;
+      box-shadow: 0 0 20px rgba(36, 112, 239, 0.7) !important;
+      background-color: #3b82f6 !important;
+    }
 
-.mouse-glow-bg {
-  position: absolute; width: 600px; height: 600px;
-  background: radial-gradient(circle, rgba(36, 112, 239, 0.12) 0%, rgba(36, 112, 239, 0) 70%);
-  border-radius: 50%; pointer-events: none; transform: translate(-50%, -50%);
-  transition: opacity 0.5s ease; opacity: 0; z-index: 1;
-}
-.kitchen-tile { transition: all 0.2s ease; cursor: pointer; }
-.kitchen-tile:hover { filter: drop-shadow(0 0 6px #2470ef); }
-</style>
+    .btn-reset-glowing {
+      background-color: rgba(245, 158, 11, 0.15) !important;
+      border: 1px solid rgba(245, 158, 11, 0.4) !important;
+      color: #f59e0b !important;
+      box-shadow: 0 0 12px rgba(245, 158, 11, 0.2) !important;
+      cursor: pointer !important;
+    }
+    .btn-reset-glowing:hover {
+      background-color: rgba(245, 158, 11, 0.25) !important;
+      box-shadow: 0 0 20px rgba(245, 158, 11, 0.4) !important;
+      transform: scale(1.01) !important;
+    }
+
+    /* Navigation */
+    .nav-pill {
+      position: fixed; top: 12px; left: 50%; transform: translateX(-50%);
+      width: 94%; max-width: 1300px;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(12px);
+      border-radius: 999px;
+      padding: 8px 16px;
+      display: flex; justify-content: space-between; align-items: center;
+      z-index: 300;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+      border: 1px solid rgba(255,255,255,1);
+      transition: all 0.4s ease;
+    }
+    .nav-pill.scrolled {
+      padding: 4px 12px;
+      width: 80%;
+      max-width: 1000px;
+      background: rgba(255,255,255,0.98);
+    }
+
+    /* Sidebar */
+    .sidebar-container {
+      background-color: rgba(241, 245, 249, 0.92);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      padding: 6px;
+      border-radius: 999px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    @media (max-width: 768px) { .sidebar-container.idle { opacity: 0.15; transform: translate(40px, -50%); } }
+    .sidebar-link {
+      transition: all 0.4s ease;
+      width: 38px; height: 38px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 50%;
+      color: #64748b;
+    }
+    @media (min-width: 768px) { .sidebar-link { width: 44px; height: 44px; } .sidebar-container { padding: 12px; gap: 1.5rem; } }
+    .sidebar-link.active {
+      background-color: #2470ef;
+      color: #ffffff !important;
+      box-shadow: 0 6px 20px rgba(36, 112, 239, 0.4);
+      transform: scale(1.15);
+    }
+
+    /* Progress bar */
+    #progress-bar {
+      position: fixed; top: 0; left: 0; width: 0%; height: 3px;
+      background: linear-gradient(90deg, #2470ef, #5170ff, #2470ef);
+      background-size: 200% 100%;
+      animation: gradientX 3s linear infinite;
+      z-index: 400;
+      transition: width 0.1s ease;
+    }
+    @keyframes gradientX {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
+    }
+
+    /* Modules cards */
+    .module-card {
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1px solid rgba(0,0,0,0.05);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      background: white;
+      position: relative;
+      overflow: hidden;
+    }
+    .module-card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(36, 112, 239, 0.05), transparent);
+      transition: left 0.8s ease;
+    }
+    .module-card:hover::before { left: 100%; }
+    .module-card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 40px 80px -15px rgba(36, 112, 239, 0.25);
+      border-color: rgba(36, 112, 239, 0.3);
+    }
+
+    .kpi-step-badge {
+      padding: 8px 24px;
+      border-radius: 999px;
+      color: white;
+      font-weight: 900;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      display: inline-block;
+    }
+    .kpi-blue   { background: linear-gradient(135deg, #2470ef, #5170ff); }
+    .kpi-green  { background: linear-gradient(135deg, #10b981, #059669); }
+    .kpi-cyan   { background: linear-gradient(135deg, #06b6d4, #0891b2); }
+    .kpi-yellow { background: linear-gradient(135deg, #ffde59, #facc15); color: #002d62; }
+    .kpi-purple { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+
+    /* Tech rings */
+    .tech-ring {
+      position: absolute;
+      border: 1px solid rgba(36, 112, 239, 0.1);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    /* Hero particles */
+    .hero-particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: rgba(36, 112, 239, 0.6);
+      border-radius: 50%;
+      box-shadow: 0 0 10px rgba(36, 112, 239, 0.8);
+      animation: particleFloat 15s linear infinite;
+    }
+    @keyframes particleFloat {
+      0% { transform: translateY(100vh) translateX(0) scale(0); opacity: 0; }
+      10% { opacity: 1; transform: translateY(90vh) translateX(10px) scale(1); }
+      90% { opacity: 1; }
+      100% { transform: translateY(-10vh) translateX(-20px) scale(0); opacity: 0; }
+    }
+
+    .mouse-glow-bg {
+      position: absolute;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(36, 112, 239, 0.12) 0%, rgba(36, 112, 239, 0) 70%);
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.5s ease;
+      opacity: 0;
+      z-index: 1;
+    }
+
+    /* VS Image */
+    .vs-image-container {
+      position: absolute;
+      left: 50%; top: 50%;
+      transform: translate(-50%, -50%);
+      width: 140px; height: 140px;
+      z-index: 20;
+      background: white;
+      border-radius: 50%;
+      box-shadow: 0 15px 45px rgba(36, 112, 239, 0.2), 0 0 0 12px rgba(255,255,255,1);
+      padding: 20px;
+      animation: vs-pulse 3s ease-in-out infinite alternate;
+    }
+    @keyframes vs-pulse {
+      0% { box-shadow: 0 15px 45px rgba(36, 112, 239, 0.2), 0 0 0 12px rgba(255,255,255,1); transform: translate(-50%, -50%) scale(1); }
+      100% { box-shadow: 0 20px 60px rgba(36, 112, 239, 0.5), 0 0 0 12px rgba(255,255,255,1), 0 0 40px rgba(36, 112, 239, 0.3); transform: translate(-50%, -50%) scale(1.05); }
+    }
+    @media (max-width: 1024px) {
+      .vs-image-container {
+        position: relative;
+        top: auto; left: auto;
+        transform: none;
+        margin: -40px auto -40px auto;
+        width: 100px; height: 100px;
+        padding: 15px;
+        box-shadow: 0 10px 25px rgba(36, 112, 239, 0.3), 0 0 0 8px rgba(255,255,255,1);
+        animation: none;
+      }
+    }
+
+    /* ===== SIMULATEURS ===== */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.80);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      box-shadow: 0 20px 60px -12px rgba(0, 0, 0, 0.08);
+      border-radius: 32px;
+      overflow: hidden;
+      transition: all 0.4s;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    .glass-card:hover {
+      box-shadow: 0 30px 80px -12px rgba(0, 0, 0, 0.12);
+      transform: translateY(-4px);
+    }
+
+    .sim-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 18px 24px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+      flex-shrink: 0;
+    }
+    .sim-header i {
+      color: #1a56db;
+      width: 28px;
+      height: 28px;
+    }
+    .sim-header h2 {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: #0b1e3a;
+    }
+
+    .whatsapp-container {
+      background: #0b141a;
+      border-radius: 24px;
+      padding: 18px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      scroll-behavior: smooth;
+      box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.4);
+      height: 700px;
+    }
+    .whatsapp-container::-webkit-scrollbar {
+      width: 4px;
+    }
+    .whatsapp-container::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .whatsapp-container::-webkit-scrollbar-thumb {
+      background: #3b82f6;
+      border-radius: 10px;
+    }
+
+    .whatsapp-bubble-user {
+      background: linear-gradient(135deg, #005c4b, #007a63);
+      color: white;
+      border-radius: 18px 18px 4px 18px;
+      padding: 12px 16px;
+      max-width: 85%;
+      align-self: flex-end;
+      margin-bottom: 10px;
+      font-size: 14px;
+      animation: slideUp 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+    .whatsapp-bubble-bot {
+      background: #1f2c33;
+      color: #e1e9f0;
+      border-radius: 18px 18px 18px 4px;
+      padding: 12px 16px;
+      max-width: 85%;
+      align-self: flex-start;
+      margin-bottom: 10px;
+      font-size: 14px;
+      animation: slideUp 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+    .whatsapp-bubble-user img,
+    .whatsapp-bubble-bot img {
+      max-width: 200px;
+      border-radius: 12px;
+      margin-top: 6px;
+      display: block;
+    }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .suggestion-chip {
+      background: white;
+      color: #1e293b;
+      border: 1px solid #cbd5e1;
+      border-radius: 40px;
+      padding: 10px 22px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-block;
+      margin: 6px;
+      transition: all 0.2s;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+    }
+    .suggestion-chip:hover {
+      background: #f1f5f9;
+      border-color: #3b82f6;
+      transform: scale(1.02) translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    }
+    .suggestion-chip:active {
+      transform: scale(0.96);
+    }
+
+    .sim-tab {
+      transition: all 0.3s;
+      cursor: pointer;
+      border-radius: 999px;
+      padding: 12px 28px;
+      font-weight: 700;
+      border: 1px solid #e2e8f0;
+      background: white;
+      color: #1e293b;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.95rem;
+    }
+    .sim-tab:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+      border-color: #94a3b8;
+    }
+    .sim-tab.active {
+      background: linear-gradient(135deg, #1a56db, #3b82f6);
+      color: white !important;
+      border-color: transparent;
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px -8px rgba(26, 86, 219, 0.4);
+    }
+    .sim-tab i {
+      width: 20px;
+      height: 20px;
+    }
+
+    .kpi-card {
+      background: white;
+      border-radius: 20px;
+      padding: 16px 20px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+      transition: all 0.2s;
+    }
+    .kpi-card:hover {
+      border-color: #94a3b8;
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+    }
+    .kpi-value {
+      font-size: 28px;
+      font-weight: 800;
+      color: #0b1e3a;
+      line-height: 1.2;
+    }
+    .kpi-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    .kpi-trend {
+      font-size: 13px;
+      font-weight: 700;
+      margin-left: 4px;
+    }
+    .kpi-trend-up { color: #10b981; }
+    .kpi-trend-down { color: #ef4444; }
+
+    .image-placeholder {
+      background: rgba(0, 0, 0, 0.02);
+      border-radius: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      min-height: 200px;
+      backdrop-filter: blur(4px);
+      border: 1px dashed #cbd5e1;
+      flex: 1;
+    }
+    .scan-badge {
+      background: rgba(59, 130, 246, 0.12);
+      backdrop-filter: blur(8px);
+      border-radius: 40px;
+      padding: 8px 18px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #1a56db;
+      display: inline-block;
+      margin-bottom: 12px;
+      border: 1px solid rgba(59, 130, 246, 0.15);
+    }
+    .fade-in { animation: fadeIn 0.8s ease forwards; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .scan-panel {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      padding: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      min-height: 180px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .scan-panel .relative { border-radius: 16px; overflow: hidden; }
+
+    .map-panel {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      padding: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      margin-bottom: 16px;
+    }
+    .map-panel svg { width: 100%; height: auto; border-radius: 16px; }
+
+    .next-action-box {
+      background: rgba(59, 130, 246, 0.08);
+      border-radius: 16px;
+      padding: 12px 16px;
+      border-left: 4px solid #3b82f6;
+      margin-bottom: 12px;
+    }
+    .next-action-box .label {
+      font-size: 10px;
+      font-weight: 700;
+      color: #3b82f6;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .next-action-box .action {
+      font-size: 13px;
+      font-weight: 600;
+      color: #0b1e3a;
+    }
+
+    .kpi-card-dark {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 14px 18px;
+      transition: border-color 0.2s;
+    }
+    .kpi-card-dark:hover { border-color: rgba(36, 112, 239, 0.4); }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .sim-tab { padding: 8px 16px; font-size: 12px; gap: 4px; }
+      .sim-tab i { width: 16px; height: 16px; }
+      .grid { grid-template-columns: 1fr !important; }
+      .kpi-value { font-size: 22px; }
+      .glass-card { border-radius: 1.5rem; }
+      .whatsapp-container { height: 400px !important; }
+      .sim-header h2 { font-size: 1.1rem; }
+    }
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    .icon-unified { color: #2470ef !important; }
+    .icon-unified-accent { color: #06b6d4 !important; }
+    .icon-unified-success { color: #10b981 !important; }
+    .icon-unified-warning { color: #f59e0b !important; }
+    .icon-unified-danger { color: #ef4444 !important; }
+  </style>
 </head>
-<body class="min-h-screen bg-white font-sans text-slate-900 overflow-x-hidden relative digital-noise text-left">
-<!-- PROGRESS BAR -->
+<body class="digital-noise">
+
+<!-- BARRE DE PROGRESSION -->
 <div id="progress-bar"></div>
 
-<!-- NAVIGATION HEADER -->
+<!-- NAVIGATION -->
 <nav id="nav-pill" class="nav-pill">
-<a href="https://comete.ai/" class="shrink-0">
-<img src="https://cdn.convrrt.com/apps/sendinblue/6761372/ab4f2f8e-3e94-4b4e-8ff8-e21271d4b3f4.png" alt="comete.ai" class="h-5 md:h-8" />
-</a>
-<button onclick="window.location.href='https://comete.ai/etudes-de-cas/'" class="px-3 py-2 md:px-6 md:py-3 rounded-full bg-[#2470ef] text-white font-bold uppercase tracking-widest text-[8px] md:text-[11px] shadow-lg border border-white/10 transition-all hover:scale-[1.05] flex items-center gap-2 whitespace-nowrap font-sans">
-<span>Voir les autres études de cas</span>
-<i data-lucide="arrow-right" class="w-3 h-3 md:w-4 md:h-4" style="color:white !important;"></i>
-</button>
+  <a href="https://comete.ai/" class="shrink-0">
+    <img src="https://cdn.convrrt.com/apps/sendinblue/6761372/ab4f2f8e-3e94-4b4e-8ff8-e21271d4b3f4.png" alt="comete.ai" class="h-5 md:h-8" />
+  </a>
+  <button onclick="window.location.href='https://comete.ai/etudes-de-cas/'" class="px-3 py-2 md:px-6 md:py-3 text-[8px] md:text-[11px] btn-unified flex items-center gap-2 whitespace-nowrap">
+    <span>Voir les études de cas</span>
+    <span class="flex items-center justify-center w-5 h-5 md:w-6 md:h-6 rounded-full bg-white/20 border border-white/20 backdrop-blur-md shrink-0">
+      <i data-lucide="arrow-right" class="w-3 h-3 md:w-4 md:h-4 text-white"></i>
+    </span>
+  </button>
 </nav>
 
 <!-- CONTENU PRINCIPAL -->
 <div id="main-content" class="text-left w-full max-w-full overflow-hidden">
-<!-- SIDEBAR -->
-<div id="sidebar" class="fixed right-2 md:right-6 top-1/2 -translate-y-1/2 z-[110] flex sidebar-container shadow-2xl">
-<a href="#hero" class="sidebar-link active animate-fade-in" data-section="hero"><i data-lucide="home" class="w-4 h-4 md:w-5 md:h-5"></i></a>
-<a href="#comparatif" class="sidebar-link" data-section="comparatif"><i data-lucide="scale" class="w-4 h-4 md:w-5 md:h-5"></i></a>
-<a href="#modules" class="sidebar-link" data-section="modules"><i data-lucide="layers" class="w-4 h-4 md:w-5 md:h-5"></i></a>
-<a href="#impact" class="sidebar-link" data-section="impact"><i data-lucide="trending-up" class="w-4 h-4 md:w-5 md:h-5"></i></a>
-<a href="#laboratoire" class="sidebar-link" data-section="laboratoire"><i data-lucide="activity" class="w-4 h-4 md:w-5 md:h-5"></i></a>
-<a href="#vision" class="sidebar-link" data-section="vision"><i data-lucide="award" class="w-4 h-4 md:w-5 md:h-5"></i></a>
+
+  <!-- SIDEBAR -->
+  <div id="sidebar" class="fixed right-2 md:right-6 top-1/2 -translate-y-1/2 z-[110] flex sidebar-container shadow-2xl">
+    <a href="#hero" class="sidebar-link active" data-section="hero"><i data-lucide="home" class="w-4 h-4 md:w-5 md:h-5"></i></a>
+    <a href="#comparatif" class="sidebar-link" data-section="comparatif"><i data-lucide="scale" class="w-4 h-4 md:w-5 md:h-5"></i></a>
+    <a href="#modules" class="sidebar-link" data-section="modules"><i data-lucide="layers" class="w-4 h-4 md:w-5 md:h-5"></i></a>
+    <a href="#impact" class="sidebar-link" data-section="impact"><i data-lucide="trending-up" class="w-4 h-4 md:w-5 md:h-5"></i></a>
+    <a href="#laboratoire" class="sidebar-link" data-section="laboratoire"><i data-lucide="activity" class="w-4 h-4 md:w-5 md:h-5"></i></a>
+    <a href="#vision" class="sidebar-link" data-section="vision"><i data-lucide="award" class="w-4 h-4 md:w-5 md:h-5"></i></a>
+  </div>
+
+  <!-- HERO -->
+  <section id="hero" class="min-h-screen relative flex items-center overflow-hidden bg-[#000d25] text-left pt-36 pb-20 md:pt-48 md:pb-32">
+    <div id="hero-mouse-glow" class="mouse-glow-bg"></div>
+    <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+      <div class="hero-particle" style="left: 10%; animation-delay: 0s;"></div>
+      <div class="hero-particle" style="left: 20%; animation-delay: 2s;"></div>
+      <div class="hero-particle" style="left: 35%; animation-delay: 4s;"></div>
+      <div class="hero-particle" style="left: 50%; animation-delay: 1s;"></div>
+      <div class="hero-particle" style="left: 65%; animation-delay: 3s;"></div>
+      <div class="hero-particle" style="left: 80%; animation-delay: 5s;"></div>
+      <div class="hero-particle" style="left: 90%; animation-delay: 2.5s;"></div>
+    </div>
+    <div class="absolute inset-0 z-0">
+      <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&q=80&w=2400" class="w-full h-full object-cover opacity-25 animate-bg-zoom scale-105" alt="E-commerce" />
+      <div class="absolute inset-0 bg-gradient-to-r from-[#000d25] via-[#000d25]/85 to-transparent"></div>
+      <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#000d25]"></div>
+      <div class="tech-ring w-[600px] h-[600px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-slow-spin"></div>
+      <div class="tech-ring w-[800px] h-[800px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-slow-spin-reverse opacity-50"></div>
+      <div class="tech-ring w-[1000px] h-[1000px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-slow-spin opacity-30"></div>
+    </div>
+    <div class="relative z-10 max-w-7xl mx-auto px-4 md:px-6 w-full">
+      <div class="max-w-4xl space-y-8 md:space-y-12">
+        <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-xl animate-fade-in shadow-2xl">
+          <span class="w-2 h-2 rounded-full bg-cyan-300 animate-pulse live-dot"></span>
+          <span class="text-[9px] md:text-[10px] uppercase tracking-[0.3em] text-blue-100 font-black">E-COMMERCE & GRANDE DISTRIBUTION : L'ÈRE DE L'EXPÉRIENCE AUGMENTÉE</span>
+        </div>
+        <h1 class="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-normal text-white leading-[1.1] tracking-tighter">
+          L'IA redéfinit le <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#2470ef] via-[#5170ff] to-[#8ab1ff] font-bold">parcours d'achat</span> et la relation client.
+        </h1>
+        <p class="text-base md:text-xl lg:text-2xl text-white/70 font-light leading-relaxed border-l-4 border-[#2470ef]/60 pl-4 md:pl-6 max-w-3xl animate-fade-in" style="animation-delay: 0.6s;">
+          De la découverte produit à la fidélisation, <b class="text-white">comete.ai orchestre</b> une expérience omnicanale fluide, durable et ultra-personnalisée. Transformez chaque interaction en opportunité de valeur.
+        </p>
+        <div class="animate-fade-in flex flex-wrap gap-4" style="animation-delay: 0.9s;">
+          <button onclick="document.getElementById('laboratoire').scrollIntoView({behavior:'smooth'})" class="btn-unified px-6 py-4 md:px-8 md:py-5 text-[10px] md:text-sm flex items-center gap-3">
+            <span>DÉCOUVRIR LE LAB IA</span>
+            <i data-lucide="arrow-down" class="w-4 h-4 md:w-5 md:h-5"></i>
+          </button>
+          <button onclick="document.getElementById('impact').scrollIntoView({behavior:'smooth'})" class="group bg-white/5 backdrop-blur-xl border border-white/20 text-white px-6 py-4 md:px-8 md:py-5 rounded-2xl font-bold uppercase tracking-widest text-[10px] md:text-sm flex items-center gap-3 transition-all hover:bg-white/10 hover:border-white/40">
+            VOIR LES RÉSULTATS <i data-lucide="trending-up" class="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" style="color:white !important;"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPARATIF -->
+  <section id="comparatif" class="py-24 md:py-36 bg-white overflow-hidden text-left relative">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
+      <h2 class="text-3xl md:text-5xl lg:text-7xl font-normal text-[#002d62] leading-tight tracking-tighter mb-12 md:mb-20 lg:mb-16">
+        La performance <br><span class="text-[#2470ef]">sans compromis</span> sur l'expérience client.
+      </h2>
+      <div class="flex flex-col lg:grid lg:grid-cols-2 gap-0 relative">
+        <div class="bg-gradient-to-br from-slate-50 to-white p-6 md:p-14 lg:pr-24 rounded-3xl lg:rounded-l-[48px] lg:rounded-r-none border border-slate-200 mb-10 lg:mb-0 reveal-up">
+          <h3 class="text-xl md:text-2xl font-black text-slate-700 mb-10 flex items-center gap-4">
+            <span class="w-10 h-10 rounded-xl bg-red-100 flex items-center justify-center"><i data-lucide="alert-circle" class="icon-unified-danger w-5 h-5"></i></span>
+            Pistes d'amélioration
+          </h3>
+          <ul class="space-y-6">
+            <li class="flex gap-4 text-slate-500 text-sm md:text-base group">
+              <span class="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center shrink-0 group-hover:bg-red-100 transition-colors"><i data-lucide="x-circle" class="icon-unified-danger w-4 h-4"></i></span>
+              <span>Parcours d'achat <b>statique</b> et comparatifs techniques indigestes.</span>
+            </li>
+            <li class="flex gap-4 text-slate-500 text-sm md:text-base group">
+              <span class="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center shrink-0 group-hover:bg-red-100 transition-colors"><i data-lucide="x-circle" class="icon-unified-danger w-4 h-4"></i></span>
+              <span>Taux d'abandon de panier élevé par <b>manque d'accompagnement</b> contextuel.</span>
+            </li>
+            <li class="flex gap-4 text-slate-500 text-sm md:text-base group">
+              <span class="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center shrink-0 group-hover:bg-red-100 transition-colors"><i data-lucide="x-circle" class="icon-unified-danger w-4 h-4"></i></span>
+              <span>SAV réactif et coûteux, généré par une <b>mauvaise utilisation</b> des produits.</span>
+            </li>
+            <li class="flex gap-4 text-slate-500 text-sm md:text-base group">
+              <span class="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center shrink-0 group-hover:bg-red-100 transition-colors"><i data-lucide="x-circle" class="icon-unified-danger w-4 h-4"></i></span>
+              <span>Gestion des retours, de la fraude et de la <b>seconde main fragmentée</b>.</span>
+            </li>
+            <li class="flex gap-4 text-slate-500 text-sm md:text-base group">
+              <span class="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center shrink-0 group-hover:bg-red-100 transition-colors"><i data-lucide="x-circle" class="icon-unified-danger w-4 h-4"></i></span>
+              <span>Maintenance et consommables déclenchés <b>uniquement après la panne</b>.</span>
+            </li>
+          </ul>
+        </div>
+        <div class="vs-image-container">
+          <img src="https://cdn.convrrt.com/apps/sendinblue/6761372/060d39f9-27f2-4b6f-8faf-aaf96c025e56.png" alt="VS" class="w-full object-contain" />
+        </div>
+        <div class="bg-gradient-to-br from-[#002d62] via-[#001c3d] to-[#002d62] px-6 pb-6 pt-16 md:p-14 lg:pl-24 rounded-3xl lg:rounded-r-[48px] lg:rounded-l-none border border-[#2470ef]/20 shadow-2xl reveal-up relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-96 h-96 bg-[#2470ef]/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+          <div class="absolute bottom-0 left-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+          <div class="relative z-10">
+            <h3 class="text-xl md:text-2xl font-black text-white mb-10 flex items-center gap-4">
+              <span class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#2470ef] to-cyan-500 flex items-center justify-center shadow-lg shadow-[#2470ef]/30"><i data-lucide="sparkles" class="w-5 h-5" style="color:white !important;"></i></span>
+              Orchestration comete.ai
+            </h3>
+            <ul class="space-y-6">
+              <li class="flex gap-4 text-blue-50 text-sm md:text-base group">
+                <span class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center shrink-0 group-hover:bg-white/20 transition-colors"><i data-lucide="check-circle-2" class="icon-unified-accent w-4 h-4" style="color:#22d3ee !important;"></i></span>
+                <span><b>Assistant d'achat conversationnel</b> et comparateur intelligent guidé par l'IA.</span>
+              </li>
+              <li class="flex gap-4 text-blue-50 text-sm md:text-base group">
+                <span class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center shrink-0 group-hover:bg-white/20 transition-colors"><i data-lucide="check-circle-2" class="icon-unified-accent w-4 h-4" style="color:#22d3ee !important;"></i></span>
+                <span><b>Relance contextuelle</b> et personnalisée des paniers abandonnés en temps réel.</span>
+              </li>
+              <li class="flex gap-4 text-blue-50 text-sm md:text-base group">
+                <span class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center shrink-0 group-hover:bg-white/20 transition-colors"><i data-lucide="check-circle-2" class="icon-unified-accent w-4 h-4" style="color:#22d3ee !important;"></i></span>
+                <span><b>Aide à l'usage proactive</b> et visio-assistance pour un SAV résolu au premier contact.</span>
+              </li>
+              <li class="flex gap-4 text-blue-50 text-sm md:text-base group">
+                <span class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center shrink-0 group-hover:bg-white/20 transition-colors"><i data-lucide="check-circle-2" class="icon-unified-accent w-4 h-4" style="color:#22d3ee !important;"></i></span>
+                <span><b>Estimation instantanée par Vision IA</b> pour la reprise et l'économie circulaire.</span>
+              </li>
+              <li class="flex gap-4 text-blue-50 text-sm md:text-base group">
+                <span class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center shrink-0 group-hover:bg-white/20 transition-colors"><i data-lucide="check-circle-2" class="icon-unified-accent w-4 h-4" style="color:#22d3ee !important;"></i></span>
+                <span><b>Concierge IA prédictif</b> pour l'entretien, les consommables et l'upsell cyclique.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODULES -->
+  <section id="modules" class="py-24 md:py-36 bg-white text-left overflow-hidden">
+    <div class="max-w-[1440px] mx-auto px-4 md:px-6">
+      <div class="text-center max-w-3xl mx-auto mb-16 md:mb-20 reveal-up">
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#2470ef]/10 border border-[#2470ef]/20 mb-6">
+          <i data-lucide="layers" class="icon-unified w-4 h-4"></i>
+          <span class="text-[10px] uppercase tracking-widest text-[#2470ef] font-black">Nos Briques Opérationnelles</span>
+        </div>
+        <h2 class="text-3xl md:text-5xl lg:text-6xl font-normal text-[#002d62] tracking-tighter">
+          L'orchestration retail & E-commerce <br><span class="text-gradient-animated">augmentée par l'IA.</span>
+        </h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8 animate-fade-in" id="solutions-retail-grid">
+        <!-- Injecté par JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- IMPACT -->
+  <section id="impact" class="py-24 md:py-36 bg-[#001c3d] text-white relative overflow-hidden">
+    <div class="absolute inset-0 pointer-events-none">
+      <div class="absolute top-20 left-10 w-72 h-72 bg-[#2470ef]/10 rounded-full blur-3xl animate-float-slow"></div>
+      <div class="absolute bottom-20 right-10 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl animate-float-slow" style="animation-delay: 2s;"></div>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
+      <div class="grid lg:grid-cols-2 gap-16 md:gap-24 items-center">
+        <div class="space-y-8 reveal-up">
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span class="text-[9px] uppercase tracking-widest text-emerald-400 font-bold">Résultats mesurables</span>
+          </div>
+          <h2 class="text-3xl md:text-5xl lg:text-7xl font-normal leading-tight tracking-tighter">
+            Un commerce <span class="text-gradient-animated">augmenté</span>, des résultats mesurables.
+          </h2>
+          <p class="text-white/80 text-lg md:text-2xl italic font-light pl-6 border-l-2 border-[#2470ef]">
+            "L'IA ne remplace pas le commerce, elle lui donne les moyens d'être à la hauteur des attentes omnicanalles."
+          </p>
+        </div>
+        <div class="grid grid-cols-2 gap-4 md:gap-6">
+          <div class="group bg-gradient-to-br from-white/5 to-white/[0.02] p-6 md:p-8 rounded-3xl border border-white/10 text-center transition-all hover:bg-white/10 hover:border-[#2470ef]/40 hover:scale-105 reveal-up">
+            <span class="text-3xl md:text-6xl font-black text-white block mb-2">+35%</span>
+            <span class="text-[8px] md:text-[9px] uppercase font-bold text-white/60 tracking-widest">Taux de conversion</span>
+          </div>
+          <div class="group bg-gradient-to-br from-white/5 to-white/[0.02] p-6 md:p-8 rounded-3xl border border-white/10 text-center transition-all hover:bg-white/10 hover:border-[#2470ef]/40 hover:scale-105 reveal-up" style="transition-delay: 0.1s;">
+            <span class="text-3xl md:text-6xl font-black text-white block mb-2">-40%</span>
+            <span class="text-[8px] md:text-[9px] uppercase font-bold text-white/60 tracking-widest">Abandons de panier</span>
+          </div>
+          <div class="group bg-gradient-to-br from-white/5 to-white/[0.02] p-6 md:p-8 rounded-3xl border border-white/10 text-center transition-all hover:bg-white/10 hover:border-[#2470ef]/40 hover:scale-105 reveal-up" style="transition-delay: 0.2s;">
+            <span class="text-3xl md:text-6xl font-black text-white block mb-2">-60%</span>
+            <span class="text-[8px] md:text-[9px] uppercase font-bold text-white/60 tracking-widest">Retours (mauvais usage)</span>
+          </div>
+          <div class="group bg-gradient-to-br from-white/5 to-white/[0.02] p-6 md:p-8 rounded-3xl border border-white/10 text-center transition-all hover:bg-white/10 hover:border-[#2470ef]/40 hover:scale-105 reveal-up" style="transition-delay: 0.3s;">
+            <span class="text-3xl md:text-6xl font-black text-white block mb-2">+25%</span>
+            <span class="text-[8px] md:text-[9px] uppercase font-bold text-white/60 tracking-widest">Revenus récurrents</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LABORATOIRE -->
+  <section id="laboratoire" class="py-24 md:py-36 bg-gradient-to-b from-slate-50 via-white to-slate-50 text-left overflow-hidden relative">
+    <div class="absolute inset-0 pointer-events-none">
+      <div class="absolute top-40 left-20 w-96 h-96 bg-[#2470ef]/5 rounded-full blur-3xl"></div>
+      <div class="absolute bottom-40 right-20 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl"></div>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
+      <div class="text-center max-w-3xl mx-auto mb-12 md:mb-16 reveal-up">
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#2470ef]/10 border border-[#2470ef]/20 mb-6">
+          <i data-lucide="flask-conical" class="icon-unified w-4 h-4"></i>
+          <span class="text-[10px] uppercase tracking-widest text-[#2470ef] font-black">Laboratoire Interactif</span>
+        </div>
+        <h2 class="text-3xl md:text-5xl lg:text-6xl font-normal text-[#002d62] tracking-tighter">
+          Le Laboratoire <span class="text-gradient-animated">comete.ai</span>
+        </h2>
+        <p class="text-slate-500 text-[15px] font-light mt-4 text-center">
+          Visualisez concrètement comment notre IA transforme chaque étape du parcours client. Cliquez sur les modules pour tester les simulations en temps réel.
+        </p>
+      </div>
+      <div class="max-w-6xl mx-auto px-4 -mt-6 mb-10">
+        <div id="tabs-wrapper" class="flex flex-wrap justify-center gap-3"></div>
+      </div>
+      <div id="sim-root" class="max-w-6xl mx-auto px-4 pb-20"></div>
+    </div>
+  </section>
+
+  <!-- VISION -->
+  <section id="vision" class="py-24 md:py-36 bg-gradient-to-b from-slate-50 to-white text-left overflow-hidden relative">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 grid lg:grid-cols-2 gap-12 md:gap-20 items-center relative z-10">
+      <div class="space-y-10 reveal-up">
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#2470ef]/10 border border-[#2470ef]/20">
+          <i data-lucide="zap" class="icon-unified w-4 h-4"></i>
+          <span class="text-[10px] uppercase tracking-widest text-[#2470ef] font-black">Passez à l'action</span>
+        </div>
+        <h2 class="text-3xl md:text-5xl lg:text-7xl font-normal text-[#002d62] leading-tight tracking-tighter">
+          Combiner intelligemment <span class="text-gradient-animated">Technologie et Humain.</span>
+        </h2>
+        <p class="text-slate-500 text-lg md:text-2xl font-light max-w-xl">
+          Libérez vos équipes des tâches répétitives et concentrez votre énergie sur la relation client, le conseil expert et la création de valeur durable.
+        </p>
+        <div class="grid sm:grid-cols-2 gap-8">
+          <div class="space-y-1 group">
+            <p class="font-bold text-slate-800 flex items-center gap-2 text-sm md:text-base"><span class="w-8 h-8 rounded-lg bg-[#2470ef]/10 flex items-center justify-center group-hover:bg-[#2470ef]/20 transition-colors"><i data-lucide="zap" class="icon-unified w-4 h-4"></i></span> Disponibilité totale</p>
+            <p class="text-[11px] md:text-xs text-slate-400 pl-10">Réponse pertinent à toute heure sur tous les canaux.</p>
+          </div>
+          <div class="space-y-1 group">
+            <p class="font-bold text-slate-800 flex items-center gap-2 text-sm md:text-base"><span class="w-8 h-8 rounded-lg bg-[#2470ef]/10 flex items-center justify-center group-hover:bg-[#2470ef]/20 transition-colors"><i data-lucide="users" class="icon-unified w-4 h-4 animate-pulse"></i></span> Conseillers valorisés</p>
+            <p class="text-[11px] md:text-xs text-slate-400 pl-10">Vos équipes gagnent en fluidité et en disponibilité pour des échanges à plus forte valeur.</p>
+          </div>
+          <div class="space-y-1 group">
+            <p class="font-bold text-slate-800 flex items-center gap-2 text-sm md:text-base"><span class="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center group-hover:bg-emerald-100 transition-colors"><i data-lucide="leaf" class="icon-unified-success w-4 h-4"></i></span> Durabilité</p>
+            <p class="text-[11px] md:text-xs text-slate-400 pl-10">Allongement de la durée de vie des produits et économie circulaire.</p>
+          </div>
+          <div class="space-y-1 group">
+            <p class="font-bold text-slate-800 flex items-center gap-2 text-sm md:text-base"><span class="w-8 h-8 rounded-lg bg-[#2470ef]/10 flex items-center justify-center group-hover:bg-[#2470ef]/20 transition-colors"><i data-lucide="shield-check" class="icon-unified w-4 h-4"></i></span> Conformité garantie</p>
+            <p class="text-[11px] md:text-xs text-slate-400 pl-10">Interactions supervisées et protection contre la fraude.</p>
+          </div>
+        </div>
+      </div>
+      <div class="relative overflow-hidden rounded-[32px] md:rounded-[48px] border border-white/10 shadow-[0_25px_80px_rgba(0,0,0,0.45)] group reveal-up">
+        <div class="absolute inset-0">
+          <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1600&auto=format&fit=crop" alt="Consultation stratégique" class="w-full h-full object-cover scale-105 group-hover:scale-110 transition-transform duration-[4000ms] ease-out" />
+          <div class="absolute inset-0 bg-gradient-to-br from-[#001633]/95 via-[#002d62]/80 to-[#001633]/90"></div>
+          <div class="absolute -top-24 -right-24 w-72 h-72 bg-blue-400/20 blur-3xl rounded-full"></div>
+          <div class="absolute -bottom-24 -left-24 w-72 h-72 bg-cyan-300/10 blur-3xl rounded-full"></div>
+        </div>
+        <div class="relative z-10 px-8 py-12 md:px-16 md:py-20 text-center text-white">
+          <div class="max-w-2xl mx-auto space-y-8 md:space-y-10">
+            <div class="relative mx-auto w-20 h-20 md:w-24 md:h-24 flex items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-xl shadow-[0_10px_40px_rgba(255,255,255,0.08)] animate-glow-pulse">
+              <div class="absolute inset-0 rounded-full bg-gradient-to-br from-yellow-300/20 to-orange-400/10"></div>
+              <i data-lucide="zap" class="relative z-10 w-9 h-9 md:w-11 md:h-11 text-yellow-300 fill-yellow-300 drop-shadow-[0_0_18px_rgba(253,224,71,0.65)]"></i>
+            </div>
+            <div class="space-y-4">
+              <h4 class="text-3xl md:text-5xl font-semibold tracking-[-0.03em] leading-tight">
+                Passez à l'action
+              </h4>
+              <p class="text-blue-100/90 text-base md:text-xl leading-relaxed max-w-xl mx-auto font-light">
+                Évaluer mon <b>Parcours Client Omnicanal</b> dès maintenant.
+              </p>
+            </div>
+            <div class="pt-2 md:pt-4">
+              <button onclick="window.open('https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ3JTz751iHQ5Rb5gntRTGFWkr2nO8ocaXYcBoHv6MOaaitFMWgY4O0kzJ5K-xBe6a_tF64_FSyQ', '_blank')" class="inline-flex items-center justify-center gap-2.5 md:gap-4 rounded-xl md:rounded-3xl bg-gradient-to-r from-[#3b82f6] via-[#2470ef] to-[#1d4ed8] px-5 py-3.5 md:px-10 md:py-5 text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] text-white shadow-[0_12px_30px_rgba(37,99,235,0.35)] transition-all duration-500 hover:scale-[1.03] hover:shadow-[0_18px_50px_rgba(37,99,235,0.6)] hover:-translate-y-1">
+                <span>ÉCHANGER AVEC UN EXPERT</span>
+                <span class="flex items-center justify-center w-6 h-6 md:w-8 md:h-8 rounded-full bg-white/15 border border-white/20 backdrop-blur-md shrink-0">
+                  <i data-lucide="arrow-up-right" class="w-3 h-3 md:w-4 md:h-4" style="color:white !important;"></i>
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-white py-12 md:py-16 border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 flex flex-col md:flex-row justify-between items-center gap-8 md:gap-10 text-center md:text-left">
+      <div class="flex flex-col md:flex-row items-center gap-6 md:gap-8">
+        <img src="https://cdn.convrrt.com/apps/sendinblue/6761372/ab4f2f8e-3e94-4b4e-8ff8-e21271d4b3f4.png" alt="comete.ai" class="h-5 md:h-6" />
+        <p class="text-slate-400 font-black text-[7px] md:text-[9px] uppercase tracking-[0.4em]">La technologie et l'IA au service du E-commerce et du Retail</p>
+      </div>
+      <div class="text-slate-400 font-black text-[7px] md:text-[9px] uppercase tracking-[0.4em]">
+        <span>© 2026 comete.ai</span>
+      </div>
+    </div>
+  </footer>
 </div>
 
-<!-- HERO SECTION -->
-<section id="hero" class="min-h-screen relative flex items-center overflow-hidden bg-[#000d25] text-left pt-36 pb-20 md:pt-48 md:pb-32">
-<div id="hero-mouse-glow" class="mouse-glow-bg"></div>
-<!-- Particles -->
-<div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-<div class="hero-particle" style="left: 10%; animation-delay: 0s;"></div>
-<div class="hero-particle" style="left: 20%; animation-delay: 2s;"></div>
-<div class="hero-particle" style="left: 35%; animation-delay: 4s;"></div>
-<div class="hero-particle" style="left: 50%; animation-delay: 1s;"></div>
-<div class="hero-particle" style="left: 65%; animation-delay: 3s;"></div>
-<div class="hero-particle" style="left: 80%; animation-delay: 5s;"></div>
-<div class="hero-particle" style="left: 90%; animation-delay: 2.5s;"></div>
-</div>
-<div class="absolute inset-0 z-0">
-<img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&q=80&w=2400" class="w-full h-full object-cover opacity-25 animate-bg-zoom scale-105" alt="E-commerce Futuriste" />
-<div class="absolute inset-0 bg-gradient-to-r from-[#000d25] via-[#000d25]/85 to-transparent"></div>
-<div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#000d25]"></div>
-<div class="tech-ring w-[600px] h-[600px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-slow-spin"></div>
-<div class="tech-ring w-[800px] h-[800px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-slow-spin-reverse opacity-50"></div>
-<div class="tech-ring w-[1000px] h-[1000px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-slow-spin opacity-30"></div>
-</div>
-<div class="relative z-10 max-w-7xl mx-auto px-4 md:px-6 w-full">
-<div class="max-w-4xl space-y-8 md:space-y-12">
-<div class="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-xl animate-fade-in shadow-2xl">
-<span class="w-2 h-2 rounded-full bg-cyan-300 animate-pulse live-dot font-sans"></span>
-<span class="text-[9px] md:text-[10px] uppercase tracking-[0.3em] text-blue-100 font-black font-sans">E-COMMERCE & GRANDE DISTRIBUTION : L'ÈRE DE L'EXPÉRIENCE AUGMENTÉE</span>
-</div>
-<h1 class="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-normal text-white leading-[1.1] tracking-tighter">
-L'IA redéfinit le <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#2470ef] via-[#5170ff] to-[#8ab1ff] font-sans font-bold">parcours d'achat</span> et la relation client.
-</h1>
-<p class="text-base md:text-xl lg:text-2xl text-blue-100/70 font-light leading-relaxed border-l-4 border-[#2470ef]/60 pl-4 md:pl-6 max-w-3xl animate-fade-in" style="animation-delay: 0.6s;">
-De la découverte produit à la fidélisation, <b class="text-white">comete.ai orchestre</b> une expérience omnicanale fluide, durable et ultra-personnalisée. Transformez chaque interaction en opportunité de valeur.
-</p>
-<div class="animate-fade-in flex flex-wrap gap-4" style="animation-delay: 0.9s;">
-<button onclick="document.getElementById('laboratoire').scrollIntoView({behavior:'smooth'})" class="group bg-gradient-to-r from-[#2470ef] to-[#5170ff] text-white px-6 py-4 md:px-8 md:py-5 rounded-2xl font-bold uppercase tracking-widest text-[10px] md:text-sm flex items-center gap-3 shadow-2xl transition-all hover:scale-[1.05] hover:shadow-[0_20px_60px_rgba(36,112,239,0.6)] font-sans">
-DÉCOUVRIR LE LAB IA <i data-lucide="arrow-down" class="w-4 h-4 md:w-5 md:h-5 group-hover:translate-y-1 transition-transform" style="color:white !important;"></i>
-</button>
-<button onclick="document.getElementById('impact').scrollIntoView({behavior:'smooth'})" class="group bg-white/5 backdrop-blur-xl border border-white/20 text-white px-6 py-4 md:px-8 md:py-5 rounded-2xl font-bold uppercase tracking-widest text-[10px] md:text-sm flex items-center gap-3 transition-all hover:bg-white/10 hover:border-white/40 font-sans">
-VOIR LES RÉSULTATS <i data-lucide="trending-up" class="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" style="color:white !important;"></i>
-</button>
-</div>
-</div>
-</div>
-</section>
-
-<!-- SECTION COMPARATIVE -->
-<section id="comparatif" class="py-24 md:py-36 bg-white overflow-hidden text-left relative">
-<div class="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
-<h2 class="text-3xl md:text-5xl lg:text-7xl font-normal text-[#002d62] leading-tight tracking-tighter mb-12 md:mb-20 lg:mb-16">
-La performance <br><span class="text-[#2470ef]">sans compromis</span> sur l'expérience client.
-</h2>
-<div class="flex flex-col lg:grid lg:grid-cols-2 gap-0 relative">
-<!-- E-commerce traditionnel -->
-<div class="bg-gradient-to-br from-slate-50 to-white p-6 md:p-14 lg:pr-24 rounded-3xl lg:rounded-l-[48px] lg:rounded-r-none border border-slate-200 mb-10 lg:mb-0 reveal-up">
-<h3 class="text-xl md:text-2xl font-black text-slate-700 mb-10 flex items-center gap-4">
-<span class="w-10 h-10 rounded-xl bg-red-100 flex items-center justify-center"><i data-lucide="alert-circle" class="icon-unified-danger w-5 h-5"></i></span>
-Pistes d'amélioration
-</h3>
-<ul class="space-y-6">
-<li class="flex gap-4 text-slate-500 text-sm md:text-base group">
-<span class="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center shrink-0 group-hover:bg-red-100 transition-colors"><i data-lucide="x-circle" class="icon-unified-danger w-4 h-4"></i></span>
-<span>Parcours d'achat <b>statique</b> et comparatifs techniques indigestes.</span>
-</li>
-<li class="flex gap-4 text-slate-500 text-sm md:text-base group">
-<span class="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center shrink-0 group-hover:bg-red-100 transition-colors"><i data-lucide="x-circle" class="icon-unified-danger w-4 h-4"></i></span>
-<span>Taux d'abandon de panier élevé par <b>manque d'accompagnement</b> contextuel.</span>
-</li>
-<li class="flex gap-4 text-slate-500 text-sm md:text-base group">
-<span class="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center shrink-0 group-hover:bg-red-100 transition-colors"><i data-lucide="x-circle" class="icon-unified-danger w-4 h-4"></i></span>
-<span>SAV réactif et coûteux, généré par une <b>mauvaise utilisation</b> des produits.</span>
-</li>
-<li class="flex gap-4 text-slate-500 text-sm md:text-base group">
-<span class="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center shrink-0 group-hover:bg-red-100 transition-colors"><i data-lucide="x-circle" class="icon-unified-danger w-4 h-4"></i></span>
-<span>Gestion des retours, de la fraude et de la <b>seconde main fragmentée</b>.</span>
-</li>
-<li class="flex gap-4 text-slate-500 text-sm md:text-base group">
-<span class="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center shrink-0 group-hover:bg-red-100 transition-colors"><i data-lucide="x-circle" class="icon-unified-danger w-4 h-4"></i></span>
-<span>Maintenance et consommables déclenchés <b>uniquement après la panne</b>.</span>
-</li>
-</ul>
-</div>
-<!-- Badge VS -->
-<div class="vs-image-container">
-<img src="https://cdn.convrrt.com/apps/sendinblue/6761372/060d39f9-27f2-4b6f-8faf-aaf96c025e56.png" alt="VS" class="w-full object-contain" />
-</div>
-<!-- Orchestration comete.ai -->
-<div class="bg-gradient-to-br from-[#002d62] via-[#001c3d] to-[#002d62] px-6 pb-6 pt-16 md:p-14 lg:pl-24 rounded-3xl lg:rounded-r-[48px] lg:rounded-l-none border border-[#2470ef]/20 shadow-2xl reveal-up relative overflow-hidden">
-<div class="absolute top-0 right-0 w-96 h-96 bg-[#2470ef]/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 font-sans"></div>
-<div class="absolute bottom-0 left-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 font-sans"></div>
-<div class="relative z-10">
-<h3 class="text-xl md:text-2xl font-black text-white mb-10 flex items-center gap-4">
-<span class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#2470ef] to-cyan-500 flex items-center justify-center shadow-lg shadow-[#2470ef]/30"><i data-lucide="sparkles" class="w-5 h-5" style="color:white !important;"></i></span>
-Orchestration comete.ai
-</h3>
-<ul class="space-y-6">
-<li class="flex gap-4 text-blue-50 text-sm md:text-base group">
-<span class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center shrink-0 group-hover:bg-white/20 transition-colors"><i data-lucide="check-circle-2" class="icon-unified-accent w-4 h-4" style="color:#22d3ee !important;"></i></span>
-<span><b>Assistant d'achat conversationnel</b> et comparateur intelligent guidé par l'IA.</span>
-</li>
-<li class="flex gap-4 text-blue-50 text-sm md:text-base group">
-<span class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center shrink-0 group-hover:bg-white/20 transition-colors"><i data-lucide="check-circle-2" class="icon-unified-accent w-4 h-4" style="color:#22d3ee !important;"></i></span>
-<span><b>Relance contextuelle</b> et personnalisée des paniers abandonnés en temps réel.</span>
-</li>
-<li class="flex gap-4 text-blue-50 text-sm md:text-base group">
-<span class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center shrink-0 group-hover:bg-white/20 transition-colors"><i data-lucide="check-circle-2" class="icon-unified-accent w-4 h-4" style="color:#22d3ee !important;"></i></span>
-<span><b>Aide à l'usage proactive</b> et visio-assistance pour un SAV résolu au premier contact.</span>
-</li>
-<li class="flex gap-4 text-blue-50 text-sm md:text-base group">
-<span class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center shrink-0 group-hover:bg-white/20 transition-colors"><i data-lucide="check-circle-2" class="icon-unified-accent w-4 h-4" style="color:#22d3ee !important;"></i></span>
-<span><b>Estimation instantanée par Vision IA</b> pour la reprise et l'économie circulaire.</span>
-</li>
-<li class="flex gap-4 text-blue-50 text-sm md:text-base group">
-<span class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center shrink-0 group-hover:bg-white/20 transition-colors"><i data-lucide="check-circle-2" class="icon-unified-accent w-4 h-4" style="color:#22d3ee !important;"></i></span>
-<span><b>Concierge IA prédictif</b> pour l'entretien, les consommables et l'upsell cyclique.</span>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</section>
-
-<!-- SECTION MODULES -->
-<section id="modules" class="py-24 md:py-36 bg-white text-left overflow-hidden">
-<div class="max-w-[1440px] mx-auto px-4 md:px-6">
-<div class="text-center max-w-3xl mx-auto mb-16 md:mb-20 reveal-up font-sans">
-<div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#2470ef]/10 border border-[#2470ef]/20 mb-6">
-<i data-lucide="layers" class="icon-unified w-4 h-4 font-sans"></i>
-<span class="text-[10px] uppercase tracking-widest text-[#2470ef] font-black font-sans">Nos Briques Opérationnelles</span>
-</div>
-<h2 class="text-3xl md:text-5xl lg:text-6xl font-normal text-[#002d62] tracking-tighter">
-L'orchestration retail & E-commerce <br><span class="text-gradient-animated">augmentée par l'IA.</span>
-</h2>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8 font-sans animate-fade-in" id="solutions-retail-grid">
-<!-- Les cartes sont injectées par le script JS du site -->
-</div>
-</div>
-</section>
-
-<!-- IMPACT SECTION -->
-<section id="impact" class="py-24 md:py-36 bg-[#001c3d] text-white relative overflow-hidden">
-<div class="absolute inset-0 pointer-events-none">
-<div class="absolute top-20 left-10 w-72 h-72 bg-[#2470ef]/10 rounded-full blur-3xl animate-float-slow"></div>
-<div class="absolute bottom-20 right-10 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl animate-float-slow" style="animation-delay: 2s;"></div>
-</div>
-<div class="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
-<div class="grid lg:grid-cols-2 gap-16 md:gap-24 items-center">
-<div class="space-y-8 reveal-up">
-<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 font-sans">
-<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse font-sans"></span>
-<span class="text-[9px] uppercase tracking-widest text-emerald-400 font-bold font-sans">Résultats mesurables</span>
-</div>
-<h2 class="text-3xl md:text-5xl lg:text-7xl font-normal leading-tight tracking-tighter font-sans">
-Un commerce <span class="text-gradient-animated">augmenté</span>, des résultats mesurables.
-</h2>
-<p class="text-blue-100/70 text-lg md:text-2xl italic font-light pl-6 border-l-2 border-[#2470ef] font-sans">
-"L'IA ne remplace pas le commerce, elle lui donne les moyens d'être à la hauteur des attentes omnicanalles."
-</p>
-</div>
-<div class="grid grid-cols-2 gap-4 md:gap-6 font-sans">
-<div class="group bg-gradient-to-br from-white/5 to-white/[0.02] p-6 md:p-8 rounded-3xl border border-white/10 text-center transition-all hover:bg-white/10 hover:border-[#2470ef]/40 hover:scale-105 reveal-up">
-<span class="text-3xl md:text-6xl font-black kpi-value block mb-2">+35%</span>
-<span class="text-[8px] md:text-[9px] uppercase font-bold text-blue-100/50 tracking-widest">Taux de conversion</span>
-</div>
-<div class="group bg-gradient-to-br from-white/5 to-white/[0.02] p-6 md:p-8 rounded-3xl border border-white/10 text-center transition-all hover:bg-white/10 hover:border-[#2470ef]/40 hover:scale-105 reveal-up" style="transition-delay: 0.1s;">
-<span class="text-3xl md:text-6xl font-black kpi-value block mb-2">-40%</span>
-<span class="text-[8px] md:text-[9px] uppercase font-bold text-blue-100/50 tracking-widest">Abandons de panier</span>
-</div>
-<div class="group bg-gradient-to-br from-white/5 to-white/[0.02] p-6 md:p-8 rounded-3xl border border-white/10 text-center transition-all hover:bg-white/10 hover:border-[#2470ef]/40 hover:scale-105 reveal-up" style="transition-delay: 0.2s;">
-<span class="text-3xl md:text-6xl font-black kpi-value block mb-2">-60%</span>
-<span class="text-[8px] md:text-[9px] uppercase font-bold text-blue-100/50 tracking-widest">Retours (mauvais usage)</span>
-</div>
-<div class="group bg-gradient-to-br from-white/5 to-white/[0.02] p-6 md:p-8 rounded-3xl border border-white/10 text-center transition-all hover:bg-white/10 hover:border-[#2470ef]/40 hover:scale-105 reveal-up" style="transition-delay: 0.3s;">
-<span class="text-3xl md:text-6xl font-black kpi-value block mb-2">+25%</span>
-<span class="text-[8px] md:text-[9px] uppercase font-bold text-blue-100/50 tracking-widest">Revenus récurrents</span>
-</div>
-</div>
-</div>
-</div>
-</section>
-
-<!-- LABORATOIRE INTERACTIF - INTÉGRATION DE L'ÉDITION LIGHT -->
-<section id="laboratoire" class="py-24 md:py-36 bg-gradient-to-b from-slate-50 via-white to-slate-50 text-left overflow-hidden relative">
-<div class="absolute inset-0 pointer-events-none">
-<div class="absolute top-40 left-20 w-96 h-96 bg-[#2470ef]/5 rounded-full blur-3xl"></div>
-<div class="absolute bottom-40 right-20 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl"></div>
-</div>
-<div class="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
-<div class="text-center max-w-3xl mx-auto mb-12 md:mb-16 reveal-up">
-<div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#2470ef]/10 border border-[#2470ef]/20 mb-6">
-<i data-lucide="flask-conical" class="icon-unified w-4 h-4 font-sans"></i>
-<span class="text-[10px] uppercase tracking-widest text-[#2470ef] font-black font-sans">Laboratoire Interactif</span>
-</div>
-<h2 class="text-3xl md:text-5xl lg:text-6xl font-normal text-[#002d62] tracking-tighter">
-Le Laboratoire <span class="text-gradient-animated">comete.ai</span>
-</h2>
-<p class="text-slate-500 text-[15px] font-light mt-4 text-center font-sans">
-Visualisez concrètement comment notre IA transforme chaque étape du parcours client. Cliquez sur les modules pour tester les simulations en temps réel.
-</p>
-</div>
-
-<!-- ====== DÉBUT DU CODE DE L'ÉDITION LIGHT (onglets + sim-root) ====== -->
-<div class="max-w-6xl mx-auto px-4 -mt-6 mb-10">
-  <div id="tabs-wrapper" class="flex flex-wrap justify-center gap-3"></div>
-</div>
-
-<div id="sim-root" class="max-w-6xl mx-auto px-4 pb-20"></div>
-<!-- ====== FIN DU CODE DE L'ÉDITION LIGHT ====== -->
-
-</div>
-</section>
-
-<!-- VISION SECTION -->
-<section id="vision" class="py-24 md:py-36 bg-gradient-to-b from-slate-50 to-white text-left overflow-hidden relative">
-<div class="max-w-7xl mx-auto px-4 md:px-6 grid lg:grid-cols-2 gap-12 md:gap-20 items-center relative z-10">
-<div class="space-y-10 reveal-up">
-<div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#2470ef]/10 border border-[#2470ef]/20 font-sans">
-<i data-lucide="zap" class="icon-unified w-4 h-4 font-sans"></i>
-<span class="text-[10px] uppercase tracking-widest text-[#2470ef] font-black">Passez à l'action</span>
-</div>
-<h2 class="text-3xl md:text-5xl lg:text-7xl font-normal text-[#002d62] leading-tight tracking-tighter font-sans">
-Combiner intelligemment <span class="text-gradient-animated">Technologie et Humain.</span>
-</h2>
-<p class="text-slate-500 text-lg md:text-2xl font-light max-w-xl font-sans">
-Libérez vos équipes des tâches répétitives et concentrez votre énergie sur la relation client, le conseil expert et la création de valeur durable.
-</p>
-<div class="grid sm:grid-cols-2 gap-8 font-sans">
-<div class="space-y-1 group">
-<p class="font-bold text-slate-800 flex items-center gap-2 text-sm md:text-base"><span class="w-8 h-8 rounded-lg bg-[#2470ef]/10 flex items-center justify-center group-hover:bg-[#2470ef]/20 transition-colors"><i data-lucide="zap" class="icon-unified w-4 h-4"></i></span> Disponibilité totale</p>
-<p class="text-[11px] md:text-xs text-slate-400 pl-10 font-sans">Réponse pertinent à toute heure sur tous les canaux.</p>
-</div>
-<div class="space-y-1 group">
-<p class="font-bold text-slate-800 flex items-center gap-2 text-sm md:text-base"><span class="w-8 h-8 rounded-lg bg-[#2470ef]/10 flex items-center justify-center group-hover:bg-[#2470ef]/20 transition-colors"><i data-lucide="users" class="icon-unified w-4 h-4 animate-pulse"></i></span> Conseillers valorisés</p>
-<p class="text-[11px] md:text-xs text-slate-400 pl-10 font-sans">Vos équipes gagnent en fluidité et en disponibilité pour des échanges à plus forte valeur.</p>
-</div>
-<div class="space-y-1 group">
-<p class="font-bold text-slate-800 flex items-center gap-2 text-sm md:text-base"><span class="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center group-hover:bg-emerald-100 transition-colors"><i data-lucide="leaf" class="icon-unified-success w-4 h-4"></i></span> Durabilité</p>
-<p class="text-[11px] md:text-xs text-slate-400 pl-10 font-sans">Allongement de la durée de vie des produits et économie circulaire.</p>
-</div>
-<div class="space-y-1 group">
-<p class="font-bold text-slate-800 flex items-center gap-2 text-sm md:text-base"><span class="w-8 h-8 rounded-lg bg-[#2470ef]/10 flex items-center justify-center group-hover:bg-[#2470ef]/20 transition-colors"><i data-lucide="shield-check" class="icon-unified w-4 h-4"></i></span> Conformité garantie</p>
-<p class="text-[11px] md:text-xs text-slate-400 pl-10 font-sans">Interactions supervisées et protection contre la fraude.</p>
-</div>
-</div>
-</div>
-<div class="relative overflow-hidden rounded-[32px] md:rounded-[48px] border border-white/10 shadow-[0_25px_80px_rgba(0,0,0,0.45)] group reveal-up">
-<div class="absolute inset-0">
-<img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1600&auto=format&fit=crop" alt="Consultation stratégique" class="w-full h-full object-cover scale-105 group-hover:scale-110 transition-transform duration-[4000ms] ease-out" />
-<div class="absolute inset-0 bg-gradient-to-br from-[#001633]/95 via-[#002d62]/80 to-[#001633]/90"></div>
-<div class="absolute -top-24 -right-24 w-72 h-72 bg-blue-400/20 blur-3xl rounded-full"></div>
-<div class="absolute -bottom-24 -left-24 w-72 h-72 bg-cyan-300/10 blur-3xl rounded-full"></div>
-</div>
-<div class="relative z-10 px-8 py-12 md:px-16 md:py-20 text-center text-white font-sans">
-<div class="max-w-2xl mx-auto space-y-8 md:space-y-10">
-<div class="relative mx-auto w-20 h-20 md:w-24 md:h-24 flex items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-xl shadow-[0_10px_40px_rgba(255,255,255,0.08)] animate-glow-pulse">
-<div class="absolute inset-0 rounded-full bg-gradient-to-br from-yellow-300/20 to-orange-400/10"></div>
-<i data-lucide="zap" class="relative z-10 w-9 h-9 md:w-11 md:h-11 text-yellow-300 fill-yellow-300 drop-shadow-[0_0_18px_rgba(253,224,71,0.65)]"></i>
-</div>
-<div class="space-y-4">
-<h4 class="text-3xl md:text-5xl font-semibold tracking-[-0.03em] leading-tight">
-Passez à l'action
-</h4>
-<p class="text-blue-100/90 text-base md:text-xl leading-relaxed max-w-xl mx-auto font-light font-sans">
-Évaluer mon <b>Parcours Client Omnicanal</b> dès maintenant.
-</p>
-</div>
-<div class="pt-2 md:pt-4 font-sans">
-<button onclick="window.open('https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ3JTz751iHQ5Rb5gntRTGFWkr2nO8ocaXYcBoHv6MOaaitFMWgY4O0kzJ5K-xBe6a_tF64_FSyQ', '_blank')" class="inline-flex items-center justify-center gap-2.5 md:gap-4 rounded-xl md:rounded-3xl bg-gradient-to-r from-[#3b82f6] via-[#2470ef] to-[#1d4ed8] px-5 py-3.5 md:px-10 md:py-5 text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] text-white shadow-[0_12px_30px_rgba(37,99,235,0.35)] transition-all duration-500 hover:scale-[1.03] hover:shadow-[0_18px_50px_rgba(37,99,235,0.6)] hover:-translate-y-1">
-<span>ÉCHANGER AVEC UN EXPERT</span>
-<span class="flex items-center justify-center w-6 h-6 md:w-8 md:h-8 rounded-full bg-white/15 border border-white/20 backdrop-blur-md shrink-0">
-<i data-lucide="arrow-up-right" class="w-3 h-3 md:w-4 md:h-4" style="color:white !important;"></i>
-</span>
-</button>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-
-<!-- FOOTER -->
-<footer class="bg-white py-12 md:py-16 border-t border-slate-200">
-<div class="max-w-7xl mx-auto px-4 md:px-6 flex flex-col md:flex-row justify-between items-center gap-8 md:gap-10 text-center md:text-left">
-<div class="flex flex-col md:flex-row items-center gap-6 md:gap-8">
-<img src="https://cdn.convrrt.com/apps/sendinblue/6761372/ab4f2f8e-3e94-4b4e-8ff8-e21271d4b3f4.png" alt="comete.ai" class="h-5 md:h-6" />
-<p class="text-slate-400 font-black text-[7px] md:text-[9px] uppercase tracking-[0.4em] font-sans">La technologie et l'IA au service du E-commerce et du Retail</p>
-</div>
-<div class="text-slate-400 font-black text-[7px] md:text-[9px] uppercase tracking-[0.4em] font-sans">
-<span>© 2026 comete.ai</span>
-</div>
-</div>
-</footer>
-</div>
-
-<!-- ====== SCRIPTS DE L'ÉDITION LIGHT (avec cross-sell dans le chat) ====== -->
+<!-- ===== SCRIPTS COMPLETS ===== -->
 <script>
 // ============================================================
-// 0. BASE DE DONNÉES SIMULÉE
+// 1. BASE DE DONNÉES SIMULÉE
 // ============================================================
 var DB = {
   clients: {
@@ -748,11 +907,11 @@ var DB = {
     }
     return this.clients[simId][clientId];
   },
-  save: function() { /* console.log('DB sauvegardée', this.clients); */ }
+  save: function() {}
 };
 
 // ============================================================
-// 1. ONGLETS
+// 2. ONGLETS
 // ============================================================
 var tabsData = [
   { id: 'match', label: 'Match & Buy', icon: 'shopping-bag' },
@@ -760,22 +919,19 @@ var tabsData = [
   { id: 'croute', label: 'C-Route Dispatch', icon: 'truck' },
   { id: 'safereturn', label: 'SafeReturn', icon: 'shield-check' }
 ];
-
 var tabsWrapper = document.getElementById('tabs-wrapper');
 var tabElements = [];
-
-for (var t = 0; t < tabsData.length; t++) {
-  var tab = tabsData[t];
+tabsData.forEach(function(tab) {
   var btn = document.createElement('button');
   btn.setAttribute('data-sim', tab.id);
   btn.className = 'sim-tab';
   btn.innerHTML = '<i data-lucide="' + tab.icon + '" style="width:20px;height:20px;"></i> ' + tab.label;
   tabsWrapper.appendChild(btn);
   tabElements.push(btn);
-}
+});
 
 // ============================================================
-// 2. FONCTIONS UTILITAIRES GLOBALES
+// 3. FONCTIONS UTILITAIRES
 // ============================================================
 function addMessage(containerId, from, text, imageUrl) {
   var container = document.getElementById(containerId);
@@ -811,8 +967,24 @@ function addResetButton(containerId, resetFn) {
   }
 }
 
+function safeSetText(id, text) {
+  var el = document.getElementById(id);
+  if (el) el.textContent = text;
+}
+function safeSetWidth(id, width) {
+  var el = document.getElementById(id);
+  if (el) el.style.width = width;
+}
+function safeCreateIcons() {
+  if (typeof lucide !== 'undefined' && lucide.createIcons) {
+    lucide.createIcons();
+  } else {
+    setTimeout(safeCreateIcons, 100);
+  }
+}
+
 // ============================================================
-// 3. SIMULATEUR 1 : MATCH & BUY (avec cross-sell dans le chat)
+// 4. SIMULATEUR : MATCH & BUY
 // ============================================================
 function renderMatch() {
   var clientId = 'client_match_1';
@@ -824,6 +996,7 @@ function renderMatch() {
   var cart = [];
   var totalVisits = 0;
   var conversions = 0;
+  var isProcessing = false;
   var products = [
     { name: "MacBook Pro M3 Max", price: 3899, category: "creatif" },
     { name: "Lenovo IdeaPad 5", price: 799, category: "etudiant" },
@@ -834,103 +1007,61 @@ function renderMatch() {
     'creatif': {
       product: 'Souris MX Master 3S',
       price: 99,
-      pitch: '🚀 Optimisez votre workflow créatif : la MX Master 3S offre une précision 8K, un scroll ultra-fluide et une autonomie de 70 jours. Réduisez de 30% vos clics inutiles et gagnez en productivité.'
+      pitch: '🚀 Optimisez votre workflow créatif : précision 8K, scroll ultra-fluide, autonomie 70 jours. Réduisez de 30% vos clics inutiles.'
     },
     'etudiant': {
       product: 'Housse de transport renforcée',
       price: 45,
-      pitch: '🎒 Protégez votre investissement avec une housse antichoc étanche, compatible avec tous les ordinateurs 13-16 pouces. Garantie 2 ans contre les chocs et l\'humidité.'
+      pitch: '🎒 Protégez votre investissement avec une housse antichoc étanche, garantie 2 ans.'
     },
     'pro': {
       product: 'Hub USB-C 7-en-1',
       price: 79,
-      pitch: '💼 Connectez tout votre écosystème professionnel en un clic : HDMI 4K, Ethernet Gigabit, 3 ports USB 3.0 et lecture de cartes SD. Augmentez votre débit de données de 500% et simplifiez vos présentations.'
+      pitch: '💼 Connectez tout votre écosystème : HDMI 4K, Ethernet Gigabit, 3 ports USB 3.0. Augmentez votre débit de 500%.'
     },
     'gamer': {
       product: 'Casque gaming surround 7.1',
       price: 129,
-      pitch: '🎧 Plongez au cœur de l\'action avec un son immersif 3D, un microphone noise-cancelling et une construction légère en alliage. Profitez d\'une latence < 20 ms pour une réactivité sans faille.'
+      pitch: '🎧 Son immersif 3D, microphone noise-cancelling, latence < 20 ms pour une réactivité sans faille.'
     }
   };
-  var isProcessing = false;
-  var nextAction = "En attente du choix de l'utilisateur";
 
   function updateDashboard() {
-    var total = 0;
-    for (var i = 0; i < cart.length; i++) total += cart[i].price;
+    var total = cart.reduce(function(s, item) { return s + item.price; }, 0);
     var avgBasket = cart.length > 0 ? (total / cart.length).toFixed(0) + '€' : '0€';
     var rate = totalVisits > 0 ? Math.round((conversions / totalVisits) * 100) : 0;
-    var el = function(id) { return document.getElementById(id); };
-    var elm;
-    if ((elm = el('m-dash-visits'))) elm.textContent = totalVisits;
-    if ((elm = el('m-dash-conversions'))) elm.textContent = conversions;
-    if ((elm = el('m-dash-cartItems'))) elm.textContent = cart.length;
-    if ((elm = el('m-dash-avgBasket'))) elm.textContent = avgBasket;
-    if ((elm = el('m-dash-totalSpent'))) elm.textContent = client.totalSpent + '€';
-    if ((elm = el('m-dash-conversionBar'))) elm.style.width = rate + '%';
-    if ((elm = el('m-dash-rate'))) elm.textContent = rate + '%';
-    if ((elm = el('m-dash-trend'))) {
-      elm.textContent = rate > 50 ? '▲ +5%' : '▼ -2%';
-      elm.className = 'kpi-trend ' + (rate > 50 ? 'kpi-trend-up' : 'kpi-trend-down');
-    }
-    var historyList = el('m-dash-history');
-    if (historyList) {
-      var html = '';
-      var important = client.history.filter(function(item) { return item.important === true; });
-      if (important.length === 0) html = '<div class="text-xs text-slate-400">Aucune interaction importante</div>';
-      else {
-        for (var h = 0; h < important.length; h++) {
-          html += '<div class="text-xs text-slate-600 border-b border-slate-100 py-1">' + important[h].summary + '</div>';
-        }
-      }
-      historyList.innerHTML = html;
-    }
-    if ((elm = el('m-cart-count'))) elm.textContent = cart.length;
-    if ((elm = el('m-total'))) elm.textContent = total + '€';
-    var nextEl = el('m-next-action');
-    if (nextEl) {
-      if (step === 1) nextEl.textContent = "L'IA va demander l'usage principal";
-      else if (step === 2) nextEl.textContent = "L'IA va proposer un produit et attendre l'ajout au panier";
-      else if (step === 3) nextEl.textContent = "L'IA va proposer la finalisation de la commande";
-      else if (step === 4) nextEl.textContent = "L'IA va proposer un cross-sell (si applicable)";
-      else nextEl.textContent = "Simulation terminée";
-    }
+    safeSetText('m-dash-visits', totalVisits);
+    safeSetText('m-dash-conversions', conversions);
+    safeSetText('m-dash-cartItems', cart.length);
+    safeSetText('m-dash-avgBasket', avgBasket);
+    safeSetText('m-dash-totalSpent', client.totalSpent + '€');
+    safeSetWidth('m-dash-conversionBar', rate + '%');
+    safeSetText('m-dash-rate', rate + '%');
+    safeSetText('m-cart-count', cart.length);
+    safeSetText('m-total', total + '€');
+    safeCreateIcons();
   }
 
-  function addUser(text) {
-    addMessage('m-chat', 'user', text);
-    DB.save();
-    updateDashboard();
-  }
-
-  function addBot(text) {
-    addMessage('m-chat', 'bot', text.replace(/{user}/g, firstName));
-    updateDashboard();
-  }
-
-  function addImportantSummary(summary) {
-    client.history.push({ important: true, summary: summary, timestamp: new Date().toISOString() });
-    DB.save();
-  }
+  function addUser(text) { addMessage('m-chat', 'user', text); DB.save(); updateDashboard(); }
+  function addBot(text) { addMessage('m-chat', 'bot', text.replace(/{user}/g, firstName)); updateDashboard(); }
+  function addImportantSummary(summary) { client.history.push({ important: true, summary: summary }); DB.save(); }
 
   function replaceSuggestions(btns) {
     var container = document.getElementById('m-suggestions');
     if (!container) return;
     container.innerHTML = '';
-    for (var i = 0; i < btns.length; i++) {
-      var b = btns[i];
+    btns.forEach(function(b) {
       var chip = document.createElement('div');
       chip.className = 'suggestion-chip';
       chip.innerText = b.label;
-      chip.dataset.value = b.value;
-      chip.addEventListener('click', function() {
+      chip.onclick = function() {
         if (isProcessing) return;
-        var val = this.dataset.value;
-        if (val !== 'reset') addUser(this.innerText);
-        handleChoice(val);
-      });
+        if (b.value !== 'reset') addUser(this.innerText);
+        handleChoice(b.value);
+      };
       container.appendChild(chip);
-    }
+    });
+    safeCreateIcons();
   }
 
   function handleChoice(val) {
@@ -938,10 +1069,7 @@ function renderMatch() {
       selectedUsage = val;
       step = 2;
       totalVisits++;
-      var product = null;
-      for (var i = 0; i < products.length; i++) {
-        if (products[i].category === selectedUsage) { product = products[i]; break; }
-      }
+      var product = products.find(function(p) { return p.category === selectedUsage; });
       if (product) {
         addImportantSummary('Choix : ' + selectedUsage);
         addBot('Bonjour ' + firstName + ', merci de nous contacter. Je vous recommande le ' + product.name + ' à ' + product.price + '€. Souhaitez-vous l\'ajouter à votre panier ?');
@@ -952,10 +1080,7 @@ function renderMatch() {
       }
     } else if (step === 2) {
       if (val === "add") {
-        var product = null;
-        for (var i = 0; i < products.length; i++) {
-          if (products[i].category === selectedUsage) { product = products[i]; break; }
-        }
+        var product = products.find(function(p) { return p.category === selectedUsage; });
         if (product) {
           cart.push(product);
           addImportantSummary('Ajout panier : ' + product.name);
@@ -966,16 +1091,11 @@ function renderMatch() {
             { label: "🔄 Recommencer", value: "reset" }
           ]);
         }
-      } else if (val === "reset") {
-        reset();
-      }
+      } else if (val === "reset") { reset(); }
     } else if (step === 3) {
       if (val === "checkout") {
         conversions++;
-        for (var i = 0; i < cart.length; i++) {
-          client.purchases.push(cart[i]);
-          client.totalSpent += cart[i].price;
-        }
+        cart.forEach(function(item) { client.purchases.push(item); client.totalSpent += item.price; });
         addImportantSummary('Commande finalisée : ' + cart.length + ' article(s)');
         addBot('🎉 Commande validée avec succès ' + firstName + ' ! Merci de votre confiance.');
         clearSuggestions('m-suggestions');
@@ -983,20 +1103,16 @@ function renderMatch() {
         var offer = crossSellOffers[selectedUsage];
         if (offer) {
           step = 4;
-          // 1. Envoyer le message de cross-sell dans le chat (côté client)
           addBot('💡 ' + firstName + ', je vous propose d\'ajouter <strong>' + offer.product + '</strong> (' + offer.price + '€) à votre commande.<br><span class="text-xs">' + offer.pitch + '</span>');
 
-          // 2. Ajouter les boutons d'action dans la zone de suggestions
           var recosDiv = document.getElementById('m-suggestions');
           if (recosDiv) {
-            // Vider la zone (au cas où)
             recosDiv.innerHTML = '';
-
             var acceptBtn = document.createElement('div');
             acceptBtn.className = 'suggestion-chip';
             acceptBtn.innerText = '✅ Accepter l\'offre (+' + offer.price + '€)';
             acceptBtn.style.borderColor = '#10b981';
-            acceptBtn.addEventListener('click', function() {
+            acceptBtn.onclick = function() {
               if (isProcessing) return;
               isProcessing = true;
               addUser('Accepter l\'offre ' + offer.product);
@@ -1004,58 +1120,49 @@ function renderMatch() {
               client.purchases.push({ name: offer.product, price: offer.price });
               client.totalSpent += offer.price;
               addImportantSummary('Cross-sell accepté : ' + offer.product);
-              addBot('👍 Parfait ' + firstName + ' ! ' + offer.product + ' a été ajouté à votre commande. Profitez dès maintenant de cette offre exclusive. Au plaisir de vous accompagner.');
+              addBot('👍 Parfait ' + firstName + ' ! ' + offer.product + ' a été ajouté à votre commande.');
               clearSuggestions('m-suggestions');
               addResetButton('m-suggestions', reset);
               updateDashboard();
               step = 0;
               isProcessing = false;
-            });
+            };
             recosDiv.appendChild(acceptBtn);
 
             var refuseBtn = document.createElement('div');
             refuseBtn.className = 'suggestion-chip';
             refuseBtn.innerText = '❌ Refuser l\'offre';
             refuseBtn.style.borderColor = '#ef4444';
-            refuseBtn.addEventListener('click', function() {
+            refuseBtn.onclick = function() {
               if (isProcessing) return;
               isProcessing = true;
               addUser('Refuser l\'offre');
               addImportantSummary('Cross-sell refusé');
-              addBot('Pas de problème ' + firstName + ', je comprends tout à fait. N\'hésitez pas à revenir vers nous si besoin. Restons en contact.');
+              addBot('Pas de problème ' + firstName + ', restons en contact.');
               clearSuggestions('m-suggestions');
               addResetButton('m-suggestions', reset);
               updateDashboard();
               step = 0;
               isProcessing = false;
-            });
+            };
             recosDiv.appendChild(refuseBtn);
           }
         } else {
-          addBot('Merci ' + firstName + ' pour votre commande. Nous restons à votre disposition.');
+          addBot('Merci ' + firstName + ' pour votre commande.');
           addResetButton('m-suggestions', reset);
         }
-      } else if (val === "reset") {
-        reset();
-      }
+      } else if (val === "reset") { reset(); }
     }
     updateDashboard();
   }
 
   function reset() {
-    client.history = [];
-    client.purchases = [];
-    client.totalSpent = 0;
-    DB.save();
-    step = 1;
-    selectedUsage = null;
-    cart = [];
-    totalVisits = 0;
-    conversions = 0;
+    client.history = []; client.purchases = []; client.totalSpent = 0; DB.save();
+    step = 1; selectedUsage = null; cart = []; totalVisits = 0; conversions = 0;
     var chatDiv = document.getElementById('m-chat');
     if (chatDiv) chatDiv.innerHTML = '';
     addUser('Bonjour ' + firstName + ', je recherche un ordinateur professionnel.');
-    addBot('Bonjour ' + firstName + ' et merci pour votre visite. Pour vous orienter vers le modèle idéal, quel est votre usage principal ?');
+    addBot('Bonjour ' + firstName + ' ! Pour vous orienter, quel est votre usage principal ?');
     replaceSuggestions([
       { label: "🎨 Créatif", value: "creatif" },
       { label: "📚 Étudiant", value: "etudiant" },
@@ -1110,94 +1217,43 @@ function renderMatch() {
     </div>
   </div>`;
   document.getElementById('sim-root').innerHTML = html;
-  setTimeout(function() { lucide.createIcons(); reset(); }, 100);
+  setTimeout(function() { safeCreateIcons(); reset(); }, 100);
 }
 
 // ============================================================
-// 4. SIMULATEUR 2 : SECONDE MAIN
+// 5. SIMULATEUR : SECONDE MAIN
 // ============================================================
 function renderSecondLife() {
   var clientId = 'client_sl_1';
   var client = DB.getClient('secondlife', clientId);
   var firstName = client.firstName;
-
-  var state = {
-    step: 0,
-    photoSent: false,
-    scanCompleted: false,
-    totalEstimations: 0,
-    acceptedOffers: 0,
-    lastEstimation: 0,
-    lastConfidence: 0,
-    isProcessing: false,
-    timerId: null
-  };
-  var nextAction = "En attente de l'envoi de la photo";
+  var state = { step:0, photoSent:false, scanCompleted:false, totalEstimations:0, acceptedOffers:0, lastEstimation:0, lastConfidence:0, isProcessing:false, timerId:null };
 
   function updateDashboard() {
     var acceptRate = state.totalEstimations > 0 ? Math.round((state.acceptedOffers / state.totalEstimations) * 100) : 0;
     var gain = state.acceptedOffers * 425;
-    var el = function(id) { return document.getElementById(id); };
-    var elm;
-    if ((elm = el('sl-dash-estimations'))) elm.textContent = state.totalEstimations;
-    if ((elm = el('sl-dash-accepted'))) elm.textContent = state.acceptedOffers;
-    if ((elm = el('sl-dash-acceptRate'))) elm.textContent = acceptRate + '%';
-    if ((elm = el('sl-dash-acceptBar'))) elm.style.width = acceptRate + '%';
-    if ((elm = el('sl-dash-gain'))) elm.textContent = gain + '€';
-    if ((elm = el('sl-dash-trend'))) {
-      elm.textContent = acceptRate > 50 ? '▲ +8%' : '▼ -3%';
-      elm.className = 'kpi-trend ' + (acceptRate > 50 ? 'kpi-trend-up' : 'kpi-trend-down');
-    }
+    safeSetText('sl-dash-estimations', state.totalEstimations);
+    safeSetText('sl-dash-accepted', state.acceptedOffers);
+    safeSetText('sl-dash-acceptRate', acceptRate + '%');
+    safeSetWidth('sl-dash-acceptBar', acceptRate + '%');
+    safeSetText('sl-dash-gain', gain + '€');
     var stock = gain * 1.8;
-    if ((elm = el('sl-dash-stockBar'))) elm.style.width = Math.min((stock / 1000) * 100, 100) + '%';
-    if ((elm = el('sl-dash-potential'))) elm.textContent = stock + '€';
-    var historyDiv = el('sl-dash-history');
-    if (historyDiv) {
-      var html = '';
-      var important = client.history.filter(function(item) { return item.important === true; });
-      if (important.length === 0) html = '<div class="text-xs text-slate-400">Aucune estimation</div>';
-      else {
-        for (var i = 0; i < important.length; i++) {
-          html += '<div class="text-xs text-slate-600 border-b border-slate-100 py-1">' + important[i].summary + '</div>';
-        }
-      }
-      historyDiv.innerHTML = html;
-    }
-    if ((elm = el('sl-dash-estimation'))) elm.textContent = state.lastEstimation > 0 ? state.lastEstimation + '€' : '---';
-    if ((elm = el('sl-dash-confidence'))) elm.textContent = state.lastConfidence > 0 ? state.lastConfidence + '%' : '--%';
-    var statusEl = el('sl-dash-scanStatus');
+    safeSetWidth('sl-dash-stockBar', Math.min((stock / 1000) * 100, 100) + '%');
+    safeSetText('sl-dash-potential', stock + '€');
+    safeSetText('sl-dash-estimation', state.lastEstimation > 0 ? state.lastEstimation + '€' : '---');
+    safeSetText('sl-dash-confidence', state.lastConfidence > 0 ? state.lastConfidence + '%' : '--%');
+    var statusEl = document.getElementById('sl-dash-scanStatus');
     if (statusEl) {
-      if (state.scanCompleted) {
-        statusEl.textContent = '✅ Scan terminé';
-        statusEl.style.color = '#10b981';
-        nextAction = "Proposer l'offre d'achat";
-      } else if (state.photoSent) {
-        statusEl.textContent = '🔍 Analyse en cours...';
-        statusEl.style.color = '#f59e0b';
-        nextAction = "Analyse en cours...";
-      } else {
-        statusEl.textContent = '⏳ En attente';
-        statusEl.style.color = '#64748b';
-        nextAction = "En attente de l'envoi de la photo";
-      }
+      if (state.scanCompleted) { statusEl.textContent = '✅ Scan terminé'; statusEl.style.color = '#10b981'; }
+      else if (state.photoSent) { statusEl.textContent = '🔍 Analyse en cours...'; statusEl.style.color = '#f59e0b'; }
+      else { statusEl.textContent = '⏳ En attente'; statusEl.style.color = '#64748b'; }
     }
     updateScanPanel();
-    var nextEl = el('sl-next-action');
-    if (nextEl) nextEl.textContent = nextAction;
+    safeCreateIcons();
   }
-
-  function addBot(text) {
-    addMessage('sl-chat', 'bot', text.replace(/{user}/g, firstName));
-  }
-  function addUser(text, imageUrl) {
-    addMessage('sl-chat', 'user', text, imageUrl);
-    DB.save();
-  }
-
-  function addImportantSummary(summary) {
-    client.history.push({ important: true, summary: summary, timestamp: new Date().toISOString() });
-    DB.save();
-  }
+  function addBot(text) { addMessage('sl-chat', 'bot', text.replace(/{user}/g, firstName)); }
+  function addUser(text, img) { addMessage('sl-chat', 'user', text, img); DB.save(); }
+  function addImportantSummary(summary) { client.history.push({ important: true, summary: summary }); DB.save(); }
 
   function updateScanPanel() {
     var panel = document.getElementById('sl-scan-panel');
@@ -1208,8 +1264,7 @@ function renderSecondLife() {
           <i data-lucide="camera" class="w-12 h-12 text-blue-400 mb-2"></i>
           <p class="text-slate-600 text-sm font-semibold">En attente de la photo</p>
           <p class="text-slate-400 text-xs">Envoyez une photo pour l'analyse</p>
-        </div>
-      `;
+        </div>`;
     } else {
       var overlay = !state.scanCompleted ? '<div class="absolute inset-0 bg-black/30 z-10 flex items-center justify-center"><span class="text-white text-sm font-semibold">📸 Analyse en cours...</span></div>' : '';
       var badge = state.scanCompleted ? '<div class="absolute top-2 left-2 z-20 scan-badge">✅ Scan terminé - Confiance ' + state.lastConfidence + '%</div>' : '';
@@ -1218,10 +1273,9 @@ function renderSecondLife() {
           <img src="https://cdn.convrrt.com/apps/sendinblue/6761372/5b4c26c6-34de-4125-879b-4b13a02b2154.png" class="w-full h-full object-cover" alt="iPhone 13 Pro" />
           ${overlay}
           ${badge}
-        </div>
-      `;
+        </div>`;
     }
-    lucide.createIcons();
+    safeCreateIcons();
   }
 
   function showAcceptButtons() {
@@ -1231,7 +1285,7 @@ function renderSecondLife() {
     var accept = document.createElement('div');
     accept.className = 'suggestion-chip';
     accept.innerText = '✅ Accepter l\'offre';
-    accept.addEventListener('click', function() {
+    accept.onclick = function() {
       if (state.isProcessing) return;
       state.isProcessing = true;
       addUser("Accepter l'offre");
@@ -1239,30 +1293,31 @@ function renderSecondLife() {
       client.purchases.push({ name: 'iPhone 13 Pro (reconditionné)', price: 425 });
       client.totalSpent += 425;
       addImportantSummary('Offre acceptée : iPhone 13 Pro');
-      addBot('🎉 Offre acceptée ' + firstName + ' ! L\'étiquette d\'expédition vous sera envoyée par email sous 2h. Merci pour votre confiance.');
+      addBot('🎉 Offre acceptée ' + firstName + ' ! L\'étiquette d\'expédition vous sera envoyée par email sous 2h.');
       clearSuggestions('sl-suggestions');
       addResetButton('sl-suggestions', reset);
       updateDashboard();
       state.step = 0;
       state.isProcessing = false;
-    });
+    };
     div.appendChild(accept);
     var refuse = document.createElement('div');
     refuse.className = 'suggestion-chip';
     refuse.innerText = '❌ Refuser l\'offre';
     refuse.style.borderColor = '#ef4444';
-    refuse.addEventListener('click', function() {
+    refuse.onclick = function() {
       if (state.isProcessing) return;
       state.isProcessing = true;
       addUser("Refuser l'offre");
       addImportantSummary('Offre refusée');
-      addBot('Pas de souci ' + firstName + ', vous pouvez toujours y revenir. Merci de nous avoir contactés.');
+      addBot('Pas de souci ' + firstName + ', vous pouvez revenir plus tard.');
       clearSuggestions('sl-suggestions');
       addResetButton('sl-suggestions', reset);
       state.step = 0;
       state.isProcessing = false;
-    });
+    };
     div.appendChild(refuse);
+    safeCreateIcons();
   }
 
   function completeScan() {
@@ -1274,7 +1329,7 @@ function renderSecondLife() {
     addImportantSummary('Estimation iPhone 13 Pro : 425€ (confiance ' + state.lastConfidence + '%)');
     state.step = 2;
     updateDashboard();
-    addBot('🔍 Analyse terminée ' + firstName + ' : état général correct (micro-rayures superficielles, batterie 81%). Estimation : 425€. Taux de confiance IA : ' + state.lastConfidence + '%. Acceptez-vous l\'offre ?');
+    addBot('🔍 Analyse terminée ' + firstName + ' : état général correct, batterie 81%. Estimation : 425€. Confiance IA : ' + state.lastConfidence + '%. Acceptez-vous l\'offre ?');
     showAcceptButtons();
     state.isProcessing = false;
   }
@@ -1290,24 +1345,14 @@ function renderSecondLife() {
     updateDashboard();
     addBot('Merci ' + firstName + ' ! L\'analyse de votre iPhone 13 Pro est en cours...');
     if (state.timerId) clearTimeout(state.timerId);
-    state.timerId = setTimeout(function() {
-      completeScan();
-    }, 3000);
+    state.timerId = setTimeout(function() { completeScan(); }, 3000);
   }
 
   function reset() {
     if (state.timerId) { clearTimeout(state.timerId); state.timerId = null; }
-    client.history = [];
-    client.purchases = [];
-    client.totalSpent = 0;
-    DB.save();
-    state.step = 0;
-    state.photoSent = false;
-    state.scanCompleted = false;
-    state.totalEstimations = 0;
-    state.acceptedOffers = 0;
-    state.lastEstimation = 0;
-    state.lastConfidence = 0;
+    client.history = []; client.purchases = []; client.totalSpent = 0; DB.save();
+    state.step = 0; state.photoSent = false; state.scanCompleted = false;
+    state.totalEstimations = 0; state.acceptedOffers = 0; state.lastEstimation = 0; state.lastConfidence = 0;
     state.isProcessing = false;
     var chatDiv = document.getElementById('sl-chat');
     if (chatDiv) chatDiv.innerHTML = '';
@@ -1318,7 +1363,7 @@ function renderSecondLife() {
       var sendBtn = document.createElement('div');
       sendBtn.className = 'suggestion-chip';
       sendBtn.innerText = '📸 Envoyer la photo';
-      sendBtn.addEventListener('click', sendPhoto);
+      sendBtn.onclick = sendPhoto;
       div.appendChild(sendBtn);
     }
     updateDashboard();
@@ -1380,76 +1425,73 @@ function renderSecondLife() {
     </div>
   </div>`;
   document.getElementById('sim-root').innerHTML = html;
-  setTimeout(function() { lucide.createIcons(); reset(); }, 100);
+  setTimeout(function() { safeCreateIcons(); reset(); }, 100);
 }
 
 // ============================================================
-// 5. SIMULATEUR 3 : C-ROUTE
+// 6. SIMULATEUR : C-ROUTE
 // ============================================================
 function renderCRoute() {
   var clientId = 'client_cr_1';
   var client = DB.getClient('croute', clientId);
   var firstName = client.firstName;
-
-  var step = 1;
-  var isProcessing = false;
-  var totalCO2 = 24 * 0.181;
-  var totalKm = 24;
-  var incidents = 1;
-  var satisfaction = 85;
-  var deliveries = 12;
-  var optimizations = 0;
-  var nextAction = "Proposer l'optimisation de la tournée";
+  var step = 1, isProcessing = false;
+  var totalCO2 = 24 * 0.181, totalKm = 24, incidents = 1, satisfaction = 85, deliveries = 12, optimizations = 0;
 
   function updateDashboard() {
-    var el = function(id) { return document.getElementById(id); };
-    var elm;
-    if ((elm = el('cr-dash-co2'))) elm.textContent = totalCO2.toFixed(1) + ' kg';
-    if ((elm = el('cr-dash-km'))) elm.textContent = totalKm + ' km';
-    if ((elm = el('cr-dash-incidents'))) elm.textContent = incidents;
-    if ((elm = el('cr-dash-satisfaction'))) elm.textContent = satisfaction + '%';
-    if ((elm = el('cr-dash-satisfactionBar'))) elm.style.width = satisfaction + '%';
-    if ((elm = el('cr-dash-deliveries'))) elm.textContent = deliveries;
-    if ((elm = el('cr-dash-optimizations'))) elm.textContent = optimizations;
-    if ((elm = el('cr-dash-trend'))) {
-      elm.textContent = satisfaction > 90 ? '▲ +5%' : '▼ -2%';
-      elm.className = 'kpi-trend ' + (satisfaction > 90 ? 'kpi-trend-up' : 'kpi-trend-down');
-    }
-    if ((elm = el('cr-dash-distance'))) elm.innerHTML = totalKm + ' km';
-    if ((elm = el('cr-dash-co2-label'))) elm.innerHTML = totalCO2.toFixed(1) + ' kg CO₂';
-    var path = document.getElementById('new-route-path');
-    if (path) { /* style géré par le click */ }
-    var historyDiv = el('cr-dash-history');
-    if (historyDiv) {
-      var html = '';
-      var important = client.history.filter(function(item) { return item.important === true; });
-      if (important.length === 0) html = '<div class="text-xs text-slate-400">Aucune optimisation</div>';
-      else {
-        for (var i = 0; i < important.length; i++) {
-          html += '<div class="text-xs text-slate-600 border-b border-slate-100 py-1">' + important[i].summary + '</div>';
-        }
-      }
-      historyDiv.innerHTML = html;
-    }
-    var nextEl = el('cr-next-action');
-    if (nextEl) {
-      if (step === 1) nextEl.textContent = "Proposer l'optimisation de la tournée";
-      else if (step === 2) nextEl.textContent = "Attendre la validation du client";
-      else nextEl.textContent = "Simulation terminée";
-    }
+    safeSetText('cr-dash-co2', totalCO2.toFixed(1) + ' kg');
+    safeSetText('cr-dash-km', totalKm + ' km');
+    safeSetText('cr-dash-incidents', incidents);
+    safeSetText('cr-dash-satisfaction', satisfaction + '%');
+    safeSetWidth('cr-dash-satisfactionBar', satisfaction + '%');
+    safeSetText('cr-dash-deliveries', deliveries);
+    safeSetText('cr-dash-optimizations', optimizations);
+    safeSetText('cr-distance', totalKm);
+    safeSetText('cr-co2', totalCO2.toFixed(1));
+    safeCreateIcons();
   }
+  function addBot(text) { addMessage('cr-chat', 'bot', text.replace(/{user}/g, firstName)); }
+  function addUser(text) { addMessage('cr-chat', 'user', text); DB.save(); }
+  function addImportantSummary(summary) { client.history.push({ important: true, summary: summary }); DB.save(); }
 
-  function addBot(text) {
-    addMessage('cr-chat', 'bot', text.replace(/{user}/g, firstName));
-  }
-  function addUser(text) {
-    addMessage('cr-chat', 'user', text);
-    DB.save();
-  }
-
-  function addImportantSummary(summary) {
-    client.history.push({ important: true, summary: summary, timestamp: new Date().toISOString() });
-    DB.save();
+  function restoreSuggestions() {
+    var div = document.getElementById('cr-suggestions');
+    if (!div) return;
+    div.innerHTML = '';
+    if (step === 1) {
+      var opt = document.createElement('div');
+      opt.className = 'suggestion-chip';
+      opt.innerText = '🔄 Optimiser la tournée';
+      opt.onclick = reroute;
+      div.appendChild(opt);
+    } else if (step === 2) {
+      var confirm = document.createElement('div');
+      confirm.className = 'suggestion-chip';
+      confirm.innerText = '✅ Valider la tournée';
+      confirm.onclick = function() {
+        addUser("Valider la tournée");
+        var newCO2 = 18 * 0.181;
+        totalCO2 = newCO2; totalKm = 18; incidents = 0; satisfaction = 98; deliveries = 12; optimizations++;
+        addImportantSummary('Optimisation : 18 km, ' + newCO2.toFixed(1) + ' kg CO₂');
+        updateDashboard();
+        var path = document.getElementById('new-route-path');
+        if (path) path.setAttribute('stroke', '#3b82f6');
+        addBot('✅ Tournée validée ' + firstName + ' ! Économie : ' + (4.344 - newCO2).toFixed(1) + ' kg CO₂ évités.');
+        clearSuggestions('cr-suggestions');
+        addResetButton('cr-suggestions', reset);
+        step = 3;
+        updateDashboard();
+      };
+      div.appendChild(confirm);
+      var resetChip = document.createElement('div');
+      resetChip.className = 'suggestion-chip';
+      resetChip.innerText = '🔄 Recommencer';
+      resetChip.onclick = reset;
+      div.appendChild(resetChip);
+    } else if (step === 3) {
+      addResetButton('cr-suggestions', reset);
+    }
+    safeCreateIcons();
   }
 
   function reroute() {
@@ -1457,85 +1499,26 @@ function renderCRoute() {
     isProcessing = true;
     addUser("🔄 Optimiser la tournée");
     addBot('🔍 Recherche d’un itinéraire plus efficace ' + firstName + '...');
+    clearSuggestions('cr-suggestions');
     setTimeout(function() {
       var newCO2 = 18 * 0.181;
-      addBot('🟢 Nouvelle tournée : 18 km (' + newCO2.toFixed(1) + ' kg CO₂). Livraison estimée dans 22 min. Validez-vous ?');
+      addBot('🟢 Nouvelle tournée : 18 km (' + newCO2.toFixed(1) + ' kg CO₂). Validez-vous ?');
       step = 2;
-      var div = document.getElementById('cr-suggestions');
-      if (!div) return;
-      div.innerHTML = '';
-      var confirm = document.createElement('div');
-      confirm.className = 'suggestion-chip';
-      confirm.innerText = '✅ Valider la tournée';
-      confirm.addEventListener('click', function() {
-        addUser("Valider la tournée");
-        totalCO2 = newCO2;
-        totalKm = 18;
-        incidents = 0;
-        satisfaction = 98;
-        deliveries = 12;
-        optimizations++;
-        addImportantSummary('Optimisation : 18 km, ' + newCO2.toFixed(1) + ' kg CO₂');
-        updateDashboard();
-        var path = document.getElementById('new-route-path');
-        if (path) path.setAttribute('stroke', '#3b82f6');
-        addBot('✅ Tournée validée ' + firstName + ' ! Client notifié. Économie : ' + (4.344 - newCO2).toFixed(1) + ' kg CO₂ évités. Merci de votre confiance.');
-        clearSuggestions('cr-suggestions');
-        var recosDiv = document.getElementById('cr-suggestions');
-        if (recosDiv) {
-          var label = document.createElement('div');
-          label.className = 'text-sm font-semibold text-slate-300 mt-2 mb-1';
-          label.innerText = '💡 Souhaitez-vous optimiser une autre tournée ?';
-          recosDiv.appendChild(label);
-          var chip = document.createElement('div');
-          chip.className = 'suggestion-chip';
-          chip.innerText = '🔄 Nouvelle optimisation';
-          chip.addEventListener('click', reset);
-          recosDiv.appendChild(chip);
-          addResetButton('cr-suggestions', reset);
-        }
-        isProcessing = false;
-        step = 0;
-        updateDashboard();
-      });
-      div.appendChild(confirm);
-      var resetChip = document.createElement('div');
-      resetChip.className = 'suggestion-chip';
-      resetChip.innerText = '🔄 Recommencer';
-      resetChip.addEventListener('click', reset);
-      div.appendChild(resetChip);
+      restoreSuggestions();
       isProcessing = false;
     }, 2000);
   }
 
   function reset() {
-    client.history = [];
-    client.purchases = [];
-    client.totalSpent = 0;
-    DB.save();
-    step = 1;
-    totalCO2 = 24 * 0.181;
-    totalKm = 24;
-    incidents = 1;
-    satisfaction = 85;
-    deliveries = 12;
-    optimizations = 0;
-    isProcessing = false;
+    client.history = []; client.purchases = []; client.totalSpent = 0; DB.save();
+    step = 1; totalCO2 = 24 * 0.181; totalKm = 24; incidents = 1; satisfaction = 85; deliveries = 12; optimizations = 0; isProcessing = false;
     updateDashboard();
     var path = document.getElementById('new-route-path');
     if (path) path.setAttribute('stroke', 'none');
     var chatDiv = document.getElementById('cr-chat');
     if (chatDiv) chatDiv.innerHTML = '';
     addBot('Bonjour ' + firstName + ', un incident est signalé : technicien J. Martin en panne. Lancer l\'optimisation ?');
-    var div = document.getElementById('cr-suggestions');
-    if (div) {
-      div.innerHTML = '';
-      var opt = document.createElement('div');
-      opt.className = 'suggestion-chip';
-      opt.innerText = '🔄 Optimiser la tournée';
-      opt.addEventListener('click', reroute);
-      div.appendChild(opt);
-    }
+    restoreSuggestions();
   }
 
   var html = `
@@ -1575,8 +1558,8 @@ function renderCRoute() {
             <text x="20" y="380" font-size="9">● Dépôt  ● Client  ⚠️ Incident</text>
           </svg>
           <div class="mt-3 flex justify-between text-sm font-semibold bg-white/60 p-2 rounded-xl">
-            <span>📏 Distance : <span id="cr-dash-distance">24</span> km</span>
-            <span>🌱 CO₂ : <span id="cr-dash-co2-label">4.3</span> kg CO₂</span>
+            <span>📏 Distance : <span id="cr-distance">24</span> km</span>
+            <span>🌱 CO₂ : <span id="cr-co2">4.3</span> kg CO₂</span>
           </div>
         </div>
         <div class="grid grid-cols-2 gap-4">
@@ -1601,90 +1584,39 @@ function renderCRoute() {
     </div>
   </div>`;
   document.getElementById('sim-root').innerHTML = html;
-  setTimeout(function() { lucide.createIcons(); reset(); }, 100);
+  setTimeout(function() { safeCreateIcons(); reset(); }, 100);
 }
 
 // ============================================================
-// 6. SIMULATEUR 4 : SAFERETURN
+// 7. SIMULATEUR : SAFERETURN
 // ============================================================
 function renderSafeReturn() {
   var clientId = 'client_sr_1';
   var client = DB.getClient('safereturn', clientId);
   var firstName = client.firstName;
-
-  var state = {
-    step: 0,
-    photoSent: false,
-    scanCompleted: false,
-    totalFraudDetected: 0,
-    totalClaims: 0,
-    savings: 0,
-    confidenceLevel: 96,
-    isProcessing: false,
-    timerId: null
-  };
-  var nextAction = "En attente de l'envoi de la photo";
+  var state = { step:0, photoSent:false, scanCompleted:false, totalFraudDetected:0, totalClaims:0, savings:0, confidenceLevel:96, isProcessing:false, timerId:null };
 
   function updateDashboard() {
-    var el = function(id) { return document.getElementById(id); };
-    var elm;
-    if ((elm = el('sr-dash-frauds'))) elm.textContent = state.totalFraudDetected;
-    if ((elm = el('sr-dash-claims'))) elm.textContent = state.totalClaims;
-    if ((elm = el('sr-dash-savings'))) elm.textContent = state.savings + '€';
     var rate = state.totalClaims > 0 ? Math.round((state.totalFraudDetected / state.totalClaims) * 100) : 0;
-    if ((elm = el('sr-dash-fraudRate'))) elm.textContent = rate + '%';
-    if ((elm = el('sr-dash-fraudBar'))) elm.style.width = rate + '%';
-    if ((elm = el('sr-dash-confidenceLevel'))) elm.textContent = state.confidenceLevel + '%';
-    if ((elm = el('sr-dash-confidenceBar'))) elm.style.width = state.confidenceLevel + '%';
-    if ((elm = el('sr-dash-trend'))) {
-      elm.textContent = rate > 50 ? '▲ +12%' : '▼ -5%';
-      elm.className = 'kpi-trend ' + (rate > 50 ? 'kpi-trend-up' : 'kpi-trend-down');
-    }
-    var historyDiv = el('sr-dash-history');
-    if (historyDiv) {
-      var html = '';
-      var important = client.history.filter(function(item) { return item.important === true; });
-      if (important.length === 0) html = '<div class="text-xs text-slate-400">Aucune vérification</div>';
-      else {
-        for (var i = 0; i < important.length; i++) {
-          html += '<div class="text-xs text-slate-600 border-b border-slate-100 py-1">' + important[i].summary + '</div>';
-        }
-      }
-      historyDiv.innerHTML = html;
-    }
-    var statusEl = el('sr-dash-scanStatus');
+    safeSetText('sr-dash-frauds', state.totalFraudDetected);
+    safeSetText('sr-dash-claims', state.totalClaims);
+    safeSetText('sr-dash-savings', state.savings + '€');
+    safeSetText('sr-dash-fraudRate', rate + '%');
+    safeSetWidth('sr-dash-fraudBar', rate + '%');
+    safeSetText('sr-dash-confidenceLevel', state.confidenceLevel + '%');
+    safeSetWidth('sr-dash-confidenceBar', state.confidenceLevel + '%');
+    var statusEl = document.getElementById('sr-dash-scanStatus');
     if (statusEl) {
-      if (state.scanCompleted) {
-        statusEl.textContent = '✅ Scan terminé';
-        statusEl.style.color = '#10b981';
-        nextAction = "Proposer la contestation ou l'acceptation";
-      } else if (state.photoSent) {
-        statusEl.textContent = '🔍 Analyse en cours...';
-        statusEl.style.color = '#f59e0b';
-        nextAction = "Analyse en cours...";
-      } else {
-        statusEl.textContent = '⏳ En attente';
-        statusEl.style.color = '#64748b';
-        nextAction = "En attente de l'envoi de la photo";
-      }
+      if (state.scanCompleted) { statusEl.textContent = '✅ Scan terminé'; statusEl.style.color = '#10b981'; }
+      else if (state.photoSent) { statusEl.textContent = '🔍 Analyse en cours...'; statusEl.style.color = '#f59e0b'; }
+      else { statusEl.textContent = '⏳ En attente'; statusEl.style.color = '#64748b'; }
     }
     updateScanPanel();
-    var nextEl = el('sr-next-action');
-    if (nextEl) nextEl.textContent = nextAction;
+    safeCreateIcons();
   }
-
-  function addBot(text) {
-    addMessage('sr-chat', 'bot', text.replace(/{user}/g, firstName));
-  }
-  function addUser(text, imageUrl) {
-    addMessage('sr-chat', 'user', text, imageUrl);
-    DB.save();
-  }
-
-  function addImportantSummary(summary) {
-    client.history.push({ important: true, summary: summary, timestamp: new Date().toISOString() });
-    DB.save();
-  }
+  function addBot(text) { addMessage('sr-chat', 'bot', text.replace(/{user}/g, firstName)); }
+  function addUser(text, img) { addMessage('sr-chat', 'user', text, img); DB.save(); }
+  function addImportantSummary(summary) { client.history.push({ important: true, summary: summary }); DB.save(); }
 
   function updateScanPanel() {
     var panel = document.getElementById('sr-scan-panel');
@@ -1695,8 +1627,7 @@ function renderSafeReturn() {
           <i data-lucide="package" class="w-12 h-12 text-red-400 mb-2"></i>
           <p class="text-slate-600 text-sm font-semibold">En attente de la photo</p>
           <p class="text-slate-400 text-xs">Envoyez une photo du colis</p>
-        </div>
-      `;
+        </div>`;
     } else {
       var overlay = !state.scanCompleted ? '<div class="absolute inset-0 bg-black/30 z-10 flex items-center justify-center"><span class="text-white text-sm font-semibold">📸 Analyse en cours...</span></div>' : '';
       var badge = state.scanCompleted ? '<div class="absolute top-2 left-2 z-20 scan-badge" style="background:rgba(239,68,68,0.15); color:#dc2626; border-color:#fca5a5;">⚠️ Fraude détectée - ' + state.confidenceLevel + '%</div>' : '';
@@ -1705,10 +1636,9 @@ function renderSafeReturn() {
           <img src="https://cdn.convrrt.com/apps/sendinblue/6761372/7212f405-ebd9-4255-8af6-08936a033c66.png" class="w-full h-full object-cover" alt="Colis endommagé" />
           ${overlay}
           ${badge}
-        </div>
-      `;
+        </div>`;
     }
-    lucide.createIcons();
+    safeCreateIcons();
   }
 
   function showContestButtons() {
@@ -1718,34 +1648,33 @@ function renderSafeReturn() {
     var appeal = document.createElement('div');
     appeal.className = 'suggestion-chip';
     appeal.innerText = '📋 Contester la décision';
-    appeal.addEventListener('click', function() {
+    appeal.onclick = function() {
       if (state.isProcessing) return;
       state.isProcessing = true;
       addUser("Contester la décision");
       addImportantSummary('Réclamation déposée');
-      addBot('📞 Réclamation déposée ' + firstName + '. Un expert analysera votre dossier sous 48h. Merci de votre confiance.');
+      addBot('📞 Réclamation déposée ' + firstName + '. Un expert analysera votre dossier sous 48h.');
       clearSuggestions('sr-suggestions');
       addResetButton('sr-suggestions', reset);
-      state.step = 0;
-      state.isProcessing = false;
-    });
+      state.step = 0; state.isProcessing = false;
+    };
     div.appendChild(appeal);
     var accept = document.createElement('div');
     accept.className = 'suggestion-chip';
     accept.innerText = '✅ Accepter la décision';
     accept.style.borderColor = '#10b981';
-    accept.addEventListener('click', function() {
+    accept.onclick = function() {
       if (state.isProcessing) return;
       state.isProcessing = true;
       addUser("Accepter la décision");
       addImportantSummary('Décision acceptée');
-      addBot('Merci ' + firstName + ' pour votre compréhension. Nous restons à votre disposition.');
+      addBot('Merci ' + firstName + ' pour votre compréhension.');
       clearSuggestions('sr-suggestions');
       addResetButton('sr-suggestions', reset);
-      state.step = 0;
-      state.isProcessing = false;
-    });
+      state.step = 0; state.isProcessing = false;
+    };
     div.appendChild(accept);
+    safeCreateIcons();
   }
 
   function completeScan() {
@@ -1758,9 +1687,9 @@ function renderSafeReturn() {
     addImportantSummary('Fraude confirmée - Confiance ' + state.confidenceLevel + '%');
     state.step = 2;
     updateDashboard();
-    addBot('🔬 Vérification des métadonnées EXIF et analyse des pixels ' + firstName + '...');
-    addBot('🚨 Fraude confirmée ' + firstName + ' : métadonnées EXIF altérées (date 2023-01-12), clonage Photoshop détecté. Score de confiance : ' + state.confidenceLevel + '%. Remboursement refusé.');
-    addBot('📷 Détails : Adobe Photoshop 2024, duplication de zones de pixels. Souhaitez-vous contester cette décision ' + firstName + ' ?');
+    addBot('🔬 Vérification des métadonnées EXIF...');
+    addBot('🚨 Fraude confirmée ' + firstName + ' : métadonnées EXIF altérées, clonage Photoshop détecté. Confiance : ' + state.confidenceLevel + '%. Remboursement refusé.');
+    addBot('📷 Souhaitez-vous contester cette décision ?');
     showContestButtons();
     state.isProcessing = false;
   }
@@ -1775,35 +1704,25 @@ function renderSafeReturn() {
     state.step = 1;
     updateDashboard();
     if (state.timerId) clearTimeout(state.timerId);
-    state.timerId = setTimeout(function() {
-      completeScan();
-    }, 3000);
+    state.timerId = setTimeout(function() { completeScan(); }, 3000);
   }
 
   function reset() {
     if (state.timerId) { clearTimeout(state.timerId); state.timerId = null; }
-    client.history = [];
-    client.purchases = [];
-    client.totalSpent = 0;
-    DB.save();
-    state.step = 0;
-    state.photoSent = false;
-    state.scanCompleted = false;
-    state.totalFraudDetected = 0;
-    state.totalClaims = 0;
-    state.savings = 0;
-    state.confidenceLevel = 96;
+    client.history = []; client.purchases = []; client.totalSpent = 0; DB.save();
+    state.step = 0; state.photoSent = false; state.scanCompleted = false;
+    state.totalFraudDetected = 0; state.totalClaims = 0; state.savings = 0; state.confidenceLevel = 96;
     state.isProcessing = false;
     var chatDiv = document.getElementById('sr-chat');
     if (chatDiv) chatDiv.innerHTML = '';
-    addBot('Bonjour ' + firstName + ', un litige a été ouvert pour un colis endommagé. Pour traiter votre demande, envoyez-nous une photo du colis.');
+    addBot('Bonjour ' + firstName + ', un litige a été ouvert pour un colis endommagé. Envoyez-nous une photo.');
     var div = document.getElementById('sr-suggestions');
     if (div) {
       div.innerHTML = '';
       var sendBtn = document.createElement('div');
       sendBtn.className = 'suggestion-chip';
       sendBtn.innerText = '📸 Envoyer la photo';
-      sendBtn.addEventListener('click', sendPhoto);
+      sendBtn.onclick = sendPhoto;
       div.appendChild(sendBtn);
     }
     updateDashboard();
@@ -1863,11 +1782,11 @@ function renderSafeReturn() {
     </div>
   </div>`;
   document.getElementById('sim-root').innerHTML = html;
-  setTimeout(function() { lucide.createIcons(); reset(); }, 100);
+  setTimeout(function() { safeCreateIcons(); reset(); }, 100);
 }
 
 // ============================================================
-// 7. ROUTEUR
+// 8. ROUTEUR
 // ============================================================
 var simMap = {
   match: renderMatch,
@@ -1881,171 +1800,135 @@ function switchSim(id) {
   current = id;
   if (simMap[current]) simMap[current]();
 
-  for (var i = 0; i < tabElements.length; i++) {
-    var btn = tabElements[i];
+  tabElements.forEach(function(btn) {
     var isActive = btn.getAttribute('data-sim') === current;
-    if (isActive) {
-      btn.style.background = 'linear-gradient(135deg, #1a56db, #3b82f6)';
-      btn.style.color = 'white';
-      btn.style.borderColor = 'transparent';
-      btn.style.transform = 'translateY(-4px)';
-      btn.style.boxShadow = '0 12px 32px -8px rgba(26,86,219,0.4)';
-    } else {
-      btn.style.background = 'white';
-      btn.style.color = '#1e293b';
-      btn.style.borderColor = '#e2e8f0';
-      btn.style.transform = 'translateY(0)';
-      btn.style.boxShadow = '0 2px 8px rgba(0,0,0,0.02)';
-    }
-  }
+    btn.classList.toggle('active', isActive);
+  });
 }
 
-for (var i = 0; i < tabElements.length; i++) {
-  (function(btn) {
-    btn.addEventListener('click', function() {
-      switchSim(this.getAttribute('data-sim'));
-    });
-  })(tabElements[i]);
-}
-
-switchSim('match');
-
-window.addEventListener("scroll", function() {
-  var scroll = document.documentElement.scrollTop;
-  var height = document.documentElement.scrollHeight - window.innerHeight;
-  var progress = document.getElementById("progress-bar");
-  if (progress) progress.style.width = (scroll / height) * 100 + "%";
-  var nav = document.getElementById("nav-pill");
-  if (nav) {
-    if (scroll > 60) nav.classList.add("scrolled");
-    else nav.classList.remove("scrolled");
-  }
+tabElements.forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    switchSim(this.getAttribute('data-sim'));
+  });
 });
 
-lucide.createIcons();
-</script>
+// ============================================================
+// 9. INJECTION DES CARTES MODULES & INIT
+// ============================================================
+document.addEventListener('DOMContentLoaded', function() {
+  var retailSolutions = [
+    {
+      num: "01",
+      title: "Seconde Main & Reprise",
+      icon: "refresh-cw",
+      badge: "CIRCULAIRE",
+      challenge: "Proposer un parcours de reprise de produits d'occasion simple et digne de confiance pour encourager l'économie circulaire.",
+      solutions: [
+        "<b>Estimation en ligne par Vision IA</b> : analyse automatique de l'état esthétique à partir de photos.",
+        "<b>Visioconférence de certification</b> : validation en direct de l'état fonctionnel du produit.",
+        "<b>Rachat instantané</b> : conversion directe de la valeur estimée en carte cadeau."
+      ],
+      badgeBg: "kpi-blue",
+      numBg: "kpi-blue",
+      iconColor: "text-blue-500",
+      borderClass: "border-t-blue-500",
+      hoverGlow: "hover:shadow-[0_20px_50px_rgba(59,130,246,0.35)] hover:border-blue-500/40",
+      image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&q=80&w=800"
+    },
+    {
+      num: "02",
+      title: "Coach & Aide à l'usage",
+      icon: "graduation-cap",
+      badge: "FIDÉLISATION",
+      challenge: "Accompagner l'acheteur dans sa prise en main pour maximiser sa satisfaction et limiter les retours évitables.",
+      solutions: [
+        "<b>Guides interactifs personnalisés</b> : tutoriels pas-à-pas adaptés aux besoins de l'usager.",
+        "<b>Alertes d'entretien intelligentes</b> : notifications basées sur le cycle de vie du produit.",
+        "<b>Sessions de formation en live</b> : webinaires thématiques pour s'approprier l'appareil."
+      ],
+      badgeBg: "kpi-green",
+      numBg: "kpi-green",
+      iconColor: "text-emerald-500",
+      borderClass: "border-t-emerald-500",
+      hoverGlow: "hover:shadow-[0_20px_50px_rgba(16,185,129,0.35)] hover:border-emerald-500/40",
+      image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=800"
+    },
+    {
+      num: "03",
+      title: "SafeReturn : Anti-Fraude",
+      icon: "shield-alert",
+      badge: "RISK MANAGEMENT",
+      challenge: "Protéger les marges d'exploitation face aux abus et fausses déclarations de colis endommagés.",
+      solutions: [
+        "<b>Analyse forensique d'images</b> : détection de photomontages ou duplication de photos.",
+        "<b>Arbitrage vidéo assisté</b> : vérification visuelle guidée pour valider les réclamations.",
+        "<b>Scoring de suspicion</b> : identification précoce des comportements abusifs répétés."
+      ],
+      badgeBg: "bg-gradient-to-r from-rose-500 to-pink-600",
+      numBg: "bg-gradient-to-r from-rose-500 to-pink-600",
+      iconColor: "text-rose-500",
+      borderClass: "border-t-rose-500",
+      hoverGlow: "hover:shadow-[0_20px_50px_rgba(244,63,94,0.35)] hover:border-rose-500/40",
+      image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=800"
+    },
+    {
+      num: "04",
+      title: "Conciergerie IA Omnicanale",
+      icon: "message-square",
+      badge: "WhatsApp & RCS",
+      challenge: "Maintenir une relation client proactive post-achat pour anticiper les besoins et générer des ventes récurrentes.",
+      solutions: [
+        "<b>Suivi d'entretien proactif</b> : rappels réguliers pour préserver les performances de l'appareil.",
+        "<b>Réapprovisionnement prédictif</b> : suggestions de consommables au moment idéal.",
+        "<b>Relance de panier intelligente</b> : récupération des ventes interrompues sur tous les canaux."
+      ],
+      badgeBg: "kpi-purple",
+      numBg: "kpi-purple",
+      iconColor: "text-purple-500",
+      borderClass: "border-t-purple-500",
+      hoverGlow: "hover:shadow-[0_20px_50px_rgba(168,85,247,0.35)] hover:border-purple-500/40",
+      image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800"
+    },
+    {
+      num: "05",
+      title: "Scan & Plan : Designer Virtuel",
+      icon: "layout",
+      badge: "CONCEPTION",
+      challenge: "Accompagner les projets d'aménagement d'intérieur complexes sans nécessiter de déplacements physiques coûteux.",
+      solutions: [
+        "<b>Analyse de pièce par Vision IA</b> : détection automatique des dimensions et obstacles.",
+        "<b>Propositions d'aménagement 3D</b> : sélection optimisée de mobilier et d'électroménager.",
+        "<b>Génération de devis automatique</b> : budgétisation immédiate pour prise de rendez-vous qualifié."
+      ],
+      badgeBg: "kpi-cyan",
+      numBg: "kpi-cyan",
+      iconColor: "text-cyan-500",
+      borderClass: "border-t-cyan-500",
+      hoverGlow: "hover:shadow-[0_20px_50px_rgba(6,182,212,0.35)] hover:border-cyan-500/40",
+      image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&q=80&w=800"
+    },
+    {
+      num: "06",
+      title: "Match & Buy : Conseil Intelligent",
+      icon: "git-compare",
+      badge: "CONVERSATIONNEL",
+      challenge: "Guider l'acheteur parmi des catalogues complexes en remplaçant les filtres techniques par un conseil chaleureux.",
+      solutions: [
+        "<b>Analyse de requêtes sémantiques</b> : compréhension des besoins exprimés en langage naturel.",
+        "<b>Comparaison comparative active</b> : mise en évidence argumentée des forces de chaque modèle.",
+        "<b>Assistant d'achat dynamique</b> : accompagnement personnalisé du conseil jusqu'au panier."
+      ],
+      badgeBg: "kpi-yellow",
+      numBg: "kpi-yellow",
+      iconColor: "text-amber-500",
+      borderClass: "border-t-amber-500",
+      hoverGlow: "hover:shadow-[0_20px_50px_rgba(245,158,11,0.35)] hover:border-amber-500/40",
+      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800"
+    }
+  ];
 
-<!-- ====== SCRIPTS DU SITE PRINCIPAL (injection des cartes modules) ====== -->
-<script>
-const retailSolutions = [
-  {
-    num: "01",
-    title: "Seconde Main & Reprise",
-    icon: "refresh-cw",
-    badge: "CIRCULAIRE",
-    challenge: "Proposer un parcours de reprise de produits d'occasion simple et digne de confiance pour encourager l'économie circulaire.",
-    solutions: [
-      "<b>Estimation en ligne par Vision IA</b> : analyse automatique de l'état esthétique à partir de photos.",
-      "<b>Visioconférence de certification</b> : validation en direct de l'état fonctionnel du produit.",
-      "<b>Rachat instantané</b> : conversion directe de la valeur estimée en carte cadeau."
-    ],
-    badgeBg: "kpi-blue",
-    numBg: "kpi-blue",
-    iconColor: "text-blue-500",
-    borderClass: "border-t-blue-500",
-    hoverGlow: "hover:shadow-[0_20px_50px_rgba(59,130,246,0.35)] hover:border-blue-500/40",
-    image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&q=80&w=800"
-  },
-  {
-    num: "02",
-    title: "Coach & Aide à l'usage",
-    icon: "graduation-cap",
-    badge: "FIDÉLISATION",
-    challenge: "Accompagner l'acheteur dans sa prise en main pour maximiser sa satisfaction et limiter les retours évitables.",
-    solutions: [
-      "<b>Guides interactifs personnalisés</b> : tutoriels pas-à-pas adaptés aux besoins de l'usager.",
-      "<b>Alertes d'entretien intelligentes</b> : notifications basées sur le cycle de vie du produit.",
-      "<b>Sessions de formation en live</b> : webinaires thématiques pour s'approprier l'appareil."
-    ],
-    badgeBg: "kpi-green",
-    numBg: "kpi-green",
-    iconColor: "text-emerald-500",
-    iconBg: "bg-emerald-500/10",
-    borderClass: "border-t-emerald-500",
-    hoverGlow: "hover:shadow-[0_20px_50px_rgba(16,185,129,0.35)] hover:border-emerald-500/40",
-    image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=800"
-  },
-  {
-    num: "03",
-    title: "SafeReturn : Anti-Fraude",
-    icon: "shield-alert",
-    badge: "RISK MANAGEMENT",
-    challenge: "Protéger les marges d'exploitation face aux abus et fausses déclarations de colis endommagés.",
-    solutions: [
-      "<b>Analyse forensique d'images</b> : détection de photomontages ou duplication de photos.",
-      "<b>Arbitrage vidéo assisté</b> : vérification visuelle guidée pour valider les réclamations.",
-      "<b>Scoring de suspicion</b> : identification précoce des comportements abusifs répétés."
-    ],
-    badgeBg: "bg-gradient-to-r from-rose-500 to-pink-600",
-    numBg: "bg-gradient-to-r from-rose-500 to-pink-600",
-    iconColor: "text-rose-500",
-    iconBg: "bg-rose-500/10",
-    borderClass: "border-t-rose-500",
-    hoverGlow: "hover:shadow-[0_20px_50px_rgba(244,63,94,0.35)] hover:border-rose-500/40",
-    image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=800"
-  },
-  {
-    num: "04",
-    title: "Conciergerie IA Omnicanale",
-    icon: "message-square",
-    badge: "WhatsApp & RCS",
-    challenge: "Maintenir une relation client proactive post-achat pour anticiper les besoins et générer des ventes récurrentes.",
-    solutions: [
-      "<b>Suivi d'entretien proactif</b> : rappels réguliers pour préserver les performances de l'appareil.",
-      "<b>Réapprovisionnement prédictif</b> : suggestions de consommables au moment idéal.",
-      "<b>Relance de panier intelligente</b> : récupération des ventes interrompues sur tous les canaux."
-    ],
-    badgeBg: "kpi-purple",
-    numBg: "kpi-purple",
-    iconColor: "text-purple-500",
-    iconBg: "bg-purple-500/10",
-    borderClass: "border-t-purple-500",
-    hoverGlow: "hover:shadow-[0_20px_50px_rgba(168,85,247,0.35)] hover:border-purple-500/40",
-    image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800"
-  },
-  {
-    num: "05",
-    title: "Scan & Plan : Designer Virtuel",
-    icon: "layout",
-    badge: "CONCEPTION",
-    challenge: "Accompagner les projets d'aménagement d'intérieur complexes sans nécessiter de déplacements physiques coûteux.",
-    solutions: [
-      "<b>Analyse de pièce par Vision IA</b> : détection automatique des dimensions et obstacles.",
-      "<b>Propositions d'aménagement 3D</b> : sélection optimisée de mobilier et d'électroménager.",
-      "<b>Génération de devis automatique</b> : budgétisation immédiate pour prise de rendez-vous qualifié."
-    ],
-    badgeBg: "kpi-cyan",
-    numBg: "kpi-cyan",
-    iconColor: "text-cyan-500",
-    iconBg: "bg-cyan-500/10",
-    borderClass: "border-t-cyan-500",
-    hoverGlow: "hover:shadow-[0_20px_50px_rgba(6,182,212,0.35)] hover:border-cyan-500/40",
-    image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&q=80&w=800"
-  },
-  {
-    num: "06",
-    title: "Match & Buy : Conseil Intelligent",
-    icon: "git-compare",
-    badge: "CONVERSATIONNEL",
-    challenge: "Guider l'acheteur parmi des catalogues complexes en remplaçant les filtres techniques par un conseil chaleureux.",
-    solutions: [
-      "<b>Analyse de requêtes sémantiques</b> : compréhension des besoins exprimés en langage naturel.",
-      "<b>Comparaison comparative active</b> : mise en évidence argumentée des forces de chaque modèle.",
-      "<b>Assistant d'achat dynamique</b> : accompagnement personnalisé du conseil jusqu'au panier."
-    ],
-    badgeBg: "kpi-yellow",
-    numBg: "kpi-yellow",
-    iconColor: "text-amber-500",
-    iconBg: "bg-amber-500/10",
-    borderClass: "border-t-amber-500",
-    hoverGlow: "hover:shadow-[0_20px_50px_rgba(245,158,11,0.35)] hover:border-amber-500/40",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800"
-  }
-];
-
-document.addEventListener("DOMContentLoaded", () => {
-  // Injection des cartes modules
-  document.getElementById('solutions-retail-grid').innerHTML = retailSolutions.map(s => `
+  document.getElementById('solutions-retail-grid').innerHTML = retailSolutions.map(function(s) {
+    return `
     <div class="module-card rounded-[40px] overflow-hidden shadow-xl reveal-up transition-all duration-500 border-t-4 ${s.borderClass} ${s.hoverGlow} text-left font-sans bg-white flex flex-col h-full">
       <div class="h-44 relative overflow-hidden bg-slate-950">
         <img src="${s.image}" class="w-full h-full object-cover opacity-35 transition-transform duration-[6s] hover:scale-105" />
@@ -2068,74 +1951,44 @@ document.addEventListener("DOMContentLoaded", () => {
           <div>
             <p class="font-black uppercase text-[#2470ef] text-[9px] tracking-widest mb-1.5">NOS SOLUTIONS</p>
             <div class="space-y-2 text-slate-700 text-xs font-medium">
-              ${s.solutions.map(sol => `
-                <div class="flex items-start gap-1.5">
-                  <span class="text-[#2470ef] mt-0.5">•</span>
-                  <p class="leading-relaxed font-sans">${sol}</p>
-                </div>
-              `).join('')}
+              ${s.solutions.map(function(sol) {
+                return `<div class="flex items-start gap-1.5"><span class="text-[#2470ef] mt-0.5">•</span><p class="leading-relaxed font-sans">${sol}</p></div>`;
+              }).join('')}
             </div>
           </div>
         </div>
       </div>
-    </div>
-  `).join('');
+    </div>`;
+  }).join('');
 
-  // Observateur reveal-up
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
-  }, { threshold: 0.05 });
-  document.querySelectorAll('.reveal-up').forEach(el => observer.observe(el));
-
-  // Mouse Glow
-  const heroSection = document.getElementById('hero');
-  const mouseGlow = document.getElementById('hero-mouse-glow');
-  if (heroSection && mouseGlow) {
-    heroSection.addEventListener('mousemove', (e) => {
-      const rect = heroSection.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      mouseGlow.style.left = `${x}px`;
-      mouseGlow.style.top = `${y}px`;
-      mouseGlow.style.opacity = '1';
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) entry.target.classList.add('active');
     });
-    heroSection.addEventListener('mouseleave', () => {
-      mouseGlow.style.opacity = '0';
-    });
-  }
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal-up').forEach(function(el) {
+    observer.observe(el);
+  });
 
-  // Scroll: nav, sidebar, progress
-  const sidebar = document.getElementById('sidebar');
-  const navPill = document.getElementById('nav-pill');
-  const progressBar = document.getElementById('progress-bar');
-  let scrollTimeout;
-  window.addEventListener('scroll', () => {
-    const scrollY = window.scrollY;
-    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    progressBar.style.width = (scrollY / height) * 100 + '%';
-    if (scrollY > 50) navPill.classList.add('scrolled'); else navPill.classList.remove('scrolled');
-
-    const sections = ['hero', 'comparatif', 'modules', 'impact', 'laboratoire', 'vision'];
-    let current = 'hero';
-    sections.forEach(id => {
-      const el = document.getElementById(id);
-      if (el && scrollY >= (el.offsetTop - 350)) current = id;
-    });
-    document.querySelectorAll('.sidebar-link').forEach(link => {
-      link.classList.toggle('active', link.getAttribute('data-section') === current);
-    });
-
-    if (window.innerWidth < 768) {
+  window.addEventListener('scroll', function() {
+    var nav = document.getElementById('nav-pill');
+    if (nav) {
+      if (window.scrollY > 50) nav.classList.add('scrolled');
+      else nav.classList.remove('scrolled');
+    }
+    var sidebar = document.getElementById('sidebar');
+    if (sidebar && window.innerWidth <= 768) {
+      clearTimeout(sidebar._timeout);
       sidebar.classList.remove('idle');
-      clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(() => sidebar.classList.add('idle'), 2000);
+      sidebar._timeout = setTimeout(function() {
+        sidebar.classList.add('idle');
+      }, 3000);
     }
   });
 
-  // Rafraîchir les icônes après l'injection des cartes
-  lucide.createIcons();
+  switchSim('match');
+  safeCreateIcons();
 });
 </script>
-
 </body>
 </html>
