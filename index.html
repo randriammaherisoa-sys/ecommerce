@@ -803,6 +803,15 @@
         <div id="tabs-wrapper" class="flex flex-wrap justify-center gap-3"></div>
       </div>
       <div id="sim-root" class="max-w-6xl mx-auto px-4 pb-20"></div>
+      <!-- Footer du laboratoire (explicatif) -->
+      <div class="flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-slate-400 shrink-0 relative z-10 font-sans mt-3 border-t border-white/5 pt-3">
+        <p class="text-center sm:text-left font-light text-slate-400 text-[11px]" id="lab-explainer">L'assistant IA guide le client vers le produit parfait en temps réel.</p>
+        <div class="flex items-center gap-2 text-[9px] font-mono">
+          <span class="flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> IA Active</span>
+          <span class="text-slate-600">|</span>
+          <span>Latence &lt; 200ms</span>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -984,7 +993,24 @@ function safeCreateIcons() {
 }
 
 // ============================================================
-// 4. SIMULATEUR : MATCH & BUY
+// 4. EXPLAINER
+// ============================================================
+var explainerMap = {
+  match: "L'assistant IA guide le client vers le produit parfait, propose des comparaisons claires et gère le panier d'achat.",
+  secondlife: "La Vision IA de comete.ai examine l'intégrité de l'appareil pour produire une estimation certifiée.",
+  croute: "Optimisation dynamique du dernier kilomètre. Simulez un incident pour observer le re‑routage IA instantané.",
+  safereturn: "L'IA SafeReturn de comete.ai examine pixellairement l'intégrité des documents et colis réclamés pour débusquer les fraudes."
+};
+
+function updateLabExplainer(simId) {
+  var el = document.getElementById('lab-explainer');
+  if (el && explainerMap[simId]) {
+    el.textContent = explainerMap[simId];
+  }
+}
+
+// ============================================================
+// 5. SIMULATEUR : MATCH & BUY
 // ============================================================
 function renderMatch() {
   var clientId = 'client_match_1';
@@ -1039,6 +1065,14 @@ function renderMatch() {
     safeSetText('m-dash-rate', rate + '%');
     safeSetText('m-cart-count', cart.length);
     safeSetText('m-total', total + '€');
+    var nextEl = document.getElementById('m-next-action');
+    if (nextEl) {
+      if (step === 1) nextEl.textContent = "L'IA va demander l'usage principal";
+      else if (step === 2) nextEl.textContent = "L'IA va proposer un produit et attendre l'ajout au panier";
+      else if (step === 3) nextEl.textContent = "L'IA va proposer la finalisation de la commande";
+      else if (step === 4) nextEl.textContent = "L'IA va proposer un cross‑sell (si applicable)";
+      else nextEl.textContent = "Simulation terminée";
+    }
     safeCreateIcons();
   }
 
@@ -1221,7 +1255,7 @@ function renderMatch() {
 }
 
 // ============================================================
-// 5. SIMULATEUR : SECONDE MAIN
+// 6. SIMULATEUR : SECONDE MAIN
 // ============================================================
 function renderSecondLife() {
   var clientId = 'client_sl_1';
@@ -1247,6 +1281,12 @@ function renderSecondLife() {
       if (state.scanCompleted) { statusEl.textContent = '✅ Scan terminé'; statusEl.style.color = '#10b981'; }
       else if (state.photoSent) { statusEl.textContent = '🔍 Analyse en cours...'; statusEl.style.color = '#f59e0b'; }
       else { statusEl.textContent = '⏳ En attente'; statusEl.style.color = '#64748b'; }
+    }
+    var nextEl = document.getElementById('sl-next-action');
+    if (nextEl) {
+      if (state.scanCompleted) nextEl.textContent = "Proposer l'offre d'achat";
+      else if (state.photoSent) nextEl.textContent = "Analyse en cours...";
+      else nextEl.textContent = "En attente de l'envoi de la photo";
     }
     updateScanPanel();
     safeCreateIcons();
@@ -1429,7 +1469,7 @@ function renderSecondLife() {
 }
 
 // ============================================================
-// 6. SIMULATEUR : C-ROUTE
+// 7. SIMULATEUR : C-ROUTE
 // ============================================================
 function renderCRoute() {
   var clientId = 'client_cr_1';
@@ -1448,6 +1488,12 @@ function renderCRoute() {
     safeSetText('cr-dash-optimizations', optimizations);
     safeSetText('cr-distance', totalKm);
     safeSetText('cr-co2', totalCO2.toFixed(1));
+    var nextEl = document.getElementById('cr-next-action');
+    if (nextEl) {
+      if (step === 1) nextEl.textContent = "Proposer l'optimisation de la tournée";
+      else if (step === 2) nextEl.textContent = "Attendre la validation du client";
+      else nextEl.textContent = "Simulation terminée";
+    }
     safeCreateIcons();
   }
   function addBot(text) { addMessage('cr-chat', 'bot', text.replace(/{user}/g, firstName)); }
@@ -1588,7 +1634,7 @@ function renderCRoute() {
 }
 
 // ============================================================
-// 7. SIMULATEUR : SAFERETURN
+// 8. SIMULATEUR : SAFERETURN
 // ============================================================
 function renderSafeReturn() {
   var clientId = 'client_sr_1';
@@ -1610,6 +1656,12 @@ function renderSafeReturn() {
       if (state.scanCompleted) { statusEl.textContent = '✅ Scan terminé'; statusEl.style.color = '#10b981'; }
       else if (state.photoSent) { statusEl.textContent = '🔍 Analyse en cours...'; statusEl.style.color = '#f59e0b'; }
       else { statusEl.textContent = '⏳ En attente'; statusEl.style.color = '#64748b'; }
+    }
+    var nextEl = document.getElementById('sr-next-action');
+    if (nextEl) {
+      if (state.scanCompleted) nextEl.textContent = "Proposer la contestation ou l'acceptation";
+      else if (state.photoSent) nextEl.textContent = "Analyse en cours...";
+      else nextEl.textContent = "En attente de l'envoi de la photo";
     }
     updateScanPanel();
     safeCreateIcons();
@@ -1786,7 +1838,7 @@ function renderSafeReturn() {
 }
 
 // ============================================================
-// 8. ROUTEUR
+// 9. ROUTEUR
 // ============================================================
 var simMap = {
   match: renderMatch,
@@ -1804,6 +1856,8 @@ function switchSim(id) {
     var isActive = btn.getAttribute('data-sim') === current;
     btn.classList.toggle('active', isActive);
   });
+
+  updateLabExplainer(current);
 }
 
 tabElements.forEach(function(btn) {
@@ -1813,7 +1867,7 @@ tabElements.forEach(function(btn) {
 });
 
 // ============================================================
-// 9. INJECTION DES CARTES MODULES & INIT
+// 10. INJECTION DES CARTES MODULES & INIT
 // ============================================================
 document.addEventListener('DOMContentLoaded', function() {
   var retailSolutions = [
