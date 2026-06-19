@@ -3,10 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>comete.ai – L'IA au cœur du E‑commerce et de la Grande Distribution</title>
-  <meta name="description" content="De la découverte produit à l'après-vente, comete.ai orchestre chaque étape du parcours client e-commerce. Conversion, fidélisation, réduction des retours et des litiges." />
+  <title>comete.ai – L'IA au cœur du E‑commerce</title>
+  <meta name="description" content="De la découverte produit à l'après-vente, comete.ai orchestre chaque étape du parcours client." />
   <link rel="icon" href="https://cdn.convrrt.com/apps/sendinblue/6761372/6aa995aa-40f4-4933-83ae-401c3ae0ae02.png" type="image/png" />
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
@@ -49,7 +48,7 @@
     }
   </script>
   <style>
-    /* === STYLES UNIFIÉS – CHARTE USECASE IRVE === */
+    /* === STYLES UNIFIÉS === */
     * { font-family: 'Montserrat', sans-serif; }
     .font-mono, .terminal-log, .terminal-log * { font-family: 'Share Tech Mono', monospace !important; }
     body { background: #f8fafc; color: #1e293b; overflow-x: hidden; }
@@ -63,7 +62,6 @@
       pointer-events: none;
       z-index: 50;
     }
-
     .text-gradient-animated {
       background-size: 200% auto;
       background-image: linear-gradient(to right, #2470ef, #5170ff, #38bdf8, #2470ef);
@@ -76,7 +74,6 @@
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
-
     .reveal-up { opacity: 0; transform: translateY(25px); transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1); }
     .reveal-up.active { opacity: 1; transform: translateY(0); }
 
@@ -96,7 +93,6 @@
       box-shadow: 0 0 20px rgba(36, 112, 239, 0.7) !important;
       background-color: #3b82f6 !important;
     }
-
     .btn-reset-glowing {
       background-color: rgba(245, 158, 11, 0.15) !important;
       border: 1px solid rgba(245, 158, 11, 0.4) !important;
@@ -110,7 +106,6 @@
       transform: scale(1.01) !important;
     }
 
-    /* Navigation */
     .nav-pill {
       position: fixed; top: 12px; left: 50%; transform: translateX(-50%);
       width: 94%; max-width: 1300px;
@@ -131,7 +126,6 @@
       background: rgba(255,255,255,0.98);
     }
 
-    /* Sidebar */
     .sidebar-container {
       background-color: rgba(241, 245, 249, 0.92);
       backdrop-filter: blur(18px);
@@ -159,7 +153,6 @@
       transform: scale(1.15);
     }
 
-    /* Progress bar */
     #progress-bar {
       position: fixed; top: 0; left: 0; width: 0%; height: 3px;
       background: linear-gradient(90deg, #2470ef, #5170ff, #2470ef);
@@ -173,7 +166,6 @@
       100% { background-position: 200% 50%; }
     }
 
-    /* Modules cards (5 cartes) */
     .module-card {
       transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
       border: 1px solid rgba(0,0,0,0.05);
@@ -217,7 +209,6 @@
     .kpi-purple { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
     .kpi-rose   { background: linear-gradient(135deg, #f43f5e, #e11d48); }
 
-    /* Tech rings */
     .tech-ring {
       position: absolute;
       border: 1px solid rgba(36, 112, 239, 0.1);
@@ -225,7 +216,6 @@
       pointer-events: none;
     }
 
-    /* Hero particles */
     .hero-particle {
       position: absolute;
       width: 4px;
@@ -254,7 +244,6 @@
       z-index: 1;
     }
 
-    /* VS Image */
     .vs-image-container {
       position: absolute;
       left: 50%; top: 50%;
@@ -284,7 +273,6 @@
       }
     }
 
-    /* ===== SIMULATEURS ===== */
     .glass-card {
       background: rgba(255, 255, 255, 0.80);
       backdrop-filter: blur(12px);
@@ -550,7 +538,6 @@
     }
     .kpi-card-dark:hover { border-color: rgba(36, 112, 239, 0.4); }
 
-    /* Responsive */
     @media (max-width: 768px) {
       .sim-tab { padding: 8px 16px; font-size: 12px; gap: 4px; }
       .sim-tab i { width: 16px; height: 16px; }
@@ -570,6 +557,31 @@
     .icon-unified-success { color: #10b981 !important; }
     .icon-unified-warning { color: #f59e0b !important; }
     .icon-unified-danger { color: #ef4444 !important; }
+
+    .typing-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: #1f2c33;
+      padding: 10px 16px;
+      border-radius: 18px 18px 18px 4px;
+      align-self: flex-start;
+      margin-bottom: 8px;
+    }
+    .typing-dot {
+      width: 8px;
+      height: 8px;
+      background: #8696a0;
+      border-radius: 50%;
+      animation: typingBounce 1.4s infinite;
+    }
+    .typing-dot:nth-child(1) { animation-delay: 0s; }
+    .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes typingBounce {
+      0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+      30% { transform: translateY(-6px); opacity: 1; }
+    }
   </style>
 </head>
 <body class="digital-noise">
@@ -603,7 +615,7 @@
     <a href="#vision" class="sidebar-link" data-section="vision"><i data-lucide="award" class="w-4 h-4 md:w-5 md:h-5"></i></a>
   </div>
 
-  <!-- 1. HERO SECTION -->
+  <!-- HERO -->
   <section id="hero" class="min-h-screen relative flex items-center overflow-hidden bg-[#000d25] text-left pt-36 pb-20 md:pt-48 md:pb-32">
     <div id="hero-mouse-glow" class="mouse-glow-bg"></div>
     <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
@@ -633,7 +645,7 @@
           <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#2470ef] via-[#5170ff] to-[#8ab1ff] font-bold">L'IA transforme chaque interaction</span> en opportunité de vente et de fidélisation.
         </h1>
         <p class="text-base md:text-xl lg:text-2xl text-white/70 font-light leading-relaxed border-l-4 border-[#2470ef]/60 pl-4 md:pl-6 max-w-3xl animate-fade-in" style="animation-delay: 0.6s;">
-          De la sélection produit à l'après-vente, <b class="text-white">comete.ai orchestre</b> l'ensemble du parcours client e-commerce. Augmentez votre conversion, réduisez vos retours et vos coûts SAV, et créez une relation client durable — à chaque étape du cycle de vie produit.
+          De la sélection produit à l'après-vente, <b class="text-white">notre plateforme orchestre</b> l'ensemble du parcours client e-commerce. Augmentez votre conversion, réduisez vos retours et vos coûts SAV, et créez une relation client durable — à chaque étape du cycle de vie produit.
         </p>
         <div class="animate-fade-in flex flex-wrap gap-4" style="animation-delay: 0.9s;">
           <button onclick="document.getElementById('laboratoire').scrollIntoView({behavior:'smooth'})" class="btn-unified px-6 py-4 md:px-8 md:py-5 text-[10px] md:text-sm flex items-center gap-3">
@@ -648,7 +660,7 @@
     </div>
   </section>
 
-  <!-- 2. COMPARATIF -->
+  <!-- COMPARATIF -->
   <section id="comparatif" class="py-24 md:py-36 bg-white overflow-hidden text-left relative">
     <div class="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
       <h2 class="text-3xl md:text-5xl lg:text-7xl font-normal text-[#002d62] leading-tight tracking-tighter mb-12 md:mb-20 lg:mb-16">
@@ -658,7 +670,7 @@
         <div class="bg-gradient-to-br from-slate-50 to-white p-6 md:p-14 lg:pr-24 rounded-3xl lg:rounded-l-[48px] lg:rounded-r-none border border-slate-200 mb-10 lg:mb-0 reveal-up">
           <h3 class="text-xl md:text-2xl font-black text-slate-700 mb-10 flex items-center gap-4">
             <span class="w-10 h-10 rounded-xl bg-red-100 flex items-center justify-center"><i data-lucide="alert-circle" class="icon-unified-danger w-5 h-5"></i></span>
-            Sans comete.ai / Pistes d’amélioration
+            Sans IA / Pistes d’amélioration
           </h3>
           <ul class="space-y-6">
             <li class="flex gap-4 text-slate-500 text-sm md:text-base group">
@@ -692,7 +704,7 @@
           <div class="relative z-10">
             <h3 class="text-xl md:text-2xl font-black text-white mb-10 flex items-center gap-4">
               <span class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#2470ef] to-cyan-500 flex items-center justify-center shadow-lg shadow-[#2470ef]/30"><i data-lucide="sparkles" class="w-5 h-5" style="color:white !important;"></i></span>
-              Avec comete.ai / orchestration comete.ai
+              Avec notre IA / orchestration intelligente
             </h3>
             <ul class="space-y-6">
               <li class="flex gap-4 text-blue-50 text-sm md:text-base group">
@@ -722,7 +734,7 @@
     </div>
   </section>
 
-  <!-- 3. MODULES (5 CARTES) - DISPOSITION : 3 + 2 CENTRÉES -->
+  <!-- MODULES (5 CARTES) -->
   <section id="modules" class="py-24 md:py-36 bg-white text-left overflow-hidden">
     <div class="max-w-[1440px] mx-auto px-4 md:px-6">
       <div class="text-center max-w-3xl mx-auto mb-16 md:mb-20 reveal-up">
@@ -734,20 +746,12 @@
           L'orchestration retail & E-commerce <br><span class="text-gradient-animated">augmentée par l'IA.</span>
         </h2>
       </div>
-
-      <!-- Grille : 3 premières cartes -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 animate-fade-in" id="solutions-retail-grid-top">
-        <!-- Injecté par JS -->
-      </div>
-
-      <!-- Grille : 2 dernières cartes centrées -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto animate-fade-in" id="solutions-retail-grid-bottom">
-        <!-- Injecté par JS -->
-      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 animate-fade-in" id="solutions-retail-grid-top"></div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto animate-fade-in" id="solutions-retail-grid-bottom"></div>
     </div>
   </section>
 
-  <!-- 4. IMPACT -->
+  <!-- IMPACT -->
   <section id="impact" class="py-24 md:py-36 bg-[#001c3d] text-white relative overflow-hidden">
     <div class="absolute inset-0 pointer-events-none">
       <div class="absolute top-20 left-10 w-72 h-72 bg-[#2470ef]/10 rounded-full blur-3xl animate-float-slow"></div>
@@ -764,7 +768,7 @@
             <span class="text-gradient-animated">"Le client ne veut pas chercher. Il veut trouver, comprendre et acheter — sans effort."</span>
           </h2>
           <p class="text-white/80 text-lg md:text-2xl italic font-light pl-6 border-l-2 border-[#2470ef]">
-            — comete.ai
+            — Notre vision
           </p>
         </div>
         <div class="grid grid-cols-2 gap-4 md:gap-6">
@@ -789,7 +793,7 @@
     </div>
   </section>
 
-  <!-- 5. LABORATOIRE (simulateurs) -->
+  <!-- LABORATOIRE -->
   <section id="laboratoire" class="py-24 md:py-36 bg-gradient-to-b from-slate-50 via-white to-slate-50 text-left overflow-hidden relative">
     <div class="absolute inset-0 pointer-events-none">
       <div class="absolute top-40 left-20 w-96 h-96 bg-[#2470ef]/5 rounded-full blur-3xl"></div>
@@ -812,18 +816,10 @@
         <div id="tabs-wrapper" class="flex flex-wrap justify-center gap-3"></div>
       </div>
       <div id="sim-root" class="max-w-6xl mx-auto px-4 pb-20"></div>
-      <div class="flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-slate-400 shrink-0 relative z-10 font-sans mt-3 border-t border-white/5 pt-3">
-        <p class="text-center sm:text-left font-light text-slate-400 text-[11px]" id="lab-explainer">L'assistant IA guide le client vers le produit parfait en temps réel.</p>
-        <div class="flex items-center gap-2 text-[9px] font-mono">
-          <span class="flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> IA Active</span>
-          <span class="text-slate-600">|</span>
-          <span>Latence &lt; 200ms</span>
-        </div>
-      </div>
     </div>
   </section>
 
-  <!-- 6. VISION / CTA -->
+  <!-- VISION / CTA -->
   <section id="vision" class="py-24 md:py-36 bg-gradient-to-b from-slate-50 to-white text-left overflow-hidden relative">
     <div class="max-w-7xl mx-auto px-4 md:px-6 grid lg:grid-cols-2 gap-12 md:gap-20 items-center relative z-10">
       <div class="space-y-10 reveal-up">
@@ -905,8 +901,19 @@
   </footer>
 </div>
 
-<!-- ===== SCRIPTS COMPLETS ===== -->
 <script>
+// ============================================================
+// 0. ÉTATS GLOBAUX
+// ============================================================
+window.SIM_STATES = {
+  match: { totalVisits: 0, conversions: 0 },
+  secondlife: { totalEstimations: 0, acceptedOffers: 0 },
+  croute: { optimizations: 0 },
+  safereturn: { totalFraudDetected: 0 }
+};
+
+var messageTimers = {};
+
 // ============================================================
 // 1. BASE DE DONNÉES SIMULÉE
 // ============================================================
@@ -928,7 +935,7 @@ var DB = {
 };
 
 // ============================================================
-// 2. ONGLETS (renommés)
+// 2. ONGLETS
 // ============================================================
 var tabsData = [
   { id: 'match', label: 'Match & Buy', icon: 'shopping-bag' },
@@ -958,29 +965,44 @@ function addMessage(containerId, from, text, imageUrl) {
   bubble.className = from === 'user' ? 'whatsapp-bubble-user' : 'whatsapp-bubble-bot';
   var html = text;
   if (imageUrl) {
-    html += '<br><img src="' + imageUrl + '" alt="Photo envoyée" style="max-width:200px; border-radius:12px; margin-top:6px;">';
+    html += '<br><img src="' + imageUrl + '" alt="Preuve visuelle" style="max-width:200px; border-radius:12px; margin-top:6px; border:1px solid rgba(255,255,255,0.1);">';
   }
   bubble.innerHTML = html + '<div class="text-right text-[9px] opacity-50 mt-1">' + time + (from === 'user' ? ' ✔️✔️' : '') + '</div>';
   container.appendChild(bubble);
   container.scrollTop = container.scrollHeight;
 }
 
-function clearSuggestions(containerId) {
-  var div = document.getElementById(containerId);
-  if (div) div.innerHTML = '';
+function showTyping(containerId) {
+  var container = document.getElementById(containerId);
+  if (!container) return;
+  var typing = document.createElement('div');
+  typing.className = 'typing-indicator';
+  typing.id = 'typing-indicator-' + containerId;
+  typing.innerHTML = '<div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>';
+  container.appendChild(typing);
+  container.scrollTop = container.scrollHeight;
 }
 
-function addResetButton(containerId, resetFn) {
-  var div = document.getElementById(containerId);
-  if (div) {
-    var btn = document.createElement('div');
-    btn.className = 'suggestion-chip';
-    btn.innerText = '🔄 Nouvelle simulation';
-    btn.style.background = '#1a56db';
-    btn.style.color = 'white';
-    btn.style.borderColor = '#1a56db';
-    btn.onclick = resetFn;
-    div.appendChild(btn);
+function hideTyping(containerId) {
+  var typing = document.getElementById('typing-indicator-' + containerId);
+  if (typing) typing.remove();
+}
+
+function addDelayedMessage(containerId, from, text, imageUrl, delay, callback) {
+  var container = document.getElementById(containerId);
+  if (!container) return;
+  if (from === 'bot') showTyping(containerId);
+  setTimeout(function() {
+    hideTyping(containerId);
+    addMessage(containerId, from, text, imageUrl);
+    if (callback) callback();
+  }, delay);
+}
+
+function clearMessageTimers(simId) {
+  if (messageTimers[simId]) {
+    clearTimeout(messageTimers[simId]);
+    delete messageTimers[simId];
   }
 }
 
@@ -1001,24 +1023,46 @@ function safeCreateIcons() {
 }
 
 // ============================================================
-// 4. EXPLAINER
+// 3.1 GESTION DES SUGGESTIONS
 // ============================================================
-var explainerMap = {
-  match: "L'assistant IA guide le client vers le produit parfait, propose des comparaisons claires et gère le panier d'achat.",
-  secondlife: "La Vision IA de comete.ai examine l'intégrité de l'appareil pour produire une estimation certifiée.",
-  croute: "Suivez en temps réel l'avancement de votre commande via des notifications RCS.",
-  safereturn: "L'IA SafeReturn de comete.ai examine pixellairement l'intégrité des documents et colis réclamés pour débusquer les fraudes."
-};
+function clearSuggestions(containerId) {
+  var container = document.getElementById(containerId);
+  if (container) container.innerHTML = '';
+}
 
-function updateLabExplainer(simId) {
-  var el = document.getElementById('lab-explainer');
-  if (el && explainerMap[simId]) {
-    el.textContent = explainerMap[simId];
-  }
+function addResetButton(containerId, resetFunction) {
+  var container = document.getElementById(containerId);
+  if (!container) return;
+  container.innerHTML = '';
+  var resetBtn = document.createElement('div');
+  resetBtn.className = 'suggestion-chip';
+  resetBtn.innerText = '🔄 Réinitialiser la simulation';
+  resetBtn.style.borderColor = '#f59e0b';
+  resetBtn.style.backgroundColor = '#fffbeb';
+  resetBtn.onclick = function() {
+    if (typeof resetFunction === 'function') resetFunction();
+  };
+  container.appendChild(resetBtn);
 }
 
 // ============================================================
-// 5. INJECTION DES 5 CARTES (3 + 2 centrées)
+// 4. TÉLÉMÉTRIE (supprimée de l'affichage)
+// ============================================================
+function updateTelemetry() {
+  // Conservée pour la logique interne
+}
+
+window.resetAllJourney = function() {
+  window.SIM_STATES.match = { totalVisits: 0, conversions: 0 };
+  window.SIM_STATES.secondlife = { totalEstimations: 0, acceptedOffers: 0 };
+  window.SIM_STATES.croute = { optimizations: 0 };
+  window.SIM_STATES.safereturn = { totalFraudDetected: 0 };
+  switchSim(current);
+  safeCreateIcons();
+};
+
+// ============================================================
+// 5. INJECTION DES 5 CARTES
 // ============================================================
 function injectModules() {
   var retailSolutions = [
@@ -1029,15 +1073,15 @@ function injectModules() {
       badge: "CONSEIL",
       challenge: "Il a été découvert que les produits aux spécifications complexes (électroménager, high-tech, bricolage, ameublement...) le client hésite, compare mal et abandonne. Le conseiller humain ne peut pas être disponible à chaque instant.",
       solutions: [
-        "<b>Conseiller IA conversationnel :</b> pose les bonnes questions sur l'usage, propose les produits adaptés, compare les caractéristiques et explique les différences — jusqu'à l'ajout au panier. (Exemple : pour l'achat d'un PC, l'IA qualifie l'usage, suggère trois modèles, les compare et guide vers le bon choix.)",
-        "<b>Assistant de conception IA :</b> à partir d'une photo ou d'un plan envoyé par le client, l'IA propose un aménagement personnalisé en s'appuyant sur le catalogue (ex. cuisine, salon). Un appel de validation peut être déclenché, et un rendez-vous en point de vente qualifié est proposé si le client souhaite aller plus loin."
+        "<b>Conseiller IA conversationnel :</b> pose les bonnes questions sur l'usage, propose les produits adaptés, compare les caractéristiques et explique les différences — jusqu'à l'ajout au panier.",
+        "<b>Assistant de conception IA :</b> à partir d'une photo ou d'un plan envoyé par le client, l'IA propose un aménagement personnalisé en s'appuyant sur le catalogue."
       ],
-      benefices: "Client : accompagnement personnalisé, même sur des produits complexes.<br>E‑commerçant : réduction des paniers abandonnés, meilleure conversion, rendez-vous en magasin qualifiés.",
+      benefices: "Client : accompagnement personnalisé.<br>E‑commerçant : réduction des abandons, meilleure conversion.",
       badgeBg: "kpi-blue",
       numBg: "kpi-blue",
       iconColor: "text-blue-500",
       borderClass: "border-t-blue-500",
-      hoverGlow: "hover:shadow-[0_20px_50px_rgba(59,130,246,0.35)] hover:border-blue-500/40",
+      hoverGlow: "hover:shadow-[0_20px_50px_rgba(59,130,246,0.35)]",
       image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&q=80&w=800"
     },
     {
@@ -1045,17 +1089,17 @@ function injectModules() {
       title: "Achat & Souscription",
       icon: "shopping-bag",
       badge: "CONVERSION",
-      challenge: "Le passage à l'acte reste un moment de friction : hésitation de dernière minute, options mal comprises, parcours de commande abandonné avant la finalisation.",
+      challenge: "Le passage à l'acte reste un moment de friction : hésitation de dernière minute, parcours abandonné.",
       solutions: [
-        "<b>Bot conversationnel :</b> lève les dernières objections, rassure sur les garanties et conditions de retour, et accompagne à la validation de commande.",
-        "<b>Push contextuel en temps réel :</b> suggère les accessoires, extensions de garantie ou services complémentaires au bon moment du parcours."
+        "<b>Bot conversationnel :</b> lève les dernières objections, rassure sur les garanties.",
+        "<b>Push contextuel :</b> suggère les accessoires et extensions au bon moment."
       ],
-      benefices: "Client : expérience d'achat fluide et rassurante.<br>E‑commerçant : hausse du panier moyen et du taux de finalisation.",
+      benefices: "Client : expérience fluide.<br>E‑commerçant : hausse du panier moyen.",
       badgeBg: "kpi-green",
       numBg: "kpi-green",
       iconColor: "text-emerald-500",
       borderClass: "border-t-emerald-500",
-      hoverGlow: "hover:shadow-[0_20px_50px_rgba(16,185,129,0.35)] hover:border-emerald-500/40",
+      hoverGlow: "hover:shadow-[0_20px_50px_rgba(16,185,129,0.35)]",
       image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=800"
     },
     {
@@ -1063,17 +1107,17 @@ function injectModules() {
       title: "Prise en main & Usage",
       icon: "graduation-cap",
       badge: "CONVERSION",
-      challenge: "Une part significative des retours et des contacts SAV est liée non à un défaut produit, mais à une mauvaise utilisation. L'e-commerçant subit un coût opérationnel évitable.",
+      challenge: "Une part des retours est liée à une mauvaise utilisation, coût évitable.",
       solutions: [
-        "<b>Dispositif de formation proactive post-achat :</b> déclenchement automatique après livraison de guides interactifs, tutoriels vidéo et assistances pas-à-pas adaptés au produit acheté et au profil du client.",
-        "<b>Sessions de formation en live :</b> pour les produits à prise en main complexe, possibilité d'une session d'accompagnement ciblée avec un conseiller, à distance."
+        "<b>Formation proactive post-achat :</b> guides interactifs, tutoriels vidéo adaptés.",
+        "<b>Sessions en live :</b> pour les produits complexes."
       ],
-      benefices: "Client : satisfaction dès les premières utilisations, autonomie renforcée.<br>E‑commerçant : réduction des retours évitables et des contacts SAV de premier niveau.",
+      benefices: "Client : satisfaction immédiate.<br>E‑commerçant : réduction des retours.",
       badgeBg: "kpi-cyan",
       numBg: "kpi-cyan",
       iconColor: "text-cyan-500",
       borderClass: "border-t-cyan-500",
-      hoverGlow: "hover:shadow-[0_20px_50px_rgba(6,182,212,0.35)] hover:border-cyan-500/40",
+      hoverGlow: "hover:shadow-[0_20px_50px_rgba(6,182,212,0.35)]",
       image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800"
     },
     {
@@ -1081,35 +1125,35 @@ function injectModules() {
       title: "SAV, Litiges & Reprise",
       icon: "shield-alert",
       badge: "RISK MANAGEMENT",
-      challenge: "Les réclamations pour colis endommagé ou produit défectueux reposent trop souvent sur du déclaratif non vérifiable. Parallèlement, les parcours de reprise ou de revente restent longs et peu engageants pour le client.",
+      challenge: "Les réclamations reposent souvent sur du déclaratif non vérifiable.",
       solutions: [
-        "<b>Vérification visuelle IA des litiges :</b> détection automatique des images retouchées, analyse des photos soumises par le client selon des critères définis, déclenchement d'un appel vidéo de contrôle pour certifier les déclarations avant traitement.",
-        "<b>Estimation instantanée à la reprise :</b> à partir de photos ou d'une vidéo envoyées par le client, combinées à des données déclaratives (date d'achat, usage, état), l'IA évalue l'état esthétique et fonctionnel du produit et propose une valeur de reprise immédiate. Un appel vidéo de vérification peut compléter le parcours."
+        "<b>Vérification visuelle IA :</b> détection des images retouchées, appel vidéo de contrôle.",
+        "<b>Estimation instantanée :</b> à partir de photos, évaluation de l'état et proposition de reprise."
       ],
-      benefices: "Client : parcours de litige ou de reprise rapide et transparent.<br>E‑commerçant : réduction des pertes liées aux fraudes, accélération du reconditionnement et valorisation de l'économie circulaire.",
+      benefices: "Client : parcours rapide et transparent.<br>E‑commerçant : réduction des fraudes.",
       badgeBg: "kpi-rose",
       numBg: "kpi-rose",
       iconColor: "text-rose-500",
       borderClass: "border-t-rose-500",
-      hoverGlow: "hover:shadow-[0_20px_50px_rgba(244,63,94,0.35)] hover:border-rose-500/40",
+      hoverGlow: "hover:shadow-[0_20px_50px_rgba(244,63,94,0.35)]",
       image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=800"
     },
     {
       num: "05",
-      title: "Fidélisation & Cycle de vie produit",
+      title: "Fidélisation & Cycle de vie",
       icon: "repeat",
       badge: "FIDÉLISATION",
-      challenge: "La relation client s'arrête trop souvent à la livraison. Pourtant, c'est après l'achat que se jouent la fidélité, la recommandation et la valeur à long terme.",
+      challenge: "La relation client s'arrête trop souvent à la livraison.",
       solutions: [
-        "<b>Concierge IA personnel (WhatsApp / RCS) :</b> connaît les équipements possédés par le client, pousse des conseils d'entretien et d'usage au bon moment du cycle de vie, anticipe les commandes de consommables et détecte les opportunités d'upsell pertinentes.",
-        "<b>Échanges proactifs ciblés :</b> alertes de maintenance, rappels de garantie, suggestions de renouvellement ou d'upgrade contextualisés selon l'usage réel."
+        "<b>Concierge IA personnel :</b> conseils d'entretien, alertes, upsell contextuel.",
+        "<b>Échanges proactifs :</b> rappels de garantie, suggestions de renouvellement."
       ],
-      benefices: "Client : relation proactive et personnalisée, produits mieux entretenus, pannes évitées.<br>E‑commerçant : allongement de la durée de vie des produits, réduction des interventions SAV, création de valeur continue après l'achat, fidélité renforcée.",
+      benefices: "Client : relation proactive.<br>E‑commerçant : valeur continue, fidélité.",
       badgeBg: "kpi-purple",
       numBg: "kpi-purple",
       iconColor: "text-purple-500",
       borderClass: "border-t-purple-500",
-      hoverGlow: "hover:shadow-[0_20px_50px_rgba(168,85,247,0.35)] hover:border-purple-500/40",
+      hoverGlow: "hover:shadow-[0_20px_50px_rgba(168,85,247,0.35)]",
       image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800"
     }
   ];
@@ -1166,10 +1210,10 @@ function injectModules() {
 }
 
 // ============================================================
-// 6. SIMULATEURS MIS À JOUR
+// 6. SIMULATEURS COMPLETS
 // ============================================================
 
-// ---- 6.1 MATCH & BUY (proactif, 1 seule salutation) ----
+// ---- 6.1 MATCH & BUY ----
 function renderMatch() {
   var clientId = 'client_match_1';
   var client = DB.getClient('match', clientId);
@@ -1182,22 +1226,26 @@ function renderMatch() {
   var conversions = 0;
   var isProcessing = false;
   var products = [
-    { name: "MacBook Pro M3 Max", price: 3899, category: "creatif" },
-    { name: "Lenovo IdeaPad 5", price: 799, category: "etudiant" },
-    { name: "Dell XPS 15", price: 2199, category: "pro" },
-    { name: "ASUS ROG Strix G16", price: 2199, category: "gamer" }
+    { name: "MacBook Pro M3 Max", price: 3899, category: "creatif", desc: "Puissance et finesse pour les créatifs exigeants." },
+    { name: "Lenovo IdeaPad 5", price: 799, category: "etudiant", desc: "Léger, performant, idéal pour la mobilité." },
+    { name: "Dell XPS 15", price: 2199, category: "pro", desc: "Fiabilité et performance pour les professionnels." },
+    { name: "ASUS ROG Strix G16", price: 2199, category: "gamer", desc: "Ultime performance pour les jeux et le streaming." }
   ];
   var crossSellOffers = {
-    'creatif': { product: 'Souris MX Master 3S', price: 99, pitch: 'Optimisez votre workflow créatif : précision 8K, scroll ultra-fluide, autonomie 70 jours.' },
-    'etudiant': { product: 'Housse de transport renforcée', price: 45, pitch: 'Protégez votre investissement avec une housse antichoc étanche, garantie 2 ans.' },
-    'pro': { product: 'Hub USB-C 7-en-1', price: 79, pitch: 'Connectez tout votre écosystème : HDMI 4K, Ethernet Gigabit, 3 ports USB 3.0.' },
-    'gamer': { product: 'Casque gaming surround 7.1', price: 129, pitch: 'Son immersif 3D, microphone noise-cancelling, latence < 20 ms.' }
+    'creatif': { product: 'Souris MX Master 3S', price: 99, pitch: 'Précision 8K, scroll fluide, autonomie 70 jours.' },
+    'etudiant': { product: 'Housse de transport renforcée', price: 45, pitch: 'Protection antichoc et étanchéité.' },
+    'pro': { product: 'Hub USB-C 7-en-1', price: 79, pitch: 'Connectez tous vos périphériques.' },
+    'gamer': { product: 'Casque gaming surround 7.1', price: 129, pitch: 'Son immersif, micro anti-bruit.' }
   };
 
   function updateDashboard() {
     var total = cart.reduce(function(s, item) { return s + item.price; }, 0);
     var avgBasket = cart.length > 0 ? (total / cart.length).toFixed(0) + '€' : '0€';
     var rate = totalVisits > 0 ? Math.round((conversions / totalVisits) * 100) : 0;
+
+    window.SIM_STATES.match.totalVisits = totalVisits;
+    window.SIM_STATES.match.conversions = conversions;
+
     safeSetText('m-dash-visits', totalVisits);
     safeSetText('m-dash-conversions', conversions);
     safeSetText('m-dash-cartItems', cart.length);
@@ -1207,20 +1255,48 @@ function renderMatch() {
     safeSetText('m-dash-rate', rate + '%');
     safeSetText('m-cart-count', cart.length);
     safeSetText('m-total', total + '€');
+
     var nextEl = document.getElementById('m-next-action');
     if (nextEl) {
-      if (step === 1) nextEl.textContent = "🔍 L'IA analyse votre besoin pour vous recommander le produit idéal.";
-      else if (step === 2) nextEl.textContent = "💡 L'IA prépare une proposition de produit adapté à votre usage.";
-      else if (step === 3) nextEl.textContent = "🛒 L'IA va vous proposer la finalisation de votre commande.";
-      else if (step === 4) nextEl.textContent = "🎯 L'IA vous suggère un accessoire complémentaire pour optimiser votre équipement.";
-      else nextEl.textContent = "✅ Simulation terminée – Merci d'avoir testé comete.ai.";
+      if (step === 1) nextEl.textContent = "🔍 En attente de votre choix d'usage.";
+      else if (step === 2) nextEl.textContent = "💡 L'IA prépare une proposition de produit adapté.";
+      else if (step === 3) nextEl.textContent = "🛒 L'IA va proposer la finalisation de votre commande.";
+      else if (step === 4) nextEl.textContent = "🎯 L'IA vous suggère un accessoire complémentaire.";
+      else if (step === 5) nextEl.textContent = "✅ Simulation terminée – Merci pour votre participation.";
+      else nextEl.textContent = "✅ Simulation terminée.";
     }
+
+    var historyList = document.getElementById('m-dash-history');
+    if (historyList) {
+      var html = '';
+      var important = client.history.filter(function(item) { return item.important === true; });
+      if (important.length === 0) html = '<div class="text-xs text-slate-400">Aucune interaction importante</div>';
+      else {
+        for (var h = 0; h < important.length; h++) {
+          html += '<div class="text-xs text-slate-600 border-b border-slate-100 py-1">' + important[h].summary + '</div>';
+        }
+      }
+      historyList.innerHTML = html;
+    }
+
     safeCreateIcons();
   }
 
-  function addUser(text) { addMessage('m-chat', 'user', text); DB.save(); updateDashboard(); }
-  function addBot(text) { addMessage('m-chat', 'bot', text.replace(/{user}/g, firstName)); updateDashboard(); }
-  function addImportantSummary(summary) { client.history.push({ important: true, summary: summary }); DB.save(); }
+  function addUser(text) {
+    addMessage('m-chat', 'user', text);
+    DB.save();
+    updateDashboard();
+  }
+
+  function addBotDelayed(text, callback) {
+    addDelayedMessage('m-chat', 'bot', text, null, 1000, callback);
+  }
+
+  function addImportantSummary(summary) {
+    client.history.push({ important: true, summary: summary, timestamp: new Date().toISOString() });
+    DB.save();
+    updateDashboard();
+  }
 
   function replaceSuggestions(btns) {
     var container = document.getElementById('m-suggestions');
@@ -1247,86 +1323,93 @@ function renderMatch() {
       totalVisits++;
       var product = products.find(function(p) { return p.category === selectedUsage; });
       if (product) {
-        addImportantSummary('Choix : ' + selectedUsage);
-        addBot('Je vous recommande le ' + product.name + ' à ' + product.price + '€. Souhaitez-vous l\'ajouter à votre panier ?');
-        replaceSuggestions([
-          { label: "✅ Ajouter au panier", value: "add" },
-          { label: "🔄 Recommencer", value: "reset" }
-        ]);
+        addImportantSummary('Choix d\'usage : ' + selectedUsage);
+        addBotDelayed('Merci pour ces précisions. D’après votre besoin, je vous recommande le <b>' + product.name + '</b> (' + product.price + '€) – ' + product.desc + '. Souhaitez-vous l’ajouter à votre panier ?', function() {
+          step = 3;
+          replaceSuggestions([
+            { label: "✅ Ajouter au panier", value: "add" },
+            { label: "🔄 Recommencer", value: "reset" }
+          ]);
+        });
       }
-    } else if (step === 2) {
+    } else if (step === 3) {
       if (val === "add") {
         var product = products.find(function(p) { return p.category === selectedUsage; });
         if (product) {
           cart.push(product);
           addImportantSummary('Ajout panier : ' + product.name);
-          addBot('Le ' + product.name + ' a été ajouté. Voulez-vous finaliser la commande ?');
-          step = 3;
-          replaceSuggestions([
-            { label: "✅ Finaliser", value: "checkout" },
-            { label: "🔄 Recommencer", value: "reset" }
-          ]);
+          addBotDelayed('Le ' + product.name + ' a été ajouté à votre panier. Souhaitez-vous finaliser votre commande ?', function() {
+            step = 4;
+            replaceSuggestions([
+              { label: "✅ Finaliser la commande", value: "checkout" },
+              { label: "🔄 Recommencer", value: "reset" }
+            ]);
+          });
         }
       } else if (val === "reset") { reset(); }
-    } else if (step === 3) {
+    } else if (step === 4) {
       if (val === "checkout") {
         conversions++;
         cart.forEach(function(item) { client.purchases.push(item); client.totalSpent += item.price; });
         addImportantSummary('Commande finalisée : ' + cart.length + ' article(s)');
-        addBot('🎉 Commande validée avec succès ' + firstName + ' ! Merci de votre confiance.');
-        clearSuggestions('m-suggestions');
+        addBotDelayed('🎉 Félicitations, ' + firstName + ' ! Votre commande est validée avec succès. Un email de confirmation vous a été envoyé. Merci pour votre confiance.', function() {
+          clearSuggestions('m-suggestions');
+          var offer = crossSellOffers[selectedUsage];
+          if (offer) {
+            step = 5;
+            addBotDelayed('💡 ' + firstName + ', nous vous proposons en exclusivité un accessoire complémentaire : <b>' + offer.product + '</b> (' + offer.price + '€). ' + offer.pitch + ' Souhaitez-vous l’ajouter ?', function() {
+              var recosDiv = document.getElementById('m-suggestions');
+              if (recosDiv) {
+                recosDiv.innerHTML = '';
+                var acceptBtn = document.createElement('div');
+                acceptBtn.className = 'suggestion-chip';
+                acceptBtn.innerText = '✅ Accepter l\'offre (+' + offer.price + '€)';
+                acceptBtn.style.borderColor = '#10b981';
+                acceptBtn.onclick = function() {
+                  if (isProcessing) return;
+                  isProcessing = true;
+                  addUser('Accepter l\'offre ' + offer.product);
+                  cart.push({ name: offer.product, price: offer.price });
+                  client.purchases.push({ name: offer.product, price: offer.price });
+                  client.totalSpent += offer.price;
+                  addImportantSummary('Cross-sell accepté : ' + offer.product);
+                  addBotDelayed('Parfait, ' + firstName + ' ! ' + offer.product + ' a été ajouté à votre commande. Profitez pleinement de votre équipement.', function() {
+                    clearSuggestions('m-suggestions');
+                    addResetButton('m-suggestions', reset);
+                    updateDashboard();
+                    step = 0;
+                    isProcessing = false;
+                  });
+                };
+                recosDiv.appendChild(acceptBtn);
 
-        var offer = crossSellOffers[selectedUsage];
-        if (offer) {
-          step = 4;
-          addBot('💡 ' + firstName + ', je vous propose d\'ajouter <strong>' + offer.product + '</strong> (' + offer.price + '€) à votre commande. ' + offer.pitch);
-
-          var recosDiv = document.getElementById('m-suggestions');
-          if (recosDiv) {
-            recosDiv.innerHTML = '';
-            var acceptBtn = document.createElement('div');
-            acceptBtn.className = 'suggestion-chip';
-            acceptBtn.innerText = '✅ Accepter l\'offre (+' + offer.price + '€)';
-            acceptBtn.style.borderColor = '#10b981';
-            acceptBtn.onclick = function() {
-              if (isProcessing) return;
-              isProcessing = true;
-              addUser('Accepter l\'offre ' + offer.product);
-              cart.push({ name: offer.product, price: offer.price });
-              client.purchases.push({ name: offer.product, price: offer.price });
-              client.totalSpent += offer.price;
-              addImportantSummary('Cross-sell accepté : ' + offer.product);
-              addBot('👍 Parfait ' + firstName + ' ! ' + offer.product + ' a été ajouté à votre commande.');
-              clearSuggestions('m-suggestions');
+                var refuseBtn = document.createElement('div');
+                refuseBtn.className = 'suggestion-chip';
+                refuseBtn.innerText = '❌ Refuser l\'offre';
+                refuseBtn.style.borderColor = '#ef4444';
+                refuseBtn.onclick = function() {
+                  if (isProcessing) return;
+                  isProcessing = true;
+                  addUser('Refuser l\'offre');
+                  addImportantSummary('Cross-sell refusé');
+                  addBotDelayed('Pas de problème, ' + firstName + '. Nous restons à votre disposition pour toute question. Bonne continuation !', function() {
+                    clearSuggestions('m-suggestions');
+                    addResetButton('m-suggestions', reset);
+                    updateDashboard();
+                    step = 0;
+                    isProcessing = false;
+                  });
+                };
+                recosDiv.appendChild(refuseBtn);
+                safeCreateIcons();
+              }
+            });
+          } else {
+            addBotDelayed('Merci, ' + firstName + ', pour votre commande. Notre équipe vous accompagne tout au long de votre expérience.', function() {
               addResetButton('m-suggestions', reset);
-              updateDashboard();
-              step = 0;
-              isProcessing = false;
-            };
-            recosDiv.appendChild(acceptBtn);
-
-            var refuseBtn = document.createElement('div');
-            refuseBtn.className = 'suggestion-chip';
-            refuseBtn.innerText = '❌ Refuser l\'offre';
-            refuseBtn.style.borderColor = '#ef4444';
-            refuseBtn.onclick = function() {
-              if (isProcessing) return;
-              isProcessing = true;
-              addUser('Refuser l\'offre');
-              addImportantSummary('Cross-sell refusé');
-              addBot('Pas de problème ' + firstName + ', restons en contact.');
-              clearSuggestions('m-suggestions');
-              addResetButton('m-suggestions', reset);
-              updateDashboard();
-              step = 0;
-              isProcessing = false;
-            };
-            recosDiv.appendChild(refuseBtn);
+            });
           }
-        } else {
-          addBot('Merci ' + firstName + ' pour votre commande.');
-          addResetButton('m-suggestions', reset);
-        }
+        });
       } else if (val === "reset") { reset(); }
     }
     updateDashboard();
@@ -1334,18 +1417,22 @@ function renderMatch() {
 
   function reset() {
     client.history = []; client.purchases = []; client.totalSpent = 0; DB.save();
-    step = 1; selectedUsage = null; cart = []; totalVisits = 0; conversions = 0;
+    step = 1;
+    selectedUsage = null;
+    cart = [];
+    totalVisits = 0;
+    conversions = 0;
+    clearMessageTimers('match');
     var chatDiv = document.getElementById('m-chat');
     if (chatDiv) chatDiv.innerHTML = '';
-    // Message d'ouverture proactif unique
-    addUser('Bonjour ' + firstName + ', je suis à la recherche d\'un ordinateur professionnel.');
-    addBot('Bonjour ' + firstName + ', je vois que vous êtes à la recherche d\'un ordinateur professionnel. Pour mieux vous orienter, quel est votre usage principal ?');
-    replaceSuggestions([
-      { label: "🎨 Créatif", value: "creatif" },
-      { label: "📚 Étudiant", value: "etudiant" },
-      { label: "💼 Professionnel", value: "pro" },
-      { label: "🎮 Gamer", value: "gamer" }
-    ]);
+    addBotDelayed('Bonjour ' + firstName + ', je suis l’assistant intelligent. Je vois que vous recherchez un ordinateur. Pour vous recommander le modèle idéal, pourriez-vous me préciser votre usage principal ?', function() {
+      replaceSuggestions([
+        { label: "🎨 Créatif (montage, design)", value: "creatif" },
+        { label: "📚 Étudiant (cours, bureautique)", value: "etudiant" },
+        { label: "💼 Professionnel (multitâche, gestion)", value: "pro" },
+        { label: "🎮 Gamer (jeux, streaming)", value: "gamer" }
+      ]);
+    });
     updateDashboard();
   }
 
@@ -1371,7 +1458,7 @@ function renderMatch() {
       <div class="p-4 flex-1 overflow-y-auto">
         <div class="next-action-box">
           <div class="label">🤖 Prochaine action IA</div>
-          <div class="action" id="m-next-action">🔍 L'IA analyse votre besoin...</div>
+          <div class="action" id="m-next-action">🔍 En attente de votre choix d'usage.</div>
         </div>
         <div class="grid grid-cols-2 gap-4">
           <div class="kpi-card"><div class="kpi-label">Visites</div><div class="kpi-value" id="m-dash-visits">0</div></div>
@@ -1388,7 +1475,7 @@ function renderMatch() {
         </div>
         <div class="mt-4 bg-slate-50 rounded-2xl p-4">
           <p class="text-sm text-slate-600 font-medium">📋 Synthèse des interactions</p>
-          <div id="m-dash-history" class="mt-1 text-xs text-slate-600 max-h-32 overflow-y-auto"></div>
+          <div id="m-dash-history" class="mt-1 text-xs text-slate-600 max-h-32 overflow-y-auto">Aucune interaction importante</div>
         </div>
       </div>
     </div>
@@ -1397,7 +1484,7 @@ function renderMatch() {
   setTimeout(function() { safeCreateIcons(); reset(); }, 100);
 }
 
-// ---- 6.2 REPRISE (ex-Seconde Main) ----
+// ---- 6.2 REPRISE ----
 function renderSecondLife() {
   var clientId = 'client_sl_1';
   var client = DB.getClient('secondlife', clientId);
@@ -1419,6 +1506,10 @@ function renderSecondLife() {
   function updateDashboard() {
     var acceptRate = state.totalEstimations > 0 ? Math.round((state.acceptedOffers / state.totalEstimations) * 100) : 0;
     var gain = state.acceptedOffers * 425;
+
+    window.SIM_STATES.secondlife.totalEstimations = state.totalEstimations;
+    window.SIM_STATES.secondlife.acceptedOffers = state.acceptedOffers;
+
     safeSetText('sl-dash-estimations', state.totalEstimations);
     safeSetText('sl-dash-accepted', state.acceptedOffers);
     safeSetText('sl-dash-acceptRate', acceptRate + '%');
@@ -1443,13 +1534,36 @@ function renderSecondLife() {
       else if (state.selectedCondition) nextEl.textContent = "📝 Précisez la date d'achat, les accessoires inclus, etc.";
       else nextEl.textContent = "🔍 Précisez l'état du produit (excellent / bon / moyen / mauvais).";
     }
+
+    var historyList = document.getElementById('sl-dash-history');
+    if (historyList) {
+      var html = '';
+      var important = client.history.filter(function(item) { return item.important === true; });
+      if (important.length === 0) html = '<div class="text-xs text-slate-400">Aucune estimation</div>';
+      else {
+        for (var h = 0; h < important.length; h++) {
+          html += '<div class="text-xs text-slate-600 border-b border-slate-100 py-1">' + important[h].summary + '</div>';
+        }
+      }
+      historyList.innerHTML = html;
+    }
+
     updateScanPanel();
     safeCreateIcons();
   }
 
-  function addBot(text) { addMessage('sl-chat', 'bot', text.replace(/{user}/g, firstName)); }
-  function addUser(text, img) { addMessage('sl-chat', 'user', text, img); DB.save(); }
-  function addImportantSummary(summary) { client.history.push({ important: true, summary: summary }); DB.save(); }
+  function addBotDelayed(text, callback) {
+    addDelayedMessage('sl-chat', 'bot', text, null, 1000, callback);
+  }
+  function addUser(text, img) {
+    addMessage('sl-chat', 'user', text, img);
+    DB.save();
+  }
+  function addImportantSummary(summary) {
+    client.history.push({ important: true, summary: summary, timestamp: new Date().toISOString() });
+    DB.save();
+    updateDashboard();
+  }
 
   function updateScanPanel() {
     var panel = document.getElementById('sl-scan-panel');
@@ -1480,7 +1594,7 @@ function renderSecondLife() {
     div.innerHTML = '';
     var accept = document.createElement('div');
     accept.className = 'suggestion-chip';
-    accept.innerText = '✅ Accepter l\'offre';
+    accept.innerText = '✅ Accepter l\'offre de reprise';
     accept.onclick = function() {
       if (state.isProcessing) return;
       state.isProcessing = true;
@@ -1489,12 +1603,13 @@ function renderSecondLife() {
       client.purchases.push({ name: 'iPhone 13 Pro (reconditionné)', price: 425 });
       client.totalSpent += 425;
       addImportantSummary('Offre acceptée : iPhone 13 Pro');
-      addBot('🎉 Offre de reprise acceptée ! Nous vous enverrons les modalités d\'envoi par email sous 2h.');
-      clearSuggestions('sl-suggestions');
-      addResetButton('sl-suggestions', reset);
-      updateDashboard();
-      state.step = 0;
-      state.isProcessing = false;
+      addBotDelayed('🎉 Offre de reprise acceptée ! Vous allez recevoir un bon de reprise par email sous 2h. Merci pour votre démarche écoresponsable.', function() {
+        clearSuggestions('sl-suggestions');
+        addResetButton('sl-suggestions', reset);
+        updateDashboard();
+        state.step = 0;
+        state.isProcessing = false;
+      });
     };
     div.appendChild(accept);
     var refuse = document.createElement('div');
@@ -1506,11 +1621,12 @@ function renderSecondLife() {
       state.isProcessing = true;
       addUser("Refuser l'offre");
       addImportantSummary('Offre refusée');
-      addBot('Pas de souci ' + firstName + ', vous pouvez revenir plus tard.');
-      clearSuggestions('sl-suggestions');
-      addResetButton('sl-suggestions', reset);
-      state.step = 0;
-      state.isProcessing = false;
+      addBotDelayed('Pas de souci, ' + firstName + '. Vous pouvez à tout moment revenir pour une nouvelle estimation. Notre service reste à votre écoute.', function() {
+        clearSuggestions('sl-suggestions');
+        addResetButton('sl-suggestions', reset);
+        state.step = 0;
+        state.isProcessing = false;
+      });
     };
     div.appendChild(refuse);
     safeCreateIcons();
@@ -1525,8 +1641,9 @@ function renderSecondLife() {
     addImportantSummary('Estimation iPhone 13 Pro : 425€ (confiance ' + state.lastConfidence + '%)');
     state.step = 2;
     updateDashboard();
-    addBot('🔍 Analyse terminée ' + firstName + ' : état général correct, batterie 81%. Estimation : 425€. Confiance IA : ' + state.lastConfidence + '%. Acceptez-vous l\'offre ?');
-    showAcceptButtons();
+    addBotDelayed('🔍 Analyse terminée, ' + firstName + '.\n\nÉtat général : correct, batterie à 81%, quelques micro-rayures. Estimation : <b>425€</b>.\nConfiance IA : ' + state.lastConfidence + '%.\n\nAcceptez-vous cette offre de reprise ?', function() {
+      showAcceptButtons();
+    });
     state.isProcessing = false;
   }
 
@@ -1538,10 +1655,12 @@ function renderSecondLife() {
     state.photoSent = true;
     state.scanCompleted = false;
     state.step = 2;
+    clearSuggestions('sl-suggestions');
     updateDashboard();
-    addBot('Merci ' + firstName + ' ! L\'analyse de votre iPhone 13 Pro est en cours...');
-    if (state.timerId) clearTimeout(state.timerId);
-    state.timerId = setTimeout(function() { completeScan(); }, 3000);
+    addBotDelayed('Merci, ' + firstName + ' ! Notre IA analyse en ce moment les photos de votre iPhone 13 Pro. Cela ne devrait prendre que quelques secondes.', function() {
+      if (state.timerId) clearTimeout(state.timerId);
+      state.timerId = setTimeout(function() { completeScan(); }, 3000);
+    });
   }
 
   function handleConditionChoice(condition) {
@@ -1549,34 +1668,35 @@ function renderSecondLife() {
     state.selectedCondition = condition;
     state.step = 1;
     addUser("État : " + condition);
-    addBot('Merci ' + firstName + '. Pouvez-vous préciser la date d\'achat, les accessoires inclus (chargeur, câble, etc.) et d\'éventuels défauts ?');
-    // Suggestion de détails
-    var div = document.getElementById('sl-suggestions');
-    if (div) {
-      div.innerHTML = '';
-      var detailsBtn = document.createElement('div');
-      detailsBtn.className = 'suggestion-chip';
-      detailsBtn.innerText = '📝 Acheté il y a 2 ans, chargeur inclus, micro-rayures sur l\'écran';
-      detailsBtn.onclick = function() {
-        if (state.isProcessing) return;
-        state.detailsGiven = true;
-        addUser('Acheté il y a 2 ans, chargeur inclus, micro-rayures sur l\'écran.');
-        addBot('Parfait ' + firstName + '. Pour finaliser l\'estimation, envoyez-nous une photo du produit (vue avant/arrière).');
-        state.step = 1; // on reste à l'étape 1 mais on passe à l'envoi de photo
-        // On remplace les suggestions par le bouton d'envoi de photo
-        var div2 = document.getElementById('sl-suggestions');
-        if (div2) {
-          div2.innerHTML = '';
-          var sendBtn = document.createElement('div');
-          sendBtn.className = 'suggestion-chip';
-          sendBtn.innerText = '📸 Envoyer la photo';
-          sendBtn.onclick = sendPhoto;
-          div2.appendChild(sendBtn);
-        }
-        updateDashboard();
-      };
-      div.appendChild(detailsBtn);
-    }
+    addBotDelayed('Merci, ' + firstName + '. Pour affiner notre estimation, pouvez-vous préciser la date d\'achat, les accessoires inclus (chargeur, câble) et d\'éventuels défauts particuliers ?', function() {
+      var div = document.getElementById('sl-suggestions');
+      if (div) {
+        div.innerHTML = '';
+        var detailsBtn = document.createElement('div');
+        detailsBtn.className = 'suggestion-chip';
+        detailsBtn.innerText = '📝 Acheté il y a 2 ans, chargeur inclus, micro-rayures sur l\'écran';
+        detailsBtn.onclick = function() {
+          if (state.isProcessing) return;
+          state.detailsGiven = true;
+          addUser('Acheté il y a 2 ans, chargeur inclus, micro-rayures sur l\'écran.');
+          addImportantSummary('Détails fournis pour l\'estimation');
+          addBotDelayed('Parfait, ' + firstName + '. Pour finaliser l\'estimation, envoyez-nous une photo du produit (vue avant et arrière).', function() {
+            state.step = 1;
+            var div2 = document.getElementById('sl-suggestions');
+            if (div2) {
+              div2.innerHTML = '';
+              var sendBtn = document.createElement('div');
+              sendBtn.className = 'suggestion-chip';
+              sendBtn.innerText = '📸 Envoyer la photo';
+              sendBtn.onclick = sendPhoto;
+              div2.appendChild(sendBtn);
+            }
+            updateDashboard();
+          });
+        };
+        div.appendChild(detailsBtn);
+      }
+    });
     updateDashboard();
   }
 
@@ -1593,21 +1713,23 @@ function renderSecondLife() {
     state.lastEstimation = 0;
     state.lastConfidence = 0;
     state.isProcessing = false;
+    clearMessageTimers('secondlife');
     var chatDiv = document.getElementById('sl-chat');
     if (chatDiv) chatDiv.innerHTML = '';
-    addBot('Bonjour ' + firstName + ', vous souhaitez revendre votre iPhone 13 Pro. Pour évaluer sa valeur, précisez son état : excellent, bon, moyen ou mauvais.');
-    var div = document.getElementById('sl-suggestions');
-    if (div) {
-      div.innerHTML = '';
-      var states = ['Excellent', 'Bon', 'Moyen', 'Mauvais'];
-      states.forEach(function(s) {
-        var chip = document.createElement('div');
-        chip.className = 'suggestion-chip';
-        chip.innerText = s;
-        chip.onclick = function() { handleConditionChoice(s); };
-        div.appendChild(chip);
-      });
-    }
+    addBotDelayed('Bonjour ' + firstName + ', bienvenue sur notre service de reprise. Vous souhaitez revendre votre iPhone 13 Pro. Pour évaluer sa valeur, précisez son état général :', function() {
+      var div = document.getElementById('sl-suggestions');
+      if (div) {
+        div.innerHTML = '';
+        var states = ['🌟 Excellent', '👍 Bon', '📊 Moyen', '⚠️ Mauvais'];
+        states.forEach(function(s) {
+          var chip = document.createElement('div');
+          chip.className = 'suggestion-chip';
+          chip.innerText = s;
+          chip.onclick = function() { handleConditionChoice(s); };
+          div.appendChild(chip);
+        });
+      }
+    });
     updateDashboard();
   }
 
@@ -1661,7 +1783,7 @@ function renderSecondLife() {
         </div>
         <div class="mt-4 bg-slate-50 rounded-2xl p-4">
           <p class="text-sm text-slate-600 font-medium">📋 Synthèse des estimations</p>
-          <div id="sl-dash-history" class="mt-1 text-xs text-slate-600 max-h-32 overflow-y-auto"></div>
+          <div id="sl-dash-history" class="mt-1 text-xs text-slate-600 max-h-32 overflow-y-auto">Aucune estimation</div>
         </div>
       </div>
     </div>
@@ -1670,69 +1792,201 @@ function renderSecondLife() {
   setTimeout(function() { safeCreateIcons(); reset(); }, 100);
 }
 
-// ---- 6.3 SUIVI DE COMMANDE (ex-C-Route) ----
+// ---- 6.3 SUIVI DE COMMANDE (CORRIGÉ) ----
 function renderCRoute() {
   var clientId = 'client_cr_1';
   var client = DB.getClient('croute', clientId);
   var firstName = client.firstName;
 
-  var step = 1;
-  var notifications = [
-    "📦 Votre commande #CR-2026-001 est en cours de préparation.",
-    "🚚 Votre colis a été expédié par notre transporteur.",
-    "🔄 Votre colis est en transit – livraison prévue demain après-midi.",
-    "⚠️ Retard de livraison dû à des conditions météo – nouveau délai : +1 jour.",
-    "✅ Votre colis a été livré avec succès."
+  var now = new Date();
+  var baseDate = new Date(now);
+  baseDate.setHours(now.getHours() - 2, now.getMinutes() - 30);
+
+  var steps = [
+    { label: "Commande passée", date: formatDate(baseDate), icon: "check" },
+    { label: "Préparation en cours", date: formatDate(new Date(baseDate.getTime() + 4 * 60 * 60 * 1000 + 50 * 60 * 1000)), icon: "package" },
+    { label: "Expédiée", date: formatDate(new Date(baseDate.getTime() + 22 * 60 * 60 * 1000 + 45 * 60 * 1000)), icon: "truck" },
+    { label: "En transit", date: formatDate(new Date(baseDate.getTime() + 30 * 60 * 60 * 1000 + 10 * 60 * 1000)), icon: "rotate-cw" },
+    { label: "Arrivée dans votre région", date: formatDate(new Date(baseDate.getTime() + 45 * 60 * 60 * 1000 + 20 * 60 * 1000)), icon: "map-pin" },
+    { label: "En livraison", date: formatDate(new Date(baseDate.getTime() + 48 * 60 * 60 * 1000 + 30 * 60 * 1000)), icon: "navigation" },
+    { label: "Livrée", date: formatDate(new Date(baseDate.getTime() + 50 * 60 * 60 * 1000 + 0 * 60 * 1000)), icon: "check-circle" }
   ];
-  var currentNotificationIndex = 0;
+
+  var currentStepIndex = 0;
   var isProcessing = false;
   var timerId = null;
+  var optimizations = 0;
+  var isInitialized = false;
+
+  function formatDate(date) {
+    var d = new Date(date);
+    return d.toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' }) + ' ' + d.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
+  }
 
   function updateDashboard() {
-    safeSetText('cr-dash-status', notifications[currentNotificationIndex]);
+    window.SIM_STATES.croute.optimizations = optimizations;
+
+    var progressContainer = document.getElementById('cr-progress');
+    if (progressContainer) {
+      var html = '';
+      steps.forEach(function(step, index) {
+        var active = index <= currentStepIndex;
+        html += `
+          <div class="flex items-start gap-3 py-2 border-b border-white/5 ${active ? 'opacity-100' : 'opacity-40'}">
+            <div class="w-8 h-8 rounded-full flex items-center justify-center ${active ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-500'}">
+              <i data-lucide="${step.icon}" class="w-4 h-4"></i>
+            </div>
+            <div class="flex-1">
+              <div class="text-sm font-semibold ${active ? 'text-blue-600' : 'text-gray-400'}">${step.label}</div>
+              <div class="text-[11px] text-gray-500">${step.date}</div>
+            </div>
+          </div>
+        `;
+      });
+      progressContainer.innerHTML = html;
+      safeCreateIcons();
+    }
+
+    var lastNotif = document.getElementById('cr-last-notification');
+    if (lastNotif && steps[currentStepIndex]) {
+      lastNotif.textContent = steps[currentStepIndex].label + ' – ' + steps[currentStepIndex].date;
+    }
+
+    var historyDiv = document.getElementById('cr-dash-history');
+    if (historyDiv) {
+      var historyHtml = '';
+      for (var i = 0; i <= currentStepIndex; i++) {
+        historyHtml += '<div class="text-xs text-slate-600 border-b border-slate-100 py-1">' + steps[i].label + ' – ' + steps[i].date + '</div>';
+      }
+      historyDiv.innerHTML = historyHtml || '<div class="text-xs text-slate-400">Aucune notification</div>';
+    }
+
+    var div = document.getElementById('cr-suggestions');
+    if (div) {
+      if (currentStepIndex >= steps.length - 1) {
+        // Ne rien faire ici, les boutons seront ajoutés après la photo
+      } else {
+        if (!div.querySelector('.suggestion-chip')) {
+          div.innerHTML = '';
+          var nextBtn = document.createElement('div');
+          nextBtn.className = 'suggestion-chip';
+          nextBtn.innerText = '📨 Recevoir la prochaine notification';
+          nextBtn.onclick = nextStep;
+          div.appendChild(nextBtn);
+        }
+      }
+    }
     safeCreateIcons();
   }
 
-  function addBot(text) { addMessage('cr-chat', 'bot', text.replace(/{user}/g, firstName)); }
-  function addImportantSummary(summary) { client.history.push({ important: true, summary: summary }); DB.save(); }
+  function addBotDelayed(text, imageUrl, callback) {
+    addDelayedMessage('cr-chat', 'bot', text, imageUrl, 1000, callback);
+  }
+
+  function addUser(text) {
+    addMessage('cr-chat', 'user', text);
+    DB.save();
+    updateDashboard();
+  }
+
+  function addImportantSummary(summary) {
+    client.history.push({ important: true, summary: summary, timestamp: new Date().toISOString() });
+    DB.save();
+    updateDashboard();
+  }
 
   function nextStep() {
-    if (isProcessing || currentNotificationIndex >= notifications.length - 1) return;
+    if (isProcessing || currentStepIndex >= steps.length - 1) return;
     isProcessing = true;
-    currentNotificationIndex++;
-    var msg = notifications[currentNotificationIndex];
-    addBot(msg);
-    addImportantSummary(msg);
-    updateDashboard();
-    isProcessing = false;
-    if (currentNotificationIndex >= notifications.length - 1) {
-      // Fin de la simulation, on ajoute un bouton reset
-      var div = document.getElementById('cr-suggestions');
-      if (div) {
-        div.innerHTML = '';
-        addResetButton('cr-suggestions', reset);
+    currentStepIndex++;
+    optimizations++;
+    var step = steps[currentStepIndex];
+    addBotDelayed('📦 ' + step.label + ' – ' + step.date, null, function() {
+      addImportantSummary(step.label + ' – ' + step.date);
+      updateDashboard();
+
+      if (currentStepIndex === steps.length - 1) {
+        clearSuggestions('cr-suggestions');
+        // On réinitialise isProcessing pour permettre les clics sur les boutons
+        isProcessing = false;
+        setTimeout(function() {
+          var imageUrl = 'https://cdn.convrrt.com/apps/sendinblue/6761372/2effd64c-e813-44b6-900c-637dfa640a46.png';
+          var botMessage = '📸 ' + firstName + ', voici la preuve de livraison de votre colis, prise par notre livreur.\n\n' +
+                           'Nous espérons que tout est conforme à vos attentes. Avez-vous une réaction à partager ?';
+          addBotDelayed(botMessage, imageUrl, function() {
+            var div = document.getElementById('cr-suggestions');
+            if (div) {
+              div.innerHTML = '';
+              var thankBtn = document.createElement('div');
+              thankBtn.className = 'suggestion-chip';
+              thankBtn.innerText = '💬 Exprimer ma satisfaction';
+              thankBtn.style.borderColor = '#10b981';
+              thankBtn.style.backgroundColor = '#f0fdf4';
+              thankBtn.onclick = function() {
+                addUser('💬 Je suis ravi(e) de la livraison ! Tout est parfait, merci pour votre professionnalisme.');
+                addImportantSummary('Client satisfait de la livraison');
+                addBotDelayed('🙏 Un immense merci, ' + firstName + ' ! Votre retour nous touche. Nous nous engageons à vous offrir une expérience d’achat toujours plus fluide. À très bientôt !', null, function() {
+                  clearSuggestions('cr-suggestions');
+                  addResetButton('cr-suggestions', reset);
+                  updateDashboard();
+                });
+              };
+              div.appendChild(thankBtn);
+
+              var complaintBtn = document.createElement('div');
+              complaintBtn.className = 'suggestion-chip';
+              complaintBtn.innerText = '⚠️ Signaler un problème';
+              complaintBtn.style.borderColor = '#ef4444';
+              complaintBtn.style.backgroundColor = '#fef2f2';
+              complaintBtn.onclick = function() {
+                addUser('⚠️ Je souhaite signaler un problème avec ma livraison.');
+                addImportantSummary('Réclamation client');
+                addBotDelayed('📞 Nous sommes désolés d’apprendre cela, ' + firstName + '. Votre dossier a été transmis immédiatement à notre service réclamation. Un expert vous contactera sous 24h pour résoudre ce litige. Merci de votre confiance.', null, function() {
+                  clearSuggestions('cr-suggestions');
+                  addResetButton('cr-suggestions', reset);
+                  updateDashboard();
+                });
+              };
+              div.appendChild(complaintBtn);
+              safeCreateIcons();
+            }
+          });
+        }, 1500);
+      } else {
+        isProcessing = false;
       }
-    }
+    });
   }
 
   function reset() {
+    if (isInitialized) return;
+    isInitialized = true;
+
     if (timerId) { clearTimeout(timerId); timerId = null; }
+    clearMessageTimers('croute');
     client.history = []; client.purchases = []; client.totalSpent = 0; DB.save();
-    currentNotificationIndex = 0;
+    currentStepIndex = 0;
+    optimizations = 0;
     isProcessing = false;
+
     var chatDiv = document.getElementById('cr-chat');
     if (chatDiv) chatDiv.innerHTML = '';
-    addBot('Bonjour ' + firstName + ', votre commande #CR-2026-001 est en cours de préparation.');
-    var div = document.getElementById('cr-suggestions');
-    if (div) {
-      div.innerHTML = '';
-      var nextBtn = document.createElement('div');
-      nextBtn.className = 'suggestion-chip';
-      nextBtn.innerText = '📨 Recevoir la prochaine notification';
-      nextBtn.onclick = nextStep;
-      div.appendChild(nextBtn);
-    }
-    updateDashboard();
+
+    addBotDelayed('Bonjour ' + firstName + ', bienvenue sur le suivi de commande. Voici l’état d’avancement de votre commande #CR-2026-001 :', null, function() {
+      addBotDelayed('📦 ' + steps[0].label + ' – ' + steps[0].date, null, function() {
+        updateDashboard();
+        var div = document.getElementById('cr-suggestions');
+        if (div) {
+          div.innerHTML = '';
+          var nextBtn = document.createElement('div');
+          nextBtn.className = 'suggestion-chip';
+          nextBtn.innerText = '📨 Recevoir la prochaine notification';
+          nextBtn.onclick = nextStep;
+          div.appendChild(nextBtn);
+        }
+        isInitialized = false;
+      });
+    });
   }
 
   var html = `
@@ -1750,25 +2004,27 @@ function renderCRoute() {
     <div class="glass-card">
       <div class="sim-header">
         <i data-lucide="bar-chart-2"></i>
-        <h2>Dashboard Logistique</h2>
+        <h2>Tableau de suivi</h2>
       </div>
       <div class="p-4 flex-1 overflow-y-auto">
         <div class="next-action-box">
-          <div class="label">📬 Dernière notification RCS</div>
-          <div class="action" id="cr-dash-status">📦 Votre commande #CR-2026-001 est en cours de préparation.</div>
+          <div class="label">📬 Dernière notification</div>
+          <div class="action" id="cr-last-notification">Commande passée – ...</div>
         </div>
+        <div class="mt-4 space-y-1" id="cr-progress"></div>
         <div class="mt-4 bg-slate-50 rounded-2xl p-4">
           <p class="text-sm text-slate-600 font-medium">📋 Historique des notifications</p>
-          <div id="cr-dash-history" class="mt-1 text-xs text-slate-600 max-h-32 overflow-y-auto"></div>
+          <div id="cr-dash-history" class="mt-1 text-xs text-slate-600 max-h-32 overflow-y-auto">Aucune notification</div>
         </div>
       </div>
     </div>
   </div>`;
   document.getElementById('sim-root').innerHTML = html;
+  isInitialized = false;
   setTimeout(function() { safeCreateIcons(); reset(); }, 100);
 }
 
-// ---- 6.4 SAFERETURN (intro avec conditions) ----
+// ---- 6.4 SAFERETURN ----
 function renderSafeReturn() {
   var clientId = 'client_sr_1';
   var client = DB.getClient('safereturn', clientId);
@@ -1789,6 +2045,9 @@ function renderSafeReturn() {
 
   function updateDashboard() {
     var rate = state.totalClaims > 0 ? Math.round((state.totalFraudDetected / state.totalClaims) * 100) : 0;
+
+    window.SIM_STATES.safereturn.totalFraudDetected = state.totalFraudDetected;
+
     safeSetText('sr-dash-frauds', state.totalFraudDetected);
     safeSetText('sr-dash-claims', state.totalClaims);
     safeSetText('sr-dash-savings', state.savings + '€');
@@ -1809,13 +2068,36 @@ function renderSafeReturn() {
       else if (state.conditionsConfirmed) nextEl.textContent = "📸 Envoyez la photo du colis pour lancer l'analyse.";
       else nextEl.textContent = "📋 Confirmez les conditions de reprise.";
     }
+
+    var historyList = document.getElementById('sr-dash-history');
+    if (historyList) {
+      var html = '';
+      var important = client.history.filter(function(item) { return item.important === true; });
+      if (important.length === 0) html = '<div class="text-xs text-slate-400">Aucune vérification</div>';
+      else {
+        for (var h = 0; h < important.length; h++) {
+          html += '<div class="text-xs text-slate-600 border-b border-slate-100 py-1">' + important[h].summary + '</div>';
+        }
+      }
+      historyList.innerHTML = html;
+    }
+
     updateScanPanel();
     safeCreateIcons();
   }
 
-  function addBot(text) { addMessage('sr-chat', 'bot', text.replace(/{user}/g, firstName)); }
-  function addUser(text, img) { addMessage('sr-chat', 'user', text, img); DB.save(); }
-  function addImportantSummary(summary) { client.history.push({ important: true, summary: summary }); DB.save(); }
+  function addBotDelayed(text, callback) {
+    addDelayedMessage('sr-chat', 'bot', text, null, 1000, callback);
+  }
+  function addUser(text, img) {
+    addMessage('sr-chat', 'user', text, img);
+    DB.save();
+  }
+  function addImportantSummary(summary) {
+    client.history.push({ important: true, summary: summary, timestamp: new Date().toISOString() });
+    DB.save();
+    updateDashboard();
+  }
 
   function updateScanPanel() {
     var panel = document.getElementById('sr-scan-panel');
@@ -1852,10 +2134,12 @@ function renderSafeReturn() {
       state.isProcessing = true;
       addUser("Contester la décision");
       addImportantSummary('Réclamation déposée');
-      addBot('📞 Réclamation déposée ' + firstName + '. Un expert analysera votre dossier sous 48h.');
-      clearSuggestions('sr-suggestions');
-      addResetButton('sr-suggestions', reset);
-      state.step = 0; state.isProcessing = false;
+      addBotDelayed('📞 Réclamation enregistrée, ' + firstName + '. Un expert de notre service litige analysera votre dossier sous 48h. Nous vous tenons informé.', function() {
+        clearSuggestions('sr-suggestions');
+        addResetButton('sr-suggestions', reset);
+        state.step = 0;
+        state.isProcessing = false;
+      });
     };
     div.appendChild(appeal);
     var accept = document.createElement('div');
@@ -1867,10 +2151,12 @@ function renderSafeReturn() {
       state.isProcessing = true;
       addUser("Accepter la décision");
       addImportantSummary('Décision acceptée');
-      addBot('Merci ' + firstName + ' pour votre compréhension.');
-      clearSuggestions('sr-suggestions');
-      addResetButton('sr-suggestions', reset);
-      state.step = 0; state.isProcessing = false;
+      addBotDelayed('Merci, ' + firstName + ', pour votre compréhension. Si vous changez d’avis, notre service reste à votre disposition.', function() {
+        clearSuggestions('sr-suggestions');
+        addResetButton('sr-suggestions', reset);
+        state.step = 0;
+        state.isProcessing = false;
+      });
     };
     div.appendChild(accept);
     safeCreateIcons();
@@ -1886,10 +2172,13 @@ function renderSafeReturn() {
     addImportantSummary('Fraude confirmée - Confiance ' + state.confidenceLevel + '%');
     state.step = 2;
     updateDashboard();
-    addBot('🔬 Vérification des métadonnées EXIF...');
-    addBot('🚨 Fraude confirmée ' + firstName + ' : métadonnées EXIF altérées, clonage Photoshop détecté. Confiance : ' + state.confidenceLevel + '%. Remboursement refusé.');
-    addBot('📷 Souhaitez-vous contester cette décision ?');
-    showContestButtons();
+    addBotDelayed('🔬 Vérification des métadonnées EXIF…', function() {
+      addBotDelayed('🚨 Fraude confirmée, ' + firstName + ' : métadonnées EXIF altérées, clonage Photoshop détecté. Confiance : ' + state.confidenceLevel + '%.\nRemboursement refusé.', function() {
+        addBotDelayed('📷 Souhaitez-vous contester cette décision ?', function() {
+          showContestButtons();
+        });
+      });
+    });
     state.isProcessing = false;
   }
 
@@ -1901,9 +2190,12 @@ function renderSafeReturn() {
     state.photoSent = true;
     state.scanCompleted = false;
     state.step = 2;
+    clearSuggestions('sr-suggestions');
     updateDashboard();
-    if (state.timerId) clearTimeout(state.timerId);
-    state.timerId = setTimeout(function() { completeScan(); }, 3000);
+    addBotDelayed('Merci, ' + firstName + '. Notre IA procède à l’analyse approfondie de votre photo. Cela prend quelques instants.', function() {
+      if (state.timerId) clearTimeout(state.timerId);
+      state.timerId = setTimeout(function() { completeScan(); }, 3000);
+    });
   }
 
   function confirmConditions() {
@@ -1911,17 +2203,19 @@ function renderSafeReturn() {
     state.conditionsConfirmed = true;
     state.step = 1;
     addUser("Oui, je confirme les conditions.");
-    addBot('Parfait ' + firstName + '. Veuillez maintenant nous envoyer une photo du colis endommagé (vue d\'ensemble et détails).');
-    var div = document.getElementById('sr-suggestions');
-    if (div) {
-      div.innerHTML = '';
-      var sendBtn = document.createElement('div');
-      sendBtn.className = 'suggestion-chip';
-      sendBtn.innerText = '📸 Envoyer la photo';
-      sendBtn.onclick = sendPhoto;
-      div.appendChild(sendBtn);
-    }
-    updateDashboard();
+    addImportantSummary('Conditions de reprise confirmées');
+    addBotDelayed('Parfait, ' + firstName + '. Veuillez maintenant nous envoyer une photo du colis endommagé (vue d\'ensemble et détails).', function() {
+      var div = document.getElementById('sr-suggestions');
+      if (div) {
+        div.innerHTML = '';
+        var sendBtn = document.createElement('div');
+        sendBtn.className = 'suggestion-chip';
+        sendBtn.innerText = '📸 Envoyer la photo';
+        sendBtn.onclick = sendPhoto;
+        div.appendChild(sendBtn);
+      }
+      updateDashboard();
+    });
   }
 
   function reset() {
@@ -1936,18 +2230,20 @@ function renderSafeReturn() {
     state.savings = 0;
     state.confidenceLevel = 96;
     state.isProcessing = false;
+    clearMessageTimers('safereturn');
     var chatDiv = document.getElementById('sr-chat');
     if (chatDiv) chatDiv.innerHTML = '';
-    addBot('Bonjour ' + firstName + ', votre litige concernant le colis endommagé a été enregistré. Pour instruire votre dossier, nous devons vérifier quelques conditions : le produit est-il dans son emballage d\'origine ? Possédez-vous la facture ? Le colis a-t-il été ouvert ?');
-    var div = document.getElementById('sr-suggestions');
-    if (div) {
-      div.innerHTML = '';
-      var confirmBtn = document.createElement('div');
-      confirmBtn.className = 'suggestion-chip';
-      confirmBtn.innerText = '✅ Oui, tout est conforme';
-      confirmBtn.onclick = confirmConditions;
-      div.appendChild(confirmBtn);
-    }
+    addBotDelayed('Bonjour ' + firstName + ', votre litige concernant le colis endommagé a été enregistré. Pour instruire votre dossier, nous devons vérifier quelques conditions : le produit est-il dans son emballage d\'origine ? Possédez-vous la facture ? Le colis a-t-il été ouvert ?', function() {
+      var div = document.getElementById('sr-suggestions');
+      if (div) {
+        div.innerHTML = '';
+        var confirmBtn = document.createElement('div');
+        confirmBtn.className = 'suggestion-chip';
+        confirmBtn.innerText = '✅ Oui, tout est conforme';
+        confirmBtn.onclick = confirmConditions;
+        div.appendChild(confirmBtn);
+      }
+    });
     updateDashboard();
   }
 
@@ -1999,7 +2295,7 @@ function renderSafeReturn() {
         </div>
         <div class="mt-4 bg-slate-50 rounded-2xl p-4">
           <p class="text-sm text-slate-600 font-medium">📋 Synthèse des vérifications</p>
-          <div id="sr-dash-history" class="mt-1 text-xs text-slate-600 max-h-32 overflow-y-auto"></div>
+          <div id="sr-dash-history" class="mt-1 text-xs text-slate-600 max-h-32 overflow-y-auto">Aucune vérification</div>
         </div>
       </div>
     </div>
@@ -2021,14 +2317,16 @@ var current = "match";
 
 function switchSim(id) {
   current = id;
+  clearMessageTimers('match');
+  clearMessageTimers('secondlife');
+  clearMessageTimers('croute');
+  clearMessageTimers('safereturn');
   if (simMap[current]) simMap[current]();
 
   tabElements.forEach(function(btn) {
     var isActive = btn.getAttribute('data-sim') === current;
     btn.classList.toggle('active', isActive);
   });
-
-  updateLabExplainer(current);
 }
 
 tabElements.forEach(function(btn) {
