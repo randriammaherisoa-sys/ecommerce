@@ -628,7 +628,7 @@
       <div class="hero-particle" style="left: 90%; animation-delay: 2.5s;"></div>
     </div>
     <div class="absolute inset-0 z-0">
-      <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&q=80&w=2400" class="w-full h-full object-cover opacity-25 animate-bg-zoom scale-105" alt="E-commerce" />
+      <img src="https://cdn.convrrt.com/apps/sendinblue/6761372/b83390f4-b97e-4f43-b418-363634997692.png" class="w-full h-full object-cover opacity-25 animate-bg-zoom scale-105" alt="E-commerce" />
       <div class="absolute inset-0 bg-gradient-to-r from-[#000d25] via-[#000d25]/85 to-transparent"></div>
       <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#000d25]"></div>
       <div class="tech-ring w-[600px] h-[600px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-slow-spin"></div>
@@ -935,13 +935,13 @@ var DB = {
 };
 
 // ============================================================
-// 2. ONGLETS
+// 2. ONGLETS (ordre modifié : Match & Buy, Suivi de commande, SafeReturn, Reprise)
 // ============================================================
 var tabsData = [
   { id: 'match', label: 'Match & Buy', icon: 'shopping-bag' },
-  { id: 'secondlife', label: 'Reprise', icon: 'camera' },
   { id: 'croute', label: 'Suivi de commande', icon: 'truck' },
-  { id: 'safereturn', label: 'SafeReturn', icon: 'shield-check' }
+  { id: 'safereturn', label: 'SafeReturn', icon: 'shield-check' },
+  { id: 'secondlife', label: 'Reprise', icon: 'camera' }
 ];
 var tabsWrapper = document.getElementById('tabs-wrapper');
 var tabElements = [];
@@ -957,15 +957,21 @@ tabsData.forEach(function(tab) {
 // ============================================================
 // 3. FONCTIONS UTILITAIRES
 // ============================================================
-function addMessage(containerId, from, text, imageUrl) {
+function addMessage(containerId, from, text, imageUrls) {
   var container = document.getElementById(containerId);
   if (!container) return;
   var time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   var bubble = document.createElement('div');
   bubble.className = from === 'user' ? 'whatsapp-bubble-user' : 'whatsapp-bubble-bot';
   var html = text;
-  if (imageUrl) {
-    html += '<br><img src="' + imageUrl + '" alt="Preuve visuelle" style="max-width:200px; border-radius:12px; margin-top:6px; border:1px solid rgba(255,255,255,0.1);">';
+  if (imageUrls) {
+    if (Array.isArray(imageUrls)) {
+      imageUrls.forEach(function(url) {
+        html += '<br><img src="' + url + '" alt="Photo" style="max-width:200px; border-radius:12px; margin-top:6px; border:1px solid rgba(255,255,255,0.1);">';
+      });
+    } else {
+      html += '<br><img src="' + imageUrls + '" alt="Photo" style="max-width:200px; border-radius:12px; margin-top:6px; border:1px solid rgba(255,255,255,0.1);">';
+    }
   }
   bubble.innerHTML = html + '<div class="text-right text-[9px] opacity-50 mt-1">' + time + (from === 'user' ? ' ✔️✔️' : '') + '</div>';
   container.appendChild(bubble);
@@ -988,13 +994,13 @@ function hideTyping(containerId) {
   if (typing) typing.remove();
 }
 
-function addDelayedMessage(containerId, from, text, imageUrl, delay, callback) {
+function addDelayedMessage(containerId, from, text, imageUrls, delay, callback) {
   var container = document.getElementById(containerId);
   if (!container) return;
   if (from === 'bot') showTyping(containerId);
   setTimeout(function() {
     hideTyping(containerId);
-    addMessage(containerId, from, text, imageUrl);
+    addMessage(containerId, from, text, imageUrls);
     if (callback) callback();
   }, delay);
 }
@@ -1046,7 +1052,7 @@ function addResetButton(containerId, resetFunction) {
 }
 
 // ============================================================
-// 4. TÉLÉMÉTRIE (supprimée de l'affichage)
+// 4. TÉLÉMÉTRIE
 // ============================================================
 function updateTelemetry() {
   // Conservée pour la logique interne
@@ -1062,7 +1068,7 @@ window.resetAllJourney = function() {
 };
 
 // ============================================================
-// 5. INJECTION DES 5 CARTES
+// 5. INJECTION DES 5 CARTES (défis reformulés positivement)
 // ============================================================
 function injectModules() {
   var retailSolutions = [
@@ -1071,7 +1077,7 @@ function injectModules() {
       title: "Découverte & Conseil Produit",
       icon: "compass",
       badge: "CONSEIL",
-      challenge: "Il a été découvert que les produits aux spécifications complexes (électroménager, high-tech, bricolage, ameublement...) le client hésite, compare mal et abandonne. Le conseiller humain ne peut pas être disponible à chaque instant.",
+      challenge: "Offrir un accompagnement personnalisé et disponible à tout moment pour guider le client vers le produit idéal, même face à des spécifications complexes.",
       solutions: [
         "<b>Conseiller IA conversationnel :</b> pose les bonnes questions sur l'usage, propose les produits adaptés, compare les caractéristiques et explique les différences — jusqu'à l'ajout au panier.",
         "<b>Assistant de conception IA :</b> à partir d'une photo ou d'un plan envoyé par le client, l'IA propose un aménagement personnalisé en s'appuyant sur le catalogue."
@@ -1089,7 +1095,7 @@ function injectModules() {
       title: "Achat & Souscription",
       icon: "shopping-bag",
       badge: "CONVERSION",
-      challenge: "Le passage à l'acte reste un moment de friction : hésitation de dernière minute, parcours abandonné.",
+      challenge: "Transformer le passage à l'acte en une expérience fluide et rassurante, en levant les dernières hésitations et en proposant des offres adaptées.",
       solutions: [
         "<b>Bot conversationnel :</b> lève les dernières objections, rassure sur les garanties.",
         "<b>Push contextuel :</b> suggère les accessoires et extensions au bon moment."
@@ -1107,7 +1113,7 @@ function injectModules() {
       title: "Prise en main & Usage",
       icon: "graduation-cap",
       badge: "CONVERSION",
-      challenge: "Une part des retours est liée à une mauvaise utilisation, coût évitable.",
+      challenge: "Assurer une prise en main réussie et réduire les retours grâce à un accompagnement proactif et des tutoriels interactifs.",
       solutions: [
         "<b>Formation proactive post-achat :</b> guides interactifs, tutoriels vidéo adaptés.",
         "<b>Sessions en live :</b> pour les produits complexes."
@@ -1125,7 +1131,7 @@ function injectModules() {
       title: "SAV, Litiges & Reprise",
       icon: "shield-alert",
       badge: "RISK MANAGEMENT",
-      challenge: "Les réclamations reposent souvent sur du déclaratif non vérifiable.",
+      challenge: "Rendre le traitement des réclamations plus rapide et transparent grâce à des vérifications visuelles automatisées.",
       solutions: [
         "<b>Vérification visuelle IA :</b> détection des images retouchées, appel vidéo de contrôle.",
         "<b>Estimation instantanée :</b> à partir de photos, évaluation de l'état et proposition de reprise."
@@ -1143,7 +1149,7 @@ function injectModules() {
       title: "Fidélisation & Cycle de vie",
       icon: "repeat",
       badge: "FIDÉLISATION",
-      challenge: "La relation client s'arrête trop souvent à la livraison.",
+      challenge: "Prolonger la relation client au‑delà de la livraison en offrant un suivi personnalisé et des conseils tout au long du cycle de vie du produit.",
       solutions: [
         "<b>Concierge IA personnel :</b> conseils d'entretien, alertes, upsell contextuel.",
         "<b>Échanges proactifs :</b> rappels de garantie, suggestions de renouvellement."
@@ -1180,7 +1186,7 @@ function injectModules() {
             <h3 class="text-base md:text-lg font-black text-[#002d62] leading-tight">${s.title}</h3>
           </div>
           <div>
-            <p class="font-black uppercase text-[#2470ef] text-[9px] tracking-widest mb-1">LE DÉFI</p>
+            <p class="font-black uppercase text-[#2470ef] text-[9px] tracking-widest mb-1">L’OPPORTUNITÉ</p>
             <p class="text-slate-500 text-xs font-light leading-relaxed mb-4">${s.challenge}</p>
           </div>
           <div>
@@ -1213,7 +1219,7 @@ function injectModules() {
 // 6. SIMULATEURS COMPLETS
 // ============================================================
 
-// ---- 6.1 MATCH & BUY ----
+// ---- 6.1 MATCH & BUY (avec images et specs pour le produit principal ET le cross-sell) ----
 function renderMatch() {
   var clientId = 'client_match_1';
   var client = DB.getClient('match', clientId);
@@ -1226,16 +1232,69 @@ function renderMatch() {
   var conversions = 0;
   var isProcessing = false;
   var products = [
-    { name: "MacBook Pro M3 Max", price: 3899, category: "creatif", desc: "Puissance et finesse pour les créatifs exigeants." },
-    { name: "Lenovo IdeaPad 5", price: 799, category: "etudiant", desc: "Léger, performant, idéal pour la mobilité." },
-    { name: "Dell XPS 15", price: 2199, category: "pro", desc: "Fiabilité et performance pour les professionnels." },
-    { name: "ASUS ROG Strix G16", price: 2199, category: "gamer", desc: "Ultime performance pour les jeux et le streaming." }
+    { 
+      name: "MacBook Pro M3 Max", 
+      price: 3899, 
+      category: "creatif", 
+      desc: "Puissance et finesse pour les créatifs exigeants.",
+      image: "https://cdn.convrrt.com/apps/sendinblue/6761372/c48efecd-368f-41f4-a97d-ef638bd5b3ae.jpg",
+      specs: "Processeur M3 Max (16 cœurs), 36 Go RAM, 1 To SSD, écran 16\" Liquid Retina XDR, autonomie 22h."
+    },
+    { 
+      name: "Lenovo IdeaPad 5", 
+      price: 799, 
+      category: "etudiant", 
+      desc: "Léger, performant, idéal pour la mobilité.",
+      image: "https://cdn.convrrt.com/apps/sendinblue/6761372/8053724f-4db5-4236-aa83-cc5df44d34a6.jpg",
+      specs: "AMD Ryzen 7, 16 Go RAM, 512 Go SSD, écran 15.6\" Full HD, poids 1.8 kg."
+    },
+    { 
+      name: "Dell XPS 15", 
+      price: 2199, 
+      category: "pro", 
+      desc: "Fiabilité et performance pour les professionnels.",
+      image: "https://cdn.convrrt.com/apps/sendinblue/6761372/559c8538-d328-4d8e-8ebf-45d299d2d3e3.jpg",
+      specs: "Intel Core i9-13900H, 32 Go RAM, 1 To SSD, écran 15.6\" 4K OLED, batterie 86Wh."
+    },
+    { 
+      name: "ASUS ROG Strix G16", 
+      price: 2199, 
+      category: "gamer", 
+      desc: "Ultime performance pour les jeux et le streaming.",
+      image: "https://cdn.convrrt.com/apps/sendinblue/6761372/cc518b45-1b9e-4ea4-b9c9-9fd8a74fc90b.jpg",
+      specs: "Intel Core i9-13980HX, RTX 4080, 32 Go RAM, 1 To SSD, écran 16\" 240Hz."
+    }
   ];
+  // Cross-sell enrichi avec image et specs
   var crossSellOffers = {
-    'creatif': { product: 'Souris MX Master 3S', price: 99, pitch: 'Précision 8K, scroll fluide, autonomie 70 jours.' },
-    'etudiant': { product: 'Housse de transport renforcée', price: 45, pitch: 'Protection antichoc et étanchéité.' },
-    'pro': { product: 'Hub USB-C 7-en-1', price: 79, pitch: 'Connectez tous vos périphériques.' },
-    'gamer': { product: 'Casque gaming surround 7.1', price: 129, pitch: 'Son immersif, micro anti-bruit.' }
+    'creatif': { 
+      product: 'Souris MX Master 3S', 
+      price: 99, 
+      pitch: 'Précision 8K, scroll fluide, autonomie 70 jours.',
+      image: 'https://cdn.convrrt.com/apps/sendinblue/6761372/87e0ad96-59b4-4168-9183-ba87eb404a3a.jpg',
+      specs: 'Capteur 8K DPI, 7 boutons programmables, connectivité Bluetooth & USB-C, batterie 70 jours.'
+    },
+    'etudiant': { 
+      product: 'Housse de transport renforcée', 
+      price: 45, 
+      pitch: 'Protection antichoc et étanchéité.',
+      image: 'https://cdn.convrrt.com/apps/sendinblue/6761372/05ee8ce0-c50a-45b6-a09b-ae224181bac7.jpg',
+      specs: 'Rembourrage en mousse à mémoire de forme, fermeture étanche, compatibilité 15.6", poids 0.4 kg.'
+    },
+    'pro': { 
+      product: 'Hub USB-C 7-en-1', 
+      price: 79, 
+      pitch: 'Connectez tous vos périphériques.',
+      image: 'https://cdn.convrrt.com/apps/sendinblue/6761372/9fc87de0-7c63-483e-b15d-a780a6911003.jpg',
+      specs: '2x USB-C PD, 2x USB-A 3.0, HDMI 4K, Ethernet, SD/microSD, alimentation 100W.'
+    },
+    'gamer': { 
+      product: 'Casque gaming surround 7.1', 
+      price: 129, 
+      pitch: 'Son immersif, micro anti-bruit.',
+      image: 'https://cdn.convrrt.com/apps/sendinblue/6761372/e389d0d5-47ea-4210-b6a3-d3afad39d58f.jpg',
+      specs: 'Drivers 50mm, surround 7.1, micro anti-bruit, connectique USB et jack 3.5, compatible PC/PS5/Xbox.'
+    }
   };
 
   function updateDashboard() {
@@ -1288,8 +1347,8 @@ function renderMatch() {
     updateDashboard();
   }
 
-  function addBotDelayed(text, callback) {
-    addDelayedMessage('m-chat', 'bot', text, null, 1000, callback);
+  function addBotDelayed(text, imageUrls, callback) {
+    addDelayedMessage('m-chat', 'bot', text, imageUrls, 1000, callback);
   }
 
   function addImportantSummary(summary) {
@@ -1324,7 +1383,8 @@ function renderMatch() {
       var product = products.find(function(p) { return p.category === selectedUsage; });
       if (product) {
         addImportantSummary('Choix d\'usage : ' + selectedUsage);
-        addBotDelayed('Merci pour ces précisions. D’après votre besoin, je vous recommande le <b>' + product.name + '</b> (' + product.price + '€) – ' + product.desc + '. Souhaitez-vous l’ajouter à votre panier ?', function() {
+        var message = 'Merci pour ces précisions. D’après votre besoin, je vous recommande le <b>' + product.name + '</b> (' + product.price + '€) – ' + product.desc + '<br><br>📋 <b>Caractéristiques :</b> ' + product.specs + '<br><br>Souhaitez-vous l’ajouter à votre panier ?';
+        addBotDelayed(message, product.image, function() {
           step = 3;
           replaceSuggestions([
             { label: "✅ Ajouter au panier", value: "add" },
@@ -1338,7 +1398,7 @@ function renderMatch() {
         if (product) {
           cart.push(product);
           addImportantSummary('Ajout panier : ' + product.name);
-          addBotDelayed('Le ' + product.name + ' a été ajouté à votre panier. Souhaitez-vous finaliser votre commande ?', function() {
+          addBotDelayed('Le ' + product.name + ' a été ajouté à votre panier. Souhaitez-vous finaliser votre commande ?', null, function() {
             step = 4;
             replaceSuggestions([
               { label: "✅ Finaliser la commande", value: "checkout" },
@@ -1352,12 +1412,14 @@ function renderMatch() {
         conversions++;
         cart.forEach(function(item) { client.purchases.push(item); client.totalSpent += item.price; });
         addImportantSummary('Commande finalisée : ' + cart.length + ' article(s)');
-        addBotDelayed('🎉 Félicitations, ' + firstName + ' ! Votre commande est validée avec succès. Un email de confirmation vous a été envoyé. Merci pour votre confiance.', function() {
+        addBotDelayed('🎉 Félicitations, ' + firstName + ' ! Votre commande est validée avec succès. Un email de confirmation vous a été envoyé. Merci pour votre confiance.', null, function() {
           clearSuggestions('m-suggestions');
           var offer = crossSellOffers[selectedUsage];
           if (offer) {
             step = 5;
-            addBotDelayed('💡 ' + firstName + ', nous vous proposons en exclusivité un accessoire complémentaire : <b>' + offer.product + '</b> (' + offer.price + '€). ' + offer.pitch + ' Souhaitez-vous l’ajouter ?', function() {
+            // Message enrichi avec les specs et l'image
+            var msg = '💡 ' + firstName + ', nous vous proposons en exclusivité un accessoire complémentaire : <b>' + offer.product + '</b> (' + offer.price + '€).<br>' + offer.pitch + '<br><br>📋 <b>Caractéristiques :</b> ' + offer.specs + '<br><br>Souhaitez-vous l’ajouter ?';
+            addBotDelayed(msg, offer.image, function() {
               var recosDiv = document.getElementById('m-suggestions');
               if (recosDiv) {
                 recosDiv.innerHTML = '';
@@ -1373,7 +1435,7 @@ function renderMatch() {
                   client.purchases.push({ name: offer.product, price: offer.price });
                   client.totalSpent += offer.price;
                   addImportantSummary('Cross-sell accepté : ' + offer.product);
-                  addBotDelayed('Parfait, ' + firstName + ' ! ' + offer.product + ' a été ajouté à votre commande. Profitez pleinement de votre équipement.', function() {
+                  addBotDelayed('Parfait, ' + firstName + ' ! ' + offer.product + ' a été ajouté à votre commande. Profitez pleinement de votre équipement.', null, function() {
                     clearSuggestions('m-suggestions');
                     addResetButton('m-suggestions', reset);
                     updateDashboard();
@@ -1392,7 +1454,7 @@ function renderMatch() {
                   isProcessing = true;
                   addUser('Refuser l\'offre');
                   addImportantSummary('Cross-sell refusé');
-                  addBotDelayed('Pas de problème, ' + firstName + '. Nous restons à votre disposition pour toute question. Bonne continuation !', function() {
+                  addBotDelayed('Pas de problème, ' + firstName + '. Nous restons à votre disposition pour toute question. Bonne continuation !', null, function() {
                     clearSuggestions('m-suggestions');
                     addResetButton('m-suggestions', reset);
                     updateDashboard();
@@ -1405,7 +1467,7 @@ function renderMatch() {
               }
             });
           } else {
-            addBotDelayed('Merci, ' + firstName + ', pour votre commande. Notre équipe vous accompagne tout au long de votre expérience.', function() {
+            addBotDelayed('Merci, ' + firstName + ', pour votre commande. Notre équipe vous accompagne tout au long de votre expérience.', null, function() {
               addResetButton('m-suggestions', reset);
             });
           }
@@ -1425,7 +1487,7 @@ function renderMatch() {
     clearMessageTimers('match');
     var chatDiv = document.getElementById('m-chat');
     if (chatDiv) chatDiv.innerHTML = '';
-    addBotDelayed('Bonjour ' + firstName + ', je suis l’assistant intelligent. Je vois que vous recherchez un ordinateur. Pour vous recommander le modèle idéal, pourriez-vous me préciser votre usage principal ?', function() {
+    addBotDelayed('Bonjour ' + firstName + ', je suis l’assistant intelligent. Je vois que vous recherchez un ordinateur. Pour vous recommander le modèle idéal, pourriez-vous me préciser votre usage principal ?', null, function() {
       replaceSuggestions([
         { label: "🎨 Créatif (montage, design)", value: "creatif" },
         { label: "📚 Étudiant (cours, bureautique)", value: "etudiant" },
@@ -1484,315 +1546,7 @@ function renderMatch() {
   setTimeout(function() { safeCreateIcons(); reset(); }, 100);
 }
 
-// ---- 6.2 REPRISE ----
-function renderSecondLife() {
-  var clientId = 'client_sl_1';
-  var client = DB.getClient('secondlife', clientId);
-  var firstName = client.firstName;
-  var state = {
-    step: 0,
-    selectedCondition: null,
-    detailsGiven: false,
-    photoSent: false,
-    scanCompleted: false,
-    totalEstimations: 0,
-    acceptedOffers: 0,
-    lastEstimation: 0,
-    lastConfidence: 0,
-    isProcessing: false,
-    timerId: null
-  };
-
-  function updateDashboard() {
-    var acceptRate = state.totalEstimations > 0 ? Math.round((state.acceptedOffers / state.totalEstimations) * 100) : 0;
-    var gain = state.acceptedOffers * 425;
-
-    window.SIM_STATES.secondlife.totalEstimations = state.totalEstimations;
-    window.SIM_STATES.secondlife.acceptedOffers = state.acceptedOffers;
-
-    safeSetText('sl-dash-estimations', state.totalEstimations);
-    safeSetText('sl-dash-accepted', state.acceptedOffers);
-    safeSetText('sl-dash-acceptRate', acceptRate + '%');
-    safeSetWidth('sl-dash-acceptBar', acceptRate + '%');
-    safeSetText('sl-dash-gain', gain + '€');
-    var stock = gain * 1.8;
-    safeSetWidth('sl-dash-stockBar', Math.min((stock / 1000) * 100, 100) + '%');
-    safeSetText('sl-dash-potential', stock + '€');
-    safeSetText('sl-dash-estimation', state.lastEstimation > 0 ? state.lastEstimation + '€' : '---');
-    safeSetText('sl-dash-confidence', state.lastConfidence > 0 ? state.lastConfidence + '%' : '--%');
-    var statusEl = document.getElementById('sl-dash-scanStatus');
-    if (statusEl) {
-      if (state.scanCompleted) { statusEl.textContent = '✅ Scan terminé'; statusEl.style.color = '#10b981'; }
-      else if (state.photoSent) { statusEl.textContent = '🔍 Analyse en cours...'; statusEl.style.color = '#f59e0b'; }
-      else { statusEl.textContent = '⏳ En attente des infos'; statusEl.style.color = '#64748b'; }
-    }
-    var nextEl = document.getElementById('sl-next-action');
-    if (nextEl) {
-      if (state.scanCompleted) nextEl.textContent = "💰 Proposition de rachat prête – acceptez ou refusez l'offre.";
-      else if (state.photoSent) nextEl.textContent = "🧠 L'IA analyse en profondeur l'état de l'appareil…";
-      else if (state.detailsGiven) nextEl.textContent = "📸 Envoyez une photo pour confirmer l'état déclaré.";
-      else if (state.selectedCondition) nextEl.textContent = "📝 Précisez la date d'achat, les accessoires inclus, etc.";
-      else nextEl.textContent = "🔍 Précisez l'état du produit (excellent / bon / moyen / mauvais).";
-    }
-
-    var historyList = document.getElementById('sl-dash-history');
-    if (historyList) {
-      var html = '';
-      var important = client.history.filter(function(item) { return item.important === true; });
-      if (important.length === 0) html = '<div class="text-xs text-slate-400">Aucune estimation</div>';
-      else {
-        for (var h = 0; h < important.length; h++) {
-          html += '<div class="text-xs text-slate-600 border-b border-slate-100 py-1">' + important[h].summary + '</div>';
-        }
-      }
-      historyList.innerHTML = html;
-    }
-
-    updateScanPanel();
-    safeCreateIcons();
-  }
-
-  function addBotDelayed(text, callback) {
-    addDelayedMessage('sl-chat', 'bot', text, null, 1000, callback);
-  }
-  function addUser(text, img) {
-    addMessage('sl-chat', 'user', text, img);
-    DB.save();
-  }
-  function addImportantSummary(summary) {
-    client.history.push({ important: true, summary: summary, timestamp: new Date().toISOString() });
-    DB.save();
-    updateDashboard();
-  }
-
-  function updateScanPanel() {
-    var panel = document.getElementById('sl-scan-panel');
-    if (!panel) return;
-    if (!state.photoSent) {
-      panel.innerHTML = `
-        <div class="image-placeholder w-full flex flex-col items-center justify-center text-center p-4">
-          <i data-lucide="camera" class="w-12 h-12 text-blue-400 mb-2"></i>
-          <p class="text-slate-600 text-sm font-semibold">En attente de la photo</p>
-          <p class="text-slate-400 text-xs">Envoyez une photo pour finaliser l'estimation</p>
-        </div>`;
-    } else {
-      var overlay = !state.scanCompleted ? '<div class="absolute inset-0 bg-black/30 z-10 flex items-center justify-center"><span class="text-white text-sm font-semibold">📸 Analyse en cours...</span></div>' : '';
-      var badge = state.scanCompleted ? '<div class="absolute top-2 left-2 z-20 scan-badge">✅ Scan terminé - Confiance ' + state.lastConfidence + '%</div>' : '';
-      panel.innerHTML = `
-        <div class="relative w-full rounded-2xl overflow-hidden" style="min-height:180px;">
-          <img src="https://cdn.convrrt.com/apps/sendinblue/6761372/5b4c26c6-34de-4125-879b-4b13a02b2154.png" class="w-full h-full object-cover" alt="iPhone 13 Pro" />
-          ${overlay}
-          ${badge}
-        </div>`;
-    }
-    safeCreateIcons();
-  }
-
-  function showAcceptButtons() {
-    var div = document.getElementById('sl-suggestions');
-    if (!div) return;
-    div.innerHTML = '';
-    var accept = document.createElement('div');
-    accept.className = 'suggestion-chip';
-    accept.innerText = '✅ Accepter l\'offre de reprise';
-    accept.onclick = function() {
-      if (state.isProcessing) return;
-      state.isProcessing = true;
-      addUser("Accepter l'offre");
-      state.acceptedOffers++;
-      client.purchases.push({ name: 'iPhone 13 Pro (reconditionné)', price: 425 });
-      client.totalSpent += 425;
-      addImportantSummary('Offre acceptée : iPhone 13 Pro');
-      addBotDelayed('🎉 Offre de reprise acceptée ! Vous allez recevoir un bon de reprise par email sous 2h. Merci pour votre démarche écoresponsable.', function() {
-        clearSuggestions('sl-suggestions');
-        addResetButton('sl-suggestions', reset);
-        updateDashboard();
-        state.step = 0;
-        state.isProcessing = false;
-      });
-    };
-    div.appendChild(accept);
-    var refuse = document.createElement('div');
-    refuse.className = 'suggestion-chip';
-    refuse.innerText = '❌ Refuser l\'offre';
-    refuse.style.borderColor = '#ef4444';
-    refuse.onclick = function() {
-      if (state.isProcessing) return;
-      state.isProcessing = true;
-      addUser("Refuser l'offre");
-      addImportantSummary('Offre refusée');
-      addBotDelayed('Pas de souci, ' + firstName + '. Vous pouvez à tout moment revenir pour une nouvelle estimation. Notre service reste à votre écoute.', function() {
-        clearSuggestions('sl-suggestions');
-        addResetButton('sl-suggestions', reset);
-        state.step = 0;
-        state.isProcessing = false;
-      });
-    };
-    div.appendChild(refuse);
-    safeCreateIcons();
-  }
-
-  function completeScan() {
-    if (state.timerId) { clearTimeout(state.timerId); state.timerId = null; }
-    state.scanCompleted = true;
-    state.totalEstimations++;
-    state.lastEstimation = 425;
-    state.lastConfidence = Math.floor(Math.random() * 9 + 90);
-    addImportantSummary('Estimation iPhone 13 Pro : 425€ (confiance ' + state.lastConfidence + '%)');
-    state.step = 2;
-    updateDashboard();
-    addBotDelayed('🔍 Analyse terminée, ' + firstName + '.\n\nÉtat général : correct, batterie à 81%, quelques micro-rayures. Estimation : <b>425€</b>.\nConfiance IA : ' + state.lastConfidence + '%.\n\nAcceptez-vous cette offre de reprise ?', function() {
-      showAcceptButtons();
-    });
-    state.isProcessing = false;
-  }
-
-  function sendPhoto() {
-    if (state.step !== 1 || state.isProcessing) return;
-    state.isProcessing = true;
-    var imageUrl = 'https://cdn.convrrt.com/apps/sendinblue/6761372/5b4c26c6-34de-4125-879b-4b13a02b2154.png';
-    addUser("📸 Photo envoyée", imageUrl);
-    state.photoSent = true;
-    state.scanCompleted = false;
-    state.step = 2;
-    clearSuggestions('sl-suggestions');
-    updateDashboard();
-    addBotDelayed('Merci, ' + firstName + ' ! Notre IA analyse en ce moment les photos de votre iPhone 13 Pro. Cela ne devrait prendre que quelques secondes.', function() {
-      if (state.timerId) clearTimeout(state.timerId);
-      state.timerId = setTimeout(function() { completeScan(); }, 3000);
-    });
-  }
-
-  function handleConditionChoice(condition) {
-    if (state.step !== 0 || state.isProcessing) return;
-    state.selectedCondition = condition;
-    state.step = 1;
-    addUser("État : " + condition);
-    addBotDelayed('Merci, ' + firstName + '. Pour affiner notre estimation, pouvez-vous préciser la date d\'achat, les accessoires inclus (chargeur, câble) et d\'éventuels défauts particuliers ?', function() {
-      var div = document.getElementById('sl-suggestions');
-      if (div) {
-        div.innerHTML = '';
-        var detailsBtn = document.createElement('div');
-        detailsBtn.className = 'suggestion-chip';
-        detailsBtn.innerText = '📝 Acheté il y a 2 ans, chargeur inclus, micro-rayures sur l\'écran';
-        detailsBtn.onclick = function() {
-          if (state.isProcessing) return;
-          state.detailsGiven = true;
-          addUser('Acheté il y a 2 ans, chargeur inclus, micro-rayures sur l\'écran.');
-          addImportantSummary('Détails fournis pour l\'estimation');
-          addBotDelayed('Parfait, ' + firstName + '. Pour finaliser l\'estimation, envoyez-nous une photo du produit (vue avant et arrière).', function() {
-            state.step = 1;
-            var div2 = document.getElementById('sl-suggestions');
-            if (div2) {
-              div2.innerHTML = '';
-              var sendBtn = document.createElement('div');
-              sendBtn.className = 'suggestion-chip';
-              sendBtn.innerText = '📸 Envoyer la photo';
-              sendBtn.onclick = sendPhoto;
-              div2.appendChild(sendBtn);
-            }
-            updateDashboard();
-          });
-        };
-        div.appendChild(detailsBtn);
-      }
-    });
-    updateDashboard();
-  }
-
-  function reset() {
-    if (state.timerId) { clearTimeout(state.timerId); state.timerId = null; }
-    client.history = []; client.purchases = []; client.totalSpent = 0; DB.save();
-    state.step = 0;
-    state.selectedCondition = null;
-    state.detailsGiven = false;
-    state.photoSent = false;
-    state.scanCompleted = false;
-    state.totalEstimations = 0;
-    state.acceptedOffers = 0;
-    state.lastEstimation = 0;
-    state.lastConfidence = 0;
-    state.isProcessing = false;
-    clearMessageTimers('secondlife');
-    var chatDiv = document.getElementById('sl-chat');
-    if (chatDiv) chatDiv.innerHTML = '';
-    addBotDelayed('Bonjour ' + firstName + ', bienvenue sur notre service de reprise. Vous souhaitez revendre votre iPhone 13 Pro. Pour évaluer sa valeur, précisez son état général :', function() {
-      var div = document.getElementById('sl-suggestions');
-      if (div) {
-        div.innerHTML = '';
-        var states = ['🌟 Excellent', '👍 Bon', '📊 Moyen', '⚠️ Mauvais'];
-        states.forEach(function(s) {
-          var chip = document.createElement('div');
-          chip.className = 'suggestion-chip';
-          chip.innerText = s;
-          chip.onclick = function() { handleConditionChoice(s); };
-          div.appendChild(chip);
-        });
-      }
-    });
-    updateDashboard();
-  }
-
-  var html = `
-  <div class="grid md:grid-cols-2 gap-6 fade-in">
-    <div class="glass-card">
-      <div class="sim-header">
-        <i data-lucide="camera"></i>
-        <h2>Reprise — Client</h2>
-      </div>
-      <div class="p-4 flex-1 flex flex-col">
-        <div class="whatsapp-container" id="sl-chat" style="height: 700px;"></div>
-        <div id="sl-suggestions" class="flex flex-wrap gap-2 mt-4 justify-center"></div>
-      </div>
-    </div>
-    <div class="glass-card">
-      <div class="sim-header">
-        <i data-lucide="bar-chart-2"></i>
-        <h2>Dashboard Commerçant</h2>
-      </div>
-      <div class="p-4 flex-1 overflow-y-auto">
-        <div class="next-action-box">
-          <div class="label">🤖 Prochaine action IA</div>
-          <div class="action" id="sl-next-action">🔍 Précisez l'état du produit (excellent / bon / moyen / mauvais).</div>
-        </div>
-        <div class="scan-panel mb-4" id="sl-scan-panel">
-          <div class="image-placeholder w-full flex flex-col items-center justify-center text-center p-4">
-            <i data-lucide="camera" class="w-12 h-12 text-blue-400 mb-2"></i>
-            <p class="text-slate-600 text-sm font-semibold">En attente de la photo</p>
-            <p class="text-slate-400 text-xs">Envoyez une photo pour finaliser l'estimation</p>
-          </div>
-        </div>
-        <div class="grid grid-cols-2 gap-4">
-          <div class="kpi-card"><div class="kpi-label">Estimations</div><div class="kpi-value" id="sl-dash-estimations">0</div></div>
-          <div class="kpi-card"><div class="kpi-label">Offres acceptées</div><div class="kpi-value" id="sl-dash-accepted">0</div></div>
-          <div class="kpi-card"><div class="kpi-label">Taux d'acceptation</div><div class="kpi-value" id="sl-dash-acceptRate">0% <span id="sl-dash-trend" class="kpi-trend kpi-trend-up">▲ +0%</span></div></div>
-          <div class="kpi-card"><div class="kpi-label">Gain estimé</div><div class="kpi-value" id="sl-dash-gain">0€</div></div>
-        </div>
-        <div class="mt-4 bg-slate-50 rounded-2xl p-4">
-          <p class="text-sm text-slate-600 font-medium">📊 Valorisation du stock</p>
-          <div class="w-full bg-slate-200 rounded-full h-2.5 mt-1">
-            <div class="bg-blue-600 h-2.5 rounded-full transition-all duration-500" style="width:0%" id="sl-dash-stockBar"></div>
-          </div>
-          <p class="text-xs text-slate-400 mt-1">Potentiel de revente : <span id="sl-dash-potential">0€</span></p>
-        </div>
-        <div class="mt-4 bg-slate-50 rounded-2xl p-4">
-          <p class="text-sm text-slate-600 font-medium">🔍 Résultat du scan</p>
-          <p class="text-xs font-semibold" id="sl-dash-scanStatus" style="color:#64748b;">⏳ En attente</p>
-          <p class="text-xs text-slate-600 mt-1">Estimation : <span id="sl-dash-estimation">---</span></p>
-          <p class="text-xs text-slate-600">Confiance IA : <span id="sl-dash-confidence">--%</span></p>
-        </div>
-        <div class="mt-4 bg-slate-50 rounded-2xl p-4">
-          <p class="text-sm text-slate-600 font-medium">📋 Synthèse des estimations</p>
-          <div id="sl-dash-history" class="mt-1 text-xs text-slate-600 max-h-32 overflow-y-auto">Aucune estimation</div>
-        </div>
-      </div>
-    </div>
-  </div>`;
-  document.getElementById('sim-root').innerHTML = html;
-  setTimeout(function() { safeCreateIcons(); reset(); }, 100);
-}
-
-// ---- 6.3 SUIVI DE COMMANDE (CORRIGÉ) ----
+// ---- 6.2 SUIVI DE COMMANDE ----
 function renderCRoute() {
   var clientId = 'client_cr_1';
   var client = DB.getClient('croute', clientId);
@@ -1907,7 +1661,6 @@ function renderCRoute() {
 
       if (currentStepIndex === steps.length - 1) {
         clearSuggestions('cr-suggestions');
-        // On réinitialise isProcessing pour permettre les clics sur les boutons
         isProcessing = false;
         setTimeout(function() {
           var imageUrl = 'https://cdn.convrrt.com/apps/sendinblue/6761372/2effd64c-e813-44b6-900c-637dfa640a46.png';
@@ -2024,7 +1777,7 @@ function renderCRoute() {
   setTimeout(function() { safeCreateIcons(); reset(); }, 100);
 }
 
-// ---- 6.4 SAFERETURN ----
+// ---- 6.3 SAFERETURN ----
 function renderSafeReturn() {
   var clientId = 'client_sr_1';
   var client = DB.getClient('safereturn', clientId);
@@ -2114,7 +1867,7 @@ function renderSafeReturn() {
       var badge = state.scanCompleted ? '<div class="absolute top-2 left-2 z-20 scan-badge" style="background:rgba(239,68,68,0.15); color:#dc2626; border-color:#fca5a5;">⚠️ Fraude détectée - ' + state.confidenceLevel + '%</div>' : '';
       panel.innerHTML = `
         <div class="relative w-full rounded-2xl overflow-hidden" style="min-height:180px;">
-          <img src="https://cdn.convrrt.com/apps/sendinblue/6761372/7212f405-ebd9-4255-8af6-08936a033c66.png" class="w-full h-full object-cover" alt="Colis endommagé" />
+          <img src="https://cdn.convrrt.com/apps/sendinblue/6761372/7212f405-ebd9-4255-8af6-08936a033c66.png" class="w-full h-48 object-cover rounded-lg" alt="Colis endommagé" />
           ${overlay}
           ${badge}
         </div>`;
@@ -2270,11 +2023,7 @@ function renderSafeReturn() {
           <div class="action" id="sr-next-action">📋 Confirmez les conditions de reprise.</div>
         </div>
         <div class="scan-panel mb-4" id="sr-scan-panel">
-          <div class="image-placeholder w-full flex flex-col items-center justify-center text-center p-4">
-            <i data-lucide="package" class="w-12 h-12 text-red-400 mb-2"></i>
-            <p class="text-slate-600 text-sm font-semibold">En attente de la photo</p>
-            <p class="text-slate-400 text-xs">Envoyez une photo du colis pour l'analyse</p>
-          </div>
+          <!-- contenu généré par updateScanPanel() -->
         </div>
         <div class="grid grid-cols-2 gap-4">
           <div class="kpi-card"><div class="kpi-label">Fraudes détectées</div><div class="kpi-value" id="sr-dash-frauds">0</div></div>
@@ -2296,6 +2045,316 @@ function renderSafeReturn() {
         <div class="mt-4 bg-slate-50 rounded-2xl p-4">
           <p class="text-sm text-slate-600 font-medium">📋 Synthèse des vérifications</p>
           <div id="sr-dash-history" class="mt-1 text-xs text-slate-600 max-h-32 overflow-y-auto">Aucune vérification</div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+  document.getElementById('sim-root').innerHTML = html;
+  setTimeout(function() { safeCreateIcons(); reset(); }, 100);
+}
+
+// ---- 6.4 REPRISE (images côte à côte) ----
+function renderSecondLife() {
+  var clientId = 'client_sl_1';
+  var client = DB.getClient('secondlife', clientId);
+  var firstName = client.firstName;
+  var state = {
+    step: 0,
+    selectedCondition: null,
+    detailsGiven: false,
+    photoSent: false,
+    scanCompleted: false,
+    totalEstimations: 0,
+    acceptedOffers: 0,
+    lastEstimation: 0,
+    lastConfidence: 0,
+    isProcessing: false,
+    timerId: null
+  };
+
+  function updateDashboard() {
+    var acceptRate = state.totalEstimations > 0 ? Math.round((state.acceptedOffers / state.totalEstimations) * 100) : 0;
+    var gain = state.acceptedOffers * 425;
+
+    window.SIM_STATES.secondlife.totalEstimations = state.totalEstimations;
+    window.SIM_STATES.secondlife.acceptedOffers = state.acceptedOffers;
+
+    safeSetText('sl-dash-estimations', state.totalEstimations);
+    safeSetText('sl-dash-accepted', state.acceptedOffers);
+    safeSetText('sl-dash-acceptRate', acceptRate + '%');
+    safeSetWidth('sl-dash-acceptBar', acceptRate + '%');
+    safeSetText('sl-dash-gain', gain + '€');
+    var stock = gain * 1.8;
+    safeSetWidth('sl-dash-stockBar', Math.min((stock / 1000) * 100, 100) + '%');
+    safeSetText('sl-dash-potential', stock + '€');
+    safeSetText('sl-dash-estimation', state.lastEstimation > 0 ? state.lastEstimation + '€' : '---');
+    safeSetText('sl-dash-confidence', state.lastConfidence > 0 ? state.lastConfidence + '%' : '--%');
+    var statusEl = document.getElementById('sl-dash-scanStatus');
+    if (statusEl) {
+      if (state.scanCompleted) { statusEl.textContent = '✅ Scan terminé'; statusEl.style.color = '#10b981'; }
+      else if (state.photoSent) { statusEl.textContent = '🔍 Analyse en cours...'; statusEl.style.color = '#f59e0b'; }
+      else { statusEl.textContent = '⏳ En attente des infos'; statusEl.style.color = '#64748b'; }
+    }
+    var nextEl = document.getElementById('sl-next-action');
+    if (nextEl) {
+      if (state.scanCompleted) nextEl.textContent = "💰 Proposition de rachat prête – acceptez ou refusez l'offre.";
+      else if (state.photoSent) nextEl.textContent = "🧠 L'IA analyse en profondeur l'état de l'appareil…";
+      else if (state.detailsGiven) nextEl.textContent = "📸 Envoyez une photo pour confirmer l'état déclaré.";
+      else if (state.selectedCondition) nextEl.textContent = "📝 Précisez la date d'achat, les accessoires inclus, etc.";
+      else nextEl.textContent = "🔍 Précisez l'état du produit (excellent / bon / moyen / mauvais).";
+    }
+
+    var historyList = document.getElementById('sl-dash-history');
+    if (historyList) {
+      var html = '';
+      var important = client.history.filter(function(item) { return item.important === true; });
+      if (important.length === 0) html = '<div class="text-xs text-slate-400">Aucune estimation</div>';
+      else {
+        for (var h = 0; h < important.length; h++) {
+          html += '<div class="text-xs text-slate-600 border-b border-slate-100 py-1">' + important[h].summary + '</div>';
+        }
+      }
+      historyList.innerHTML = html;
+    }
+
+    updateScanPanel();
+    safeCreateIcons();
+  }
+
+  function addBotDelayed(text, callback) {
+    addDelayedMessage('sl-chat', 'bot', text, null, 1000, callback);
+  }
+  function addUser(text, imageUrls) {
+    addMessage('sl-chat', 'user', text, imageUrls);
+    DB.save();
+  }
+  function addImportantSummary(summary) {
+    client.history.push({ important: true, summary: summary, timestamp: new Date().toISOString() });
+    DB.save();
+    updateDashboard();
+  }
+
+  function updateScanPanel() {
+    var panel = document.getElementById('sl-scan-panel');
+    if (!panel) return;
+    if (!state.photoSent) {
+      panel.innerHTML = `
+        <div class="image-placeholder w-full flex flex-col items-center justify-center text-center p-4">
+          <i data-lucide="camera" class="w-12 h-12 text-blue-400 mb-2"></i>
+          <p class="text-slate-600 text-sm font-semibold">En attente des photos</p>
+          <p class="text-slate-400 text-xs">Envoyez les photos (avant et arrière) pour finaliser l'estimation</p>
+        </div>`;
+    } else {
+      var overlay = !state.scanCompleted ? '<div class="absolute inset-0 bg-black/30 z-10 flex items-center justify-center"><span class="text-white text-sm font-semibold">📸 Analyse en cours...</span></div>' : '';
+      var badge = state.scanCompleted ? '<div class="absolute top-2 left-2 z-20 scan-badge">✅ Scan terminé - Confiance ' + state.lastConfidence + '%</div>' : '';
+      panel.innerHTML = `
+        <div class="relative w-full rounded-2xl overflow-hidden" style="min-height:180px;">
+          <div class="flex gap-2">
+            <img src="https://cdn.convrrt.com/apps/sendinblue/6761372/5b4c26c6-34de-4125-879b-4b13a02b2154.png" class="w-1/2 h-48 object-cover rounded-lg" alt="iPhone 13 Pro avant" />
+            <img src="https://cdn.convrrt.com/apps/sendinblue/6761372/f8da09a5-a868-4d01-95f8-d1d3d7290485.jpg" class="w-1/2 h-48 object-cover rounded-lg" alt="iPhone 13 Pro dos" />
+          </div>
+          ${overlay}
+          ${badge}
+        </div>`;
+    }
+    safeCreateIcons();
+  }
+
+  function showAcceptButtons() {
+    var div = document.getElementById('sl-suggestions');
+    if (!div) return;
+    div.innerHTML = '';
+    var accept = document.createElement('div');
+    accept.className = 'suggestion-chip';
+    accept.innerText = '✅ Accepter l\'offre de reprise';
+    accept.onclick = function() {
+      if (state.isProcessing) return;
+      state.isProcessing = true;
+      addUser("Accepter l'offre");
+      state.acceptedOffers++;
+      client.purchases.push({ name: 'iPhone 13 Pro (reconditionné)', price: 425 });
+      client.totalSpent += 425;
+      addImportantSummary('Offre acceptée : iPhone 13 Pro');
+      addBotDelayed('🎉 Offre de reprise acceptée ! Vous allez recevoir un bon de reprise par email sous 2h. Merci pour votre démarche écoresponsable.', function() {
+        clearSuggestions('sl-suggestions');
+        addResetButton('sl-suggestions', reset);
+        updateDashboard();
+        state.step = 0;
+        state.isProcessing = false;
+      });
+    };
+    div.appendChild(accept);
+    var refuse = document.createElement('div');
+    refuse.className = 'suggestion-chip';
+    refuse.innerText = '❌ Refuser l\'offre';
+    refuse.style.borderColor = '#ef4444';
+    refuse.onclick = function() {
+      if (state.isProcessing) return;
+      state.isProcessing = true;
+      addUser("Refuser l'offre");
+      addImportantSummary('Offre refusée');
+      addBotDelayed('Pas de souci, ' + firstName + '. Vous pouvez à tout moment revenir pour une nouvelle estimation. Notre service reste à votre écoute.', function() {
+        clearSuggestions('sl-suggestions');
+        addResetButton('sl-suggestions', reset);
+        state.step = 0;
+        state.isProcessing = false;
+      });
+    };
+    div.appendChild(refuse);
+    safeCreateIcons();
+  }
+
+  function completeScan() {
+    if (state.timerId) { clearTimeout(state.timerId); state.timerId = null; }
+    state.scanCompleted = true;
+    state.totalEstimations++;
+    state.lastEstimation = 425;
+    state.lastConfidence = Math.floor(Math.random() * 9 + 90);
+    addImportantSummary('Estimation iPhone 13 Pro : 425€ (confiance ' + state.lastConfidence + '%)');
+    state.step = 2;
+    updateDashboard();
+    addBotDelayed('🔍 Analyse terminée, ' + firstName + '.\n\nÉtat général : correct, batterie à 81%, quelques micro-rayures. Estimation : <b>425€</b>.\nConfiance IA : ' + state.lastConfidence + '%.\n\nAcceptez-vous cette offre de reprise ?', function() {
+      showAcceptButtons();
+    });
+    state.isProcessing = false;
+  }
+
+  function sendPhoto() {
+    if (state.step !== 1 || state.isProcessing) return;
+    state.isProcessing = true;
+    var imageUrls = [
+      'https://cdn.convrrt.com/apps/sendinblue/6761372/5b4c26c6-34de-4125-879b-4b13a02b2154.png',
+      'https://cdn.convrrt.com/apps/sendinblue/6761372/f8da09a5-a868-4d01-95f8-d1d3d7290485.jpg'
+    ];
+    addUser("📸 Photos envoyées (vue avant et arrière)", imageUrls);
+    state.photoSent = true;
+    state.scanCompleted = false;
+    state.step = 2;
+    clearSuggestions('sl-suggestions');
+    updateDashboard();
+    addBotDelayed('Merci, ' + firstName + ' ! Notre IA analyse en ce moment les photos de votre iPhone 13 Pro. Cela ne devrait prendre que quelques secondes.', function() {
+      if (state.timerId) clearTimeout(state.timerId);
+      state.timerId = setTimeout(function() { completeScan(); }, 3000);
+    });
+  }
+
+  function handleConditionChoice(condition) {
+    if (state.step !== 0 || state.isProcessing) return;
+    state.selectedCondition = condition;
+    state.step = 1;
+    addUser("État : " + condition);
+    addBotDelayed('Merci, ' + firstName + '. Pour affiner notre estimation, pouvez-vous préciser la date d\'achat, les accessoires inclus (chargeur, câble) et d\'éventuels défauts particuliers ?', function() {
+      var div = document.getElementById('sl-suggestions');
+      if (div) {
+        div.innerHTML = '';
+        var detailsBtn = document.createElement('div');
+        detailsBtn.className = 'suggestion-chip';
+        detailsBtn.innerText = '📝 Acheté il y a 2 ans, chargeur inclus, micro-rayures sur l\'écran';
+        detailsBtn.onclick = function() {
+          if (state.isProcessing) return;
+          state.detailsGiven = true;
+          addUser('Acheté il y a 2 ans, chargeur inclus, micro-rayures sur l\'écran.');
+          addImportantSummary('Détails fournis pour l\'estimation');
+          addBotDelayed('Parfait, ' + firstName + '. Pour finaliser l\'estimation, envoyez-nous les photos du produit (vue avant et arrière).', function() {
+            state.step = 1;
+            var div2 = document.getElementById('sl-suggestions');
+            if (div2) {
+              div2.innerHTML = '';
+              var sendBtn = document.createElement('div');
+              sendBtn.className = 'suggestion-chip';
+              sendBtn.innerText = '📸 Envoyer les photos';
+              sendBtn.onclick = sendPhoto;
+              div2.appendChild(sendBtn);
+            }
+            updateDashboard();
+          });
+        };
+        div.appendChild(detailsBtn);
+      }
+    });
+    updateDashboard();
+  }
+
+  function reset() {
+    if (state.timerId) { clearTimeout(state.timerId); state.timerId = null; }
+    client.history = []; client.purchases = []; client.totalSpent = 0; DB.save();
+    state.step = 0;
+    state.selectedCondition = null;
+    state.detailsGiven = false;
+    state.photoSent = false;
+    state.scanCompleted = false;
+    state.totalEstimations = 0;
+    state.acceptedOffers = 0;
+    state.lastEstimation = 0;
+    state.lastConfidence = 0;
+    state.isProcessing = false;
+    clearMessageTimers('secondlife');
+    var chatDiv = document.getElementById('sl-chat');
+    if (chatDiv) chatDiv.innerHTML = '';
+    addBotDelayed('Bonjour ' + firstName + ', bienvenue sur notre service de reprise. Vous souhaitez revendre votre iPhone 13 Pro. Pour évaluer sa valeur, précisez son état général :', function() {
+      var div = document.getElementById('sl-suggestions');
+      if (div) {
+        div.innerHTML = '';
+        var states = ['🌟 Excellent', '👍 Bon', '📊 Moyen', '⚠️ Mauvais'];
+        states.forEach(function(s) {
+          var chip = document.createElement('div');
+          chip.className = 'suggestion-chip';
+          chip.innerText = s;
+          chip.onclick = function() { handleConditionChoice(s); };
+          div.appendChild(chip);
+        });
+      }
+    });
+    updateDashboard();
+  }
+
+  var html = `
+  <div class="grid md:grid-cols-2 gap-6 fade-in">
+    <div class="glass-card">
+      <div class="sim-header">
+        <i data-lucide="camera"></i>
+        <h2>Reprise — Client</h2>
+      </div>
+      <div class="p-4 flex-1 flex flex-col">
+        <div class="whatsapp-container" id="sl-chat" style="height: 700px;"></div>
+        <div id="sl-suggestions" class="flex flex-wrap gap-2 mt-4 justify-center"></div>
+      </div>
+    </div>
+    <div class="glass-card">
+      <div class="sim-header">
+        <i data-lucide="bar-chart-2"></i>
+        <h2>Dashboard Commerçant</h2>
+      </div>
+      <div class="p-4 flex-1 overflow-y-auto">
+        <div class="next-action-box">
+          <div class="label">🤖 Prochaine action IA</div>
+          <div class="action" id="sl-next-action">🔍 Précisez l'état du produit (excellent / bon / moyen / mauvais).</div>
+        </div>
+        <div class="scan-panel mb-4" id="sl-scan-panel">
+          <!-- contenu généré par updateScanPanel() -->
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="kpi-card"><div class="kpi-label">Estimations</div><div class="kpi-value" id="sl-dash-estimations">0</div></div>
+          <div class="kpi-card"><div class="kpi-label">Offres acceptées</div><div class="kpi-value" id="sl-dash-accepted">0</div></div>
+          <div class="kpi-card"><div class="kpi-label">Taux d'acceptation</div><div class="kpi-value" id="sl-dash-acceptRate">0% <span id="sl-dash-trend" class="kpi-trend kpi-trend-up">▲ +0%</span></div></div>
+          <div class="kpi-card"><div class="kpi-label">Gain estimé</div><div class="kpi-value" id="sl-dash-gain">0€</div></div>
+        </div>
+        <div class="mt-4 bg-slate-50 rounded-2xl p-4">
+          <p class="text-sm text-slate-600 font-medium">📊 Valorisation du stock</p>
+          <div class="w-full bg-slate-200 rounded-full h-2.5 mt-1">
+            <div class="bg-blue-600 h-2.5 rounded-full transition-all duration-500" style="width:0%" id="sl-dash-stockBar"></div>
+          </div>
+          <p class="text-xs text-slate-400 mt-1">Potentiel de revente : <span id="sl-dash-potential">0€</span></p>
+        </div>
+        <div class="mt-4 bg-slate-50 rounded-2xl p-4">
+          <p class="text-sm text-slate-600 font-medium">🔍 Résultat du scan</p>
+          <p class="text-xs font-semibold" id="sl-dash-scanStatus" style="color:#64748b;">⏳ En attente</p>
+          <p class="text-xs text-slate-600 mt-1">Estimation : <span id="sl-dash-estimation">---</span></p>
+          <p class="text-xs text-slate-600">Confiance IA : <span id="sl-dash-confidence">--%</span></p>
+        </div>
+        <div class="mt-4 bg-slate-50 rounded-2xl p-4">
+          <p class="text-sm text-slate-600 font-medium">📋 Synthèse des estimations</p>
+          <div id="sl-dash-history" class="mt-1 text-xs text-slate-600 max-h-32 overflow-y-auto">Aucune estimation</div>
         </div>
       </div>
     </div>
