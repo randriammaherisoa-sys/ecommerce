@@ -93,18 +93,6 @@
       box-shadow: 0 0 20px rgba(36, 112, 239, 0.7) !important;
       background-color: #3b82f6 !important;
     }
-    .btn-reset-glowing {
-      background-color: rgba(245, 158, 11, 0.15) !important;
-      border: 1px solid rgba(245, 158, 11, 0.4) !important;
-      color: #f59e0b !important;
-      box-shadow: 0 0 12px rgba(245, 158, 11, 0.2) !important;
-      cursor: pointer !important;
-    }
-    .btn-reset-glowing:hover {
-      background-color: rgba(245, 158, 11, 0.25) !important;
-      box-shadow: 0 0 20px rgba(245, 158, 11, 0.4) !important;
-      transform: scale(1.01) !important;
-    }
 
     .nav-pill {
       position: fixed; top: 12px; left: 50%; transform: translateX(-50%);
@@ -309,30 +297,42 @@
       color: #0b1e3a;
     }
 
-    .whatsapp-container {
-      background: #0b141a;
+    /* === INTERFACE DE DISCUSSION STYLE COMETE.AI === */
+    .chat-wrapper {
+      background: #ffffff;
       border-radius: 24px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+      overflow: hidden;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      margin: 0 4px;
+    }
+    .chat-container {
+      background: #f8fafc;
       padding: 18px;
       overflow-y: auto;
       display: flex;
       flex-direction: column;
       scroll-behavior: smooth;
-      box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.4);
-      height: 700px;
+      flex: 1;
+      min-height: 200px;
+      max-height: 460px;
     }
-    .whatsapp-container::-webkit-scrollbar {
+    .chat-container::-webkit-scrollbar {
       width: 4px;
     }
-    .whatsapp-container::-webkit-scrollbar-track {
+    .chat-container::-webkit-scrollbar-track {
       background: transparent;
     }
-    .whatsapp-container::-webkit-scrollbar-thumb {
-      background: #3b82f6;
+    .chat-container::-webkit-scrollbar-thumb {
+      background: #2470ef;
       border-radius: 10px;
     }
 
-    .whatsapp-bubble-user {
-      background: linear-gradient(135deg, #005c4b, #007a63);
+    .bubble-user {
+      background: linear-gradient(90deg, #2470ef, #5170ff);
       color: white;
       border-radius: 18px 18px 4px 18px;
       padding: 12px 16px;
@@ -341,11 +341,12 @@
       margin-bottom: 10px;
       font-size: 14px;
       animation: slideUp 0.3s ease;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 2px 8px rgba(36,112,239,0.25);
+      cursor: default;
     }
-    .whatsapp-bubble-bot {
-      background: #1f2c33;
-      color: #e1e9f0;
+    .bubble-bot {
+      background: white;
+      color: #1e293b;
       border-radius: 18px 18px 18px 4px;
       padding: 12px 16px;
       max-width: 85%;
@@ -353,42 +354,149 @@
       margin-bottom: 10px;
       font-size: 14px;
       animation: slideUp 0.3s ease;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      border: 1px solid #e2e8f0;
     }
-    .whatsapp-bubble-user img,
-    .whatsapp-bubble-bot img {
+    .bubble-user img,
+    .bubble-bot img {
       max-width: 200px;
       border-radius: 12px;
       margin-top: 6px;
       display: block;
     }
+    .bubble-user .message-time,
+    .bubble-bot .message-time {
+      font-size: 10px;
+      opacity: 0.6;
+      text-align: right;
+      margin-top: 4px;
+    }
+    .bubble-user .message-time { color: rgba(255,255,255,0.8); }
+    .bubble-bot .message-time { color: #94a3b8; }
+
     @keyframes slideUp {
       from { opacity: 0; transform: translateY(12px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
+    .chat-footer {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      background: #ffffff;
+      border-top: 1px solid #e2e8f0;
+      flex-shrink: 0;
+    }
+    .chat-footer input {
+      flex: 1;
+      padding: 10px 16px;
+      border-radius: 30px;
+      border: 1px solid #cbd5e1;
+      background: #f8fafc;
+      color: #1e293b;
+      font-size: 14px;
+      outline: none;
+      min-width: 0;
+      transition: border-color 0.2s;
+    }
+    .chat-footer input:focus {
+      border-color: #2470ef;
+      box-shadow: 0 0 0 3px rgba(36,112,239,0.15);
+    }
+    .chat-footer input::placeholder {
+      color: #94a3b8;
+    }
+    .chat-footer button {
+      background: linear-gradient(90deg, #2470ef, #5170ff);
+      border: none;
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: 0.2s;
+      flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(36,112,239,0.3);
+    }
+    .chat-footer button i {
+      color: white !important;
+      width: 20px;
+      height: 20px;
+    }
+    .chat-footer button:hover {
+      transform: scale(1.04);
+      box-shadow: 0 6px 20px rgba(36,112,239,0.4);
+    }
+
+    /* Suggestions en chips en dessous du chat - sans traits */
+    .suggestions-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 8px;
+      padding: 8px 16px 12px 16px;
+      background: #f8fafc;
+      min-height: 52px;
+    }
     .suggestion-chip {
       background: white;
       color: #1e293b;
       border: 1px solid #cbd5e1;
       border-radius: 40px;
-      padding: 10px 22px;
-      font-size: 13px;
-      font-weight: 700;
+      padding: 6px 16px;
+      font-size: 12px;
+      font-weight: 600;
       cursor: pointer;
-      display: inline-block;
-      margin: 6px;
       transition: all 0.2s;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+      white-space: nowrap;
     }
     .suggestion-chip:hover {
       background: #f1f5f9;
-      border-color: #3b82f6;
-      transform: scale(1.02) translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+      border-color: #2470ef;
+      transform: scale(1.03);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
     }
     .suggestion-chip:active {
-      transform: scale(0.96);
+      transform: scale(0.95);
+    }
+    .suggestion-chip.reset-chip {
+      border-color: #f59e0b;
+      background: #fffbeb;
+    }
+    .suggestion-chip.reset-chip:hover {
+      background: #fef3c7;
+      border-color: #d97706;
+    }
+
+    .typing-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: white;
+      padding: 10px 16px;
+      border-radius: 18px 18px 18px 4px;
+      align-self: flex-start;
+      margin-bottom: 8px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .typing-dot {
+      width: 8px;
+      height: 8px;
+      background: #94a3b8;
+      border-radius: 50%;
+      animation: typingBounce 1.4s infinite;
+    }
+    .typing-dot:nth-child(1) { animation-delay: 0s; }
+    .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes typingBounce {
+      0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+      30% { transform: translateY(-6px); opacity: 1; }
     }
 
     .sim-tab {
@@ -499,15 +607,6 @@
     }
     .scan-panel .relative { border-radius: 16px; overflow: hidden; }
 
-    .map-panel {
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 20px;
-      padding: 12px;
-      border: 1px solid rgba(0, 0, 0, 0.04);
-      margin-bottom: 16px;
-    }
-    .map-panel svg { width: 100%; height: auto; border-radius: 16px; }
-
     .next-action-box {
       background: rgba(59, 130, 246, 0.08);
       border-radius: 16px;
@@ -528,25 +627,14 @@
       color: #0b1e3a;
     }
 
-    .kpi-card-dark {
-      background: rgba(255, 255, 255, 0.03);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 16px;
-      padding: 14px 18px;
-      transition: border-color 0.2s;
-    }
-    .kpi-card-dark:hover { border-color: rgba(36, 112, 239, 0.4); }
-
     @media (max-width: 768px) {
       .sim-tab { padding: 8px 16px; font-size: 12px; gap: 4px; }
       .sim-tab i { width: 16px; height: 16px; }
       .grid { grid-template-columns: 1fr !important; }
       .kpi-value { font-size: 22px; }
       .glass-card { border-radius: 1.5rem; }
-      .whatsapp-container { height: 400px !important; }
+      .chat-container { min-height: 300px; max-height: 380px; }
       .sim-header h2 { font-size: 1.1rem; }
-      .module-card .p-6 { padding: 1rem; }
     }
     @media (min-width: 769px) and (max-width: 1024px) {
       .grid { grid-template-columns: 1fr 1fr; }
@@ -557,31 +645,6 @@
     .icon-unified-success { color: #10b981 !important; }
     .icon-unified-warning { color: #f59e0b !important; }
     .icon-unified-danger { color: #ef4444 !important; }
-
-    .typing-indicator {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      background: #1f2c33;
-      padding: 10px 16px;
-      border-radius: 18px 18px 18px 4px;
-      align-self: flex-start;
-      margin-bottom: 8px;
-    }
-    .typing-dot {
-      width: 8px;
-      height: 8px;
-      background: #8696a0;
-      border-radius: 50%;
-      animation: typingBounce 1.4s infinite;
-    }
-    .typing-dot:nth-child(1) { animation-delay: 0s; }
-    .typing-dot:nth-child(2) { animation-delay: 0.2s; }
-    .typing-dot:nth-child(3) { animation-delay: 0.4s; }
-    @keyframes typingBounce {
-      0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
-      30% { transform: translateY(-6px); opacity: 1; }
-    }
   </style>
 </head>
 <body class="digital-noise">
@@ -962,18 +1025,18 @@ function addMessage(containerId, from, text, imageUrls) {
   if (!container) return;
   var time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   var bubble = document.createElement('div');
-  bubble.className = from === 'user' ? 'whatsapp-bubble-user' : 'whatsapp-bubble-bot';
+  bubble.className = from === 'user' ? 'bubble-user' : 'bubble-bot';
   var html = text;
   if (imageUrls) {
     if (Array.isArray(imageUrls)) {
       imageUrls.forEach(function(url) {
-        html += '<br><img src="' + url + '" alt="Photo" style="max-width:200px; border-radius:12px; margin-top:6px; border:1px solid rgba(255,255,255,0.1);">';
+        html += '<br><img src="' + url + '" alt="Photo" style="max-width:200px; border-radius:12px; margin-top:6px; border:1px solid rgba(0,0,0,0.04);">';
       });
     } else {
-      html += '<br><img src="' + imageUrls + '" alt="Photo" style="max-width:200px; border-radius:12px; margin-top:6px; border:1px solid rgba(255,255,255,0.1);">';
+      html += '<br><img src="' + imageUrls + '" alt="Photo" style="max-width:200px; border-radius:12px; margin-top:6px; border:1px solid rgba(0,0,0,0.04);">';
     }
   }
-  bubble.innerHTML = html + '<div class="text-right text-[9px] opacity-50 mt-1">' + time + (from === 'user' ? ' ✔️✔️' : '') + '</div>';
+  bubble.innerHTML = html + '<div class="message-time">' + time + (from === 'user' ? ' ✔✔' : '') + '</div>';
   container.appendChild(bubble);
   container.scrollTop = container.scrollHeight;
 }
@@ -1029,26 +1092,27 @@ function safeCreateIcons() {
 }
 
 // ============================================================
-// 3.1 GESTION DES SUGGESTIONS
+// 3.1 GESTION DES SUGGESTIONS (chips en bas, côté client)
 // ============================================================
-function clearSuggestions(containerId) {
-  var container = document.getElementById(containerId);
-  if (container) container.innerHTML = '';
+function renderSuggestions(suggestionsBarId, btns) {
+  var bar = document.getElementById(suggestionsBarId);
+  if (!bar) return;
+  bar.innerHTML = '';
+  btns.forEach(function(b) {
+    var chip = document.createElement('span');
+    chip.className = 'suggestion-chip';
+    if (b.reset) chip.classList.add('reset-chip');
+    chip.textContent = b.label;
+    chip.addEventListener('click', function(e) {
+      if (b.onclick) b.onclick(e);
+    });
+    bar.appendChild(chip);
+  });
 }
 
-function addResetButton(containerId, resetFunction) {
-  var container = document.getElementById(containerId);
-  if (!container) return;
-  container.innerHTML = '';
-  var resetBtn = document.createElement('div');
-  resetBtn.className = 'suggestion-chip';
-  resetBtn.innerText = '🔄 Réinitialiser la simulation';
-  resetBtn.style.borderColor = '#f59e0b';
-  resetBtn.style.backgroundColor = '#fffbeb';
-  resetBtn.onclick = function() {
-    if (typeof resetFunction === 'function') resetFunction();
-  };
-  container.appendChild(resetBtn);
+function clearSuggestions(suggestionsBarId) {
+  var bar = document.getElementById(suggestionsBarId);
+  if (bar) bar.innerHTML = '';
 }
 
 // ============================================================
@@ -1068,7 +1132,7 @@ window.resetAllJourney = function() {
 };
 
 // ============================================================
-// 5. INJECTION DES 5 CARTES (défis reformulés positivement)
+// 5. INJECTION DES 5 CARTES
 // ============================================================
 function injectModules() {
   var retailSolutions = [
@@ -1216,10 +1280,31 @@ function injectModules() {
 }
 
 // ============================================================
+// 5.1 Fonction utilitaire pour le footer du chat
+// ============================================================
+function setupChatInput(inputId, buttonId, sendFunction) {
+  var input = document.getElementById(inputId);
+  var button = document.getElementById(buttonId);
+  if (!input || !button) return;
+  function send() {
+    var text = input.value.trim();
+    if (text) {
+      sendFunction(text);
+      input.value = '';
+      input.focus();
+    }
+  }
+  button.addEventListener('click', send);
+  input.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') send();
+  });
+}
+
+// ============================================================
 // 6. SIMULATEURS COMPLETS
 // ============================================================
 
-// ---- 6.1 MATCH & BUY (avec images et specs pour le produit principal ET le cross-sell) ----
+// ---- 6.1 MATCH & BUY (corrigé : plus de double message) ----
 function renderMatch() {
   var clientId = 'client_match_1';
   var client = DB.getClient('match', clientId);
@@ -1265,7 +1350,6 @@ function renderMatch() {
       specs: "Intel Core i9-13980HX, RTX 4080, 32 Go RAM, 1 To SSD, écran 16\" 240Hz."
     }
   ];
-  // Cross-sell enrichi avec image et specs
   var crossSellOffers = {
     'creatif': { 
       product: 'Souris MX Master 3S', 
@@ -1357,120 +1441,114 @@ function renderMatch() {
     updateDashboard();
   }
 
-  function replaceSuggestions(btns) {
-    var container = document.getElementById('m-suggestions');
-    if (!container) return;
-    container.innerHTML = '';
-    btns.forEach(function(b) {
-      var chip = document.createElement('div');
-      chip.className = 'suggestion-chip';
-      chip.innerText = b.label;
-      chip.onclick = function() {
-        if (isProcessing) return;
-        if (b.value !== 'reset') addUser(this.innerText);
-        handleChoice(b.value);
+  // Affichage des suggestions en chips – on passe la valeur ET le libellé
+  function showSuggestions(btns) {
+    renderSuggestions('m-suggestions-bar', btns.map(function(b) {
+      return {
+        label: b.label,
+        onclick: function() {
+          if (isProcessing) return;
+          // On passe la valeur et le libellé pour que handleChoice puisse afficher le bon message
+          handleChoice(b.value, b.label);
+        }
       };
-      container.appendChild(chip);
-    });
-    safeCreateIcons();
+    }));
   }
 
-  function handleChoice(val) {
+  // handleChoice reçoit la valeur et optionnellement le libellé pour le message utilisateur
+  function handleChoice(val, label) {
     if (step === 1) {
+      // L'utilisateur a choisi un usage – on affiche le libellé comme message
+      if (label) addUser(label);
       selectedUsage = val;
       step = 2;
       totalVisits++;
       var product = products.find(function(p) { return p.category === selectedUsage; });
       if (product) {
         addImportantSummary('Choix d\'usage : ' + selectedUsage);
-        var message = 'Merci pour ces précisions. D’après votre besoin, je vous recommande le <b>' + product.name + '</b> (' + product.price + '€) – ' + product.desc + '<br><br>📋 <b>Caractéristiques :</b> ' + product.specs + '<br><br>Souhaitez-vous l’ajouter à votre panier ?';
+        var message = 'Merci pour ces précisions. D’après votre besoin, je vous recommande le <b>' + product.name + '</b> (' + product.price + '€) – ' + product.desc + '<br><br>📱 <b>Caractéristiques :</b> ' + product.specs + '<br><br>Souhaitez-vous l’ajouter à votre panier ?';
         addBotDelayed(message, product.image, function() {
           step = 3;
-          replaceSuggestions([
-            { label: "✅ Ajouter au panier", value: "add" },
-            { label: "🔄 Recommencer", value: "reset" }
+          showSuggestions([
+            { label: "✅ Ajouter au panier", value: "add" }
           ]);
         });
       }
     } else if (step === 3) {
       if (val === "add") {
+        if (label) addUser(label);
         var product = products.find(function(p) { return p.category === selectedUsage; });
         if (product) {
           cart.push(product);
           addImportantSummary('Ajout panier : ' + product.name);
           addBotDelayed('Le ' + product.name + ' a été ajouté à votre panier. Souhaitez-vous finaliser votre commande ?', null, function() {
             step = 4;
-            replaceSuggestions([
-              { label: "✅ Finaliser la commande", value: "checkout" },
-              { label: "🔄 Recommencer", value: "reset" }
+            showSuggestions([
+              { label: "✅ Finaliser la commande", value: "checkout" }
             ]);
           });
         }
       } else if (val === "reset") { reset(); }
     } else if (step === 4) {
       if (val === "checkout") {
+        if (label) addUser(label);
         conversions++;
         cart.forEach(function(item) { client.purchases.push(item); client.totalSpent += item.price; });
         addImportantSummary('Commande finalisée : ' + cart.length + ' article(s)');
         addBotDelayed('🎉 Félicitations, ' + firstName + ' ! Votre commande est validée avec succès. Un email de confirmation vous a été envoyé. Merci pour votre confiance.', null, function() {
-          clearSuggestions('m-suggestions');
+          clearSuggestions('m-suggestions-bar');
           var offer = crossSellOffers[selectedUsage];
           if (offer) {
             step = 5;
-            // Message enrichi avec les specs et l'image
-            var msg = '💡 ' + firstName + ', nous vous proposons en exclusivité un accessoire complémentaire : <b>' + offer.product + '</b> (' + offer.price + '€).<br>' + offer.pitch + '<br><br>📋 <b>Caractéristiques :</b> ' + offer.specs + '<br><br>Souhaitez-vous l’ajouter ?';
+            var msg = '💡 ' + firstName + ', nous vous proposons en exclusivité un accessoire complémentaire : <b>' + offer.product + '</b> (' + offer.price + '€).<br>' + offer.pitch + '<br><br>📱 <b>Caractéristiques :</b> ' + offer.specs + '<br><br>Souhaitez-vous l’ajouter ?';
             addBotDelayed(msg, offer.image, function() {
-              var recosDiv = document.getElementById('m-suggestions');
-              if (recosDiv) {
-                recosDiv.innerHTML = '';
-                var acceptBtn = document.createElement('div');
-                acceptBtn.className = 'suggestion-chip';
-                acceptBtn.innerText = '✅ Accepter l\'offre (+' + offer.price + '€)';
-                acceptBtn.style.borderColor = '#10b981';
-                acceptBtn.onclick = function() {
-                  if (isProcessing) return;
-                  isProcessing = true;
-                  addUser('Accepter l\'offre ' + offer.product);
-                  cart.push({ name: offer.product, price: offer.price });
-                  client.purchases.push({ name: offer.product, price: offer.price });
-                  client.totalSpent += offer.price;
-                  addImportantSummary('Cross-sell accepté : ' + offer.product);
-                  addBotDelayed('Parfait, ' + firstName + ' ! ' + offer.product + ' a été ajouté à votre commande. Profitez pleinement de votre équipement.', null, function() {
-                    clearSuggestions('m-suggestions');
-                    addResetButton('m-suggestions', reset);
-                    updateDashboard();
-                    step = 0;
-                    isProcessing = false;
-                  });
-                };
-                recosDiv.appendChild(acceptBtn);
-
-                var refuseBtn = document.createElement('div');
-                refuseBtn.className = 'suggestion-chip';
-                refuseBtn.innerText = '❌ Refuser l\'offre';
-                refuseBtn.style.borderColor = '#ef4444';
-                refuseBtn.onclick = function() {
-                  if (isProcessing) return;
-                  isProcessing = true;
-                  addUser('Refuser l\'offre');
-                  addImportantSummary('Cross-sell refusé');
-                  addBotDelayed('Pas de problème, ' + firstName + '. Nous restons à votre disposition pour toute question. Bonne continuation !', null, function() {
-                    clearSuggestions('m-suggestions');
-                    addResetButton('m-suggestions', reset);
-                    updateDashboard();
-                    step = 0;
-                    isProcessing = false;
-                  });
-                };
-                recosDiv.appendChild(refuseBtn);
-                safeCreateIcons();
-              }
+              showSuggestions([
+                { label: '✅ Accepter l\'offre (+' + offer.price + '€)', value: 'accept' },
+                { label: '❌ Refuser l\'offre', value: 'refuse' }
+              ]);
             });
           } else {
             addBotDelayed('Merci, ' + firstName + ', pour votre commande. Notre équipe vous accompagne tout au long de votre expérience.', null, function() {
-              addResetButton('m-suggestions', reset);
+              renderSuggestions('m-suggestions-bar', [
+                { label: '🔄 Réinitialiser', reset: true, onclick: reset }
+              ]);
             });
           }
+        });
+      } else if (val === "reset") { reset(); }
+    } else if (step === 5) {
+      if (val === 'accept') {
+        var offer2 = crossSellOffers[selectedUsage];
+        if (offer2) {
+          isProcessing = true;
+          // Message utilisateur personnalisé
+          addUser('✅ Accepter l\'offre ' + offer2.product);
+          cart.push({ name: offer2.product, price: offer2.price });
+          client.purchases.push({ name: offer2.product, price: offer2.price });
+          client.totalSpent += offer2.price;
+          addImportantSummary('Cross-sell accepté : ' + offer2.product);
+          addBotDelayed('Parfait, ' + firstName + ' ! ' + offer2.product + ' a été ajouté à votre commande. Profitez pleinement de votre équipement.', null, function() {
+            clearSuggestions('m-suggestions-bar');
+            renderSuggestions('m-suggestions-bar', [
+              { label: '🔄 Réinitialiser', reset: true, onclick: reset }
+            ]);
+            updateDashboard();
+            step = 0;
+            isProcessing = false;
+          });
+        }
+      } else if (val === 'refuse') {
+        isProcessing = true;
+        addUser('❌ Refuser l\'offre');
+        addImportantSummary('Cross-sell refusé');
+        addBotDelayed('Pas de problème, ' + firstName + '. Nous restons à votre disposition pour toute question. Bonne continuation !', null, function() {
+          clearSuggestions('m-suggestions-bar');
+          renderSuggestions('m-suggestions-bar', [
+            { label: '🔄 Réinitialiser', reset: true, onclick: reset }
+          ]);
+          updateDashboard();
+          step = 0;
+          isProcessing = false;
         });
       } else if (val === "reset") { reset(); }
     }
@@ -1487,8 +1565,9 @@ function renderMatch() {
     clearMessageTimers('match');
     var chatDiv = document.getElementById('m-chat');
     if (chatDiv) chatDiv.innerHTML = '';
+    clearSuggestions('m-suggestions-bar');
     addBotDelayed('Bonjour ' + firstName + ', je suis l’assistant intelligent. Je vois que vous recherchez un ordinateur. Pour vous recommander le modèle idéal, pourriez-vous me préciser votre usage principal ?', null, function() {
-      replaceSuggestions([
+      showSuggestions([
         { label: "🎨 Créatif (montage, design)", value: "creatif" },
         { label: "📚 Étudiant (cours, bureautique)", value: "etudiant" },
         { label: "💼 Professionnel (multitâche, gestion)", value: "pro" },
@@ -1508,8 +1587,14 @@ function renderMatch() {
         <div class="bg-slate-100 px-4 py-1.5 rounded-full text-sm font-semibold text-slate-700">🛒 <span id="m-cart-count">0</span> • <span id="m-total" class="text-blue-600">0€</span></div>
       </div>
       <div class="p-4 flex-1 flex flex-col">
-        <div class="whatsapp-container" id="m-chat" style="height: 700px;"></div>
-        <div id="m-suggestions" class="flex flex-wrap gap-2 mt-4 justify-center"></div>
+        <div class="chat-wrapper">
+          <div class="chat-container" id="m-chat"></div>
+          <div class="suggestions-bar" id="m-suggestions-bar"></div>
+          <div class="chat-footer">
+            <input type="text" id="m-input" placeholder="Écrivez votre message..." />
+            <button id="m-send-btn"><i data-lucide="send"></i></button>
+          </div>
+        </div>
       </div>
     </div>
     <div class="glass-card">
@@ -1543,7 +1628,11 @@ function renderMatch() {
     </div>
   </div>`;
   document.getElementById('sim-root').innerHTML = html;
-  setTimeout(function() { safeCreateIcons(); reset(); }, 100);
+  setTimeout(function() {
+    safeCreateIcons();
+    reset();
+    setupChatInput('m-input', 'm-send-btn', addUser);
+  }, 100);
 }
 
 // ---- 6.2 SUIVI DE COMMANDE ----
@@ -1615,21 +1704,6 @@ function renderCRoute() {
       historyDiv.innerHTML = historyHtml || '<div class="text-xs text-slate-400">Aucune notification</div>';
     }
 
-    var div = document.getElementById('cr-suggestions');
-    if (div) {
-      if (currentStepIndex >= steps.length - 1) {
-        // Ne rien faire ici, les boutons seront ajoutés après la photo
-      } else {
-        if (!div.querySelector('.suggestion-chip')) {
-          div.innerHTML = '';
-          var nextBtn = document.createElement('div');
-          nextBtn.className = 'suggestion-chip';
-          nextBtn.innerText = '📨 Recevoir la prochaine notification';
-          nextBtn.onclick = nextStep;
-          div.appendChild(nextBtn);
-        }
-      }
-    }
     safeCreateIcons();
   }
 
@@ -1649,6 +1723,10 @@ function renderCRoute() {
     updateDashboard();
   }
 
+  function showSuggestions(btns) {
+    renderSuggestions('cr-suggestions-bar', btns);
+  }
+
   function nextStep() {
     if (isProcessing || currentStepIndex >= steps.length - 1) return;
     isProcessing = true;
@@ -1660,49 +1738,37 @@ function renderCRoute() {
       updateDashboard();
 
       if (currentStepIndex === steps.length - 1) {
-        clearSuggestions('cr-suggestions');
+        clearSuggestions('cr-suggestions-bar');
         isProcessing = false;
         setTimeout(function() {
           var imageUrl = 'https://cdn.convrrt.com/apps/sendinblue/6761372/2effd64c-e813-44b6-900c-637dfa640a46.png';
           var botMessage = '📸 ' + firstName + ', voici la preuve de livraison de votre colis, prise par notre livreur.\n\n' +
                            'Nous espérons que tout est conforme à vos attentes. Avez-vous une réaction à partager ?';
           addBotDelayed(botMessage, imageUrl, function() {
-            var div = document.getElementById('cr-suggestions');
-            if (div) {
-              div.innerHTML = '';
-              var thankBtn = document.createElement('div');
-              thankBtn.className = 'suggestion-chip';
-              thankBtn.innerText = '💬 Exprimer ma satisfaction';
-              thankBtn.style.borderColor = '#10b981';
-              thankBtn.style.backgroundColor = '#f0fdf4';
-              thankBtn.onclick = function() {
+            showSuggestions([
+              { label: '💬 Exprimer ma satisfaction', onclick: function() {
                 addUser('💬 Je suis ravi(e) de la livraison ! Tout est parfait, merci pour votre professionnalisme.');
                 addImportantSummary('Client satisfait de la livraison');
                 addBotDelayed('🙏 Un immense merci, ' + firstName + ' ! Votre retour nous touche. Nous nous engageons à vous offrir une expérience d’achat toujours plus fluide. À très bientôt !', null, function() {
-                  clearSuggestions('cr-suggestions');
-                  addResetButton('cr-suggestions', reset);
+                  clearSuggestions('cr-suggestions-bar');
+                  renderSuggestions('cr-suggestions-bar', [
+                    { label: '🔄 Réinitialiser', reset: true, onclick: reset }
+                  ]);
                   updateDashboard();
                 });
-              };
-              div.appendChild(thankBtn);
-
-              var complaintBtn = document.createElement('div');
-              complaintBtn.className = 'suggestion-chip';
-              complaintBtn.innerText = '⚠️ Signaler un problème';
-              complaintBtn.style.borderColor = '#ef4444';
-              complaintBtn.style.backgroundColor = '#fef2f2';
-              complaintBtn.onclick = function() {
+              } },
+              { label: '⚠️ Signaler un problème', onclick: function() {
                 addUser('⚠️ Je souhaite signaler un problème avec ma livraison.');
                 addImportantSummary('Réclamation client');
                 addBotDelayed('📞 Nous sommes désolés d’apprendre cela, ' + firstName + '. Votre dossier a été transmis immédiatement à notre service réclamation. Un expert vous contactera sous 24h pour résoudre ce litige. Merci de votre confiance.', null, function() {
-                  clearSuggestions('cr-suggestions');
-                  addResetButton('cr-suggestions', reset);
+                  clearSuggestions('cr-suggestions-bar');
+                  renderSuggestions('cr-suggestions-bar', [
+                    { label: '🔄 Réinitialiser', reset: true, onclick: reset }
+                  ]);
                   updateDashboard();
                 });
-              };
-              div.appendChild(complaintBtn);
-              safeCreateIcons();
-            }
+              } }
+            ]);
           });
         }, 1500);
       } else {
@@ -1724,19 +1790,14 @@ function renderCRoute() {
 
     var chatDiv = document.getElementById('cr-chat');
     if (chatDiv) chatDiv.innerHTML = '';
+    clearSuggestions('cr-suggestions-bar');
 
     addBotDelayed('Bonjour ' + firstName + ', bienvenue sur le suivi de commande. Voici l’état d’avancement de votre commande #CR-2026-001 :', null, function() {
       addBotDelayed('📦 ' + steps[0].label + ' – ' + steps[0].date, null, function() {
         updateDashboard();
-        var div = document.getElementById('cr-suggestions');
-        if (div) {
-          div.innerHTML = '';
-          var nextBtn = document.createElement('div');
-          nextBtn.className = 'suggestion-chip';
-          nextBtn.innerText = '📨 Recevoir la prochaine notification';
-          nextBtn.onclick = nextStep;
-          div.appendChild(nextBtn);
-        }
+        showSuggestions([
+          { label: '📨 Recevoir la prochaine notification', onclick: nextStep }
+        ]);
         isInitialized = false;
       });
     });
@@ -1750,8 +1811,14 @@ function renderCRoute() {
         <h2>Suivi de commande — Client</h2>
       </div>
       <div class="p-4 flex-1 flex flex-col">
-        <div class="whatsapp-container" id="cr-chat" style="height: 700px;"></div>
-        <div id="cr-suggestions" class="flex flex-wrap gap-2 mt-4 justify-center"></div>
+        <div class="chat-wrapper">
+          <div class="chat-container" id="cr-chat"></div>
+          <div class="suggestions-bar" id="cr-suggestions-bar"></div>
+          <div class="chat-footer">
+            <input type="text" id="cr-input" placeholder="Écrivez votre message..." />
+            <button id="cr-send-btn"><i data-lucide="send"></i></button>
+          </div>
+        </div>
       </div>
     </div>
     <div class="glass-card">
@@ -1773,8 +1840,11 @@ function renderCRoute() {
     </div>
   </div>`;
   document.getElementById('sim-root').innerHTML = html;
-  isInitialized = false;
-  setTimeout(function() { safeCreateIcons(); reset(); }, 100);
+  setTimeout(function() {
+    safeCreateIcons();
+    reset();
+    setupChatInput('cr-input', 'cr-send-btn', addUser);
+  }, 100);
 }
 
 // ---- 6.3 SAFERETURN ----
@@ -1875,44 +1945,8 @@ function renderSafeReturn() {
     safeCreateIcons();
   }
 
-  function showContestButtons() {
-    var div = document.getElementById('sr-suggestions');
-    if (!div) return;
-    div.innerHTML = '';
-    var appeal = document.createElement('div');
-    appeal.className = 'suggestion-chip';
-    appeal.innerText = '📋 Contester la décision';
-    appeal.onclick = function() {
-      if (state.isProcessing) return;
-      state.isProcessing = true;
-      addUser("Contester la décision");
-      addImportantSummary('Réclamation déposée');
-      addBotDelayed('📞 Réclamation enregistrée, ' + firstName + '. Un expert de notre service litige analysera votre dossier sous 48h. Nous vous tenons informé.', function() {
-        clearSuggestions('sr-suggestions');
-        addResetButton('sr-suggestions', reset);
-        state.step = 0;
-        state.isProcessing = false;
-      });
-    };
-    div.appendChild(appeal);
-    var accept = document.createElement('div');
-    accept.className = 'suggestion-chip';
-    accept.innerText = '✅ Accepter la décision';
-    accept.style.borderColor = '#10b981';
-    accept.onclick = function() {
-      if (state.isProcessing) return;
-      state.isProcessing = true;
-      addUser("Accepter la décision");
-      addImportantSummary('Décision acceptée');
-      addBotDelayed('Merci, ' + firstName + ', pour votre compréhension. Si vous changez d’avis, notre service reste à votre disposition.', function() {
-        clearSuggestions('sr-suggestions');
-        addResetButton('sr-suggestions', reset);
-        state.step = 0;
-        state.isProcessing = false;
-      });
-    };
-    div.appendChild(accept);
-    safeCreateIcons();
+  function showSuggestions(btns) {
+    renderSuggestions('sr-suggestions-bar', btns);
   }
 
   function completeScan() {
@@ -1928,7 +1962,36 @@ function renderSafeReturn() {
     addBotDelayed('🔬 Vérification des métadonnées EXIF…', function() {
       addBotDelayed('🚨 Fraude confirmée, ' + firstName + ' : métadonnées EXIF altérées, clonage Photoshop détecté. Confiance : ' + state.confidenceLevel + '%.\nRemboursement refusé.', function() {
         addBotDelayed('📷 Souhaitez-vous contester cette décision ?', function() {
-          showContestButtons();
+          showSuggestions([
+            { label: '📋 Contester la décision', onclick: function() {
+              if (state.isProcessing) return;
+              state.isProcessing = true;
+              addUser("Contester la décision");
+              addImportantSummary('Réclamation déposée');
+              addBotDelayed('📞 Réclamation enregistrée, ' + firstName + '. Un expert de notre service litige analysera votre dossier sous 48h. Nous vous tenons informé.', function() {
+                clearSuggestions('sr-suggestions-bar');
+                renderSuggestions('sr-suggestions-bar', [
+                  { label: '🔄 Réinitialiser', reset: true, onclick: reset }
+                ]);
+                state.step = 0;
+                state.isProcessing = false;
+              });
+            } },
+            { label: '✅ Accepter la décision', onclick: function() {
+              if (state.isProcessing) return;
+              state.isProcessing = true;
+              addUser("Accepter la décision");
+              addImportantSummary('Décision acceptée');
+              addBotDelayed('Merci, ' + firstName + ', pour votre compréhension. Si vous changez d’avis, notre service reste à votre disposition.', function() {
+                clearSuggestions('sr-suggestions-bar');
+                renderSuggestions('sr-suggestions-bar', [
+                  { label: '🔄 Réinitialiser', reset: true, onclick: reset }
+                ]);
+                state.step = 0;
+                state.isProcessing = false;
+              });
+            } }
+          ]);
         });
       });
     });
@@ -1943,7 +2006,7 @@ function renderSafeReturn() {
     state.photoSent = true;
     state.scanCompleted = false;
     state.step = 2;
-    clearSuggestions('sr-suggestions');
+    clearSuggestions('sr-suggestions-bar');
     updateDashboard();
     addBotDelayed('Merci, ' + firstName + '. Notre IA procède à l’analyse approfondie de votre photo. Cela prend quelques instants.', function() {
       if (state.timerId) clearTimeout(state.timerId);
@@ -1958,15 +2021,9 @@ function renderSafeReturn() {
     addUser("Oui, je confirme les conditions.");
     addImportantSummary('Conditions de reprise confirmées');
     addBotDelayed('Parfait, ' + firstName + '. Veuillez maintenant nous envoyer une photo du colis endommagé (vue d\'ensemble et détails).', function() {
-      var div = document.getElementById('sr-suggestions');
-      if (div) {
-        div.innerHTML = '';
-        var sendBtn = document.createElement('div');
-        sendBtn.className = 'suggestion-chip';
-        sendBtn.innerText = '📸 Envoyer la photo';
-        sendBtn.onclick = sendPhoto;
-        div.appendChild(sendBtn);
-      }
+      showSuggestions([
+        { label: '📸 Envoyer la photo', onclick: sendPhoto }
+      ]);
       updateDashboard();
     });
   }
@@ -1986,16 +2043,11 @@ function renderSafeReturn() {
     clearMessageTimers('safereturn');
     var chatDiv = document.getElementById('sr-chat');
     if (chatDiv) chatDiv.innerHTML = '';
+    clearSuggestions('sr-suggestions-bar');
     addBotDelayed('Bonjour ' + firstName + ', votre litige concernant le colis endommagé a été enregistré. Pour instruire votre dossier, nous devons vérifier quelques conditions : le produit est-il dans son emballage d\'origine ? Possédez-vous la facture ? Le colis a-t-il été ouvert ?', function() {
-      var div = document.getElementById('sr-suggestions');
-      if (div) {
-        div.innerHTML = '';
-        var confirmBtn = document.createElement('div');
-        confirmBtn.className = 'suggestion-chip';
-        confirmBtn.innerText = '✅ Oui, tout est conforme';
-        confirmBtn.onclick = confirmConditions;
-        div.appendChild(confirmBtn);
-      }
+      showSuggestions([
+        { label: '✅ Oui, tout est conforme', onclick: confirmConditions }
+      ]);
     });
     updateDashboard();
   }
@@ -2008,8 +2060,14 @@ function renderSafeReturn() {
         <h2>SafeReturn — Client</h2>
       </div>
       <div class="p-4 flex-1 flex flex-col">
-        <div class="whatsapp-container" id="sr-chat" style="height: 700px;"></div>
-        <div id="sr-suggestions" class="flex flex-wrap gap-2 mt-4 justify-center"></div>
+        <div class="chat-wrapper">
+          <div class="chat-container" id="sr-chat"></div>
+          <div class="suggestions-bar" id="sr-suggestions-bar"></div>
+          <div class="chat-footer">
+            <input type="text" id="sr-input" placeholder="Écrivez votre message..." />
+            <button id="sr-send-btn"><i data-lucide="send"></i></button>
+          </div>
+        </div>
       </div>
     </div>
     <div class="glass-card">
@@ -2050,10 +2108,14 @@ function renderSafeReturn() {
     </div>
   </div>`;
   document.getElementById('sim-root').innerHTML = html;
-  setTimeout(function() { safeCreateIcons(); reset(); }, 100);
+  setTimeout(function() {
+    safeCreateIcons();
+    reset();
+    setupChatInput('sr-input', 'sr-send-btn', addUser);
+  }, 100);
 }
 
-// ---- 6.4 REPRISE (images côte à côte) ----
+// ---- 6.4 REPRISE ----
 function renderSecondLife() {
   var clientId = 'client_sl_1';
   var client = DB.getClient('secondlife', clientId);
@@ -2160,48 +2222,8 @@ function renderSecondLife() {
     safeCreateIcons();
   }
 
-  function showAcceptButtons() {
-    var div = document.getElementById('sl-suggestions');
-    if (!div) return;
-    div.innerHTML = '';
-    var accept = document.createElement('div');
-    accept.className = 'suggestion-chip';
-    accept.innerText = '✅ Accepter l\'offre de reprise';
-    accept.onclick = function() {
-      if (state.isProcessing) return;
-      state.isProcessing = true;
-      addUser("Accepter l'offre");
-      state.acceptedOffers++;
-      client.purchases.push({ name: 'iPhone 13 Pro (reconditionné)', price: 425 });
-      client.totalSpent += 425;
-      addImportantSummary('Offre acceptée : iPhone 13 Pro');
-      addBotDelayed('🎉 Offre de reprise acceptée ! Vous allez recevoir un bon de reprise par email sous 2h. Merci pour votre démarche écoresponsable.', function() {
-        clearSuggestions('sl-suggestions');
-        addResetButton('sl-suggestions', reset);
-        updateDashboard();
-        state.step = 0;
-        state.isProcessing = false;
-      });
-    };
-    div.appendChild(accept);
-    var refuse = document.createElement('div');
-    refuse.className = 'suggestion-chip';
-    refuse.innerText = '❌ Refuser l\'offre';
-    refuse.style.borderColor = '#ef4444';
-    refuse.onclick = function() {
-      if (state.isProcessing) return;
-      state.isProcessing = true;
-      addUser("Refuser l'offre");
-      addImportantSummary('Offre refusée');
-      addBotDelayed('Pas de souci, ' + firstName + '. Vous pouvez à tout moment revenir pour une nouvelle estimation. Notre service reste à votre écoute.', function() {
-        clearSuggestions('sl-suggestions');
-        addResetButton('sl-suggestions', reset);
-        state.step = 0;
-        state.isProcessing = false;
-      });
-    };
-    div.appendChild(refuse);
-    safeCreateIcons();
+  function showSuggestions(btns) {
+    renderSuggestions('sl-suggestions-bar', btns);
   }
 
   function completeScan() {
@@ -2214,7 +2236,40 @@ function renderSecondLife() {
     state.step = 2;
     updateDashboard();
     addBotDelayed('🔍 Analyse terminée, ' + firstName + '.\n\nÉtat général : correct, batterie à 81%, quelques micro-rayures. Estimation : <b>425€</b>.\nConfiance IA : ' + state.lastConfidence + '%.\n\nAcceptez-vous cette offre de reprise ?', function() {
-      showAcceptButtons();
+      showSuggestions([
+        { label: '✅ Accepter l\'offre de reprise', onclick: function() {
+          if (state.isProcessing) return;
+          state.isProcessing = true;
+          addUser("Accepter l'offre");
+          state.acceptedOffers++;
+          client.purchases.push({ name: 'iPhone 13 Pro (reconditionné)', price: 425 });
+          client.totalSpent += 425;
+          addImportantSummary('Offre acceptée : iPhone 13 Pro');
+          addBotDelayed('🎉 Offre de reprise acceptée ! Vous allez recevoir un bon de reprise par email sous 2h. Merci pour votre démarche écoresponsable.', function() {
+            clearSuggestions('sl-suggestions-bar');
+            renderSuggestions('sl-suggestions-bar', [
+              { label: '🔄 Réinitialiser', reset: true, onclick: reset }
+            ]);
+            updateDashboard();
+            state.step = 0;
+            state.isProcessing = false;
+          });
+        } },
+        { label: '❌ Refuser l\'offre', onclick: function() {
+          if (state.isProcessing) return;
+          state.isProcessing = true;
+          addUser("Refuser l'offre");
+          addImportantSummary('Offre refusée');
+          addBotDelayed('Pas de souci, ' + firstName + '. Vous pouvez à tout moment revenir pour une nouvelle estimation. Notre service reste à votre écoute.', function() {
+            clearSuggestions('sl-suggestions-bar');
+            renderSuggestions('sl-suggestions-bar', [
+              { label: '🔄 Réinitialiser', reset: true, onclick: reset }
+            ]);
+            state.step = 0;
+            state.isProcessing = false;
+          });
+        } }
+      ]);
     });
     state.isProcessing = false;
   }
@@ -2230,7 +2285,7 @@ function renderSecondLife() {
     state.photoSent = true;
     state.scanCompleted = false;
     state.step = 2;
-    clearSuggestions('sl-suggestions');
+    clearSuggestions('sl-suggestions-bar');
     updateDashboard();
     addBotDelayed('Merci, ' + firstName + ' ! Notre IA analyse en ce moment les photos de votre iPhone 13 Pro. Cela ne devrait prendre que quelques secondes.', function() {
       if (state.timerId) clearTimeout(state.timerId);
@@ -2244,33 +2299,21 @@ function renderSecondLife() {
     state.step = 1;
     addUser("État : " + condition);
     addBotDelayed('Merci, ' + firstName + '. Pour affiner notre estimation, pouvez-vous préciser la date d\'achat, les accessoires inclus (chargeur, câble) et d\'éventuels défauts particuliers ?', function() {
-      var div = document.getElementById('sl-suggestions');
-      if (div) {
-        div.innerHTML = '';
-        var detailsBtn = document.createElement('div');
-        detailsBtn.className = 'suggestion-chip';
-        detailsBtn.innerText = '📝 Acheté il y a 2 ans, chargeur inclus, micro-rayures sur l\'écran';
-        detailsBtn.onclick = function() {
+      showSuggestions([
+        { label: '📝 Acheté il y a 2 ans, chargeur inclus, micro-rayures sur l\'écran', onclick: function() {
           if (state.isProcessing) return;
           state.detailsGiven = true;
           addUser('Acheté il y a 2 ans, chargeur inclus, micro-rayures sur l\'écran.');
           addImportantSummary('Détails fournis pour l\'estimation');
           addBotDelayed('Parfait, ' + firstName + '. Pour finaliser l\'estimation, envoyez-nous les photos du produit (vue avant et arrière).', function() {
             state.step = 1;
-            var div2 = document.getElementById('sl-suggestions');
-            if (div2) {
-              div2.innerHTML = '';
-              var sendBtn = document.createElement('div');
-              sendBtn.className = 'suggestion-chip';
-              sendBtn.innerText = '📸 Envoyer les photos';
-              sendBtn.onclick = sendPhoto;
-              div2.appendChild(sendBtn);
-            }
+            showSuggestions([
+              { label: '📸 Envoyer les photos', onclick: sendPhoto }
+            ]);
             updateDashboard();
           });
-        };
-        div.appendChild(detailsBtn);
-      }
+        } }
+      ]);
     });
     updateDashboard();
   }
@@ -2291,19 +2334,14 @@ function renderSecondLife() {
     clearMessageTimers('secondlife');
     var chatDiv = document.getElementById('sl-chat');
     if (chatDiv) chatDiv.innerHTML = '';
+    clearSuggestions('sl-suggestions-bar');
     addBotDelayed('Bonjour ' + firstName + ', bienvenue sur notre service de reprise. Vous souhaitez revendre votre iPhone 13 Pro. Pour évaluer sa valeur, précisez son état général :', function() {
-      var div = document.getElementById('sl-suggestions');
-      if (div) {
-        div.innerHTML = '';
-        var states = ['🌟 Excellent', '👍 Bon', '📊 Moyen', '⚠️ Mauvais'];
-        states.forEach(function(s) {
-          var chip = document.createElement('div');
-          chip.className = 'suggestion-chip';
-          chip.innerText = s;
-          chip.onclick = function() { handleConditionChoice(s); };
-          div.appendChild(chip);
-        });
-      }
+      showSuggestions([
+        { label: '🌟 Excellent', onclick: function() { handleConditionChoice('🌟 Excellent'); } },
+        { label: '👍 Bon', onclick: function() { handleConditionChoice('👍 Bon'); } },
+        { label: '📊 Moyen', onclick: function() { handleConditionChoice('📊 Moyen'); } },
+        { label: '⚠️ Mauvais', onclick: function() { handleConditionChoice('⚠️ Mauvais'); } }
+      ]);
     });
     updateDashboard();
   }
@@ -2316,8 +2354,14 @@ function renderSecondLife() {
         <h2>Reprise — Client</h2>
       </div>
       <div class="p-4 flex-1 flex flex-col">
-        <div class="whatsapp-container" id="sl-chat" style="height: 700px;"></div>
-        <div id="sl-suggestions" class="flex flex-wrap gap-2 mt-4 justify-center"></div>
+        <div class="chat-wrapper">
+          <div class="chat-container" id="sl-chat"></div>
+          <div class="suggestions-bar" id="sl-suggestions-bar"></div>
+          <div class="chat-footer">
+            <input type="text" id="sl-input" placeholder="Écrivez votre message..." />
+            <button id="sl-send-btn"><i data-lucide="send"></i></button>
+          </div>
+        </div>
       </div>
     </div>
     <div class="glass-card">
@@ -2360,7 +2404,11 @@ function renderSecondLife() {
     </div>
   </div>`;
   document.getElementById('sim-root').innerHTML = html;
-  setTimeout(function() { safeCreateIcons(); reset(); }, 100);
+  setTimeout(function() {
+    safeCreateIcons();
+    reset();
+    setupChatInput('sl-input', 'sl-send-btn', addUser);
+  }, 100);
 }
 
 // ============================================================
