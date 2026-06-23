@@ -163,6 +163,7 @@
       background: white;
       position: relative;
       overflow: hidden;
+      max-width: 100%;
     }
     .module-card::before {
       content: "";
@@ -272,6 +273,7 @@
       height: 100%;
       display: flex;
       flex-direction: column;
+      max-width: 100%;
     }
     .glass-card:hover {
       box-shadow: 0 30px 80px -12px rgba(0, 0, 0, 0.12);
@@ -285,6 +287,7 @@
       padding: 18px 24px;
       border-bottom: 1px solid rgba(0, 0, 0, 0.04);
       flex-shrink: 0;
+      flex-wrap: wrap;
     }
     .sim-header i {
       color: #1a56db;
@@ -295,6 +298,7 @@
       font-size: 1.3rem;
       font-weight: 800;
       color: #0b1e3a;
+      word-break: break-word;
     }
 
     /* === INTERFACE DE DISCUSSION STYLE COMETE.AI === */
@@ -308,6 +312,7 @@
       display: flex;
       flex-direction: column;
       margin: 0 4px;
+      max-width: 100%;
     }
     .chat-container {
       background: #f8fafc;
@@ -319,6 +324,8 @@
       flex: 1;
       min-height: 200px;
       max-height: 460px;
+      width: 100%;
+      box-sizing: border-box;
     }
     .chat-container::-webkit-scrollbar {
       width: 4px;
@@ -343,6 +350,7 @@
       animation: slideUp 0.3s ease;
       box-shadow: 0 2px 8px rgba(36,112,239,0.25);
       cursor: default;
+      word-break: break-word;
     }
     .bubble-bot {
       background: white;
@@ -356,10 +364,12 @@
       animation: slideUp 0.3s ease;
       box-shadow: 0 2px 8px rgba(0,0,0,0.06);
       border: 1px solid #e2e8f0;
+      word-break: break-word;
     }
     .bubble-user img,
     .bubble-bot img {
-      max-width: 200px;
+      max-width: 100% !important;
+      height: auto !important;
       border-radius: 12px;
       margin-top: 6px;
       display: block;
@@ -399,6 +409,7 @@
       outline: none;
       min-width: 0;
       transition: border-color 0.2s;
+      max-width: 100%;
     }
     .chat-footer input:focus {
       border-color: #2470ef;
@@ -529,6 +540,7 @@
       align-items: center;
       gap: 8px;
       font-size: 0.95rem;
+      white-space: nowrap;
     }
     .sim-tab:hover {
       transform: translateY(-2px);
@@ -554,6 +566,7 @@
       border: 1px solid #e2e8f0;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
       transition: all 0.2s;
+      max-width: 100%;
     }
     .kpi-card:hover {
       border-color: #94a3b8;
@@ -592,6 +605,7 @@
       backdrop-filter: blur(4px);
       border: 1px dashed #cbd5e1;
       flex: 1;
+      max-width: 100%;
     }
     .scan-badge {
       background: rgba(59, 130, 246, 0.12);
@@ -620,6 +634,7 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
+      max-width: 100%;
     }
     .scan-panel .relative { border-radius: 16px; overflow: hidden; }
 
@@ -629,6 +644,7 @@
       padding: 12px 16px;
       border-left: 4px solid #3b82f6;
       margin-bottom: 12px;
+      max-width: 100%;
     }
     .next-action-box .label {
       font-size: 10px;
@@ -641,16 +657,41 @@
       font-size: 13px;
       font-weight: 600;
       color: #0b1e3a;
+      word-break: break-word;
     }
 
     @media (max-width: 768px) {
-      .sim-tab { padding: 8px 16px; font-size: 12px; gap: 4px; }
+      .sim-tab { padding: 8px 16px; font-size: 12px; gap: 4px; white-space: normal; }
       .sim-tab i { width: 16px; height: 16px; }
       .grid { grid-template-columns: 1fr !important; }
       .kpi-value { font-size: 22px; }
       .glass-card { border-radius: 1.5rem; }
       .chat-container { min-height: 300px; max-height: 380px; }
       .sim-header h2 { font-size: 1.1rem; }
+      .sim-header { padding: 14px 16px; gap: 10px; }
+      .bubble-user, .bubble-bot { max-width: 90%; font-size: 13px; padding: 10px 14px; }
+      .chat-footer input { font-size: 13px; padding: 8px 14px; }
+      .chat-footer button { width: 38px; height: 38px; }
+      .chat-footer button i { width: 18px; height: 18px; }
+      .suggestion-chip { font-size: 11px; padding: 4px 12px; white-space: normal; }
+      .btn-unified { font-size: 8px !important; padding: 6px 12px !important; }
+      .nav-pill { padding: 6px 12px; }
+      .nav-pill .h-5 { height: 1.25rem; }
+      .nav-pill.scrolled { width: 90%; }
+      .hero h1 { font-size: 2.5rem !important; }
+      .hero p { font-size: 1rem !important; }
+      .module-card .p-6 { padding: 1rem; }
+      .module-card h3 { font-size: 1rem; }
+      .module-card .text-xs { font-size: 0.7rem; }
+    }
+    @media (max-width: 480px) {
+      .sim-tab { font-size: 10px; padding: 6px 12px; }
+      .sim-header h2 { font-size: 1rem; }
+      .chat-footer input { font-size: 12px; padding: 6px 10px; }
+      .chat-footer button { width: 34px; height: 34px; }
+      .chat-footer button i { width: 16px; height: 16px; }
+      .bubble-user, .bubble-bot { font-size: 12px; padding: 8px 12px; max-width: 95%; }
+      .suggestion-chip { font-size: 10px; padding: 4px 10px; }
     }
     @media (min-width: 769px) and (max-width: 1024px) {
       .grid { grid-template-columns: 1fr 1fr; }
@@ -1046,10 +1087,10 @@ function addMessage(containerId, from, text, imageUrls) {
   if (imageUrls) {
     if (Array.isArray(imageUrls)) {
       imageUrls.forEach(function(url) {
-        html += '<br><img src="' + url + '" alt="Photo" style="max-width:200px; border-radius:12px; margin-top:6px; border:1px solid rgba(0,0,0,0.04);">';
+        html += '<br><img src="' + url + '" alt="Photo" style="max-width:100% !important; height:auto !important; border-radius:12px; margin-top:6px; border:1px solid rgba(0,0,0,0.04);">';
       });
     } else {
-      html += '<br><img src="' + imageUrls + '" alt="Photo" style="max-width:200px; border-radius:12px; margin-top:6px; border:1px solid rgba(0,0,0,0.04);">';
+      html += '<br><img src="' + imageUrls + '" alt="Photo" style="max-width:100% !important; height:auto !important; border-radius:12px; margin-top:6px; border:1px solid rgba(0,0,0,0.04);">';
     }
   }
   bubble.innerHTML = html + '<div class="message-time">' + time + (from === 'user' ? ' ✔✔' : '') + '</div>';
